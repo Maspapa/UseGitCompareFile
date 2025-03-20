@@ -1,0 +1,48 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=9de8aeb5-dfc7-4059-ac1f-410e2904bf81">Graphics</a>クラスのメソッドを使用して、さまざまな図形をPDFに描画できます。ここでは、四角形と円の描画方法を示しています。Graphicsクラスにはそのほかの図形を描画するメソッドも用意されています。<br /></p>
+<h2 id="四角形の描画">四角形の描画</h2>
+<p>四角形を描画するには、<a href="gcdocsite__documentlink?toc-item-id=9de8aeb5-dfc7-4059-ac1f-410e2904bf81">DrawRectangle</a>メソッドを使用します。次のコードは、青色の四角形を描画します。<br /></p>
+<pre><code class="language-csharp">System.IO.Stream strm = (System.IO.Stream)System.IO.File.OpenWrite(&quot;test.pdf&quot;);
+GrapeCity.PDF.Document doc = new GrapeCity.PDF.Document();
+GrapeCity.PDF.Objects.PageObject page = doc.Pages.CreatePage();
+GrapeCity.PDF.Drawing.Graphics g = page.GetGraphics();
+g.DrawRectangle(Pens.Blue, 10, 10, 200, 200);
+GrapeCity.PDF.Writer.Write(doc, strm);
+strm.Close();
+</code></pre>
+<pre><code class="language-vbnet">Dim strm As System.IO.Stream = System.IO.File.OpenWrite(&quot;test.pdf&quot;)
+Dim doc As GrapeCity.PDF.Document = New GrapeCity.PDF.Document()
+Dim page As GrapeCity.PDF.Objects.PageObject = doc.Pages.CreatePage()
+Dim g As GrapeCity.PDF.Drawing.Graphics = page.GetGraphics()
+g.DrawRectangle(Pens.Blue, 10, 10, 200, 200)
+GrapeCity.PDF.Writer.Write(doc, strm)
+strm.Close()
+</code></pre>
+<br />
+<br />
+<h2 id="円の描画">円の描画</h2>
+<p>円を描画するには、<a href="gcdocsite__documentlink?toc-item-id=9de8aeb5-dfc7-4059-ac1f-410e2904bf81">DrawEllipse</a>メソッドを使用します。次のコードは、赤色の円を描画します。<br /></p>
+<pre><code class="language-csharp">System.IO.Stream strm = (System.IO.Stream)System.IO.File.OpenWrite(&quot;test.pdf&quot;);
+GrapeCity.PDF.Document doc = new GrapeCity.PDF.Document();
+GrapeCity.PDF.Objects.PageObject page = doc.Pages.CreatePage();
+GrapeCity.PDF.Drawing.Graphics g = page.GetGraphics();
+g.DrawEllipse(Pens.Red, 10, 10, 200, 200);
+GrapeCity.PDF.Writer.Write(doc, strm);
+strm.Close();
+</code></pre>
+<pre><code class="language-vbnet">Dim strm As System.IO.Stream = System.IO.File.OpenWrite(&quot;test.pdf&quot;)
+Dim doc As GrapeCity.PDF.Document = New GrapeCity.PDF.Document()
+Dim page As GrapeCity.PDF.Objects.PageObject = doc.Pages.CreatePage()
+Dim g As GrapeCity.PDF.Drawing.Graphics = page.GetGraphics()
+g.DrawEllipse(Pens.Red, 10, 10, 200, 200)
+GrapeCity.PDF.Writer.Write(doc, strm)
+strm.Close()
+</code></pre>
+<br />
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=6af94772-84b8-46d7-b783-18b250ad8556">PDFライブラリ</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=344ae08e-d376-48c7-8de4-bec506f44e64">出力方法</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=d25586a3-1ade-4972-9903-580a1e3c0647">文字列の描画</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c617991f-1cd0-4ca1-a677-c381b2bd2faa">画像の描画</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=0bcad8cd-e00a-4c1a-9ec5-923cf5efcc55">ページの操作</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=9043d7a8-5ad3-43d3-8e62-7362e8d7b6e9">文書の操作</a></p>
+<p><br /><br /></p>

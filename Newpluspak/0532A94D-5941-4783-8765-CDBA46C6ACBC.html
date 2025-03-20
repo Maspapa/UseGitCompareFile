@@ -1,0 +1,55 @@
+<p>GcLabel コントロールは均等割付や縦表示などの様々な外観設定を提供します。</p><h2>縦表示割付</h2><p>テキストの向きは<a href="gcdocsite__documentlink?toc-item-id=7c4628a3-f4b5-4dfa-80e2-ac2dfa697518" title="">TextOrientation</a>プロパティで設定します。文字の縦表示にするには、プロパティに <strong>Downward</strong> か、または <strong>Upward</strong> に設定します。また、漢字やひらがななどの日本語のみを縦に表示する場合は、<strong>VerticalFarEast</strong> や <strong>HorizontalRotatedFarEast</strong> を使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// テキストの向きを上から下に設定します</span>
+gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.Downward;
+<span class="hljs-comment">// テキストの向きを下から上に設定します</span>
+gcLabel2.TextOrientation = GrapeCity.Win.Common.TextOrientation.Upward;
+<span class="hljs-comment">// テキストの日本語を縦表示に設定します</span>
+gcLabel3.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast;
+<span class="hljs-comment">// テキストの日本語を水平方向への縦表示に設定します</span>
+gcLabel4.TextOrientation = GrapeCity.Win.Common.TextOrientation.HorizontalRotatedFarEast;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' テキストの向きを上から下に設定します
+GcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.Downward
+' テキストの向きを下から上に設定します
+GcLabel2.TextOrientation = GrapeCity.Win.Common.TextOrientation.Upward
+' テキストの日本語を縦表示に設定します
+GcLabel3.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast
+' テキストの日本語を水平方向への縦表示に設定します
+GcLabel4.TextOrientation = GrapeCity.Win.Common.TextOrientation.HorizontalRotatedFarEast</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.textorientation.png" contenteditable="false"><br></p><h2>縦中横の表示</h2><p><a href="gcdocsite__documentlink?toc-item-id=f9727fbf-36b6-4371-8550-f8405d1012d7" title="">VerticalFarEastSettings</a>クラスを使用すると、縦中横の表示ができます。VerticalFarEastSettings クラスの<a href="gcdocsite__documentlink?toc-item-id=7a5eb490-ff55-410d-a137-db48064fc1e3" title="">HorizontalInVertical</a>プロパティに True を設定すると縦中横表示になります。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>縦中横を表示するには TextOrientation プロパティに VerticalFarEast を設定する必要があります。</p></li></ul></blockquote><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast;
+
+<span class="hljs-comment">// 縦中横の設定をします</span>
+GrapeCity.Win.Buttons.VerticalFarEastSettings verticalFarEastSettings1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Buttons.VerticalFarEastSettings();
+verticalFarEastSettings1.HorizontalInVertical = <span class="hljs-literal">true</span>;
+
+gcLabel1.VerticalFarEastSettings = verticalFarEastSettings1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast
+
+' 縦中横の設定をします 
+Dim verticalFarEastSettings1 As New GrapeCity.Win.Buttons.VerticalFarEastSettings()
+verticalFarEastSettings1.HorizontalInVertical = True
+
+gcLabel1.VerticalFarEastSettings = verticalFarEastSettings1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.xhorizontalinvertical1.png" contenteditable="false"><br></p><p>縦中横表示をしている場合、<a href="gcdocsite__documentlink?toc-item-id=580a02a8-5461-4c12-a319-c2bdc07b2d8b" title="">MaxHorizontalChars</a>プロパティで水平方向に表示する最大文字数を設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast;
+
+<span class="hljs-comment">// 縦中横の設定をします</span>
+GrapeCity.Win.Buttons.VerticalFarEastSettings verticalFarEastSettings1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Buttons.VerticalFarEastSettings();
+verticalFarEastSettings1.HorizontalInVertical = <span class="hljs-literal">true</span>;
+verticalFarEastSettings1.MaxHorizontalChars = <span class="hljs-number">4</span>;
+
+gcLabel1.VerticalFarEastSettings = verticalFarEastSettings1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast
+
+' 縦中横の設定をします 
+Dim verticalFarEastSettings1 As New GrapeCity.Win.Buttons.VerticalFarEastSettings()
+verticalFarEastSettings1.HorizontalInVertical = True
+verticalFarEastSettings1.MaxHorizontalChars = 4
+
+gcLabel1.VerticalFarEastSettings = verticalFarEastSettings1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.xhorizontalinvertical2.png" contenteditable="false"><br></p><p>また、<a href="gcdocsite__documentlink?toc-item-id=f238bd12-ecf3-4b3c-bf90-0173393a2fda" title="">FitToLine</a> プロパティに True を設定すると、垂直方向に表示する文字列の幅にあわせて、水平方向に表示する文字列をスケーリングします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast;
+
+<span class="hljs-comment">// 縦中横の設定をします</span>
+GrapeCity.Win.Buttons.VerticalFarEastSettings verticalFarEastSettings1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Buttons.VerticalFarEastSettings();
+verticalFarEastSettings1.HorizontalInVertical = <span class="hljs-literal">true</span>;
+verticalFarEastSettings1.FitToLine = <span class="hljs-literal">true</span>;
+
+gcLabel1.VerticalFarEastSettings = verticalFarEastSettings1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">gcLabel1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast
+
+' 縦中横の設定をします 
+Dim verticalFarEastSettings1 As New GrapeCity.Win.Buttons.VerticalFarEastSettings()
+verticalFarEastSettings1.HorizontalInVertical = True
+verticalFarEastSettings1.FitToLine = True
+
+gcLabel1.VerticalFarEastSettings = verticalFarEastSettings1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.xhorizontalinvertical3.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=40f5c3ca-e4f8-47ac-aff9-746a680da7a3" title="">GcLabelコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=952b7d9e-cb57-4f01-82bd-e3f858e59060" title="">ラベルスタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=436a3936-92db-4b27-a5aa-df2da1f57a49" title="">文字の表示幅の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fbc2c95d-09cd-4ac6-b822-b29845c97ab8" title="">表示効果の設定</a></p>

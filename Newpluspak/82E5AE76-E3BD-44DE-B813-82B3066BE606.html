@@ -1,0 +1,261 @@
+<p>スキン機能は、既存スタイルの拡張スタイルをいくつか保持するほか、開発者自身が自由にタブを描き、コントロールに適用できる、タブスタイルの拡張機能です。スキン機能は <a href="gcdocsite__documentlink?toc-item-id=6cb28b65-38ce-45e7-b316-264be84f4931" title="">タブのオーナー描画</a> と違い、作成したスタイルをスキンオブジェクトとして管理でき、「<a href="gcdocsite__documentlink?toc-item-id=d3383196-0370-43c3-81b0-9776401b2fb2" title="">基本スタイルの選択</a>」の使用方法の感覚で、プロパティ設定により適用できます。そのため、複数コントロール間での再利用や、エンドユーザーの操作に合せたスタイルの切り替えなど容易に行える利点があります。スキンには次のような種類があります。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=f07e3eb7-4b13-4ce3-83c5-f20badc1089e" title="">ButtonsSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=64eca80a-cecf-4538-961e-beb69c073b41" title="">ClassicSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=d50a3132-346c-40d7-abc3-af81260fc822" title="">ExcelSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=6b957a54-0731-40cc-a19b-3bd48178d8e1" title="">ImageSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=ac13dae1-4aa9-493c-9ebd-cd1a0ce671fa" title="">MdiChildSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=cdec95ba-99c5-454b-9cf9-057df485b433" title="">Skin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=c5c7cf3e-be2b-4870-aa9f-37c045a6a4ae" title="">StandardSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=39543cc0-6d48-48be-8945-d257c3738c29" title="">SystemSkin</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=f7e05238-855a-4a0d-aa5f-97ca678da2e5" title="">VS2005Skin</a></p></li></ul><p>これらのスキンが持つ描画機能（プロパティやメソッド）を使用してスタイルを作成します。また、設定はコードにより行います。</p><p>上記のスキンの中でも特別な機能を持つ <a href="gcdocsite__documentlink?toc-item-id=c5c7cf3e-be2b-4870-aa9f-37c045a6a4ae" title="">StandardSkin</a>、<a href="gcdocsite__documentlink?toc-item-id=f07e3eb7-4b13-4ce3-83c5-f20badc1089e" title="">ButtonsSkin</a>、<a href="gcdocsite__documentlink?toc-item-id=6b957a54-0731-40cc-a19b-3bd48178d8e1" title="">ImageSkin</a> の3つのスキンについて、以下に解説します。また、<a href="gcdocsite__documentlink?toc-item-id=cdec95ba-99c5-454b-9cf9-057df485b433" title="">Skin</a> を利用してゼロからタブを描画する場合の例も説明します。</p><h2>StandardSkin（スタンダードスキン）</h2><p>スタンダードスキンは、タブの両角に丸みをつけるか、またはカットした描画にするかを選択できる機能を含んでいます。また、これらの丸み、およびカットの具合を自由に調整することもできます。</p><p>両角のスタイルは StandardSkin.<a href="gcdocsite__documentlink?toc-item-id=99b63e7d-fce8-4677-9131-127322734d6d" title="">CornerStyle</a> プロパティ で設定します。また、角の丸み、およびカットの大きさは StandardSkin.<a href="gcdocsite__documentlink?toc-item-id=bc57ca76-199a-4498-9647-0009f5034fc5" title="">CornerSize</a> プロパティ で調節します。 StandardSkin.<a href="gcdocsite__documentlink?toc-item-id=bc57ca76-199a-4498-9647-0009f5034fc5" title="">CornerSize</a> プロパティ は、値が大きい場合に丸み、およびカットの大きい描画になります。</p><table><thead><tr><th><p>スタイル</p></th><th><p>コーナーサイズを 10 に設定した場合</p></th><th><p>コーナーサイズを 20 に設定した場合</p></th></tr></thead><tbody><tr><td><p>BothRound</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.bothround1.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.bothround2.png" contenteditable="false"><br></p></td></tr><tr><td><p>BothCut</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.bothcut1.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.bothcut2.png" contenteditable="false"><br></p></td></tr><tr><td><p>LeftCut</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.leftcut1.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.leftcut2.png" contenteditable="false"><br></p></td></tr><tr><td><p>RightCut</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.rightcut1.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.rightcut2.png" contenteditable="false"><br></p></td></tr></tbody></table><p>コードによる設定は、次のようになります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// スタンダードスキンを作成します</span>
+GrapeCity.Win.Containers.Skins.StandardSkin objStandardSkin = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.Skins.StandardSkin();
+<span class="hljs-comment">// コーナースタイルを設定します</span>
+objStandardSkin.CornerStyle = GrapeCity.Win.Containers.Skins.CornerStyle.BothRound;
+<span class="hljs-comment">// コーナーサイズを設定します</span>
+objStandardSkin.CornerSize = <span class="hljs-number">10</span>;
+<span class="hljs-comment">// GcTabControlコントロールのスタイルにスキンを設定します</span>
+gcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin;
+<span class="hljs-comment">// スタンダードスキンを適用します</span>
+gcTabControl1.Skin = objStandardSkin;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' スタンダードスキンを作成します
+Dim objStandardSkin As New GrapeCity.Win.Containers.Skins.StandardSkin
+' コーナースタイルを設定します
+objStandardSkin.CornerStyle = GrapeCity.Win.Containers.Skins.CornerStyle.BothRound
+'コーナーサイズを設定します
+objStandardSkin.CornerSize = 10
+' GcTabControlコントロールのスタイルにスキンを設定します
+GcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin
+' スタンダードスキンを適用します
+GcTabControl1.Skin = objStandardSkin</code></pre></div><h2>ButtonsSkin（ボタンスキン）</h2><p>ボタンスキンは、予めいくつかの完成されたスタイルを保持しています。スタイルは ButtonsSkin.<a href="gcdocsite__documentlink?toc-item-id=9d5de4d8-34da-4068-a90c-506ad47bad10" title="">ButtonsSkinStyle</a> プロパティ で設定します。スタイルは、以下のような種類があります。</p><table><thead><tr><th><p>Flat</p></th><th><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonflat.png" contenteditable="false"><br></p></th></tr></thead><tbody><tr><td><p>Popup</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonpopup.png" contenteditable="false"><br></p></td></tr><tr><td><p>ActiveFlat</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonactiveflat.png" contenteditable="false"><br></p></td></tr><tr><td><p>Borderless</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonborderless.png" contenteditable="false"><br></p></td></tr><tr><td><p>XPButton</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonxpbutton.png" contenteditable="false"><br></p></td></tr><tr><td><p>XPToolBarButton</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonxptoolbarbutton.png" contenteditable="false"><br></p></td></tr><tr><td><p>Office2003GradientToolBarButton</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonoffice2003gradienttoolbarbutton.png" contenteditable="false"><br></p></td></tr><tr><td><p>Office2003HighlightToolBarButton</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonoffice2003highlighttoolbarbutton.png" contenteditable="false"><br></p></td></tr><tr><td><p>VS2003WhiteButton</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.buttonvs2003whitebutton.png" contenteditable="false"><br></p></td></tr></tbody></table><p>コードによる設定は、次のようになります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// ボタンスキンを作成します</span>
+GrapeCity.Win.Containers.Skins.ButtonsSkin objButtonsSkin = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.Skins.ButtonsSkin();
+<span class="hljs-comment">// ボタンスタイルを設定します</span>
+objButtonsSkin.ButtonsSkinStyle = GrapeCity.Win.Containers.Skins.ButtonsSkinStyle.ActiveFlat;
+<span class="hljs-comment">// GcTabControlコントロールのスタイルにスキンを設定します</span>
+gcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin;
+<span class="hljs-comment">// ボタンスキンを適用します</span>
+gcTabControl1.Skin = objButtonsSkin;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' ボタンスキンを作成します
+Dim objButtonsSkin As New GrapeCity.Win.Containers.Skins.ButtonsSkin
+' ボタンスタイルを設定します
+objButtonsSkin.ButtonsSkinStyle = GrapeCity.Win.Containers.Skins.ButtonsSkinStyle.ActiveFlat
+' GcTabControlコントロールのスタイルにスキンを設定します
+GcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin
+' ボタンスキンを適用します
+GcTabControl1.Skin = objButtonsSkin</code></pre></div><h2>ImageSkin（イメージスキン）</h2><p>イメージスキンを使用すると、GcTabControlコントロールの描画を画像により形成できるようになります。</p><p>以下のサンプルイメージでは、タブ、ナビゲーター、タブページの境界線に画像を用いて描画しています。タブの画像設定は ImageSkin.<a href="gcdocsite__documentlink?toc-item-id=95b5f6bb-9ede-4106-a2c5-0f31aef24f83" title="">DefaultStripImageSettings</a> プロパティ、ナビゲーターは ImageSkin.<a href="gcdocsite__documentlink?toc-item-id=619486da-8931-4cfd-a08b-93e7f2f57e2c" title="">NextButtonImageSettings</a> プロパティ と ImageSkin.<a href="gcdocsite__documentlink?toc-item-id=1b3a8283-cc25-4c95-916e-2b9eb22efeec" title="">PreviousButtonImageSettings</a> プロパティ、境界線は ImageSkin.<a href="gcdocsite__documentlink?toc-item-id=76eff1a3-b9a5-4263-9be9-56425cb512c2" title="">LeftBorderImage</a> プロパティ と ImageSkin.<a href="gcdocsite__documentlink?toc-item-id=e400fb86-f57c-4c50-a76d-6d761bc591a4" title="">RightBorderImage</a> プロパティ を使用しています。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.imageskin2.png" contenteditable="false"><br></p><p>コードによる設定は、次のようになります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 画像をセットします</span>
+Bitmap TabImage1 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここに通常表示されるタブの画像ファイルのフルパス名を入力してください"</span>);
+Bitmap TabImage2 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにホットトラック時に表示されるタブの画像のフルパス名を入力してください"</span>);
+Bitmap TabImage3 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにタブをクリックした時に表示されるタブの画像のフルパス名を入力してください"</span>);
+Bitmap TabImage4 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにタブが無効時に表示されるタブの画像のフルパス名を入力してください"</span>);
+Bitmap TabImage5 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここに選択されているタブの画像のフルパス名を入力してください"</span>);
+Bitmap NaviImage1 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにナビゲーターの次へボタンに表示する画像のフルパス名を入力してください"</span>);
+Bitmap NaviImage2 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにナビゲーターの前へボタンに表示する画像のフルパス名を入力してください"</span>);
+Bitmap BorderImage1 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにタブページの左境界線に表示する画像のフルパス名を入力してください"</span>);
+Bitmap BorderImage2 = <span class="hljs-keyword">new</span> Bitmap
+    (<span class="hljs-string">@"ここにタブページの右境界線に表示する画像のフルパス名を入力してください"</span>);
+
+<span class="hljs-comment">// イメージスキンを作成します</span>
+GrapeCity.Win.Containers.Skins.ImageSkin objImageSkin = 
+    <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.Skins.ImageSkin();
+<span class="hljs-comment">// タブに画像を設定します</span>
+objImageSkin.DefaultStripImageSettings = 
+    <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.Skins.ImageSettings
+    (TabImage1, TabImage2, TabImage3, TabImage4, TabImage5);
+<span class="hljs-comment">// ナビゲーターに画像を設定します</span>
+objImageSkin.NextButtonImageSettings.NormalImage = NaviImage1;
+objImageSkin.PreviousButtonImageSettings.NormalImage = NaviImage2;
+<span class="hljs-comment">// タブページの境界線に画像を設定します</span>
+objImageSkin.LeftBorderImage = BorderImage1;
+objImageSkin.RightBorderImage = BorderImage2;
+<span class="hljs-comment">// タブページの境界線のマージンを設定します</span>
+objImageSkin.PageBorderMargins = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.Margins(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// GcTabControlコントロールのスタイルにスキンを設定します</span>
+gcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin;
+<span class="hljs-comment">// イメージスキンを適用します</span>
+gcTabControl1.Skin = objImageSkin;
+<span class="hljs-comment">// GcTabControlコントロールの背景色を設定します</span>
+gcTabControl1.BackColor = Color.AliceBlue;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 画像をセットします
+Dim TabImage1 As New Bitmap _
+    ("ここに通常表示されるタブの画像ファイルのフルパス名を入力してください")
+Dim TabImage2 As New Bitmap _
+    ("ここにホットトラック時に表示されるタブの画像のフルパス名を入力してください")
+Dim TabImage3 As New Bitmap _
+    ("ここにタブをクリックした時に表示されるタブの画像のフルパス名を入力してください")
+Dim TabImage4 As New Bitmap _
+    ("ここにタブが無効時に表示されるタブの画像のフルパス名を入力してください")
+Dim TabImage5 As New Bitmap _
+    ("ここに選択されているタブの画像のフルパス名を入力してください")
+Dim NaviImage1 As New Bitmap _
+    ("ここにナビゲーターの次へボタンに表示する画像のフルパス名を入力してください")
+Dim NaviImage2 As New Bitmap _
+    ("ここにナビゲーターの前へボタンに表示する画像のフルパス名を入力してください")
+Dim BorderImage1 As New Bitmap _
+    ("ここにタブページの左境界線に表示する画像のフルパス名を入力してください")
+Dim BorderImage2 As New Bitmap _
+    ("ここにタブページの右境界線に表示する画像のフルパス名を入力してください")
+
+' イメージスキンを作成します
+Dim objImageSkin As New GrapeCity.Win.Containers.Skins.ImageSkin
+' タブに画像を設定します
+objImageSkin.DefaultStripImageSettings = _
+    New GrapeCity.Win.Containers.Skins.ImageSettings(TabImage1, TabImage2, TabImage3, _
+    TabImage4, TabImage5)
+' ナビゲーターに画像を設定します
+objImageSkin.NextButtonImageSettings.NormalImage = NaviImage1
+objImageSkin.PreviousButtonImageSettings.NormalImage = NaviImage2
+' タブページの境界線に画像を設定します
+objImageSkin.LeftBorderImage = BorderImage1
+objImageSkin.RightBorderImage = BorderImage2
+' タブページの境界線のマージンを設定します
+objImageSkin.PageBorderMargins = New GrapeCity.Win.Containers.Margins(1, 0, 1, 0)
+
+' GcTabControlコントロールのスタイルにスキンを設定します
+GcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin
+' イメージスキンを適用します
+GcTabControl1.Skin = objImageSkin
+' GcTabControlコントロールの背景色を設定します
+GcTabControl1.BackColor = Color.AliceBlue</code></pre></div><h2>ゼロからタブを描画</h2><p>各種スキンオブジェクトが持つ描画メソッドをオーバーライドして1つ1つの部位を描画し、スタイルを作成することも可能です。</p><p>ここでは、スキンオブジェクトの中でも最も基本に位置する <a href="gcdocsite__documentlink?toc-item-id=cdec95ba-99c5-454b-9cf9-057df485b433" title="">Skin</a> を使用して作成した簡単なスタイルとコード例を挙げます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">･･･
+<span class="hljs-keyword">using</span> GrapeCity.Win.Containers.Skins;
+
+･･･
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Form1</span> : <span class="hljs-title">Form</span>
+    {
+        <span class="hljs-function">public Form1()</span>
+        {
+            InitializeComponent();
+        }
+
+        <span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+        {
+            <span class="hljs-comment">// GcTabControlコントロールのスタイルにスキンを設定します</span>
+            gcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin;
+            <span class="hljs-comment">// 作成したスキンを適用します</span>
+            gcTabControl1.Skin = <span class="hljs-keyword">new</span> FreeStyle();
+            <span class="hljs-comment">// GcTabControlコントロールの背景色を設定します</span>
+            gcTabControl1.BackColor = Color.LightYellow;
+            <span class="hljs-comment">// 背景を透過表示にします</span>
+            gcTabControl1.TransparentBackground = <span class="hljs-literal">true</span>; 
+        }
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FreeStyle</span> : <span class="hljs-title">Skin</span>
+    {
+        <span class="hljs-function">public FreeStyle()</span>
+        {
+        }
+
+        <span class="hljs-function">public override bool GetUseVisualStyleBackColor()</span>
+        {
+            <span class="hljs-comment">// XP テーマの背景色を使用しません</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-comment">// タブ領域を描画します</span>
+        <span class="hljs-function">public override void DrawStrip(Graphics graphics, Rectangle rectangle, 
+            int stripIndex, StripSettings stripSettings, ControlSettings controlSettings)</span>
+        {
+            <span class="hljs-comment">// 背景色を設定します</span>
+            graphics.FillRectangle(Brushes.LightYellow, rectangle);
+
+            <span class="hljs-comment">// キャプションを描画します</span>
+            <span class="hljs-built_in">string</span> strCaption = stripSettings.Text;
+            <span class="hljs-built_in">int</span> intCaptionHeight = TextRenderer.MeasureText
+                (strCaption, stripSettings.TabStyle.Font).Height;
+            System.Drawing.SolidBrush objBrush = <span class="hljs-keyword">new</span> SolidBrush(Color.Navy);
+            graphics.DrawString(strCaption, stripSettings.TabStyle.Font, 
+                objBrush, <span class="hljs-keyword">new</span> PointF(rectangle.Left + <span class="hljs-number">5</span>, rectangle.Top + 
+                ((rectangle.Height - intCaptionHeight) / <span class="hljs-number">2</span>)));
+            objBrush.Dispose();
+
+            <span class="hljs-comment">// 背景色を設定します</span>
+            System.Drawing.Pen objPen = <span class="hljs-keyword">new</span> System.Drawing.Pen(Color.SteelBlue, <span class="hljs-number">1</span>);
+            Rectangle objRectangle = <span class="hljs-keyword">new</span> Rectangle(rectangle.Location, 
+                <span class="hljs-keyword">new</span> Size(rectangle.Width - <span class="hljs-number">1</span>, rectangle.Height));
+            graphics.DrawRectangle(objPen, objRectangle);
+            objPen.Dispose();
+        }
+
+        <span class="hljs-comment">// パネルの枠線を描画します</span>
+        <span class="hljs-function">public override void DrawPanelBorder(Graphics graphics, 
+            Rectangle rectangle, ControlSettings controlSettings)</span>
+        {
+            <span class="hljs-comment">// 背景色を設定します</span>
+            SolidBrush objBrush = <span class="hljs-keyword">new</span> SolidBrush(controlSettings.BackColor);
+            graphics.FillRectangle(objBrush, rectangle);
+
+            <span class="hljs-comment">// 境界線を描画します</span>
+            Pen objPen = <span class="hljs-keyword">new</span> System.Drawing.Pen(Color.SteelBlue, <span class="hljs-number">1</span>);
+            Rectangle objRectangle = <span class="hljs-keyword">new</span> Rectangle(rectangle.Location, 
+                <span class="hljs-keyword">new</span> Size(rectangle.Width - <span class="hljs-number">1</span>, rectangle.Height - <span class="hljs-number">1</span>));
+            graphics.DrawRectangle(objPen, objRectangle);
+            objPen.Dispose();
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Containers.Skins
+
+Public Class Form1
+
+    Private Sub Form1_Load(ByVal sender As System.Object, _
+        ByVal e As System.EventArgs) Handles MyBase.Load
+        ' GcTabControlコントロールのスタイルにスキンを設定します
+        GcTabControl1.Appearance = GrapeCity.Win.Containers.TabAppearance.Skin
+        ' 作成したスキンを適用します
+        GcTabControl1.Skin = New FreeStyle
+        ' GcTabControlコントロールの背景色を設定します
+        GcTabControl1.BackColor = Color.LightYellow
+        ' 背景を透過表示にします
+        GcTabControl1.TransparentBackground = True
+    End Sub
+
+End Class
+
+Public Class FreeStyle
+    Inherits Skin
+
+    Public Sub New()
+    End Sub
+
+    Public Overloads Overrides Function GetUseVisualStyleBackColor() As Boolean
+        ' XP テーマの背景色を使用しません
+        Return False
+    End Function
+
+    ' タブ領域を描画します
+    Public Overloads Overrides Sub DrawStrip(ByVal graphics As Graphics, _
+        ByVal rectangle As Rectangle, ByVal stripIndex As Integer, _
+        ByVal stripSettings As StripSettings, ByVal controlSettings As ControlSettings)
+        ' 背景色を設定します
+        graphics.FillRectangle(Brushes.LightYellow, rectangle)
+
+        ' キャプションを描画します
+        Dim strCaption As String = stripSettings.Text
+        Dim intCaptionHeight As Integer = TextRenderer.MeasureText(strCaption, _
+            stripSettings.TabStyle.Font).Height
+        Dim objBrush As System.Drawing.SolidBrush = New SolidBrush(Color.Navy)
+        graphics.DrawString(strCaption, stripSettings.TabStyle.Font, objBrush, _
+            New PointF(rectangle.Left + 5, rectangle.Top + _
+            ((rectangle.Height - intCaptionHeight) / 2)))
+        objBrush.Dispose()
+
+        ' 境界線を描画します
+        Dim objPen As System.Drawing.Pen = New System.Drawing.Pen(Color.SteelBlue, 1)
+        Dim objRectangle As Rectangle = New Rectangle(rectangle.Location, _
+            New Size(rectangle.Width - 1, rectangle.Height))
+        graphics.DrawRectangle(objPen, objRectangle)
+        objPen.Dispose()
+    End Sub
+
+    ' パネルの枠線を描画します
+    Public Overloads Overrides Sub DrawPanelBorder(ByVal graphics As Graphics, _
+        ByVal rectangle As Rectangle, ByVal controlSettings As ControlSettings)
+        ' 背景色を設定します
+        Dim objBrush As SolidBrush = New SolidBrush(controlSettings.BackColor)
+        graphics.FillRectangle(objBrush, rectangle)
+
+        ' 境界線を描画します
+        Dim objPen As Pen = New System.Drawing.Pen(Color.SteelBlue, 1)
+        Dim objRectangle As Rectangle = New Rectangle(rectangle.Location, _
+            New Size(rectangle.Width - 1, rectangle.Height - 1))
+        graphics.DrawRectangle(objPen, objRectangle)
+        objPen.Dispose()
+    End Sub
+
+End Class</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=41227543-a14d-488d-96ed-f61052baefe4" title="">GcTabControlコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=efa23818-5935-4782-b15f-d569b7e29b96" title="">GcTabControlプロパティページ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d3383196-0370-43c3-81b0-9776401b2fb2" title="">基本スタイルの選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8c33c00d-4354-45ae-8e79-70d4a1989154" title="">タブの配色の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6cb28b65-38ce-45e7-b316-264be84f4931" title="">タブのオーナー描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=49a0566f-d2f0-4bcd-ac34-ccf5aad63f6a" title="">さまざまな外観設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=11737120-c7df-4ef0-b2d1-49674a8d0c0b" title="">タブのホットトラック</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d1881619-641e-4fd0-987c-725f6d5be46f" title="">選択タブの外観</a></p><p><a href="gcdocsite__documentlink?toc-item-id=10779bdf-648f-4726-b1b7-8c667d9c298f" title="">テキストの縦表示とタブの配置</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8355cd6d-2680-46ba-8b93-45f9f78641ca" title="">レイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6f08a71f-3686-425b-a05c-06904a4d5863" title="">ナビゲーター</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6ed8101-373a-460d-9c49-2411ea9f3622" title="">コマンドアイコン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=33511d7b-e5b5-49b9-b6b5-56b9e60248b4" title="">タブの閉じるボタン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cf9cfd30-1f6b-4b60-a4b7-e27537314787" title="">タブの固定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0b8155fb-6291-4643-ae44-d8394db354d4" title="">子コントロールに3D効果を追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=aa6f3293-b8ff-4384-bd8b-3dd7b1959653" title="">子コントロールにキャプションを追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e7896040-1f11-4e6f-a21c-e68c7ef976f4" title="">設定の保存と読み込み</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b8c674c4-9924-4bb8-a7f5-ac5d34a65c70" title="">タッチ機能</a></p>

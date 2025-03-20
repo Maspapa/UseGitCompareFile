@@ -1,0 +1,20 @@
+<p>GcShapeButton コントロールのボタン押下時の設定方法について、以下に解説します。</p><h2>ボタン押下の自動繰り返し機能</h2><p>GcShapeButton.<a href="gcdocsite__documentlink?toc-item-id=b389b695-f019-4792-b899-f748c4199a35" title="">AutoRepeat</a>プロパティをTrueに設定することで、GcShapeButtonコントロールを押したままにした場合に、GcShapeButton.ButtonPressイベントを繰り返し発生させることができます。</p><p>GcShapeButton コントロール にフォーカスがある時、キーボードの<strong>Space</strong>キーを使っても同じ動作をします。</p><p>下記は、自動繰り返し機能を利用し、リストボックスに連続してアイテムを追加するサンプルコードを示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// オートリピートを有効にします。</span>
+gcShapeButton1.AutoRepeat = <span class="hljs-literal">true</span>;
+
+<span class="hljs-function">private void gcShapeButton1_ButtonPress(object sender, System.EventArgs e)</span>
+{
+    <span class="hljs-comment">// リストボックスに連続してアイテムを追加します。</span>
+    listBox1.Items.Add(DateTime.Now.TimeOfDay);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' オートリピートを有効にします。
+GcShapeButton1.AutoRepeat = True
+
+Private Sub GcShapeButton1_ButtonPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GcShapeButton1.ButtonPress
+    ' リストボックスに連続してアイテムを追加します。
+    ListBox1.Items.Add(Now.TimeOfDay)
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcshapebutton.autorepeat.png" contenteditable="false"><br></p><h2>自動繰り返し時間の設定</h2><p>GcShapeButtonコントロールを最初に押下してからイベントが繰り返されるまでの時間は<a href="gcdocsite__documentlink?toc-item-id=e4dc02dc-4108-4a43-910b-8e31313ecb51" title="">RepeatDelay</a>プロパティでイベントを繰り返す間隔は<a href="gcdocsite__documentlink?toc-item-id=07f02571-93c8-462b-96a5-69028b4c1ff4" title="">RepeatInterval</a>プロパティでミリ秒単位で設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// オートリピートが開始されるまでの時間を設定します。</span>
+gcShapeButton1.RepeatDelay = <span class="hljs-number">200</span>;
+<span class="hljs-comment">// イベントを繰り返す間隔を設定します。</span>
+gcShapeButton1.RepeatInterval = <span class="hljs-number">300</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' オートリピートが開始されるまでの時間を設定します。
+GcShapeButton1.RepeatDelay = 200
+' イベントを繰り返す間隔を設定します。
+GcShapeButton1.RepeatInterval = 300</code></pre></div><h2>2重クリックの防止</h2><p>2重クリックの防止の詳細については、GcButton コントロールと同様です。GcButton コントロールの「<a href="gcdocsite__documentlink?toc-item-id=d6f09cfc-183f-4094-a0ac-346209c2a430" title="">2重クリックの防止</a>」を参照してください。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b46c6785-0757-4949-a188-75db44c47bb4" title="">GcShapeButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a8cf5525-0a4c-4683-8c53-f20e0f29649f" title="">ボタンの設定</a></p>

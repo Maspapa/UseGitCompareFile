@@ -1,0 +1,109 @@
+<p>GcBarCode コントロールのバーコードの設定方法について、以下に解説します。</p><h2>バーコードの種類の指定</h2><p>GcBarCode コントロールを使用してバーコードの種類を指定するには、Type プロパティで表示するバーコードの種類を選択します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' バーコードの種類を指定します。
+GcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13</code></pre></div><p>バーコードの種類によっては、固有の値を設定することが可能です。バーコードの種類とGcBarCode コントロールで固有値を設定するプロパティは下記の一覧のとおりです。</p><table><thead><tr><th><p>バーコードの種類</p></th><th><p>プロパティ名</p></th><th><p>固有値を設定するクラス</p></th></tr></thead><tbody><tr><td><p>Aztec</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=a1d6bb22-b245-482a-948d-a0f2835a4483" title="">Aztec</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=f9587b62-d056-4846-93cb-2c97b0204730" title="">Aztec</a>メンバ</p></td></tr><tr><td><p>CODE39</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=c58695c9-145f-4d23-b03c-4ca66a1640ab" title="">Code39</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=67e1c8d4-8672-4b48-a48a-5b6c2466f0cb" title="">Code39</a>メンバ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=a08b8627-f406-420e-8dbe-6b057baf0949" title="">FixLength</a>プロパティ</p></td><td><p><br></p></td></tr><tr><td><p>CODE49</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=983b4418-2fe9-4184-8c50-ac6b5deb27a1" title="">Code49</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=5f800dac-8c4a-4a88-98ed-470e6d13def2" title="">Code49</a>メンバ</p></td></tr><tr><td><p>Data Matrix</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=4518f5ad-ca04-44d6-9d73-aac1479e8797" title="">DataMatrix</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=a3ecdcf2-07ab-47f5-9a61-eb87f7dc2cc1" title="">DataMatrix</a>メンバ</p></td></tr><tr><td><p>GS1Composite</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=4cd40567-3e6d-4c3d-9789-a9dd5ce420ed" title="">GS1Composite</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=ff65760d-432e-4e92-8501-c9b7f1177585" title="">GS1Composite</a>メンバ</p></td></tr><tr><td><p>ITF</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=3b8e3504-57f4-4a78-b0d1-85b2ac36f429" title="">ITF</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=92cfa26c-3b6b-421f-95f5-5b0b9dcb8628" title="">ITF</a>メンバ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=a08b8627-f406-420e-8dbe-6b057baf0949" title="">FixLength</a>プロパティ</p></td><td><p><br></p></td></tr><tr><td><p>MicroPDF417</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=f300c910-cd72-46b8-8d40-e5aff96c828f" title="">MicroPDF417</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=f42e3a7b-7ad0-4533-a622-013a9377af04" title="">MicroPDF417</a>メンバ</p></td></tr><tr><td><p>PDF417</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=0ebcbb16-9119-42aa-aca5-8be1a2352e41" title="">PDF417</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=2a4581ec-c3fa-430d-9029-0a477122d3fa" title="">PDF417</a>メンバ</p></td></tr><tr><td><p>POSTNET</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=a08b8627-f406-420e-8dbe-6b057baf0949" title="">FixLength</a>プロパティ</p></td><td><p><br></p></td></tr><tr><td><p>QRコード</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=3a3cd8c8-30d9-49c9-a84a-60d02deb55c4" title="">QRCode</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=cd9c455b-cfa3-415c-b707-5a734c2e803d" title="">QRCode</a>メンバ</p></td></tr><tr><td><p>GS1 DataBar Expanded Stacked</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=5c666338-3759-48a0-a88c-792b19db7201" title="">RSSExpandedStacked</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=a54c3bf5-7208-4b83-9429-f73015f2cb2b" title="">RSSExpandedStacked</a>メンバ</p></td></tr><tr><td><p>UPC/A／UPC/E／UPC/Eアドオン</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=37de10e3-3586-493a-a701-3e2ad45b0871" title="">UPC</a>プロパティ</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=b4021813-8dd5-47c9-bc0e-5c31a38fa4f8" title="">UPC</a>メンバ</p></td></tr></tbody></table><h2>バーコードに値を設定</h2><p>バーコードを表示するには<a href="gcdocsite__documentlink?toc-item-id=df2467fe-637f-47d7-8219-a3048d05679c" title="">Value</a>プロパティにバーコード化する値を設定します。GcBarCode コントロールは設定した値とバーコードの種類から、仕様に基づいてスタートキャラクタ、ストップキャラクタおよびチェックデジットを自動的に生成してバーコードを表示します。</p><p>チェックデジットを自動で設定しない場合には、<a href="gcdocsite__documentlink?toc-item-id=e7d3fd8e-b07c-4a1a-a916-a19f7c0b342b" title="">CheckDigit</a>プロパティをFalseに設定します。スタートキャラクタ、ストップキャラクタについては必ず自動で設定されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;
+<span class="hljs-comment">// バーコードの値を設定します。</span>
+gcBarCode1.Value = <span class="hljs-string">"494924012510"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' バーコードの種類を指定します。
+GcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13
+' バーコードの値を設定します。
+GcBarCode1.Value = "494924012510"</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbarcode.barcode.png" contenteditable="false"><br></p><p>Value プロパティでは string値で値を設定しますが、<a href="gcdocsite__documentlink?toc-item-id=9f6cff6d-ec6d-4c38-af67-e5165d793875" title="">ValueBinary</a>プロパティを利用すると、値をバイト配列で設定することが可能です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;
+<span class="hljs-comment">// バーコードの値を設定します。</span>
+<span class="hljs-built_in">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">12</span>];
+b[<span class="hljs-number">0</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+b[<span class="hljs-number">1</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x39</span>;
+b[<span class="hljs-number">2</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+b[<span class="hljs-number">3</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x39</span>;
+b[<span class="hljs-number">4</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x32</span>;
+b[<span class="hljs-number">5</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+b[<span class="hljs-number">6</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x30</span>;
+b[<span class="hljs-number">7</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x31</span>;
+b[<span class="hljs-number">8</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x32</span>;
+b[<span class="hljs-number">9</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x35</span>;
+b[<span class="hljs-number">10</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x31</span>;
+b[<span class="hljs-number">11</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x30</span>;
+gcBarCode1.ValueBinary = b;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' バーコードの種類を指定します。
+GcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13
+' バーコードの値を設定します。
+Dim b As Byte() = New Byte(11) {}
+b(0) = CByte(&amp;H34)
+b(1) = CByte(&amp;H39)
+b(2) = CByte(&amp;H34)
+b(3) = CByte(&amp;H39)
+b(4) = CByte(&amp;H32)
+b(5) = CByte(&amp;H34)
+b(6) = CByte(&amp;H30)
+b(7) = CByte(&amp;H31)
+b(8) = CByte(&amp;H32)
+b(9) = CByte(&amp;H35)
+b(10) = CByte(&amp;H31)
+b(11) = CByte(&amp;H30)
+GcBarCode1.ValueBinary = b</code></pre></div><p>CODE128で値にFNC1などのファンクションキャラクタを設定する必要がある場合には、Value プロパティの場合、<a href="gcdocsite__documentlink?toc-item-id=4baf7769-e7f3-416f-8639-2eec40c18939" title="">Code128</a>構造体 の定数を利用します。GS1 DataBar Expanded／GS1 DataBar Expanded Stackedには<a href="gcdocsite__documentlink?toc-item-id=e1bd5164-3dcd-4b37-bf88-d474e2150122" title="">RSSExpanded</a>構造体 の定数を利用します。なお、ValueBinary プロパティの場合には&amp;Hf1～&amp;Hf4（0xF1～0xF4）のコードでファンクションキャラクタを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128;
+<span class="hljs-comment">// バーコードの値を設定します。</span>
+gcBarCode1.Value = <span class="hljs-string">"12"</span> + GrapeCity.Win.BarCode.Options.Code128.FUNC1 + <span class="hljs-string">"34"</span>;
+
+<span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode2.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128;
+<span class="hljs-comment">// バーコードの値を設定します。</span>
+<span class="hljs-built_in">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">5</span>];
+b[<span class="hljs-number">0</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x31</span>;
+b[<span class="hljs-number">1</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x32</span>;
+b[<span class="hljs-number">2</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0xF1</span>;  <span class="hljs-comment">// FNC1を指定</span>
+b[<span class="hljs-number">3</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x33</span>;
+b[<span class="hljs-number">4</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+gcBarCode2.ValueBinary = b;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' バーコードの種類を指定します。
+GcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128
+' バーコードの値を設定します。
+GcBarCode1.Value = "12" + GrapeCity.Win.BarCode.Options.Code128.FUNC1 + "34"
+
+' バーコードの種類を指定します。
+GcBarCode2.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128
+' バーコードの値を設定します。
+Dim b As Byte() = New Byte(4) {}
+b(0) = CByte(&amp;H31)
+b(1) = CByte(&amp;H32)
+b(2) = CByte(&amp;Hf1)  ' FNC1を指定
+b(3) = CByte(&amp;H33)
+b(4) = CByte(&amp;H34)
+GcBarCode2.ValueBinary = b</code></pre></div><p>NW-7でチェックデジットの設定を行う場合には、<a href="gcdocsite__documentlink?toc-item-id=08141ccc-0f0f-458f-ac33-9c629bdac1a9" title="">CheckDigitAlgorithm</a>プロパティを利用します。以下のサンプルコードはNW-7バーコードにチェックデジットを設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//アルゴリズムを選択し、チェックデジットを設定します。</span>
+gcBarCode1.NW7.CheckDigitAlgorithm = GrapeCity.Win.BarCode.CheckDigitAlgorithm.DR_7;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'アルゴリズムを選択し、チェックデジットを設定します。
+GcBarCode1.NW7.CheckDigitAlgorithm = GrapeCity.Win.BarCode.CheckDigitAlgorithm.DR_7</code></pre></div><h2>バーコード値のテキスト表示</h2><p>バーコードイメージにはバーコード値がテキストで表示されます。バーコード値を非表示にする場合には<a href="gcdocsite__documentlink?toc-item-id=036d2944-e099-4616-98d2-c35a74350d13" title="">Message</a>プロパティをFalseに設定します。また、バーコード値のテキスト表示の位置やフォントを変更することも可能です。位置の変更は<a href="gcdocsite__documentlink?toc-item-id=5395d378-7af4-44af-88cf-45b185751d14" title="">MessagePos</a> プロパティ、フォントの変更は<a href="gcdocsite__documentlink?toc-item-id=dbd19b8e-ede5-42eb-8b62-293e9fa24fbc" title="">MessageFont</a>プロパティで行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.ITF;
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+gcBarCode1.Value = <span class="hljs-string">"1490123456789"</span>;
+<span class="hljs-comment">// バーコードのテキストの位置を右揃えに設定します。 </span>
+gcBarCode1.MessagePos = GrapeCity.Win.BarCode.ValueType.MessagePos.Right;
+<span class="hljs-comment">// バーコードのテキストのフォントを設定します。 </span>
+gcBarCode1.MessageFont = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">8</span>, FontStyle.Italic);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' バーコードの種類を指定します。 
+GcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.ITF
+' バーコードの値を設定します。 
+GcBarCode1.Value = "1490123456789"
+' バーコードのテキストの位置を右揃えに設定します。 
+GcBarCode1.MessagePos = GrapeCity.Win.BarCode.ValueType.MessagePos.Right
+' バーコードのテキストのフォントを設定します。 
+GcBarCode1.MessageFont = New Font("Meiryo UI", 8, FontStyle.Italic)</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbarcode.message.png" contenteditable="false"><br></p><p><br></p><p>バーコード値で表示されるテキストはValue プロパティで指定した値です。スタートキャラクタ／ストップキャラクタを出力したり（CODE39のアスタリスク（*）など）アプリケーション識別子を括弧で括って出力したりすることはできません。これらの情報をテキストで出力したい場合には、<a href="gcdocsite__documentlink?toc-item-id=573ec6f5-a045-4da4-a390-dc11a296c044" title="">MessageVal</a> プロパティでテキストの情報を変更します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code39;
+<span class="hljs-comment">// バーコードの値を設定します。</span>
+gcBarCode1.Value = <span class="hljs-string">"1234567890"</span>;
+<span class="hljs-comment">// バーコードのテキスト値を設定します。</span>
+gcBarCode1.MessageVal = <span class="hljs-string">"*"</span> + gcBarCode1.Value.ToString() + <span class="hljs-string">"*"</span>;
+
+<span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCode2.Type = GrapeCity.Win.BarCode.ValueType.BarType.EAN128;
+<span class="hljs-comment">// バーコードの値を設定します。（括弧を除いた値）</span>
+gcBarCode2.Value = <span class="hljs-string">"01149123456789013012101234"</span>;
+<span class="hljs-comment">// バーコードのテキスト値を設定します。</span>
+gcBarCode2.MessageVal = <span class="hljs-string">"(01)14912345678901(30)12(10)1234"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' バーコードの種類を指定します。
+GcBarCode1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code39
+' バーコードの値を設定します。
+GcBarCode1.Value = "1234567890"
+' バーコードのテキスト値を設定します。
+GcBarCode1.MessageVal = "*" + GcBarCode1.Value.ToString() + "*"
+
+' バーコードの種類を指定します。
+GcBarCode2.Type = GrapeCity.Win.BarCode.ValueType.BarType.EAN128
+' バーコードの値を設定します。（括弧を除いた値）
+GcBarCode2.Value = "01149123456789013012101234"
+' バーコードのテキスト値を設定します。
+GcBarCode2.MessageVal = "(01)14912345678901(30)12(10)1234"</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbarcode.messageval.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=ca937467-d4b9-4c07-8416-7f55a77e60cb" title="">GcBarCodeコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f0777bf8-832d-470b-9fed-0b807e6c4bd7" title="">バーコードの出力</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8aa282bf-6d00-43b0-a4db-98587f1fbe57" title="">バーコードの構成</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b561f622-bca0-43b1-a14b-47182611c6ad" title="">対応しているバーコードの種類</a></p>

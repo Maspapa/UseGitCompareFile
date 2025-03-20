@@ -1,0 +1,253 @@
+<p>GcClassicFunctionKey コントロールでは、ボタンに画像を表示したり、ボタン上にマウスポインタが置かれたときにツールチップを表示することができます。ここでは、個々のボタンに割り当てられる機能について説明します。</p><p>コントロール上のすべてのボタンに共通に適用されるスタイルについては、「<a href="gcdocsite__documentlink?toc-item-id=e4fe7d2e-e79f-440e-a26a-5b4100a71843" title="">ボタン全体のスタイルを設定</a>」を参照してください。</p><h2>キーセットの設定</h2><p>各ボタンで個別に設定する内容は、<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトとしてまとめられています。<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトで設定可能な項目は次の8つのプロパティです。</p><ul><li><p>ボタンの背景色 （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#BACKCOLOR" title="">BackColor</a>）</p></li><li><p>ボタンの位置 （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#BUTTONINDEX" title="">ButtonIndex</a>）</p></li><li><p>ボタン操作の可否 （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#ENABLED" title="">Enabled</a>）</p></li><li><p>キャプションの文字色 （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#FORECOLOR" title="">ForeColor</a>）</p></li><li><p>ボタンに表示する画像のインデックス （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#IMAGEINDEX" title="">ImageIndex</a>）</p></li><li><p>ボタンに関連付けられているキー （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#KEY" title="">Key</a>）</p></li><li><p>キャプションとして表示する文字列 （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#TEXT" title="">Text</a>）</p></li><li><p>ツールチップとして表示する文字列 （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#TOOLTIPTEXT" title="">ToolTipText</a>）</p></li></ul><p>1つの <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトは1つのキーボード上のキーに割り当てられています。以下の16個のキーに対応した <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトが1つのKeySetオブジェクト内に配列の形で格納されています。対応するキーは、<a href="gcdocsite__documentlink?toc-item-id=69fe0311-1fc4-499d-9e90-9bd278f92216" title="">KeySet</a> オブジェクトの配列内のインデックスによって決定されます。</p><table><thead><tr><th><p>Index</p></th><th><p>Key</p></th></tr></thead><tbody><tr><td><p>0</p></td><td><p>F1</p></td></tr><tr><td><p>1</p></td><td><p>F2</p></td></tr><tr><td><p>2</p></td><td><p>F3</p></td></tr><tr><td><p>3</p></td><td><p>F4</p></td></tr><tr><td><p>4</p></td><td><p>F5</p></td></tr><tr><td><p>5</p></td><td><p>F6</p></td></tr><tr><td><p>6</p></td><td><p>F7</p></td></tr><tr><td><p>7</p></td><td><p>F8</p></td></tr><tr><td><p>8</p></td><td><p>F9</p></td></tr><tr><td><p>9</p></td><td><p>F10</p></td></tr><tr><td><p>10</p></td><td><p>F11</p></td></tr><tr><td><p>11</p></td><td><p>F12</p></td></tr><tr><td><p>12</p></td><td><p>Home</p></td></tr><tr><td><p>13</p></td><td><p>End</p></td></tr><tr><td><p>14</p></td><td><p>PageUp</p></td></tr><tr><td><p>15</p></td><td><p>PageDown</p></td></tr></tbody></table><p>また、<a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#KEYITEMFROMPOINT" title="">KeyItemFromPoint</a> メソッドを使用すると、GcClassicFunctionKey コントロールのボタン上にマウスポインタが置かれたときに対応する <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトを取得することができます。</p><p><a href="gcdocsite__documentlink?toc-item-id=bedf151e-4c00-4b6b-88c4-c32a84ffc5ab" title="">KeySetCollection</a> コレクションは、複数の <a href="gcdocsite__documentlink?toc-item-id=69fe0311-1fc4-499d-9e90-9bd278f92216" title="">KeySet</a> オブジェクトを保管します。このコレクションには、GcClassicFunctionKey コントロールの <a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#KEYSETS" title="">KeySets</a> プロパティを使ってアクセスできます。また、<a href="gcdocsite__documentlink?toc-item-id=bedf151e-4c00-4b6b-88c4-c32a84ffc5ab" title="">KeySetCollection</a> コレクションに保存された <a href="gcdocsite__documentlink?toc-item-id=69fe0311-1fc4-499d-9e90-9bd278f92216" title="">KeySet</a> オブジェクトのキー（識別名）を <a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#ACTIVEKEYSET" title="">ActiveKeySet</a> プロパティに設定することで、その <a href="gcdocsite__documentlink?toc-item-id=69fe0311-1fc4-499d-9e90-9bd278f92216" title="">KeySet</a> オブジェクトの内容がGcClassicFunctionKey コントロールに反映されます。</p><p>次のサンプルコードは、キーセット（<a href="gcdocsite__documentlink?toc-item-id=69fe0311-1fc4-499d-9e90-9bd278f92216" title="">KeySet</a> オブジェクト）を作成してボタン毎に色を設定し、そのキーセットをアクティブにする方法です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, System.EventArgs e)</span>
+{
+    <span class="hljs-comment">// キーセットを作成します。 </span>
+    gcClassicFunctionKey1.KeySets.Add(<span class="hljs-string">"Normal"</span>);
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">0</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">0</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ButtonIndex = <span class="hljs-number">0</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].Text = <span class="hljs-string">"新規"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].BackColor = Color.Green;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ForeColor = Color.White;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].ButtonIndex = <span class="hljs-number">1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].Text = <span class="hljs-string">"編集"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].BackColor = Color.Orange;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].ForeColor = Color.White;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].ButtonIndex = <span class="hljs-number">2</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].Text = <span class="hljs-string">"参照"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].BackColor = Color.Blue;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].ForeColor = Color.White;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">4</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">4</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">5</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">5</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">6</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">6</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">7</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">7</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">8</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">8</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].ButtonIndex = <span class="hljs-number">3</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].Text = <span class="hljs-string">"終了"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].BackColor = Color.LightGray;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">10</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">10</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">11</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">11</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">12</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">12</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">13</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">13</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">14</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">14</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">15</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">15</span>].Enabled = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-comment">// 作成したキーセットをアクティブにします。 </span>
+    gcClassicFunctionKey1.ActiveKeySet = <span class="hljs-string">"Normal"</span>;
+    gcClassicFunctionKey1.ColumnGroups = <span class="hljs-string">"3|1"</span>;
+
+    <span class="hljs-comment">// ポップアップ形式の描画スタイルを設定します。</span>
+    gcClassicFunctionKey1.StyleSets.Add(<span class="hljs-string">"FlatStyleSet1"</span>, <span class="hljs-keyword">new</span> GrapeCity.Win.Bars.PopupStyleSet());
+    gcClassicFunctionKey1.ActiveStyleSet = <span class="hljs-string">"FlatStyleSet1"</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    ' キーセットを作成します。 
+    GcClassicFunctionKey1.KeySets.Add("Normal")
+    GcClassicFunctionKey1.KeySets("Normal")(0).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(0).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(1).ButtonIndex = 0
+    GcClassicFunctionKey1.KeySets("Normal")(1).Text = "新規"
+    GcClassicFunctionKey1.KeySets("Normal")(1).BackColor = Color.Green
+    GcClassicFunctionKey1.KeySets("Normal")(1).ForeColor = Color.White
+    GcClassicFunctionKey1.KeySets("Normal")(2).ButtonIndex = 1
+    GcClassicFunctionKey1.KeySets("Normal")(2).Text = "編集"
+    GcClassicFunctionKey1.KeySets("Normal")(2).BackColor = Color.Orange
+    GcClassicFunctionKey1.KeySets("Normal")(2).ForeColor = Color.White
+    GcClassicFunctionKey1.KeySets("Normal")(3).ButtonIndex = 2
+    GcClassicFunctionKey1.KeySets("Normal")(3).Text = "参照"
+    GcClassicFunctionKey1.KeySets("Normal")(3).BackColor = Color.Blue
+    GcClassicFunctionKey1.KeySets("Normal")(3).ForeColor = Color.White
+    GcClassicFunctionKey1.KeySets("Normal")(4).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(4).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(5).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(5).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(6).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(6).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(7).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(7).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(8).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(8).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(9).ButtonIndex = 3
+    GcClassicFunctionKey1.KeySets("Normal")(9).Text = "終了"
+    GcClassicFunctionKey1.KeySets("Normal")(9).BackColor = Color.LightGray
+    GcClassicFunctionKey1.KeySets("Normal")(10).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(10).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(11).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(11).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(12).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(12).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(13).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(13).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(14).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(14).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(15).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(15).Enabled = False
+
+    ' 作成したキーセットをアクティブにします。 
+    GcClassicFunctionKey1.ActiveKeySet = "Normal"
+    GcClassicFunctionKey1.ColumnGroups = "3|1"
+
+    ' ポップアップ形式の描画スタイルを設定します。
+    GcClassicFunctionKey1.StyleSets.Add("FlatStyleSet1", New GrapeCity.Win.Bars.PopupStyleSet())
+    GcClassicFunctionKey1.ActiveStyleSet = "FlatStyleSet1"
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcclassicfunctionkey.keysets.png" contenteditable="false"><br></p><h2>ツールチップの表示</h2><p><a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトの <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#TOOLTIPTEXT" title="">ToolTipText</a> プロパティに文字列を設定し、GcClassicFunctionKey コントロールの <a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#SHOWTIPS" title="">ShowTips</a> プロパティをTrueにすると、その <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトに対応したボタンにマウスポインタが置かれたときに、ツールチップ （<a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#TOOLTIPTEXT" title="">ToolTipText</a> プロパティで設定した文字列） を表示することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// F2キーのKeyItemにツールチップを設定します。 </span>
+gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ToolTipText = <span class="hljs-string">"新規画面を表示します。"</span>;
+gcClassicFunctionKey1.ShowTips = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' F2キーのKeyItemにツールチップを設定します。 
+GcClassicFunctionKey1.KeySets("Normal")(1).ToolTipText = "新規画面を表示します。"
+GcClassicFunctionKey1.ShowTips = True</code></pre></div><h2>画像の表示</h2><p>GcClassicFunctionKey コントロール上のボタンに画像を表示するには、次の手順を実行します。</p><ol><li><p>ImageListオブジェクトを作成する。</p></li><li><p>作成したImageListオブジェクトをImageListプロパティに設定する。</p></li><li><p>ImageListオブジェクト内の画像のインデックスを <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d" title="">KeyItem</a> オブジェクトの <a href="gcdocsite__documentlink?toc-item-id=2f3cac1f-d660-404e-8be7-3e739edff72d#IMAGEINDEX" title="">ImageIndex</a> プロパティに設定する。</p></li></ol><p>ImageListオブジェクトの作成は、標準のImageListコントロールを使う方法と、独自にオブジェクトを生成する方法があります。ImageListオブジェクトの詳細については、Visual Studioのヘルプの「ImageListクラス」を参照してください。</p><p>以下は、ツールチップと画像を設定したファンクションコントロールの例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, System.EventArgs e)</span>
+{
+    <span class="hljs-comment">// ImageListオブジェクトを作成します。</span>
+    ImageList iList = <span class="hljs-keyword">new</span> ImageList();
+    iList.ImageSize = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">32</span>, <span class="hljs-number">32</span>);
+    iList.Images.Add(Image.FromFile(<span class="hljs-string">@"C:\images\New.png"</span>));
+    iList.Images.Add(Image.FromFile(<span class="hljs-string">@"C:\images\Edit.png"</span>));
+    iList.Images.Add(Image.FromFile(<span class="hljs-string">@"C:\images\Ref.png"</span>));
+    iList.Images.Add(Image.FromFile(<span class="hljs-string">@"C:\images\Close.png"</span>));
+    <span class="hljs-comment">// ImageListプロパティを設定します。 </span>
+    gcClassicFunctionKey1.ImageList = iList;
+
+    <span class="hljs-comment">// キーセットを作成します。 </span>
+    gcClassicFunctionKey1.KeySets.Add(<span class="hljs-string">"Normal"</span>);
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">0</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">0</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ButtonIndex = <span class="hljs-number">0</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].Text = <span class="hljs-string">"新規"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].BackColor = Color.Green;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ForeColor = Color.White;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ImageIndex = <span class="hljs-number">0</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].ButtonIndex = <span class="hljs-number">1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].Text = <span class="hljs-string">"編集"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].BackColor = Color.Orange;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].ForeColor = Color.White;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].ImageIndex = <span class="hljs-number">1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].ButtonIndex = <span class="hljs-number">2</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].Text = <span class="hljs-string">"参照"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].BackColor = Color.Blue;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].ForeColor = Color.White;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].ImageIndex = <span class="hljs-number">2</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">4</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">4</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">5</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">5</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">6</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">6</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">7</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">7</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">8</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">8</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].ButtonIndex = <span class="hljs-number">3</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].Text = <span class="hljs-string">"終了"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].BackColor = Color.LightGray;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].ImageIndex = <span class="hljs-number">3</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">10</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">10</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">11</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">11</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">12</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">12</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">13</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">13</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">14</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">14</span>].Enabled = <span class="hljs-literal">false</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">15</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">15</span>].Enabled = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-comment">// 作成したキーセットをアクティブにします。 </span>
+    gcClassicFunctionKey1.ActiveKeySet = <span class="hljs-string">"Normal"</span>;
+    gcClassicFunctionKey1.ColumnGroups = <span class="hljs-string">"3|1"</span>;
+
+    <span class="hljs-comment">// ポップアップ形式の描画スタイルを設定します。</span>
+    GrapeCity.Win.Bars.PopupStyleSet FlatStyleSet1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Bars.PopupStyleSet();
+    FlatStyleSet1.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">14</span>);
+    gcClassicFunctionKey1.StyleSets.Add(<span class="hljs-string">"FlatStyleSet1"</span>, FlatStyleSet1);
+    gcClassicFunctionKey1.ActiveStyleSet = <span class="hljs-string">"FlatStyleSet1"</span>;
+
+    <span class="hljs-comment">// ツールチップを設定します。 </span>
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">1</span>].ToolTipText = <span class="hljs-string">"新規画面を表示します。"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">2</span>].ToolTipText = <span class="hljs-string">"編集内容を保存します。"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">3</span>].ToolTipText = <span class="hljs-string">"コードから名称を検索し参照します。"</span>;
+    gcClassicFunctionKey1.KeySets[<span class="hljs-string">"Normal"</span>][<span class="hljs-number">9</span>].ToolTipText = <span class="hljs-string">"画面を終了します。"</span>;
+    gcClassicFunctionKey1.ShowTips = <span class="hljs-literal">true</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    ' ImageListオブジェクトを作成します。
+    Dim iList As ImageList = New ImageList()
+    iList.ImageSize = New Size(32, 32)
+    iList.Images.Add(Image.FromFile("C:\images\New.png"))
+    iList.Images.Add(Image.FromFile("C:\images\Edit.png"))
+    iList.Images.Add(Image.FromFile("C:\images\Ref.png"))
+    iList.Images.Add(Image.FromFile("C:\images\Close.png"))
+    ' ImageListプロパティを設定します。 
+    GcClassicFunctionKey1.ImageList = iList
+
+    ' キーセットを作成します。 
+    GcClassicFunctionKey1.KeySets.Add("Normal")
+    GcClassicFunctionKey1.KeySets("Normal")(0).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(0).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(1).ButtonIndex = 0
+    GcClassicFunctionKey1.KeySets("Normal")(1).Text = "新規"
+    GcClassicFunctionKey1.KeySets("Normal")(1).BackColor = Color.Green
+    GcClassicFunctionKey1.KeySets("Normal")(1).ForeColor = Color.White
+    GcClassicFunctionKey1.KeySets("Normal")(1).ImageIndex = 0
+    GcClassicFunctionKey1.KeySets("Normal")(2).ButtonIndex = 1
+    GcClassicFunctionKey1.KeySets("Normal")(2).Text = "編集"
+    GcClassicFunctionKey1.KeySets("Normal")(2).BackColor = Color.Orange
+    GcClassicFunctionKey1.KeySets("Normal")(2).ForeColor = Color.White
+    GcClassicFunctionKey1.KeySets("Normal")(2).ImageIndex = 1
+    GcClassicFunctionKey1.KeySets("Normal")(3).ButtonIndex = 2
+    GcClassicFunctionKey1.KeySets("Normal")(3).Text = "参照"
+    GcClassicFunctionKey1.KeySets("Normal")(3).BackColor = Color.Blue
+    GcClassicFunctionKey1.KeySets("Normal")(3).ForeColor = Color.White
+    GcClassicFunctionKey1.KeySets("Normal")(3).ImageIndex = 2
+    GcClassicFunctionKey1.KeySets("Normal")(4).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(4).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(5).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(5).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(6).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(6).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(7).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(7).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(8).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(8).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(9).ButtonIndex = 3
+    GcClassicFunctionKey1.KeySets("Normal")(9).Text = "終了"
+    GcClassicFunctionKey1.KeySets("Normal")(9).BackColor = Color.LightGray
+    GcClassicFunctionKey1.KeySets("Normal")(9).ImageIndex = 3
+    GcClassicFunctionKey1.KeySets("Normal")(10).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(10).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(11).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(11).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(12).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(12).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(13).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(13).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(14).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(14).Enabled = False
+    GcClassicFunctionKey1.KeySets("Normal")(15).ButtonIndex = -1
+    GcClassicFunctionKey1.KeySets("Normal")(15).Enabled = False
+
+    ' 作成したキーセットをアクティブにします。 
+    GcClassicFunctionKey1.ActiveKeySet = "Normal"
+    GcClassicFunctionKey1.ColumnGroups = "3|1"
+
+    ' ポップアップ形式の描画スタイルを設定します。
+    Dim FlatStyleSet1 As GrapeCity.Win.Bars.PopupStyleSet = New GrapeCity.Win.Bars.PopupStyleSet()
+    FlatStyleSet1.Font = New Font("Meiryo UI", 14)
+    GcClassicFunctionKey1.StyleSets.Add("FlatStyleSet1", FlatStyleSet1)
+    GcClassicFunctionKey1.ActiveStyleSet = "FlatStyleSet1"
+
+    ' ツールチップを設定します。 
+    GcClassicFunctionKey1.KeySets("Normal")(1).ToolTipText = "新規画面を表示します。"
+    GcClassicFunctionKey1.KeySets("Normal")(2).ToolTipText = "編集内容を保存します。"
+    GcClassicFunctionKey1.KeySets("Normal")(3).ToolTipText = "コードから名称を検索し参照します。"
+    GcClassicFunctionKey1.KeySets("Normal")(9).ToolTipText = "画面を終了します。"
+    GcClassicFunctionKey1.ShowTips = True
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcclassicfunctionkey.functionkey_image.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=657de385-26c7-4db1-ab0f-f6f30e8a6d65" title="">GcClassicFunctionKeyコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=23bb6719-ede0-43b2-b30e-476931ebbca1" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=887e51ff-ec5c-4d57-b642-630de8394b61" title="">操作とイベント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e4fe7d2e-e79f-440e-a26a-5b4100a71843" title="">ボタン全体のスタイル設定</a></p>

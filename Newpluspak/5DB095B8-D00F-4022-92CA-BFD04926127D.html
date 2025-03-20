@@ -1,0 +1,25 @@
+<p>GcPostalBarCode コントロールのバーコードの作り方について、以下に解説します。</p><h2>JPAddress for Windows Formsの準備</h2><p>GcPostalBarCode コントロールの機能は、「JPAddress for Windows Forms（以下、JPAddress）」を利用して実現されており、カスタマバーコードの作成機能を利用するためには JPAddress のインストールが必要です。</p><p>詳細については「<a href="gcdocsite__documentlink?toc-item-id=06d1eb24-6ba4-498d-baf9-c2f9d00547d1" title="">JPAddress for .NETとの連携</a>」を参照してください。</p><h2>入力用コントロールの設定</h2><p>GcPostalBarCode コントロールは入力された郵便番号や住所、大口事業所の個別郵便番号の情報からカスタマバーコード（郵便バーコード）を生成するためのバーコード用キャラクタを作成し、カスタマバーコードを表示します。スタートコードとストップコード、およびチェックデジットは自動的に追加されます。</p><p>郵便番号や大口事業所の個別郵便番号を入力するコントロール、住所を入力するコントロールは以下のプロパティで設定します。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=55041e8b-12bb-48d4-9641-fd310ca11578" title="">ZipCodeInputControl</a>プロパティ（郵便番号を入力するコントロールを取得または設定します。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=f715d6cd-bf86-4731-8760-175eeb434475" title="">AddressInputControl</a>プロパティ（住所を入力するコントロールを取得または設定します。）</p></li></ul><p>次のサンプルコードでは、郵便番号と住所を入力するコントロールを指定しています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// textBox1に入力された郵便番号からカスタマバーコードを作成します。</span>
+gcPostalBarCode1.ZipCodeInputControl = textBox1;
+<span class="hljs-comment">// textBox2に入力された住所からカスタマバーコードを作成します。</span>
+gcPostalBarCode1.AddressInputControl = textBox2;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' TextBox1に入力された郵便番号からカスタマバーコードを作成します。
+GcPostalBarCode1.ZipCodeInputControl = TextBox1
+' TextBox2に入力された住所からカスタマバーコードを作成します。
+GcPostalBarCode1.AddressInputControl = TextBox2</code></pre></div><h2>郵便番号や住所の設定</h2><p>入力用コントロールを指定しないで直接設定する場合には、<a href="gcdocsite__documentlink?toc-item-id=89293cef-d995-4d98-85a3-2e15962f3774" title="">Address</a>プロパティや<a href="gcdocsite__documentlink?toc-item-id=cd2878dc-dee8-4376-b6c7-ce0567d4e03a" title="">ZipCode</a>プロパティを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 郵便番号を設定します。</span>
+gcPostalBarCode1.ZipCode = <span class="hljs-string">"1130033"</span>;
+<span class="hljs-comment">// 住所を設定します。</span>
+gcPostalBarCode1.Address = <span class="hljs-string">"東京都文京区本郷７丁目３－１"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 郵便番号を設定します。
+GcPostalBarCode1.ZipCode = "1130033"
+' 住所を設定します。
+GcPostalBarCode1.Address = "東京都文京区本郷７丁目３－１"</code></pre></div><h2>バーコード用キャラクタ作成時のエラー</h2><p>GcPostalBarCode コントロールに設定された郵便番号が不正または該当する住所がないなどでバーコード用キャラクタを作成できない場合は、値（<a href="gcdocsite__documentlink?toc-item-id=d1eb47e0-e8a0-4fbb-b41a-5088ca2074e8" title="">Value</a> プロパティ）が初期値（12345）にリセットされます。その際、HasError プロパティがTrueに設定されて<a href="gcdocsite__documentlink?toc-item-id=3bb9db63-9f1c-4fa1-a518-9c58773e4ead" title="">HasErrorChanged</a>イベントが発生します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcPostalBarCode1_HasErrorChanged(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// 郵便番号や住所が不正な場合</span>
+    <span class="hljs-keyword">if</span> (gcPostalBarCode1.HasError)
+    {
+        MessageBox.Show(<span class="hljs-string">"入力された値が不正です"</span>);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcPostalBarCode1_HasErrorChanged(sender As Object, e As EventArgs) Handles GcPostalBarCode1.HasErrorChanged
+    ' 郵便番号や住所が不正な場合
+    If GcPostalBarCode1.HasError Then
+        MessageBox.Show("入力された値が不正です")
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0730a06f-f335-417d-a155-281c74621ac0" title="">GcPostalBarCodeコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=81a0ecc2-6362-4b04-ab59-87e603e411e3" title="">バーコードの構成</a></p>

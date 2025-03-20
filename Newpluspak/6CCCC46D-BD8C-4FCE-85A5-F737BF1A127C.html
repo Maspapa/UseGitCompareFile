@@ -1,0 +1,119 @@
+<p>あらかじめ定義されたスタイルのほかに、塗りつぶしの色、グラデーションそして画像を指定することで進行状況の描画をカスタマイズすることが可能です。なお、コントロールをカスタマイズするには、<a href="gcdocsite__documentlink?toc-item-id=6d2e3f79-0fa2-4313-9c96-9769659f1a3e" title="">FlatStyle</a> プロパティを <strong>System 以外</strong>の値に設定する必要があります。</p><h2>カスタマイズに使用するプロパティ</h2><p>カスタマイズに使用するプロパティは、主に次のとおりです。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>BackColor</p></td><td><p>コントロールの背景色</p></td></tr><tr><td><p>BackGradientEffect</p></td><td><p>背景部分を塗りつぶすために使用されるグラデーション</p></td></tr><tr><td><p>BackgroundImage</p></td><td><p>コントロールの背景イメージ</p></td></tr><tr><td><p>BackgroundImageLayout</p></td><td><p>背景イメージのレイアウト</p></td></tr><tr><td><p>BorderStyle</p></td><td><p>境界線のスタイル</p></td></tr><tr><td><p>FillColor</p></td><td><p>完了部分を塗りつぶす色</p></td></tr><tr><td><p>FillForeColor</p></td><td><p>完了部分の前景色</p></td></tr><tr><td><p>FillGradientEffect</p></td><td><p>完了部分を塗りつぶすために使用されるグラデーション</p></td></tr><tr><td><p>FillImage</p></td><td><p>完了部分を塗りつぶすために使用されるイメージ</p></td></tr><tr><td><p>FillImageLayout</p></td><td><p>完了部分のイメージのレイアウト</p></td></tr><tr><td><p>SingleBorderColor</p></td><td><p>コントロールの境界線の色</p></td></tr></tbody></table><h2>グラデーション効果の使用</h2><p>グラデーション効果を使用した背景と完了部分を持つ GcProgressBar コントロールは、次のサンプルコードのように設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// gcProgressBar1のフラットスタイルを設定します。</span>
+gcProgressBar1.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+
+<span class="hljs-comment">// gcProgressBar1のスタイルを連続した塗りつぶしに設定します。</span>
+gcProgressBar1.Style = GrapeCity.Win.Bars.ProgressStyle.Continuous;
+
+<span class="hljs-comment">// コントロールの境界線およびその色を定義します。</span>
+gcProgressBar1.BorderStyle = BorderStyle.FixedSingle;
+gcProgressBar1.SingleBorderColor = System.Drawing.Color.Navy;
+
+<span class="hljs-comment">// コントロールの背景グラデーションを設定します。</span>
+GrapeCity.Win.Common.GradientEffect myBackGradientEffect1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.GradientEffect();
+myBackGradientEffect1.Style = GrapeCity.Win.Common.GradientStyle.Vertical;
+myBackGradientEffect1.Direction = GrapeCity.Win.Common.GradientDirection.Forward;
+myBackGradientEffect1.StartColor = Color.White;
+myBackGradientEffect1.EndColor = Color.Gray;
+
+<span class="hljs-comment">// 背景グラデーションをgcProgressBar1に設定します。</span>
+gcProgressBar1.BackGradientEffect = myBackGradientEffect1;
+
+<span class="hljs-comment">// 完了部分の前景色を設定します。</span>
+gcProgressBar1.FillForeColor = System.Drawing.Color.WhiteSmoke;
+
+<span class="hljs-comment">// コントロールの完了部分グラデーションを設定します。</span>
+GrapeCity.Win.Common.GradientEffect myFillGradientEffect1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.GradientEffect();
+myFillGradientEffect1.Style = GrapeCity.Win.Common.GradientStyle.Vertical;
+myFillGradientEffect1.Direction = GrapeCity.Win.Common.GradientDirection.Forward;
+myFillGradientEffect1.StartColor = Color.Wheat;
+myFillGradientEffect1.EndColor = Color.Orange;
+
+<span class="hljs-comment">// 完了部分グラデーションをgcProgressBar1に設定します。</span>
+gcProgressBar1.FillGradientEffect = myFillGradientEffect1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' GcProgressBar1のフラットスタイルを設定します。
+GcProgressBar1.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+
+' GcProgressBar1のスタイルを連続した塗りつぶしに設定します。
+GcProgressBar1.Style = GrapeCity.Win.Bars.ProgressStyle.Continuous
+
+' コントロールの境界線およびその色を定義します。
+GcProgressBar1.BorderStyle = BorderStyle.FixedSingle
+GcProgressBar1.SingleBorderColor = System.Drawing.Color.Navy
+
+' コントロールの背景グラデーションを設定します。
+Dim myBackGradientEffect1 As New GrapeCity.Win.Common.GradientEffect
+myBackGradientEffect1.Style = GrapeCity.Win.Common.GradientStyle.Vertical
+myBackGradientEffect1.Direction = GrapeCity.Win.Common.GradientDirection.Forward
+myBackGradientEffect1.StartColor = Color.White
+myBackGradientEffect1.EndColor = Color.Gray
+
+' 背景グラデーションをGcProgressBar1に設定します。
+GcProgressBar1.BackGradientEffect = myBackGradientEffect1
+
+' 完了部分の前景色を設定します。
+GcProgressBar1.FillForeColor = System.Drawing.Color.WhiteSmoke
+
+' コントロールの完了部分グラデーションを設定します。
+Dim myFillGradientEffect1 As New GrapeCity.Win.Common.GradientEffect
+myFillGradientEffect1.Style = GrapeCity.Win.Common.GradientStyle.Vertical
+myFillGradientEffect1.Direction = GrapeCity.Win.Common.GradientDirection.Forward
+myFillGradientEffect1.StartColor = Color.Wheat
+myFillGradientEffect1.EndColor = Color.Orange
+
+' 完了部分グラデーションをGcProgressBar1に設定します。
+GcProgressBar1.FillGradientEffect = myFillGradientEffect1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcprogressbar.customizesample1.png" contenteditable="false"><br></p><h2>イメージの使用</h2><p>次のサンプルコードは、イメージを用いて完了部分を塗りつぶす GcProgressBar コントロールの作成方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// GcProgressBar1のフラットスタイルを設定します。</span>
+gcProgressBar1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
+<span class="hljs-comment">// コントロールの境界線スタイルを設定します。</span>
+gcProgressBar1.BorderStyle = BorderStyle.Fixed3D;
+
+<span class="hljs-comment">// GcProgressBar1のスタイルを連続した塗りつぶしに設定します。</span>
+gcProgressBar1.Style = GrapeCity.Win.Bars.ProgressStyle.Continuous;
+
+<span class="hljs-comment">// コントロールの背景グラデーションを設定します。</span>
+GrapeCity.Win.Common.GradientEffect myBackGradientEffect1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.GradientEffect();
+myBackGradientEffect1.Style = GrapeCity.Win.Common.GradientStyle.Horizontal;
+myBackGradientEffect1.Direction = GrapeCity.Win.Common.GradientDirection.Center;
+myBackGradientEffect1.StartColor = Color.White;
+myBackGradientEffect1.EndColor = Color.Pink;
+
+<span class="hljs-comment">// 背景グラデーションをGcProgressBar1に設定します。</span>
+gcProgressBar1.BackGradientEffect = myBackGradientEffect1;
+
+<span class="hljs-comment">// テキストの色を設定します。</span>
+gcProgressBar1.ForeColor = Color.Blue;
+
+<span class="hljs-comment">// 完了部分を塗りつぶすためのイメージを設定します。</span>
+Image myFillImage = Image.FromFile(<span class="hljs-string">"Arrow.bmp"</span>);
+gcProgressBar1.FillImage = myFillImage;
+gcProgressBar1.FillImageLayout = ImageLayout.Stretch;
+
+<span class="hljs-comment">// 完了部分の塗りつぶし色を透過に設定します。</span>
+gcProgressBar1.FillColor = Color.Transparent;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' GcProgressBar1のフラットスタイルを設定します。
+GcProgressBar1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+
+' コントロールの境界線スタイルを設定します。
+GcProgressBar1.BorderStyle = BorderStyle.Fixed3D
+
+' GcProgressBar1のスタイルを連続した塗りつぶしに設定します。
+GcProgressBar1.Style = GrapeCity.Win.Bars.ProgressStyle.Continuous
+
+' コントロールの背景グラデーションを設定します。
+Dim myBackGradientEffect1 As New GrapeCity.Win.Common.GradientEffect
+myBackGradientEffect1.Style = GrapeCity.Win.Common.GradientStyle.Horizontal
+myBackGradientEffect1.Direction = GrapeCity.Win.Common.GradientDirection.Center
+myBackGradientEffect1.StartColor = Color.White
+myBackGradientEffect1.EndColor = Color.Pink
+
+' 背景グラデーションをGcProgressBar1に設定します。
+GcProgressBar1.BackGradientEffect = myBackGradientEffect1
+
+' テキストの色を設定します。
+GcProgressBar1.ForeColor = Color.Blue
+
+' 完了部分を塗りつぶすためのイメージを設定します。
+Dim myFillImage As Image = Image.FromFile("Arrow.bmp")
+GcProgressBar1.FillImage = myFillImage
+GcProgressBar1.FillImageLayout = ImageLayout.Stretch
+
+' 完了部分の塗りつぶし色を透過に設定します。
+GcProgressBar1.FillColor = Color.Transparent</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcprogressbar.customizesample2.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=d33d3278-ef9c-4ab3-906a-e06a035034f7" title="">GcProgressBarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d62a2f0c-bdf1-42c3-84f7-ebee10050cf1" title="">進行状況の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ef661071-c4ef-473f-81f5-085a30474652" title="">バーの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=27a0a00c-5dfe-4596-a7c7-5d58a5710c73" title="">テキストの設定</a></p>

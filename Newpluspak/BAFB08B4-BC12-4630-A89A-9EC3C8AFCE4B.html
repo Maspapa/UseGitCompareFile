@@ -1,0 +1,79 @@
+<p>バルーンチップのウィンドウの中にはコントロールを追加して独自のバルーンチップを作ることができます。ここでは、バルーンチップをカスタマイズする方法について解説します。</p><h2>概要</h2><p>バルーンチップにコントロールを追加するには、バルーンチップ内にコントロールを配置する必要があります。コントロールはバルーンチップ内の下図の位置に配置することができます。バルーンチップの大きさは追加されたコントロールのサイズによって自動的にサイズが調整されます。バルーンチップが表示可能なサイズの上限は<a href="gcdocsite__documentlink?toc-item-id=3ac7a6e6-aebf-42b0-aa75-ceea30b131ea" title="">MaxWidth</a>と<a href="gcdocsite__documentlink?toc-item-id=a9526805-24e4-495b-a33a-b3d0b0bfa912" title="">MaxHeight</a>プロパティで設定できます。デフォルトでは、幅（MaxWidth）は600ピクセルです。高さ（MaxHeight）には制限は設定されていません。貼り付けたコントロールのサイズが大きくバルーンチップ内に表示しきれない場合は、スクロールバーが表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.balloontipcustomarea.png" contenteditable="false"><br></p><h2>コントロールの配置</h2><p>バルーンチップ内にコントロールを配置するには、BalloonTipInformation オブジェクトの<a href="gcdocsite__documentlink?toc-item-id=be359e7c-ed69-4a0d-8de8-2d627cc6a4e3" title="">CustomControl</a> プロパティに配置するコントロールを設定します。例えば、テキストボックスコントロール（TextBox1）に設定されているバルーンチップにリンクラベル（LinkLabel1）を追加するには次のように行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcBalloonTip1.GetBalloonTipInformation(textBox1).CustomControl = linkLabel1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcBalloonTip1.GetBalloonTipInformation(TextBox1).CustomControl = LinkLabel1</code></pre></div><p>バルーンチップ内に表示されるコントロールは (0, 0)の位置に配置されます。したがって、バルーンチップ内の意図した位置に表示するには、Panelやコンテナ（Container）コントロール等のコンテナにコントロールを配置してコンテナ上でLocation プロパティを設定し、そのコンテナをCustomControl プロパティに設定する必要があります。</p><p>また、CustomControl プロパティには、１つのコントロールしか設定できません。バルーンチップに複数のコントロール表示したい場合は、Panelやコンテナ（Container）コントロール等のコンテナに表示したいコントロールを貼り付け、コンテナを CustomControl プロパティに設定します。</p><h2>活用例</h2><p>ここでは、ボタンの Click イベントで、GcContainer コントロールを配置したバルーンチップを表示する例を紹介します。ここでは、ボタン（Button1）、コンテナコントロール（GcContainer1）とGcBalloonTip コンポーネント（GcBalloonTip1）がフォームに貼り付けられていることを前提にしています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-function">private void Form1_Load(object sender, System.EventArgs e)</span>
+{
+    Label label1 = <span class="hljs-keyword">new</span> Label();
+    label1.Text = <span class="hljs-string">"問い合わせ先："</span>;
+    label1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+    label1.AutoSize = <span class="hljs-literal">true</span>;
+    gcContainer1.Controls.Add(label1);
+
+    Label label2 = <span class="hljs-keyword">new</span> Label();
+    label2.Text = <span class="hljs-string">"メシウス株式会社"</span>;
+    label2.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">20</span>, <span class="hljs-number">15</span>);
+    label2.AutoSize = <span class="hljs-literal">true</span>;
+    gcContainer1.Controls.Add(label2);
+
+    LinkLabel linkLabel1 = <span class="hljs-keyword">new</span> LinkLabel();
+    linkLabel1.Text = <span class="hljs-string">"https://developer.mescius.jp/"</span>;
+    linkLabel1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">20</span>, <span class="hljs-number">30</span>);
+    linkLabel1.AutoSize = <span class="hljs-literal">true</span>;
+    gcContainer1.Controls.Add(linkLabel1);
+
+    <span class="hljs-comment">// バルーンチップに追加するコンテナコントロールをフォームから削除します。 </span>
+    Controls.Remove(gcContainer1);
+
+    <span class="hljs-comment">// ボタンにバルーンチップを設定します。 </span>
+    BalloonTipInformation myTipInfo = <span class="hljs-keyword">new</span> BalloonTipInformation();
+    gcBalloonTip1.SetBalloonTipInformation(button1, myTipInfo);
+    myTipInfo.Caption = <span class="hljs-string">"カスタムバルーンチップ"</span>;
+    myTipInfo.Text = <span class="hljs-string">"バルーンチップにコンテナコントロールを追加"</span>;
+
+    <span class="hljs-comment">// コンテナをバルーンチップに配置します。 </span>
+    gcContainer1.Visible = <span class="hljs-literal">true</span>;
+    myTipInfo.CustomControl = gcContainer1;
+}
+
+<span class="hljs-function">private void Button1_Click(object sender, System.EventArgs e)</span>
+{
+    <span class="hljs-comment">// バルーンチップを表示します。</span>
+    gcBalloonTip1.Show(button1, TipPosition.TopRight);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim Label1 as Label = New Label()
+    Label1.Text = "問い合わせ先："
+    Label1.Location = New Point(0, 0)
+    Label1.AutoSize = True
+    GcContainer1.Controls.Add(Label1)
+
+    Dim Label2 as Label = New Label()
+    Label2.Text = "メシウス株式会社"
+    Label2.Location = New Point(20, 15)
+    Label2.AutoSize = true
+    GcContainer1.Controls.Add(Label2)
+
+    Dim LinkLabel1 as LinkLabel = New LinkLabel()
+    LinkLabel1.Text = "https://developer.mescius.jp/"
+    LinkLabel1.Location = New Point(20, 30)
+    LinkLabel1.AutoSize = True
+    GcContainer1.Controls.Add(LinkLabel1)
+    
+    ' バルーンチップに追加するコンテナコントロールをフォームから削除します。
+    Controls.Remove(GcContainer1)
+
+    ' ボタンにバルーンチップを設定します。
+    Dim myTipInfo As New BalloonTipInformation
+    GcBalloonTip1.SetBalloonTipInformation(Button1, myTipInfo)
+    myTipInfo.Caption = "カスタムバルーンチップ"
+    myTipInfo.Text = "バルーンチップにコンテナコントロールを追加"
+
+    ' コンテナをバルーンチップに配置します。
+    GcContainer1.Visible = True
+    myTipInfo.CustomControl = GcContainer1
+End Sub
+
+Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    ' バルーンチップを表示します。
+    GcBalloonTip1.Show(Button1, TipPosition.TopRight)
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.customcontrol.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=004e265f-b567-4c9f-8aee-3affb3902b5c" title="">GcBalloonTipコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9c715568-c0d2-40b6-b23f-dd958abebff4" title="">バルーンチップの表示</a></p>

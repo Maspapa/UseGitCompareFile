@@ -1,0 +1,58 @@
+<p>任意のコントロールに対して、ユーザー定義のリサイズポリシーを作成して適用できます。ここでは、ListView コントロールに対するリサイズポリシーの作成方法について説明します。</p><h2>リサイズポリシーの作成</h2><h4>ユーザー定義のリサイズポリシーの作成</h4><p>ResizePolicy クラスを継承して独自のリサイズポリシーを作成することができます。</p><p>次のコードは、ResizePolicy クラスを継承するユーザー定義の ListView のリサイズポリシーです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CostomListViewResizePolicy</span> : <span class="hljs-title">ResizePolicy</span>
+{
+    <span class="hljs-function">public override bool CanResize(Control ctl)</span>
+    {
+        <span class="hljs-keyword">return</span> ctl <span class="hljs-keyword">is</span> ListView;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> Type TargetType
+    {
+        <span class="hljs-keyword">get</span>
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span>(ListView);
+        }
+    }
+
+    <span class="hljs-function">public override void ResizeLayout(Control ctl, ResizeLayoutInfo infos)</span>
+    {
+        <span class="hljs-keyword">var</span> listView = ctl <span class="hljs-keyword">as</span> ListView;
+
+        listView.SuspendLayout();
+        <span class="hljs-keyword">if</span> (listView.Columns.Count &gt; <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">foreach</span> (ColumnHeader column <span class="hljs-keyword">in</span> listView.Columns)
+            {
+                column.Width = infos.ScaleX(column.Width);
+            }
+        }
+        listView.ResumeLayout(<span class="hljs-literal">true</span>);
+        <span class="hljs-keyword">base</span>.ResizeLayout(ctl, infos);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+Public Class CostomListViewResizePolicy
+    Inherits ResizePolicy
+    Public Overrides Function CanResize(ctl As Control) As Boolean
+        Return TypeOf ctl Is ListView
+    End Function
+
+    Public Overrides ReadOnly Property TargetType() As Type
+        Get
+            Return GetType(ListView)
+        End Get
+    End Property
+
+    Public Overrides Sub ResizeLayout(ctl As Control, infos As ResizeLayoutInfo)
+        Dim listView = TryCast(ctl, ListView)
+        listView.SuspendLayout()
+        If listView.Columns.Count &gt; 0 Then
+            For Each column As ColumnHeader In listView.Columns
+                column.Width = infos.ScaleX(column.Width)
+            Next
+        End If
+        listView.ResumeLayout(True)
+        MyBase.ResizeLayout(ctl, infos)
+    End Sub
+End Class</code></pre></div><h4>ユーザー定義のリサイズポリシーの設定</h4><p>ユーザー定義のリサイズポリシーは、ResizePolicy コレクション エディターで設定できます。</p><p>ユーザー定義のリサイズポリシークラスを作成してプロジェクトをビルドすると、ResizePolicy コレクション エディターの［カスタムポリシーの追加］のドロップダウンリストにユーザー定義のリサイズポリシーが表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcresize.gcresize_resizepolicy_custompolicy01.png" contenteditable="false"><br></p><p>このドロップダウンリストからユーザー定義のリサイズポリシーを選択すると［メンバー］リストに追加されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcresize.gcresize_resizepolicy_custompolicy02.png" contenteditable="false"><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>ユーザー定義のリサイズポリシーが1つしか存在しない場合はドロップダウンリストは表示されません。この場合、［カスタムポリシーの追加］ボタンをクリックするとユーザー定義のリサイズポリシーが［メンバー］リストに追加されます。</p></li></ul></blockquote><h4>コーディングによる設定</h4><p>次のコードは、ユーザー定義のリサイズポリシーを GcResizeの ResizePolicies プロパティに設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcResize1.ResizePolicies.Add(<span class="hljs-keyword">new</span> CostomListViewResizePolicy());</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcResize1.ResizePolicies.Add(New CostomListViewResizePolicy())</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c6236e6b-997c-4467-a621-6b948e8aec54" title="">GcResizeコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cc208a7e-db7e-4bf5-8eb8-255a0c23f247" title="">リサイズの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d0f7eb40-113e-4057-ba1b-59ac98a4e9ba" title="">フォームのリサイズ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a9e3a473-1db9-4b12-992a-2eed5bb6c2c4" title="">リサイズポリシー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7324ead3-01ce-4f49-a573-f9161960138b" title="">リサイズポリシーの使い方</a></p><p><a href="gcdocsite__documentlink?toc-item-id=22c95f8f-5310-484a-892d-7f9fa0050d78" title="">標準コントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=41733951-9059-49b4-846a-d6dec998d270" title="">ActiveReports for .NET</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c39a48be-513e-40a6-8cb0-6dda1f3413f5" title="">CalendarGrid for Windows Forms</a></p><p><a href="gcdocsite__documentlink?toc-item-id=37f05be1-799e-4793-9494-8633650409bc" title="">ComponentOne Studio for WinForms</a></p><p><a href="gcdocsite__documentlink?toc-item-id=47d1296f-1574-442c-a400-84060f29f95d" title="">InputMan for Windows Forms</a></p><p><a href="gcdocsite__documentlink?toc-item-id=77634041-2b6a-4ece-a97d-335b5fa2fc0c" title="">MultiRow for Windows Forms</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7c0f4505-42bb-449c-9606-0a76d49c8a54" title="">PlusPak for Windows Forms</a></p><p><a href="gcdocsite__documentlink?toc-item-id=197deff0-d65c-451b-b48b-84473537e0e9" title="">SPREAD for Windows Forms</a></p>

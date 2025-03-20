@@ -1,0 +1,42 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=b68dbe77-8cc5-4871-8bb5-cea03307f520" title="">GcGlobalHook</a>コンポーネントのキーボードおよびマウス操作の制御について、以下に解説します。</p><h2>キーボードの操作を制御</h2><p>KeyDown イベント または KeyUp イベントを使用して、キーボードの操作を制御することができます。</p><p>次のコードでは、KeyDown イベントを使用して PrintScreen キーでの画像キャプチャーを禁止します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// キーボード操作のグローバルフックを行います</span>
+    gcGlobalHook1.EnableKeyboardHook = <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-function">private void gcGlobalHook1_KeyDown(object sender, KeyEventArgs e)</span>
+{
+    <span class="hljs-comment">// PinrtScrnによる画面のコピーを禁止します</span>
+    <span class="hljs-keyword">if</span> (e.KeyCode == Keys.PrintScreen)
+    {
+        e.Handled = <span class="hljs-literal">true</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' キーボード操作のグローバルフックを行います
+    GcGlobalHook1.EnableKeyboardHook = True
+End Sub
+
+Private Sub GcGlobalHook1_KeyDown(sender As Object, e As KeyEventArgs) Handles GcGlobalHook1.KeyDown
+    ' PinrtScrnによる画面のコピーを禁止します
+    If e.KeyCode = Keys.PrintScreen Then
+        e.Handled = True
+    End If
+End Sub</code></pre></div><h2>マウスのフック</h2><p>以下のイベントを使用して、マウスの操作を制御することができます。</p><ul><li><p>MouseDown イベント</p></li><li><p>MouseMove イベント</p></li><li><p>MouseUp イベント</p></li><li><p>MouseWheel イベント</p></li></ul><p>次のコードでは、MouseWheel イベントを使用して、マウスホイールの操作を禁止します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// マウス操作のグローバルフックを行います</span>
+    gcGlobalHook1.EnableMouseHook = <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-function">private void gcGlobalHook1_MouseWheel(object sender, HandledMouseEventArgs e)</span>
+{
+    <span class="hljs-comment">// マウスホイールの操作を禁止する </span>
+    e.Handled = <span class="hljs-literal">true</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' マウス操作のグローバルフックを行います
+    GcGlobalHook1.EnableMouseHook = True
+End Sub
+
+Private Sub GcGlobalHook1_MouseWheel(sender As Object, e As HandledMouseEventArgs) Handles GcGlobalHook1.MouseWheel
+    ' マウスホイールの操作を禁止します
+    e.Handled = True
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=51333e04-91fc-43af-a180-c9be06b2faa3" title="">GcGlobalHookコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=90af68c5-6243-4657-b26d-8ef1bcf36fdb" title="">グローバルフックの設定</a></p>

@@ -1,0 +1,65 @@
+<h2><span class="SectionHeadingText">文字の立体表示</span></h2><p><a href="gcdocsite__documentlink?toc-item-id=eb3d3f33-dc4f-4ac0-92c8-4dacfe303d30" title="">TextEffect</a>プロパティで、文字を立体的に表示できます。立体表示には <strong>Inset</strong>（強いくぼみ）、<strong>InsetLite</strong>（軽いくぼみ）、<strong>Raised</strong>（強い浮き出し）、<strong>RaisedLite</strong>（軽い浮き出し）があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 文字を強い浮き出しの立体表示にします。</span>
+gcLabel1.TextEffect = GrapeCity.Win.Common.TextEffect.Raised;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 文字を強い浮き出しの立体表示にします。
+GcLabel1.TextEffect = GrapeCity.Win.Common.TextEffect.Raiseds</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.texteffect.png" contenteditable="false"><br></p><h2>パターン効果とグラデーション</h2><p>GcLable コントロールは、立体表示機能に加えて <a href="gcdocsite__documentlink?toc-item-id=941b4faf-7c73-458e-8d17-af33e42623f3" title="">GradientEffect</a>プロパティによる背景のグラデーションと、PatternEffect プロパティによる模様も設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Common;
+
+<span class="hljs-comment">// グラデーションを作成します</span>
+GradientEffect objGradientEffect = <span class="hljs-keyword">new</span> GradientEffect(GradientStyle.Vertical, GradientDirection.Forward, Color.SkyBlue, Color.Blue);
+<span class="hljs-comment">// グラデーションを適用します</span>
+gcLabel1.GradientEffect = objGradientEffect;
+
+<span class="hljs-comment">// パターン効果を作成します</span>
+PatternEffect objPatternEffect = <span class="hljs-keyword">new</span> PatternEffect(PatternStyle.DiagonalCross, Color.Red);
+<span class="hljs-comment">// パターン効果を適用します</span>
+gcLabel2.PatternEffect = objPatternEffect;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Common
+
+' グラデーションを作成します
+Dim objGradientEffect As New GradientEffect(GradientStyle.Vertical, GradientDirection.Forward, Color.SkyBlue, Color.Blue)
+' グラデーションを適用します
+GcLabel1.GradientEffect = objGradientEffect
+
+' パターン効果を作成します
+Dim objPatternEffect As New PatternEffect(PatternStyle.DiagonalCross, Color.Red)
+' パターン効果を適用します
+GcLabel2.PatternEffect = objPatternEffect</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.effect.png" contenteditable="false"><br></p><h2>アーチ文字</h2><p><a href="gcdocsite__documentlink?toc-item-id=eb8b3729-8734-4df9-bd09-0cd93fcbf262" title="">TextArcMode</a>プロパティで、アーチ型に表示できます。アーチ型には <strong>ArchUp</strong>（上向き）、 <strong>ArchDown</strong>（下向き）、<strong>Circle</strong>（円）があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcLabel1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcLabel1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.arch.png" contenteditable="false"><br></p><h2>画像の表示</h2><p>GcLabel コントロールは Image プロパティで画像を表示できます。画像の配置は ImageAlign プロパティを使用します。</p><p>また、TextArcMode プロパティと組み合わせて使用することもできます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcLabel1.Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"c:\icon.png"</span>);
+gcLabel1.ImageAlign = GrapeCity.Win.Common.ImageAlign.Bottom;
+
+gcLabel1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcLabel1.Image = New Bitmap("c:\icon.png")
+GcLabel1.ImageAlign = GrapeCity.Win.Common.ImageAlign.Bottom
+
+GcLabel1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.image.png" contenteditable="false"><br></p><h2>テキストの中抜き効果</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2b79eed-cc48-4c4d-87f7-9d887f506737" title="">OutlineEffect</a>クラスを使用すると、テキストの中抜き効果を表示できます。中抜きの効果では、テキストの塗りつぶし色および境界線の色と種類を設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.Buttons.OutlineEffect outlineEffect1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Buttons.OutlineEffect();
+outlineEffect1.FillColor = Color.Yellow;
+outlineEffect1.LineColor = Color.Red;
+outlineEffect1.LineStyle = GrapeCity.Win.Buttons.OutlineStyle.Single;
+
+gcLabel1.OutlineEffect = outlineEffect1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim outlineEffect1 As New GrapeCity.Win.Buttons.OutlineEffect()
+outlineEffect1.FillColor = Color.Yellow
+outlineEffect1.LineColor = Color.Red
+outlineEffect1.LineStyle = GrapeCity.Win.Buttons.OutlineStyle.Single
+
+GcLabel1.OutlineEffect = outlineEffect1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.outline.png" contenteditable="false"><br></p><h2>テキストの影付き効果</h2><p><a href="gcdocsite__documentlink?toc-item-id=dcf8edcc-889d-49d7-9543-8b930eb78f8e" title="">ShadowEffect</a>クラスを使用すると、テキストの影付き効果を表示できます。影付き効果では、影の色と深さを設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.Buttons.ShadowEffect shadowEffect1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Buttons.ShadowEffect();
+shadowEffect1.Color = Color.Silver;
+shadowEffect1.Thickness = <span class="hljs-number">2</span>;
+
+gcLabel1.ShadowEffect = shadowEffect1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim shadowEffect1 As New GrapeCity.Win.Buttons.ShadowEffect()
+shadowEffect1.Color = Color.Silver
+shadowEffect1.Thickness = 2
+
+GcLabel1.ShadowEffect = shadowEffect1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.shadoweffect.png" contenteditable="false"><br></p><h2>テキストの下線／取り消し線／枠線</h2><p><a href="gcdocsite__documentlink?toc-item-id=5101d131-e7cb-4518-bee4-649d684af1e5" title="">TextDecorations</a>クラスを使用すると、テキストに下線／取り消し線／枠線を表示できます。それぞれの線には、線の色と種類を設定することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.Buttons.TextDecorations textDecorations1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Buttons.TextDecorations();
+textDecorations1.StrikethroughColor = Color.Black;
+textDecorations1.StrikethroughStyle = GrapeCity.Win.Buttons.TextLineStyle.Double;
+textDecorations1.TextBorderColor = Color.Black;
+textDecorations1.TextBorderStyle = GrapeCity.Win.Buttons.TextBorderStyle.DashDot;
+textDecorations1.TextBorderWidth = <span class="hljs-number">5</span>;
+textDecorations1.UnderlineColor = Color.Black;
+textDecorations1.UnderlineStyle = GrapeCity.Win.Buttons.TextLineStyle.Waved;
+
+gcLabel1.TextDecorations = textDecorations1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim textDecorations1 As New GrapeCity.Win.Buttons.TextDecorations()
+textDecorations1.StrikethroughColor = Color.Black
+textDecorations1.StrikethroughStyle = GrapeCity.Win.Buttons.TextLineStyle.Double
+textDecorations1.TextBorderColor = Color.Black
+textDecorations1.TextBorderStyle = GrapeCity.Win.Buttons.TextBorderStyle.DashDot
+textDecorations1.TextBorderWidth = 5
+textDecorations1.UnderlineColor = Color.Black
+textDecorations1.UnderlineStyle = GrapeCity.Win.Buttons.TextLineStyle.Waved
+
+GcLabel1.TextDecorations = textDecorations1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.textdecorations.png" contenteditable="false"><br></p><h2>コントロール無効時のスタイル</h2><p>コントロールのEnabledプロパティがFalseに設定されている場合、コントロールは無効となり背景や文字がグレーで表示されますが、<a href="gcdocsite__documentlink?toc-item-id=9454c650-dd78-4aa8-bc62-6cc3c98deaa2" title="">DisabledForeColor</a>プロパティで無効時の文字色を指定することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcLabel1.DisabledForeColor = Color.Red;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcLabel1.DisabledForeColor = Color.Red</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gclabel.disabledforecolor.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=40f5c3ca-e4f8-47ac-aff9-746a680da7a3" title="">GcLabelコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=952b7d9e-cb57-4f01-82bd-e3f858e59060" title="">ラベルスタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=436a3936-92db-4b27-a5aa-df2da1f57a49" title="">文字の表示幅の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2c5593c8-843b-4d41-adc8-9eb2b4b8debe" title="">縦表示文字の設定</a></p>

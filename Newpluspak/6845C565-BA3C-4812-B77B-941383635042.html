@@ -1,0 +1,92 @@
+<p>バルーンチップを表示する方法について、以下の項目に分けて解説します。</p><h2>概要</h2><p>GcBalloonTip コンポーネントは、フォーム上のコントロールに、独自のバルーンチップを表示する拡張プロバイダです。フォーム上に描画されている System.Windows.Forms.Control クラスを継承したコントロールを拡張することができます。</p><p>バルーンチップの表示には、フォーカス移動を伴いません。このため、KeyDownイベント内で呼び出した場合でも、KeyUpイベントが正しく発生します。KeyDownイベント内の呼び出しでKeyUpイベントが発生しなくなるメッセージボックスに比べ、より安全な動作を実現できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.balloontip.png" contenteditable="false"><br></p><p>バルーンチップコンポーネントがフォームに配置されると <strong>GcBalloonTip1 の BalloonTipInfo</strong> がフォーム上の各コントロールのプロパティウィンドウに追加されます。右側に表示されるボタンをクリックすると、バルーンチップの設定を行うバルーンチップ エディタが表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.editor.png" contenteditable="false"><br></p><p>また、バルーンチップがフォームに配置されると、デザイン時の各コントロールのスマートタグにもバルーン チップ エディタを表示するショートカットが追加されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.smart_tag.png" contenteditable="false"><br></p><h2>バルーンチップの設定</h2><p>表示するバルーンチップの内容を設定するには、通常前項で説明したバルーンチップ エディタで行います。コードからバルーンチップの内容を設定するには、バルーンチップの<a href="gcdocsite__documentlink?toc-item-id=e6ad222b-8035-4999-ae52-dc91fc766b17" title="">BalloonTipInformation</a>オブジェクトを生成する必要があります。</p><p>BalloonTipInformation オブジェクトをコントロールに設定するには、<a href="gcdocsite__documentlink?toc-item-id=eca2ab95-2380-40cb-ad2b-e569cde77f88" title="">SetBalloonTipInformation</a>メソッドを使用します。また、コントロールから BalloonTipInformation オブジェクトを取得するには<a href="gcdocsite__documentlink?toc-item-id=9a2fef10-e219-427e-9c03-589988913a16" title="">GetBalloonTipInformation</a>メソッドを使用します。</p><p>BalloonTipInformation オブジェクトで設定できる項目については次項にて詳しく解説します。</p><p>バルーンチップの内容は、<a href="gcdocsite__documentlink?toc-item-id=e6ad222b-8035-4999-ae52-dc91fc766b17" title="">BalloonTipInformation</a>クラスの以下のプロパティで設定します。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=b4cc4adb-4923-4475-a6e4-734939601bb1" title="">AutoClose</a></p></td><td><p>自動的に閉じるかどうか</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=b0dd2574-f4d4-43db-85a0-ebeeaf443a6c" title="">AutoPopDelay</a></p></td><td><p>自動的に閉じるまでの時間</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=59ef9a37-2722-4529-878c-cb856cef26f9" title="">AutoShow</a></p></td><td><p>コントロール上にマウスを移動したときに、自動的に表示するかどうか</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=f9262cd7-5b60-4573-be78-751abdc07f62" title="">AutoSize</a></p></td><td><p>バルーンチップのサイズを自動的に調整するかどうか</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=4611cba0-8066-4abb-868b-f56dccbfd505" title="">BackColor</a></p></td><td><p>背景色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=e6ad222b-8035-4999-ae52-dc91fc766b17" title="">BaloonTipStyle</a></p></td><td><p>バルーンチップのスタイル</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=a6d70cbd-9b9c-4a97-82ec-1b4c46b97179" title="">Caption</a></p></td><td><p>キャプション</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=b491b0f5-54bc-45d3-b9d1-18d7dfb7acca" title="">CaptionFont</a></p></td><td><p>キャプションのフォント</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=a1b93335-45ec-4617-b8e9-4bd866aa52bc" title="">CaptionForeColor</a></p></td><td><p>キャプションの文字色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=7edcf1f0-44fe-4ffb-b4c8-fc3581930d23" title="">CustomIcon</a></p></td><td><p>カスタムアイコン画像</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=7a43d616-459a-43d1-8480-15e53e16f1ac" title="">GradientEffect</a></p></td><td><p>背景のグラデーション</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=55365099-dd10-48ea-99ae-28228ac3834a" title="">IconType</a></p></td><td><p>表示するアイコンの種類</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=8be71fcb-51ac-4861-a915-3bab7e7a04dd" title="">InitialDelay</a></p></td><td><p>自動的に表示するまでの時間</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=1aedaaf9-0153-4237-a40c-d438f0524e8d" title="">LongTapDelay</a></p></td><td><p>コントロールを長押ししたときに自動的に表示するまでの時間</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=a9526805-24e4-495b-a33a-b3d0b0bfa912" title="">MaxHeight</a></p></td><td><p>高さの上限</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=3ac7a6e6-aebf-42b0-aa75-ceea30b131ea" title="">MaxWidth</a></p></td><td><p>幅の上限</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=abc18f91-93aa-4961-b814-5a1bd76e9c37" title="">Shape</a></p></td><td><p>枠の形状</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=1eb34319-9057-4459-9235-2c8f999192ad" title="">ShowCloseButton</a></p></td><td><p>閉じるボタンを表示するかどうか</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=96451599-1a25-4568-887a-4b21e0e0bfe0" title="">Size</a></p></td><td><p>サイズ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=60f60ed6-b9dd-4f20-a560-53304d88d1ff" title="">Text</a></p></td><td><p>表示するテキスト</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=6e06b601-5b81-4a25-b552-d3ca28d836fa" title="">TextFont</a></p></td><td><p>テキストのフォント</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=d1dcbe34-4d7c-47e6-8718-566155e50d1f" title="">TextForeColor</a></p></td><td><p>テキストの文字色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=19dd4031-7217-461a-ab49-96a41422dd18" title="">UseVisualStyleBackColor</a></p></td><td><p>視覚スタイルがサポートされている場合、視覚スタイルを使用して背景を描画するかどうか</p></td></tr></tbody></table><p>以下は、テキストボックスコントロールに設定されているバルーンチップを取得しキャプションとメッセージを設定する例です。フォームにテキストボックス コントロール（TextBox1）と GcBalloonTip コンポーネント（GcBalloonTip1）が貼り付けられていることを前提にしています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 表示するバルーンチップのオブジェクトを作成します。</span>
+GrapeCity.Win.Components.BalloonTipInformation myTipInfo = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.BalloonTipInformation();
+<span class="hljs-comment">// テキストボックスコントロールにセットします。</span>
+BalloonTip1.SetBalloonTipInformation(TextBox1, myTipInfo);
+<span class="hljs-comment">// バルーンチップの内容を設定します。</span>
+myTipInfo.Caption = <span class="hljs-string">"不正な入力"</span>;
+myTipInfo.Text = <span class="hljs-string">"入力された値が不正です。"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 表示するバルーンチップのオブジェクトを作成します。
+Dim myTipInfo As New GrapeCity.Win.Components.BalloonTipInformation
+' テキストボックスコントロールにセットします。
+BalloonTip1.SetBalloonTipInformation(TextBox1, myTipInfo)
+' バルーンチップの内容を設定します。
+myTipInfo.Caption = "不正な入力"
+myTipInfo.Text = "入力された値が不正です。"</code></pre></div><h2>バルーンチップの表示</h2><p>コントロールにバルーンチップを表示するには、<a href="gcdocsite__documentlink?toc-item-id=23934f71-e76e-4f86-a4ad-3cc21aec8b05" title="">Show</a>メソッドを呼び出します。また、<a href="gcdocsite__documentlink?toc-item-id=0af0bd51-647a-4acc-964e-f33482be4ce5" title="">Hide</a>メソッドで強制的に閉じることができます。バルーンチップが表示されると<a href="gcdocsite__documentlink?toc-item-id=9e588cc8-017b-4ed5-9940-d697bf6661aa" title="">TipOpening</a>イベントが、バルーンチップが閉じたときには、<a href="gcdocsite__documentlink?toc-item-id=bfe05dd3-253c-4dd3-86eb-ddead5dfd243" title="">TipClosed</a>イベントが発生します。</p><p>以下は、テキストボックスコントロール（TextBox1）に設定されているバルーンチップを表示する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcBalloonTip1.Show(textBox1);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcBalloonTip1.Show(TextBox1)</code></pre></div><p>また、BalloonTipInformationクラスのAutoShowプロパティをTrueに設定することでコントロール上にマウスを移動したときに自動的にバルーンチップを表示することもできます。</p><p>次のサンプルコードではテキストボックスコントロール（TextBox1）にマウスを移動したときにバルーンチップを自動的に表示する設定を行う方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// BalloonTipInformationクラスを生成します。</span>
+GrapeCity.Win.Components.BalloonTipInformation myTipInfo = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.BalloonTipInformation();
+<span class="hljs-comment">// バルーンチップを自動的に表示する設定をします。</span>
+myTipInfo.AutoShow = <span class="hljs-literal">true</span>;
+<span class="hljs-comment">// コントロールにバルーンチップを設定します。</span>
+gcBalloonTip1.SetBalloonTipInformation(textBox1, myTipInfo);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' BalloonTipInformationクラスを生成します。
+Dim myTipInfo As New GrapeCity.Win.Components.BalloonTipInformation
+' バルーンチップを自動的に表示する設定をします。
+myTipInfo.AutoShow = True
+' コントロールにバルーンチップを設定します。
+GcBalloonTip1.SetBalloonTipInformation(TextBox1, myTipInfo)</code></pre></div><h2>表示位置の設定</h2><p>バルーンチップを表示するとき、<a href="gcdocsite__documentlink?toc-item-id=23934f71-e76e-4f86-a4ad-3cc21aec8b05" title="">Show</a>メソッドのパラメータ<a href="gcdocsite__documentlink?toc-item-id=f87e7711-5d80-4690-a1c2-3b0103f51c09" title="">TipPosition</a>列挙体を使って、バルーンチップの表示位置を設定することができます。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.balloontipposition.png" contenteditable="false"><br></p><table><thead><tr><th><p>メンバ名</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>TopLeft</p></td><td><p>コントロールの左上に表示します。</p></td></tr><tr><td><p>TopCenter</p></td><td><p>コントロールの中央上に表示します。</p></td></tr><tr><td><p>TopRight</p></td><td><p>コントロールの右上に表示します。</p></td></tr><tr><td><p>BottomLeft</p></td><td><p>コントロールの左下に表示します。</p></td></tr><tr><td><p>BottomCenter</p></td><td><p>コントロールの中央下に表示します。</p></td></tr><tr><td><p>BottomRight</p></td><td><p>コントロールの右下に表示します。</p></td></tr></tbody></table><p>以下は、テキストボックスコントロール（TextBox1）に設定されているバルーンチップをコントロールの左下に表示する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcBalloonTip1.Show(textBox1, GrapeCity.Win.Components.TipPosition.BottomLeft);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcBalloonTip1.Show(TextBox1, GrapeCity.Win.Components.TipPosition.BottomLeft)</code></pre></div><h2>グリッドのセルに表示する方法</h2><p><a href="gcdocsite__documentlink?toc-item-id=23934f71-e76e-4f86-a4ad-3cc21aec8b05" title="">Show</a>メソッドのパラメータ <strong>control</strong> と <strong>rectangle</strong> を使用して、グリッドコントロール内の特定のセルにバルーンチップを表示することが可能です。以下は、DataGridViewのセルにバルーンチップを表示する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void DataGridView1_CellValidating(System.Object sender, System.Windows.Forms.DataGridViewCellValidatingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.FormattedValue.ToString() == <span class="hljs-built_in">string</span>.Empty) {
+        Rectangle bound = dataGridView1.GetCellDisplayRectangle(dataGridView1.CurrentCell.ColumnIndex, dataGridView1.CurrentCell.RowIndex, <span class="hljs-literal">true</span>);
+        GrapeCity.Win.Components.BalloonTipInformation balloon = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.BalloonTipInformation();
+        balloon.Text = <span class="hljs-string">"この欄を空にすることはできません。"</span> + Environment.NewLine + <span class="hljs-string">"ColumnIndex："</span> + e.ColumnIndex + <span class="hljs-string">"　RowIndex:"</span> + e.RowIndex;
+        gcBalloonTip1.Show(dataGridView1, bound, GrapeCity.Win.Components.TipPosition.BottomCenter, balloon);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub DataGridView1_CellValidating(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs) Handles DataGridView1.CellValidating
+    If e.FormattedValue.ToString() = string.Empty Then
+        Dim bound As Rectangle = DataGridView1.GetCellDisplayRectangle(DataGridView1.CurrentCell.ColumnIndex, DataGridView1.CurrentCell.RowIndex, True)
+        Dim balloon As New GrapeCity.Win.Components.BalloonTipInformation
+        balloon.Text = "この欄を空にすることはできません。" + Environment.NewLine + "ColumnIndex：" &amp; e.ColumnIndex &amp; "　RowIndex:" &amp; e.RowIndex
+        GcBalloonTip1.Show(DataGridView1, bound, GrapeCity.Win.Components.TipPosition.BottomCenter, balloon)
+    End If
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.grid.png" contenteditable="false"><br></p><h2>カスタムアイコンの設定</h2><p>バルーンチップに表示するアイコンはIconTypeプロパティをCustomIconに設定しCustomIconプロパティに独自のアイコン画像を設定することでカスタムアイコンが表示できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.customiconsample.png" contenteditable="false"><br></p><p>以下のサンプルコードではカスタムアイコンを設定したバルーンチップをテキストボックスコントロール(TextBox1)に設定する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// BalloonTipInformationクラスを生成します。</span>
+GrapeCity.Win.Components.BalloonTipInformation myTipInfo = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.BalloonTipInformation();
+<span class="hljs-comment">// カスタムアイコンを読み込みます。</span>
+myTipInfo.CustomIcon = Image.FromFile(<span class="hljs-string">"C:/images/custom_icon.png"</span>);
+<span class="hljs-comment">// 表示するアイコンをカスタムアイコンに設定します。</span>
+myTipInfo.IconType = GrapeCity.Win.Components.IconType.CustomIcon;
+<span class="hljs-comment">// コントロールにバルーンチップを設定します。</span>
+gcBalloonTip1.SetBalloonTipInformation(textBox1, myTipInfo);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' BalloonTipInformationクラスを生成します。
+Dim myTipInfo As New GrapeCity.Win.Components.BalloonTipInformation
+' カスタムアイコンを読み込みます。
+myTipInfo.CustomIcon = Image.FromFile("C:/images/custom_icon.png")
+' 表示するアイコンをカスタムアイコンに設定します。
+myTipInfo.IconType = GrapeCity.Win.Components.IconType.CustomIcon
+' コントロールにバルーンチップを設定します。
+GcBalloonTip1.SetBalloonTipInformation(TextBox1, myTipInfo)</code></pre></div><h2>活用例</h2><p>ここでは、バルーンチップを表示する用例を紹介します。このサンプルでは、フォームにテキストボックスコントロール（TextBox1）とGcBalloonTip コンポーネント（GcBalloonTip1）が貼り付けられていることを前提にしています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void TextBox1_Validating(object sender, System.ComponentModel.CancelEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (textBox1.Text.Length != <span class="hljs-number">8</span>)
+    {
+        <span class="hljs-comment">// 表示するバルーンチップのオブジェクトを作成します。</span>
+        GrapeCity.Win.Components.BalloonTipInformation tipinfo = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.BalloonTipInformation();
+       
+        <span class="hljs-comment">// テキストコントロールにセットします。</span>
+        gcBalloonTip1.SetBalloonTipInformation(textBox1, tipinfo);
+       
+        <span class="hljs-comment">// バルーンチップの内容を設定します。</span>
+        tipinfo.Caption = <span class="hljs-string">"不正な入力"</span>;
+        tipinfo.Text = <span class="hljs-string">"8桁のユーザーIDを入力してください。"</span>;
+        tipinfo.IconType = GrapeCity.Win.Components.IconType.Error;
+       
+        <span class="hljs-comment">// バルーンチップを表示します。</span>
+        gcBalloonTip1.Show(textBox1, GrapeCity.Win.Components.TipPosition.BottomCenter);
+       
+        <span class="hljs-comment">// イベントをキャンセルします。</span>
+        e.Cancel = <span class="hljs-literal">true</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub TextBox1_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TextBox1.Validating
+    If TextBox1.Text.Length &lt;&gt; 8 Then
+        ' 表示するバルーンチップのオブジェクトを作成します。
+        Dim tipinfo As New GrapeCity.Win.Components.BalloonTipInformation
+
+        ' テキストコントロールにセットします。
+        GcBalloonTip1.SetBalloonTipInformation(TextBox1, tipinfo)
+
+        ' バルーンチップの内容を設定します。
+        tipinfo.Caption = "不正な入力"
+        tipinfo.Text = "8桁のユーザーIDを入力してください。"
+        tipinfo.IconType = GrapeCity.Win.Components.IconType.Error
+
+        ' バルーンチップを表示します。
+        GcBalloonTip1.Show(TextBox1, GrapeCity.Win.Components.TipPosition.BottomCenter)
+
+        ' イベントをキャンセルします。
+        e.Cancel = True
+    End If
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcballoontip.err.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=004e265f-b567-4c9f-8aee-3affb3902b5c" title="">GcBalloonTipコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a114a358-cbb5-4afb-a767-c0580d999a33" title="">バルーンチップのカスタマイズ</a></p>

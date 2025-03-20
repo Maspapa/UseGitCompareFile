@@ -1,0 +1,215 @@
+<p>GcCalendar コントロールのヘッダに表示できる書式の設定について解説します。</p>
+<h2 id="月-日カレンダーの書式設定">月-日カレンダーの書式設定</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#CALENDARTYPE">CalendarType</a> プロパティが<a href="gcdocsite__documentlink?toc-item-id=e0ef0beb-7acf-4bf1-b2ca-435deeb8793a">CalendarType.MonthDay</a> のとき（月-日カレンダー）のヘッダの表示書式は<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#HEADERFORMAT">HeaderFormat</a> プロパティで設定します。 HeaderFormat プロパティに以下のキーワードとリテラル文字を設定することで、書式を作成します。<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#HEADERFORMAT">HeaderFormat</a>プロパティで設定した書式を有効にするには、<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#USEHEADERFORMAT">UseHeaderFormat</a>プロパティをTrueにします。</p>
+<table>
+<thead>
+<tr>
+<th>キーワード</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>g</td>
+<td>年号の頭文字をアルファベットで表示（M、T、S、H、R）</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>年号の頭文字を漢字で表示（明、大、昭、平、令）</td>
+</tr>
+<tr>
+<td>ggg</td>
+<td>年号の正式名称を漢字で表示（明治、大正、昭和、平成、令和）</td>
+</tr>
+<tr>
+<td>e</td>
+<td>和暦年を２桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>ee</td>
+<td>和暦年を２桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>E</td>
+<td>和暦年を２桁で表示し開始年を元と表示（先頭に0を付けない）<br />（例：平成元年）<br /></td>
+</tr>
+<tr>
+<td>EE</td>
+<td>和暦年を２桁で表示し開始年を元と表示（先頭に0を付ける）<br />（例：平成元年）<br /></td>
+</tr>
+<tr>
+<td>y</td>
+<td>年を２桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>年を２桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>yyy</td>
+<td>年を４桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>yyyy</td>
+<td>年を４桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>M</td>
+<td>月を２桁の数字で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>MM</td>
+<td>月を２桁の数字で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>MMM</td>
+<td>月を省略形で表示<br />（DateTimeFormatInfo.AbbreviatedMonthNames() で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>MMMM</td>
+<td>月を正式名称で表示<br />（DateTimeFormatInfo.MonthNames()で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>\（Chr(92)）</td>
+<td>キーワードをリテラル文字として表示</td>
+</tr>
+</tbody>
+</table>
+<br />
+<blockquote type="warning">
+<p>type=warning</p>
+<ul>
+<li>キーワード&quot;e&quot;、&quot;ee&quot;、&quot;E&quot;、または&quot;EE&quot;を使用する場合は、元号を表すキーワード&quot;g&quot;、&quot;gg&quot;、または&quot;ggg&quot;を必ず併用してください。</li>
+<li>和暦表示が可能な日付の範囲は、1868年9月1日～2087年12月31日です。この範囲を超えた場合は、西暦で表示されます。</li>
+</ul>
+</blockquote>
+<p>次のサンプルコードはヘッダの書式を設定する例です。</p>
+<pre><code class="language-csharp">gcCalendar1.ShowHeader = true;
+gcCalendar1.HeaderHeight = 25;
+gcCalendar1.HeaderFormat = &quot;ggg e年 M月&quot;;
+</code></pre>
+<pre><code class="language-vbnet">GcCalendar1.ShowHeader = True
+GcCalendar1.HeaderHeight = 25
+GcCalendar1.HeaderFormat = &quot;ggg e年 M月&quot;
+</code></pre>
+<br />
+<h2 id="年-月カレンダーの書式設定">年-月カレンダーの書式設定</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#CALENDARTYPE">CalendarType</a> プロパティが<a href="gcdocsite__documentlink?toc-item-id=e0ef0beb-7acf-4bf1-b2ca-435deeb8793a">CalendarType.YearMonth</a> （年-月カレンダー）のときの書式設定には、 <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#YEARMONTHFORMAT">YearMonthFormat</a> プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=a3b5f36b-d8af-4ee6-9d7b-a3c0afb6e125">YearMonthFormat</a> オブジェクトを使用します。</p>
+<p>YearMonthFormatオブジェクトの<a href="gcdocsite__documentlink?toc-item-id=a3b5f36b-d8af-4ee6-9d7b-a3c0afb6e125#MONTHFORMAT">MonthFormat</a> および<a href="gcdocsite__documentlink?toc-item-id=a3b5f36b-d8af-4ee6-9d7b-a3c0afb6e125#YEARFORMAT">YearFormat</a> プロパティにキーワードとリテラル文字を設定することで、月の書式、年の書式をそれぞれ作成します。</p>
+<h4 id="月の設定に関するキーワード">月の設定に関するキーワード</h4>
+<table>
+<thead>
+<tr>
+<th>キーワード</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M</td>
+<td>月を２桁の数字で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>MM</td>
+<td>月を２桁の数字で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>MMM</td>
+<td>月を省略形で表示<br />（DateTimeFormatInfo.AbbreviatedMonthNames() で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>MMMM</td>
+<td>月を正式名称で表示<br />（DateTimeFormatInfo.MonthNames()で指定された形式）<br /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="年の設定に関するキーワード">年の設定に関するキーワード</h4>
+<table>
+<thead>
+<tr>
+<th>キーワード</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>g</td>
+<td>年号の頭文字をアルファベットで表示（M、T、S、H、R）</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>年号の頭文字を漢字で表示（明、大、昭、平、令）</td>
+</tr>
+<tr>
+<td>ggg</td>
+<td>年号の正式名称を漢字で表示（明治、大正、昭和、平成、令和）</td>
+</tr>
+<tr>
+<td>e</td>
+<td>和暦年を２桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>ee</td>
+<td>和暦年を２桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>E</td>
+<td>和暦年を２桁で表示し開始年を元と表示（先頭に0を付けない）<br />（例：平成元年）<br /></td>
+</tr>
+<tr>
+<td>EE</td>
+<td>和暦年を２桁で表示し開始年を元と表示（先頭に0を付ける）<br />（例：平成元年）<br /></td>
+</tr>
+<tr>
+<td>y</td>
+<td>年を２桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>年を２桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>yyy</td>
+<td>年を４桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>yyyy</td>
+<td>年を４桁で表示（先頭に0を付ける）</td>
+</tr>
+</tbody>
+</table>
+<blockquote type="warning">
+<p>type=warning</p>
+<ul>
+<li>キーワード&quot;e&quot;、&quot;ee&quot;、&quot;E&quot;、または&quot;EE&quot;を使用する場合は、元号を表すキーワード&quot;g&quot;、&quot;gg&quot;、または&quot;ggg&quot;を必ず併用してください。</li>
+<li>和暦表示が可能な日付の範囲は、1868年9月1日～2087年12月31日です。この範囲を超えた場合は、西暦で表示されます。</li>
+</ul>
+</blockquote>
+<p>次のサンプルコードは、年-月カレンダーの表示書式を設定する方法を示します。</p>
+<pre><code class="language-csharp">gcCalendar1.CalendarType = GrapeCity.Win.Calendar.CalendarType.YearMonth;
+gcCalendar1.YearMonthFormat.YearFormat = &quot;ggg e年&quot;;
+gcCalendar1.YearMonthFormat.MonthFormat = &quot;MM月&quot;;
+</code></pre>
+<pre><code class="language-vbnet">GcCalendar1.CalendarType = GrapeCity.Win.Calendar.CalendarType.YearMonth
+GcCalendar1.YearMonthFormat.YearFormat = &quot;ggg e年&quot;
+GcCalendar1.YearMonthFormat.MonthFormat = &quot;MM月&quot;
+</code></pre>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea">GcCalendarコントロール</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=e66c4893-3b5b-4507-971f-c09edf9557c3">レイアウトの変更</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=80b84915-ff83-478e-810b-597b80912e4d">カレンダーの操作</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6">キーボードからの操作</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=de21e2fe-95a3-4c39-9073-4acaa8eb54c2">他コントロールとの接続</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c40c7d0e-6f68-44d2-8ce4-b0aa396e4892">スタイルの設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=85cf0462-1301-4b6b-aa5e-67e1c3001940">休日の設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=7e869caf-4b0c-450c-a2f7-65de33a638ee">休業日の設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=f47e6259-8f3b-4353-9f00-ea93a81d5eba">日付の選択と取得</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=fbc47142-f954-4edd-ad6a-bd9d93e026cc">ショートカットキーの割り当て</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c9f769bb-c91c-46fb-8c72-ad3fcc1940d1">データベースへの接続</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=1d011cfa-a662-45d4-9bc2-c7b90899337b">祝日定義ファイルのインポート／エクスポート</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=f347df74-4201-4c70-a287-57693eee6202">iCalendarファイルのインポート／エクスポート</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=0bf2eeee-9eb4-4fe7-b19d-b22284a06d0d">カレンダーの手動描画</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=2fd5902b-8728-4967-b45e-41744d6cdeae">日付のメモ設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123">和暦表示の設定変更</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=066f939c-562e-4601-bc52-17dfd94f85e9">add要素</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=209c31c3-d8f3-45b5-bdbe-3ed713735acc">タッチ機能</a></p>

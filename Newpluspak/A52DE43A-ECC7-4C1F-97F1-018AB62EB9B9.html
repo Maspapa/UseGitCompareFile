@@ -1,0 +1,112 @@
+<p>GcKeyLock コンポーネントは、次の3つのキーを制御するために使用します。このコンポーネントでは、これらのキーの状態（オン／オフ）を切り替えることができます。また、コントロール毎にこれらのキーを設定することも可能です。<br /></p>
+<ul>
+<li>CapsLock キー</li>
+<li>NumLock キー</li>
+<li>ScrollLock キー</li>
+</ul>
+<br />
+<h2 id="キーの状態制御">キーの状態制御</h2>
+<p>キーの状態を取得、変更するには、<a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">CapsLock</a>、 <a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">NumLock</a>、 <a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">ScrollLock</a> プロパティを使用します。キーボードや、コード上からこれらのキーの状態が変更された場合は、<a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">LockKeyChanged</a>イベントが発生します。<br />以下に、CapsLock、NumLock、ScrollLock の3つのキーの状態を StatusStrip に表示する例を示します。このサンプルコードは、フォームに StatusStrip コントロールと GcKeyLock コンポーネントが貼り付けられていることを前提にしています。<br /></p>
+<pre><code class="language-csharp">using GrapeCity.Win.Components;
+
+private void Form1_Load(object sender, EventArgs e)
+{
+    statusStrip1.Items.Add(&quot;&quot;);
+    statusStrip1.Items.Add(&quot;&quot;);
+    statusStrip1.Items.Add(&quot;&quot;);
+
+    gcKeyLock1.LockKeyChanged += GcKeyLock1_LockKeyChanged;
+}
+
+private void GcKeyLock1_LockKeyChanged(object sender, LockKeyChangedEventArgs e)
+{
+    switch (e.LockKey)
+    {
+        case Keys.CapsLock:
+            if (e.LockKeyStatus == LockKeyStatus.On) statusStrip1.Items[0].Text = &quot;Caps&quot;;
+            else statusStrip1.Items[0].Text = &quot;&quot;;
+            break;
+        case Keys.NumLock:
+            if (e.LockKeyStatus == LockKeyStatus.On) statusStrip1.Items[1].Text = &quot;Num&quot;;
+            else statusStrip1.Items[1].Text = &quot;&quot;;
+            break;
+        case Keys.Scroll:
+            if (e.LockKeyStatus == LockKeyStatus.On) statusStrip1.Items[2].Text = &quot;Scroll&quot;;
+            else statusStrip1.Items[2].Text = &quot;&quot;;
+            break;
+    }
+}
+</code></pre>
+<pre><code class="language-vbnet">Imports GrapeCity.Win.Components
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    StatusStrip1.Items.Add(&quot;&quot;)
+    StatusStrip1.Items.Add(&quot;&quot;)
+    StatusStrip1.Items.Add(&quot;&quot;)
+End Sub
+
+Private Sub GcKeyLock1_LockKeyChanged(ByVal sender As System.Object, ByVal e As LockKeyChangedEventArgs) Handles GcKeyLock1.LockKeyChanged
+    Select Case e.LockKey
+        Case Keys.CapsLock
+            If e.LockKeyStatus = LockKeyStatus.On Then
+                StatusStrip1.Items(0).Text = &quot;Caps&quot;
+            Else
+                StatusStrip1.Items(0).Text = &quot;&quot;
+            End If
+        Case Keys.NumLock
+            If e.LockKeyStatus = LockKeyStatus.On Then
+                StatusStrip1.Items(1).Text = &quot;Num&quot;
+            Else
+                StatusStrip1.Items(1).Text = &quot;&quot;
+            End If
+        Case Keys.Scroll
+            If e.LockKeyStatus = LockKeyStatus.On Then
+                StatusStrip1.Items(2).Text = &quot;Scroll&quot;
+            Else
+                StatusStrip1.Items(2).Text = &quot;&quot;
+            End If
+    End Select
+End Sub
+</code></pre>
+<p><br /><br /></p>
+<h2 id="コントロールのモード設定">コントロールのモード設定</h2>
+<p>コントロール毎にキーの状態を切り替えることができます。状態の変更は指定したコントロールにフォーカスが移動されたときに行われます。コントロールにこの設定を行うには、次のメソッドを使用します。</p>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">SetCapsLock</a></td>
+<td>CapsLockキーのオン／オフを制御します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">SetNumLock</a></td>
+<td>NumLockキーのモードを設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=972dbdac-2bec-415e-bee4-9eb3b507d7d5">SetScrollLock</a></td>
+<td>ScrollLockキーのオン／オフを制御します。</td>
+</tr>
+</tbody>
+</table>
+<p>以下に、テキストコントロール(TextBox)にフォーカスが移動されたときにCapsLockキー、NumLockキーとScrollLockキーすべてを有効にする例を示します。<br /></p>
+<pre><code class="language-csharp">using GrapeCity.Win.Components;
+
+gcKeyLock1.SetCapsLock(textBox1, LockKeyMode.On);
+gcKeyLock1.SetNumLock(textBox1, LockKeyMode.On);
+gcKeyLock1.SetScrollLock(textBox1, LockKeyMode.On);
+</code></pre>
+<pre><code class="language-vbnet">Imports GrapeCity.Win.Components
+
+GcKeyLock1.SetCapsLock(TextBox1, LockKeyMode.On)
+GcKeyLock1.SetNumLock(TextBox1, LockKeyMode.On)
+GcKeyLock1.SetScrollLock(TextBox1, LockKeyMode.On)
+</code></pre>
+<br />
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=ac431b93-a652-4379-913e-721b58e87e81">GcKeyLockコンポーネント</a></p>
+<p><br /><br /></p>

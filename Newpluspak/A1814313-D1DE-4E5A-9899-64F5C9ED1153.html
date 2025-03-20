@@ -1,0 +1,104 @@
+<p>GcApplicationResize コンポーネントで、GcResizeコンポーネントを利用する方法について、以下に解説します。</p><h2>関連付けられたGcResizeコンポーネント</h2><p><a href="gcdocsite__documentlink?toc-item-id=a0bdb48e-4a92-4cc1-b688-65a95ba5e3a4" title="">GcApplicationResize</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=1ad5d5da-847c-42a9-8b3d-7d99bf49f909" title="">GetGcResize</a>メソッドを使用して、特定のフォームに関連付けられた <a href="gcdocsite__documentlink?toc-item-id=c6236e6b-997c-4467-a621-6b948e8aec54" title="">GcResizeコンポーネント</a>をコードにより取得できます。このメソッドは GcApplicationResize オブジェクトのインスタンスの有無に関わらず利用できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    Form2 subForm = <span class="hljs-keyword">new</span> Form2();
+
+    GcResize gcResize = GcApplicationResize.GetGcResize(subForm);
+    <span class="hljs-keyword">if</span> (gcResize == <span class="hljs-literal">null</span>)
+    {
+        MessageBox.Show(<span class="hljs-string">"Form2にGcResizeコンポーネントはありません。"</span>);
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        MessageBox.Show(<span class="hljs-string">"Form2にGcResizeコンポーネントがあります。"</span>);
+        gcResize.AboutBox();
+    }
+    subForm.Show();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Dim subForm As New Form2()
+
+    Dim gcResize As GcResize = GcApplicationResize.GetGcResize(subForm)
+
+    If gcResize Is Nothing Then
+        MessageBox.Show("Form2にGcResizeコンポーネントはありません。")
+    Else
+        MessageBox.Show("Form2にGcResizeコンポーネントがあります。")
+        gcResize.AboutBox()
+    End If
+
+    subForm.Show()
+
+End Sub</code></pre></div><h2>フォームごとに割り当てられたGcResizeのイベント</h2><p>以下の手順では、フォームごとに GcApplicationResize コンポーネントによって割り当てられた GcResize コンポーネントのイベントを使って、リサイズ時に各フォームのタイトルバーにフォームのサイズを表示します。</p><ol><li><p>Windows Formsプロジェクトを新規に作成します。</p></li><li><p>フォーム（Form1）にボタン（Button1）を追加します。</p></li><li><p>新たにフォーム（Form2）を追加します。</p></li><li><p>Form2に任意のボタンやテキストボックスコントロールなどを追加します。</p></li><li><p>Form1のButton1のClickイベントに次のコードを実装し、ボタンクリックによりForm2が表示されるように設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    Form2 f2 = <span class="hljs-keyword">new</span> Form2();
+    f2.Show();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Dim f2 As New Form2()
+    f2.Show()
+End Sub</code></pre></div></li><li><p>フォーム（Form1）にGcApplicationZoomコンポーネント（GcApplicationZoom1）を追加します。</p></li><li><p>次のように実装します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-function">private void gcApplicationResize1_GcResizeAttaching(object sender, GrapeCity.Win.Components.GcResizeAttachingEventArgs e)</span>
+{
+    <span class="hljs-comment">// Form2にGcResizeイベントの追加</span>
+    <span class="hljs-keyword">if</span> (e.Form <span class="hljs-keyword">is</span> Form2)
+    {
+        e.GcResize.ControlResizing += GcResize_ControlResizing;
+    }
+}
+
+<span class="hljs-function">private void gcApplicationResize1_GcResizeDetached(object sender, GrapeCity.Win.Components.GcResizeDetachedEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Form <span class="hljs-keyword">is</span> Form2)
+    {
+        e.GcResize.ControlResizing -= GcResize_ControlResizing;
+    }
+}
+
+<span class="hljs-function">public void GcResize_ControlResizing(object sender, GrapeCity.Win.Components.GcResizeEventArgs e)</span>
+{
+    GcResize gcresize = sender <span class="hljs-keyword">as</span> GcResize;
+    Form form = Form.ActiveForm;
+    form.Text = <span class="hljs-built_in">string</span>.Format(<span class="hljs-string">"Width:{0}、Height:{1}"</span>, form.Width, form.Height);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+Private Sub GcApplicationResize1_GcResizeAttaching(sender As Object, e As GcResizeAttachingEventArgs) Handles GcApplicationResize1.GcResizeAttaching
+    ' Form2にGcResizeイベントの追加
+    If TypeOf e.Form Is Form2 Then
+        AddHandler e.GcResize.ControlResizing, AddressOf GcResize_ControlResizing
+    End If
+End Sub
+
+Private Sub GcApplicationResize1_GcResizeDetached(sender As Object, e As GcResizeDetachedEventArgs) Handles GcApplicationResize1.GcResizeDetached
+    If TypeOf e.Form Is Form2 Then
+        RemoveHandler e.GcResize.ControlResizing, AddressOf GcResize_ControlResizing
+    End If
+End Sub
+
+Private Sub GcResize_ControlResizing(sender As Object, e As EventArgs)
+    Dim gcResize As GcResize = DirectCast(sender, GcResize)
+    Dim form As Form = form.ActiveForm
+    form.Text = String.Format("Width:{0}、Height:{1}", form.Width, form.Height)
+End Sub</code></pre></div></li><li><p>プロジェクトを実行し、Form1のButton1をクリックし、Form2を表示します。</p></li><li><p>Form2のリサイズを行います。</p><p><br></p></li></ol><blockquote type="warning"><p>!type=warning</p><ul><li><p>ユーザーが現在操作しているフォームにアクセスするには、<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/weblink.png" contenteditable="false"><a href="http://msdn.microsoft.com/ja-jp/library/w4bcxb43.aspx" title="">System.Windows.Forms.Form</a>クラスの<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/weblink.png" contenteditable="false"><a href="http://msdn.microsoft.com/ja-jp/library/system.windows.forms.form.activeform.aspx" title="">ActiveForm</a>プロパティを使用します。</p></li><li><p>ユーザーが現在操作しているフォームの GcResize コンポーネントは、sender 引数で参照できます。</p></li><li><p>GcResize コンポーネントのイベントは、GcApplicationResize.GcResizeDetached イベントで削除（解放）する必要があります。</p></li></ul></blockquote><h2>リサイズ後のコントロール追加</h2><p>GcApplicationResizeコンポーネントの影響化にあるフォームに対し、リサイズが発生した後にSystem.Windows.Forms.ControlCollectionのAddメソッドを使用して動的にコントロールを追加する場合は追加処理の前後でBeginAddControlsおよびEndAddControlsメソッドをコールする必要があります。</p><p>BeginAddControlsおよびEndAddControlsメソッドを利用せず、 Addメソッドのみを使用して動的にコントロールの追加を行うと、適切な拡縮率がコントロールに適用されません。</p><p>以下のサンプルコードでは、動的に追加したボタンコントロールに適切な拡縮率が適用されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//コントロール追加前にBeginAddControlsメソッドをコールします。</span>
+gcApplicationResize1.BeginAddControls(<span class="hljs-keyword">this</span>);
+<span class="hljs-comment">//ボタンコントロールを生成します。</span>
+Button newButton = <span class="hljs-keyword">new</span> Button();
+newButton.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+newButton.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">100</span>, <span class="hljs-number">30</span>);
+newButton.Text = <span class="hljs-string">"Added Button"</span>;
+<span class="hljs-comment">//フォームにボタンコントロールを追加します。</span>
+<span class="hljs-keyword">this</span>.Controls.Add(newButton);
+<span class="hljs-comment">//コントロール追加後にEndAddControlsメソッドをコールします。</span>
+gcApplicationResize1.EndAddControls(<span class="hljs-keyword">this</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'コントロール追加前にBeginAddControlsメソッドをコールします。
+GcApplicationResize1.BeginAddControls(Me)
+'ボタンコントロールを生成します。
+Dim newButton As New Button()
+newButton.Location = New Point(0, 0)
+newButton.Size = New Size(100, 30)
+newButton.Text = "Added Button"
+'フォームへボタンコントロールを追加します。
+Me.Controls.Add(newButton)
+'コントロール追加後にEndAddControlsメソッドをコールします。
+GcApplicationResize1.EndAddControls(Me)</code></pre></div><p>下記のような初期サイズのフォームとボタンコントロールを例に、<a href="gcdocsite__documentlink?toc-item-id=134d4e7d-1594-4aad-b828-31a70e46f9ee" title="">BeginAddControls</a>および <a href="gcdocsite__documentlink?toc-item-id=e3d73d1e-4062-4e9d-8ac8-3d5ceaa5c3e0" title="">EndAddControls</a>メソッドを使用して動的にコントロールを追加した際の動作について解説します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcapplicationresize.noresize.png" contenteditable="false"><br></p><p>フォームのリサイズ後、<a href="gcdocsite__documentlink?toc-item-id=134d4e7d-1594-4aad-b828-31a70e46f9ee" title="">BeginAddControls</a>および <a href="gcdocsite__documentlink?toc-item-id=e3d73d1e-4062-4e9d-8ac8-3d5ceaa5c3e0" title="">EndAddControls</a>メソッドを使用して動的にコントロールを追加すると以下のような結果となります。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcapplicationresize.resizebeginend.png" contenteditable="false"><br></p><p>このとき、<a href="gcdocsite__documentlink?toc-item-id=134d4e7d-1594-4aad-b828-31a70e46f9ee" title="">BeginAddControls</a>および <a href="gcdocsite__documentlink?toc-item-id=e3d73d1e-4062-4e9d-8ac8-3d5ceaa5c3e0" title="">EndAddControls</a>メソッドを使用しないと、適切な拡縮率が適用されずコントロールの一部（フォントサイズなど）に意図しない拡大や縮小が発生します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcapplicationresize.resizewithoutbeginend.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=9d6e3991-6aca-44c1-acfd-236ba66bd808" title="">GcApplicationResizeコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=952bcfcf-f44b-4a4e-92f8-585a634fbc3e" title="">特定のフォームの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ca506c6a-1ebd-49bc-a124-5dbe6248b7a2" title="">リサイズポリシー</a></p>

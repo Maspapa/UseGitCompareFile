@@ -1,0 +1,80 @@
+<p>タッチツールバーを利用するにはGcTouchToolBarコントロールを使用します。GcTouchToolBarコントロールは、タッチ操作を支援するUIコントロールです。<a href="gcdocsite__documentlink?toc-item-id=7f27e2b2-4af9-4181-9f34-d087d1227a75" title="">GcTouchToolBarProvider</a>コンポーネントと組み合わせて利用することで、フォーム上に配置されたコントロールでタッチツールバーを使用することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.gctouchtoolbarcomponent.png" contenteditable="false"><br></p><h2>対応コントロール</h2><p>GcTouchToolBarコントロールは下記のコントロールに対し、コンテキストメニュー処理と同様のタッチツールバー機能を提供します。これらのコントロール上に表示されたタッチツールバーで、貼り付け / 切り取り / コピー / 削除 / 元に戻す / すべて選択 ツールボタンをタップした場合、各コントロールでコンテキストメニューから同名の項目を選択した場合と同じ処理を実行します。</p><p><strong>.Net Framework 標準コントロール</strong></p><ul><li><p>TextBox</p></li><li><p>ComboBox</p></li><li><p>DomainUpDown</p></li><li><p>MaskedTextBox</p></li><li><p>RichTextBox</p></li><li><p>NumericUpDown</p></li></ul><p><strong>PlusPak コントロール</strong></p><ul><li><p>GcColorPicker</p></li><li><p>GcFontPicker</p></li></ul><h4>未対応コントロールでの動作</h4><p>対応コントロール以外のコントロールでもタッチツールバーを表示させることが可能です。ただしこの場合、タッチツールバー上のボタン押下に応じて下記のような動作が実行され、処理の結果は各コントロールの動作に依存します。例えば対象のコントロールで’Ctrl + C’キー押下時の動作にコピー処理が割り当てられていない場合、タッチツールバー上のコピーボタンを押下した場合でもコピーは実行されません。また、’Ctrl + C’キー押下の動作として特定の処理が割り当てられている場合には、その動作が実行されます。</p><table><thead><tr><th><p>ツールボタン</p></th><th><p>実行される動作</p></th></tr></thead><tbody><tr><td><p>コピー</p></td><td><p>対象のコントロールに ’Ctrl + C’ キーを送信します</p></td></tr><tr><td><p>切り取り</p></td><td><p>対象のコントロールに ’Ctrl + X’ キーを送信します</p></td></tr><tr><td><p>貼り付け</p></td><td><p>対象のコントロールに ’Ctrl + V’ キーを送信します</p></td></tr><tr><td><p>すべて選択</p></td><td><p>対象のコントロールに ’Ctrl + A’ キーを送信します</p></td></tr><tr><td><p>元に戻す</p></td><td><p>対象のコントロールに ’Ctrl + Z’ キーを送信します</p></td></tr><tr><td><p>削除</p></td><td><p>対象のコントロールに ’DEL’ キーを送信します</p></td></tr></tbody></table><h2>ツールボタン状態の取得</h2><p>タッチツールバー上のツールボタンには、コピーや貼り付けなどの動作（アクション）が設定されており、これらはITouchBarActionインターフェイスを使用して定義、実装されています。</p><p>ITouchBarActionインターフェイスのCanExecuteメソッドを使用することで、タッチツールバー上のツールボタンが実行可能な状態かどうかを取得することが可能です。</p><table><thead><tr><th><p>CanExecuteメソッドの戻り値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>True</p></td><td><p>アクションが実行可能な状態を示します。タッチツールバー上ではツールボタンが有効な状態となり、ボタン押下によってアクションが実行可能となります。</p></td></tr><tr><td><p>False</p></td><td><p>アクションが実行不可能な状態を示します。タッチツールバー上ではツールボタンが無効な状態（グレー表示）となり、ボタンを押下してもアクションは実行されません。</p></td></tr></tbody></table><p>対応コントロールでのタッチツールバー表示では、下記のツールボタンでは、状況によってCanExecuteメソッドの戻り値が自動で変更され、ツールボタンの表示に反映されます。</p><ul><li><p>コピー</p></li><li><p>切り取り</p></li><li><p>貼り付け</p></li><li><p>すべて選択</p></li><li><p>元に戻す</p></li><li><p>削除</p></li></ul><p>例えば貼り付けボタンについて、クリップボードにコピーされたデータが存在しない場合、このボタンに割り当てられているアクションのCanExecuteメソッドの戻り値はFalseとなり、タッチツールバー上のボタン外観は自動的にグレー表示となります。</p><p>なお、未対応コントロールでのタッチツールバー表示では、上記のツールボタンに割り当てられたアクションの<a href="gcdocsite__documentlink?toc-item-id=b7f39ba1-6d52-45dd-9eea-ecf0f89f10b9" title="">CanExecute</a>メソッドは対象コントロールにおけるフォーカスの有無のみをチェックし、その結果を返します。このため、クリップボードやその他の状況にかかわらず、対象コントロールにフォーカスのある場合には、タッチツールバー上のすべてのツールボタンが押下可能な状態として表示されます。</p><p>下記のサンプルコードはCanExecuteメソッドを使用してツールボタンが実行可能かどうかを確認する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//タッチツールバーにある先頭のボタンを取得します。</span>
+GrapeCity.Win.Components.TouchToolBarButton TouchToolBarButton1 = (GrapeCity.Win.Components.TouchToolBarButton)gcTouchToolBar1.Items[<span class="hljs-number">0</span>];
+<span class="hljs-comment">//ボタンに割り当てられたアクションが実行可能かどうかを取得します。</span>
+<span class="hljs-built_in">bool</span> buttonEnable = TouchToolBarButton1.Action.CanExecute(<span class="hljs-keyword">this</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'タッチツールバーにある先頭のボタンを取得します。
+Dim TouchToolBarButton As GrapeCity.Win.Components.TouchToolBarButton = GcTouchToolBar1.Items(0)
+'ボタンに割り当てられたアクションが実行可能かどうかを取得します。
+Dim buttonEnable As Boolean = TouchToolBarButton.Action.CanExecute(Me)</code></pre></div><h2>ツールボタンの設定</h2><p>初期状態のGcTouchToolBarコントロールには、”コピー”や”貼り付け”などのツールボタンが設定されていません。このため、GcTouchToolBarコントロールをフォームに配置した後、ツールボタンを設定する必要があります。</p><p>ツールボタンの例</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.additem.png" contenteditable="false"><br></p><h4>スマートタグからのツールボタン設定</h4><p>フォーム上に配置したGcTouchToolBarコントロールのスマートタグに表示されるデフォルトツールボタンの追加をクリックすることで、貼り付けやコピー、切り取りや削除など、一般的なコンテキストメニューに対応したツールボタンを一括で追加することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.itemcustom.png" contenteditable="false"><br></p><p>この操作では、デフォルトツールボタンとして下記のツールボタンがタッチツールバーに設定されます。</p><ul><li><p>貼り付け</p></li><li><p>切り取り</p></li><li><p>コピー</p></li><li><p>削除</p></li><li><p>元に戻す</p></li><li><p>すべて選択</p></li></ul><h4>コードからのツールボタン設定</h4><p>コードから動的にツールボタンを追加する場合、一括追加機能はありません。以下の例に示されるように、それぞれのツールボタンを個別に追加する必要があります。</p><p>下記のサンプルは、貼り付け、区切り線、切り取りのツールボタンをそれぞれタッチツールバーに動的に追加する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//ツールボタンに画像を割り当てる為に使用します。</span>
+<span class="hljs-comment">//コードの実行前にあらかじめツールボタン用リソースをフォームに登録してください。</span>
+
+System.ComponentModel.ComponentResourceManager resources = <span class="hljs-keyword">new</span> System.ComponentModel.ComponentResourceManager(<span class="hljs-keyword">typeof</span>(Form1));
+
+<span class="hljs-comment">//ツールボタンを設定します。(貼り付け)</span>
+<span class="hljs-comment">//アクション、画像、テキスト等を設定します。</span>
+GrapeCity.Win.Components.TouchToolBarButton TouchToolBarButton1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.TouchToolBarButton();
+TouchToolBarButton1.Action = GrapeCity.Win.Components.TouchToolBarActions.PasteAction;
+TouchToolBarButton1.Image = (System.Drawing.Image)resources.GetObject(<span class="hljs-string">"TouchToolBarButton1.Image"</span>);
+TouchToolBarButton1.Name = <span class="hljs-string">"pasteButton"</span>;
+TouchToolBarButton1.Text = <span class="hljs-string">"貼り付け"</span>;
+
+<span class="hljs-comment">//タッチツールバー上の区切り線を設定します。</span>
+GrapeCity.Win.Components.TouchToolBarSeparator TouchToolBarSeparator1 = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.TouchToolBarSeparator();
+TouchToolBarSeparator1.Name = <span class="hljs-string">"separator"</span>;
+
+<span class="hljs-comment">//ツールボタンを設定します。(切り取り)</span>
+GrapeCity.Win.Components.TouchToolBarButton TouchToolBarButton2 = <span class="hljs-keyword">new</span> GrapeCity.Win.Components.TouchToolBarButton();
+TouchToolBarButton2.Action = GrapeCity.Win.Components.TouchToolBarActions.CutAction;
+TouchToolBarButton2.Image = (System.Drawing.Image)resources.GetObject(<span class="hljs-string">"TouchToolBarButton2.Image"</span>);
+TouchToolBarButton2.Name = <span class="hljs-string">"cutButton"</span>;
+TouchToolBarButton2.Text = <span class="hljs-string">"切り取り"</span>;
+
+<span class="hljs-comment">//タッチツールバーへツールボタンを追加します。</span>
+gcTouchToolBar1.Items.AddRange(<span class="hljs-keyword">new</span> GrapeCity.Win.Components.TouchToolBarItem[] {TouchToolBarButton1,TouchToolBarSeparator1,TouchToolBarButton2});</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'ツールボタンに画像を割り当てる為に使用します。
+'コードの実行前にあらかじめツールボタン用リソースをフォームに登録してください。
+Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+
+'ツールボタンを設定します。(貼り付け)
+'アクション、画像、テキスト等を設定します
+Dim TouchToolBarButton1 As GrapeCity.Win.Components.TouchToolBarButton = New GrapeCity.Win.Components.TouchToolBarButton()
+TouchToolBarButton1.Action = GrapeCity.Win.Components.TouchToolBarActions.PasteAction
+TouchToolBarButton1.Image = CType(Resources.GetObject("TouchToolBarButton1.Image"), System.Drawing.Image)
+TouchToolBarButton1.Name = "pasteButton"
+TouchToolBarButton1.Text = "貼り付け"
+
+'タッチツールバー上の区切り線を設定します。
+Dim TouchToolBarSeparator1 As GrapeCity.Win.Components.TouchToolBarSeparator = New GrapeCity.Win.Components.TouchToolBarSeparator()
+TouchToolBarSeparator1.Name = "separator"
+
+'ツールボタンを設定します。(切り取り)
+Dim TouchToolBarButton2 As GrapeCity.Win.Components.TouchToolBarButton = New GrapeCity.Win.Components.TouchToolBarButton()
+TouchToolBarButton2.Action = GrapeCity.Win.Components.TouchToolBarActions.CutAction
+TouchToolBarButton2.Image = CType(Resources.GetObject("TouchToolBarButton2.Image"), System.Drawing.Image)
+TouchToolBarButton2.Name = "cutButton"
+TouchToolBarButton2.Text = "切り取り"
+
+'タッチツールバーへツールボタンを追加します。
+GcTouchToolBar1.Items.AddRange(New GrapeCity.Win.Components.TouchToolBarItem() {TouchToolBarButton1, TouchToolBarSeparator1, TouchToolBarButton2})</code></pre></div><h2>ツールボタンの編集</h2><p>フォーム上に配置したGcTouchToolBarコントロールのスマートタグにあるツールボタンの編集... をクリックするとTouchToolBarItem コレクションエディターが表示されます。このエディターを利用することで、ツールバー上にあるツールボタンの並び順やアイコン、動作（アクション）やツールボタンの個別追加などを視覚的に設定することが可能です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.itemcustom.png" contenteditable="false"><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.touchtoolbar%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF.png" contenteditable="false"><br></p><p>また、コードからツールボタンの編集を行う場合には、GcTouchToolBarコントロールのインスタンスからツールボタンを取得し、各種プロパティにアクセスしてそれぞれの設定を行います。</p><p>以下のサンプルコードはタッチツールバーにある先頭のツールボタンを取得して、”貼り付け”のツールボタンとして設定を行う例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//タッチツールバーにある先頭のボタンを取得します。</span>
+GrapeCity.Win.Components.TouchToolBarButton TouchToolBarButton1 = (GrapeCity.Win.Components.TouchToolBarButton)gcTouchToolBar1.Items[<span class="hljs-number">0</span>];
+<span class="hljs-comment">//アクション、画像、テキストなどを設定します。</span>
+TouchToolBarButton1.Action = GrapeCity.Win.Components.TouchToolBarActions.PasteAction;
+TouchToolBarButton1.Image = (System.Drawing.Image)resources.GetObject(<span class="hljs-string">"TouchToolBarButton1.Image"</span>);
+TouchToolBarButton1.Name = <span class="hljs-string">"pasteButton"</span>;
+TouchToolBarButton1.Text = <span class="hljs-string">"貼り付け"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'タッチツールバーにある先頭のボタンを取得します。
+Dim TouchToolBarButton1 As GrapeCity.Win.Components.TouchToolBarButton = GcTouchToolBar1.Items(0)
+'アクション、画像、テキストなどを設定します。
+TouchToolBarButton1.Action = GrapeCity.Win.Components.TouchToolBarActions.PasteAction
+TouchToolBarButton1.Image = CType(Resources.GetObject("TouchToolBarButton1.Image"), System.Drawing.Image)
+TouchToolBarButton1.Name = "pasteButton"
+TouchToolBarButton1.Text = "貼り付け"</code></pre></div><h2>コンテキストメニューの追加</h2><p>GcTouchToolBarコントロールの<a href="gcdocsite__documentlink?toc-item-id=45b372f6-4ed1-4793-ad93-73bdb1790bac" title="">AdditionalMenuStrip</a>プロパティと.Net FrameworkのContextMenuStripコントロールを利用することで、タッチツールバーにコンテキストメニューを追加することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.addcontextmenu.png" contenteditable="false"><br></p><h4>プロパティウィンドウからの設定</h4><p>プロパティウィンドウにあるGcTouchToolBarコントロールの<a href="gcdocsite__documentlink?toc-item-id=45b372f6-4ed1-4793-ad93-73bdb1790bac" title="">AdditionalMenuStrip</a>プロパティをクリックすると、フォームに配置されているContextMenuStripコントロールの一覧が表示されます。設定したいContextMenuStripコントロールを選択してコンテキストメニューをタッチツールバーに追加します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.additionalmenustrip.png" contenteditable="false"><br></p><h4>コードからの設定</h4><p>GcTouchToolBarコントロールにコードから動的にコンテキストメニューを追加する場合には、ContextMenuStripオブジェクトを生成し、<a href="gcdocsite__documentlink?toc-item-id=45b372f6-4ed1-4793-ad93-73bdb1790bac" title="">AdditionalMenuStrip</a>プロパティに設定します。以下はコードでコンテキストメニューを生成しタッチツールバーに設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// コンテキストメニューの作成します。 </span>
+ContextMenuStrip menu = <span class="hljs-keyword">new</span> System.Windows.Forms.ContextMenuStrip();
+menu.Items.Add(<span class="hljs-string">"メニューA"</span>);
+menu.Items.Add(<span class="hljs-string">"メニューB"</span>);
+menu.Items.Add(<span class="hljs-string">"メニューC"</span>);
+<span class="hljs-comment">// タッチツールバーにコンテキストメニューを設定します。</span>
+gcTouchToolBar1.AdditionalMenuStrip = menu;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' コンテキストメニューを作成します。 
+Dim menu = New System.Windows.Forms.ContextMenuStrip()
+menu.Items.Add("メニューA")
+menu.Items.Add("メニューB")
+menu.Items.Add("メニューC")
+' タッチツールバーにコンテキストメニューを設定します。
+GcTouchToolBar1.AdditionalMenuStrip = menu</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=f1b374d4-b282-48c4-ac60-87ca625277bf" title="">GcTouchToolBarProviderコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=62776f91-bceb-4ae5-acca-6df43985a375" title="">カスタムアクションの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=11d8177e-fd58-4651-8e77-5cc138ffa762" title="">タッチツールバーの設定</a></p>

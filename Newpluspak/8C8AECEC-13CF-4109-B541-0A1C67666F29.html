@@ -1,0 +1,61 @@
+<p>本項ではGcButton コントロールの文字の配置や特殊効果について解説します。</p><h2>GcButton コントロールの外観</h2><p>GcButton コントロールは、Visual Studio 標準のボタンコントロールの機能に加えて、文字の均等割付や方向の回転など高度な機能を追加しました。これらの機能は<a href="gcdocsite__documentlink?toc-item-id=ac4a16ce-7d9e-40cd-b7d7-d8fcd3e3d3b1" title="">TextAppearance</a>プロパティを使って設定できます。</p><table><thead><tr><th><p>TextAppearanceの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=c2da89e8-2d51-4362-8b8e-a4e761188cf2" title="">OrientationTextAppearance</a></p></td><td><p>文字を均等割付、または縦方向に表示します。</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=0dd6a1b8-6f27-480c-9019-efbf9cd3b98d" title="">RotationTextAppearance</a></p></td><td><p>文字を均等割付、または方向を回転して表示します。</p></td></tr></tbody></table><h2>文字の縦表示と均等割付</h2><p>文字を<strong>縦表示</strong>にするには、<a href="gcdocsite__documentlink?toc-item-id=c2da89e8-2d51-4362-8b8e-a4e761188cf2" title="">OrientationTextAppearance</a>の<a href="gcdocsite__documentlink?toc-item-id=607cc682-c9e2-4940-957b-5a6f9719d58d" title="">TextOrientation</a>プロパティを使って設定できます。TextOrientation プロパティに設定可能な値は次の通りです。</p><table><thead><tr><th><p>TextOrientationの値</p></th><th><p>説明</p></th><th><p>外観</p></th></tr></thead><tbody><tr><td><p>Horizontal</p></td><td><p>文字を水平方向に配置します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textorientation_horiz.png" contenteditable="false"><br></p></td></tr><tr><td><p>Downward</p></td><td><p>文字を上から下へと配置します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textorientation_downward.png" contenteditable="false"><br></p></td></tr><tr><td><p>Upward</p></td><td><p>文字を下から上へと配置します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textorientation_upward.png" contenteditable="false"><br></p></td></tr><tr><td><p>VerticalFarEast</p></td><td><p>文字を縦方向に配置します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textorientation_verti.png" contenteditable="false"><br></p></td></tr><tr><td><p>HorizontalRotatedFarEast</p></td><td><p>日本語文字を90度回転して水平方向に配置します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textorientation_horizrotfareast.png" contenteditable="false"><br></p></td></tr></tbody></table><p>文字を<strong>均等割付</strong>に配置するには、OrientationTextAppearance の<a href="gcdocsite__documentlink?toc-item-id=5d8be5d4-060a-495a-a0df-207c749a0a8e" title="">TextHorizontalAdjustment</a>プロパティを<strong>Distributed</strong> （均等割付）か、または <strong>DistributedWithSpace</strong> （両端にスペースを残した均等割付）に設定します。</p><p>均等割付（Distributed）</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textappearance_distributed.png" contenteditable="false"><br></p><p>スペース入りの均等割付（DistributedWithSpace）</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textappearance_distributedwithspace.png" contenteditable="false"><br></p><p>下記は、ボタンの文字を縦方向のスペース入りの均等割付に設定するサンプルコードです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Buttons;
+
+<span class="hljs-comment">// 文字の表示スタイルを作成します。</span>
+OrientationTextAppearance OrientationTextAppearance1 = <span class="hljs-keyword">new</span> OrientationTextAppearance();
+
+<span class="hljs-comment">// スペース入りの均等割付と縦表示を設定します。</span>
+OrientationTextAppearance1.TextHorizontalAdjustment = TextAdjustment.DistributeWithSpace;
+OrientationTextAppearance1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast;
+
+<span class="hljs-comment">// スタイルをボタンに設定します。</span>
+gcButton1.TextAppearance = OrientationTextAppearance1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Buttons
+
+' 文字の表示スタイルを作成します。
+Dim OrientationTextAppearance1 As New OrientationTextAppearance
+
+' スペース入りの均等割付と縦表示を設定します。
+OrientationTextAppearance1.TextHorizontalAdjustment = TextAdjustment.DistributeWithSpace
+OrientationTextAppearance1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast
+
+' スタイルをボタンに設定します。
+GcButton1.TextAppearance = OrientationTextAppearance1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.orientationtextappearance.png" contenteditable="false"><br></p><h2>文字の回転</h2><p>文字を回転するには、<a href="gcdocsite__documentlink?toc-item-id=0dd6a1b8-6f27-480c-9019-efbf9cd3b98d" title="">RotationTextAppearance</a>を使用します。回転の角度は<a href="gcdocsite__documentlink?toc-item-id=db390123-733f-49df-8cde-5a7909b5265c" title="">Angle</a>プロパティで設定します。設定可能な範囲は　-90 ～ 90 です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Buttons;
+
+<span class="hljs-comment">// 文字の表示スタイルを作成します。</span>
+RotationTextAppearance RotationTextAppearance1 = <span class="hljs-keyword">new</span> RotationTextAppearance();
+
+<span class="hljs-comment">// スペース入りの均等割付と30度の回転を設定します。</span>
+RotationTextAppearance1.Angle = <span class="hljs-number">30</span>;
+RotationTextAppearance1.TextHorizontalAdjustment = TextAdjustment.DistributeWithSpace;
+RotationTextAppearance1.TextVerticalAdjustment = TextAdjustment.None;
+
+<span class="hljs-comment">// スタイルをボタンに設定します。</span>
+gcButton1.TextAppearance = RotationTextAppearance1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Buttons
+
+' 文字の表示スタイルを作成します。
+Dim RotationTextAppearance1 As New RotationTextAppearance
+
+' スペース入りの均等割付と30度の回転を設定します。
+RotationTextAppearance1.Angle = 30
+RotationTextAppearance1.TextHorizontalAdjustment = TextAdjustment.DistributeWithSpace
+RotationTextAppearance1.TextVerticalAdjustment = TextAdjustment.None
+
+' スタイルをボタンに設定します。
+GcButton1.TextAppearance = RotationTextAppearance1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.textrotation.png" contenteditable="false"><br></p><h2>文字の立体表示</h2><p>OrientationTextAppearance の<a href="gcdocsite__documentlink?toc-item-id=928471b1-d224-4b24-bf7c-de1a44847e2e" title="">TextEffect</a>プロパティや RotationTextAppearance の<a href="gcdocsite__documentlink?toc-item-id=204e65e6-d3f4-401f-9219-05c0b071e1c4" title="">TextEffect</a>プロパティで文字を立体的に表示することができます。立体表示には <strong>Inset</strong>（強いくぼみ）、<strong>InsetLite</strong>（軽いくぼみ）、<strong>Raised</strong>（強い浮き出し）、<strong>RaisedLite</strong>（軽い浮き出し）があります。</p><table><thead><tr><th><p>TextEffectの値</p></th><th><p>説明</p></th><th><p>外観</p></th></tr></thead><tbody><tr><td><p>Flat</p></td><td><p>テキストを3D効果なしで描画します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.texteffect_flat.png" contenteditable="false"><br></p></td></tr><tr><td><p>Inset</p></td><td><p>テキストは強くくぼんで表示されます。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.texteffect_inset.png" contenteditable="false"><br></p></td></tr><tr><td><p>Raised</p></td><td><p>テキストは強く浮き出して表示されます。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.texteffect_raised.png" contenteditable="false"><br></p></td></tr><tr><td><p>InsetLite</p></td><td><p>テキストは軽くくぼんで表示されます。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.texteffect_insetlite.png" contenteditable="false"><br></p></td></tr><tr><td><p>RaisedLite</p></td><td><p>テキストは軽く浮き出して表示されます。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.texteffect_raisedlite.png" contenteditable="false"><br></p></td></tr></tbody></table><p>下記のサンプルコードは、文字の強いくぼみを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Buttons;
+
+<span class="hljs-comment">// 文字の表示スタイルを作成します。</span>
+OrientationTextAppearance OrientationTextAppearance1 = <span class="hljs-keyword">new</span> OrientationTextAppearance();
+
+<span class="hljs-comment">// 強いくぼみ表示を設定します。</span>
+OrientationTextAppearance1.TextEffect = GrapeCity.Win.Common.TextEffect.InsetLite;
+
+<span class="hljs-comment">// スタイルをボタンに設定します。</span>
+gcButton1.TextAppearance = OrientationTextAppearance1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Buttons
+
+' 文字の表示スタイルを作成します。
+Dim OrientationTextAppearance1 As New OrientationTextAppearance
+
+' 強いくぼみ表示を設定します。
+OrientationTextAppearance1.TextEffect = GrapeCity.Win.Common.TextEffect.InsetLite
+
+' スタイルをボタンに設定します。
+GcButton1.TextAppearance = OrientationTextAppearance1</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.texteffect.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=2a763373-6f6a-4d64-a251-8934cf77633c" title="">GcButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3e5b3ac6-cad1-4e4b-a6db-1879c5b4eb3b" title="">ボタン押下の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d6f09cfc-183f-4094-a0ac-346209c2a430" title="">2重クリックの防止</a></p><p><a href="gcdocsite__documentlink?toc-item-id=efaaa3e7-0fe7-4f4c-815e-ce8dc133609d" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3bc7404-cf8f-4570-9a8a-db064af9fe6c" title="">タッチ機能</a></p>

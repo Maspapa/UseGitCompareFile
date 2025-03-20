@@ -1,0 +1,13 @@
+<p>PDF ライブラリを利用して PDFファイルに文字列を描画することができます。</p><h2>PDFファイルの出力</h2><p>文字列を描画するには、<a href="gcdocsite__documentlink?toc-item-id=b29b2fa8-fb10-4286-b1ff-09d1a813ef8f" title="">DrawString</a>メソッドを使用します。DrawString メソッドで描画した文字列は、Adobe Reader 上で選択してクリップボードにコピーすることができます。</p><p>次のコードは、文字列「新製品について」を描画します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">System.IO.Stream strm = (System.IO.Stream)System.IO.File.OpenWrite(<span class="hljs-string">"test.pdf"</span>);
+GrapeCity.PDF.Document doc = <span class="hljs-keyword">new</span> GrapeCity.PDF.Document();
+GrapeCity.PDF.Objects.PageObject page = doc.Pages.CreatePage();
+GrapeCity.PDF.Drawing.Graphics g = page.GetGraphics();
+g.DrawString(<span class="hljs-string">"新製品について"</span>, <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">10</span>), Brushes.Black, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
+GrapeCity.PDF.Writer.Write(doc, strm);
+strm.Close();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim strm As System.IO.Stream = System.IO.File.OpenWrite("test.pdf")
+Dim doc As GrapeCity.PDF.Document = New GrapeCity.PDF.Document()
+Dim page As GrapeCity.PDF.Objects.PageObject = doc.Pages.CreatePage()
+Dim g As GrapeCity.PDF.Drawing.Graphics = page.GetGraphics()
+g.DrawString("新製品について", New Font("MS UI Gothic", 10), Brushes.Black, 10, 10)
+GrapeCity.PDF.Writer.Write(doc, strm)
+strm.Close()</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6af94772-84b8-46d7-b783-18b250ad8556" title="">PDFライブラリ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=344ae08e-d376-48c7-8de4-bec506f44e64" title="">出力方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=08c510a3-92ec-4fa6-adb9-1e5fcd7e3b53" title="">図形の描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c617991f-1cd0-4ca1-a677-c381b2bd2faa" title="">画像の描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0bcad8cd-e00a-4c1a-9ec5-923cf5efcc55" title="">ページの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9043d7a8-5ad3-43d3-8e62-7362e8d7b6e9" title="">文書の操作</a></p>

@@ -1,0 +1,160 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=e43e4abc-ad96-4c38-a0b2-e51fed3ddd9d" title="">GcFontPicker</a>コントロールでは、次のタッチ操作に最適化した機能を備えています。</p><h2>タッチによるスクロール</h2><p>GcFontPicker コントロールでは、ドロップダウンリストをタッチしてスライド（タッチしたまま指を動かす操作）すると、ドロップダウンリストをスクロールすることができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchscroll.png" contenteditable="false"><br></p><h2>タッチ キーボードの表示と非表示</h2><p>GcFontPicker.ShowTouchKeyboardメソッドおよびGcFontPicker.HideTouchKeyboardメソッドでタッチキーボードの表示／非表示を切り替えることができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcFontPicker1_Enter(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// タッチキーボードを表示します。 </span>
+    gcFontPicker1.ShowTouchKeyboard();
+}
+
+<span class="hljs-function">private void gcFontPicker1_Leave(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// タッチキーボードを非表示にします。 </span>
+    gcFontPicker1.HideTouchKeyboard();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcFontPicker1_Enter(sender As Object, e As EventArgs) Handles GcFontPicker1.Enter
+    ' タッチキーボードを表示します。 
+    GcFontPicker1.ShowTouchKeyboard()
+End Sub
+
+Private Sub GcFontPicker1_Leave(sender As Object, e As EventArgs) Handles GcFontPicker1.Leave
+    ' タッチキーボードを非表示にします。 
+    GcFontPicker1.HideTouchKeyboard()
+End Sub</code></pre></div><h2>タッチ キーボードの種類の設定</h2><p>GcFontPicker コントロール では、InputScope プロパティを提供します。InputScope プロパティを使用すると、表示するタッチキーボードの種類を設定できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchkeyboard.png" contenteditable="false"><br></p><p>次のコードは、２つのGcFontPicker コントロールがアクティブになったとき、それぞれに異なるタッチキーボードを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// GcFontPicker1コントロールのInputScopeを設定します。</span>
+    gcFontPicker1.InputScope = GrapeCity.Win.PlusPak.InputScopeNameValue.Number;
+    <span class="hljs-comment">// GcFontPicker2コントロールのInputScopeを設定します。</span>
+    gcFontPicker2.InputScope = GrapeCity.Win.PlusPak.InputScopeNameValue.Hiragana;
+}
+
+<span class="hljs-function">private void gcFontPicker1_Enter(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// タッチキーボードを表示します</span>
+    gcFontPicker1.ShowTouchKeyboard();
+}
+
+<span class="hljs-function">private void gcFontPicker1_Leave(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// タッチキーボードを非表示にします。  </span>
+    gcFontPicker1.HideTouchKeyboard();
+}
+                                                                
+<span class="hljs-function">private void gcFontPicker2_Enter(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// タッチキーボードを表示します</span>
+    gcFontPicker2.ShowTouchKeyboard();
+}
+
+<span class="hljs-function">private void gcFontPicker2_Leave(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// タッチキーボードを非表示にします。  </span>
+    gcFontPicker2.HideTouchKeyboard();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' GcFontPicker1コントロールのInputScopeを設定します。
+    GcFontPicker1.InputScope = GrapeCity.Win.PlusPak.InputScopeNameValue.Number
+    ' GcFontPicker2コントロールのInputScopeを設定します。
+    GcFontPicker2.InputScope = GrapeCity.Win.PlusPak.InputScopeNameValue.Hiragana
+End Sub
+
+Private Sub GcFontPicker1_Enter(sender As Object, e As EventArgs) Handles GcFontPicker1.Enter
+    ' タッチキーボードを表示します
+    GcFontPicker2.ShowTouchKeyboard()
+End Sub
+
+Private Sub GcFontPicker1_Leave(sender As Object, e As EventArgs) Handles GcFontPicker1.Leave
+    ' タッチキーボードを非表示にします。  
+    GcFontPicker2.HideTouchKeyboard()
+End Sub
+                                                                
+Private Sub GcFontPicker2_Enter(sender As Object, e As EventArgs) Handles GcFontPicker2.Enter
+    ' タッチキーボードを表示します
+    GcFontPicker1.ShowTouchKeyboard()
+End Sub
+
+Private Sub GcFontPicker2_Leave(sender As Object, e As EventArgs) Handles GcFontPicker2.Leave
+    ' タッチキーボードを非表示にします。  
+    GcFontPicker1.HideTouchKeyboard()
+End Sub</code></pre></div><blockquote type="warning"><p>!type=warning</p><p>InputScope プロパティは、コントロールのIMEモードを切り替えることも可能です。この機能の詳細についてや設定可能な値については、下記の項目をご覧ください。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=d073875c-be5b-49f6-ad57-861b1cb5f9db" title="">IMEモードの切り替え (GcFontPicker)</a></p></li></ul></blockquote><h2>ドロップダウン ウィンドウの拡大</h2><p>GcFontPicker コントロール タッチ操作でドロップダウンリストを表示した場合、マウス操作で表示するドロップダウンリストよりもリスト内の項目の間隔を広くできます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchdropdownscale.png" contenteditable="false"><br></p><p>タッチ操作で表示するドロップダウンリストの項目の間隔はTouchDropDownScaleプロパティで設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GcFontPicker1.DropDownSettings.TouchDropDownScale = <span class="hljs-number">1.5F</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcFontPicker1.DropDownSettings.TouchDropDownScale = 1.5F</code></pre></div><h2>コンテキストメニューの拡大</h2><p>タッチ操作で編集中のコントロールのコンテキストメニューを表示した場合、マウス操作で表示するコンテキストメニューよりも項目間のスペースが大きいサイズで表示できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchcontextmenuscale.png" contenteditable="false"><br></p><p>タッチ操作で表示するコンテキストメニューの大きさはTouchContextMenuScaleプロパティで設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcFontPicker1.TouchContextMenuScale = <span class="hljs-number">2.5F</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcFontPicker1.TouchContextMenuScale = 2.5F</code></pre></div><h2>サイドボタンによる自動繰り返し</h2><p>GcFontPickerコントロールでは、サイドボタンを長押しすることで自動繰り返しの処理を行うことができます。自動繰り返し機能により、コントロールを繰り返しタップすることなく、連続した処理を行うことができます。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchautorepeat.png" contenteditable="false"><br></p><p><br></p><p>サイドボタンである SpinButton、SymbolButton および SideButton の Delay プロパティを設定すると、サイドボタンを押ししても Delay プロパティに設定された時間はボタン押下時の処理が実行されません。この機能は、タッチによる誤操作を防ぐ効果があります。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>Delay プロパティの設定はマウス操作の場合にも有効です。</p></li></ul></blockquote><p>次のコードでは、GcFontPicker コントロールの2番目のサイドボタンに追加しているスピンボタンを1秒以上押し続けたときにボタン押下処理を実行します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">(gcFontPicker1.SideButtons[<span class="hljs-number">1</span>] <span class="hljs-keyword">as</span> GrapeCity.Win.Common.SpinButton).Delay = <span class="hljs-number">1000</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">DirectCast(GcFontPicker1.SideButtons(1), GrapeCity.Win.Common.SpinButton).Delay = 1000</code></pre></div><h2>コントロールのスピン機能</h2><p>GcColorPicker、GcFontPicker、GcComboFrame コントロールでは、サイドボタンを追加できます。サイドボタンでは、SpinButton （スピンボタン）を追加することで、スピン機能を使用できますが、スピンボタンはマウスによる操作を前提としたボタンの大きさや配置となっており、タッチ操作には適していません。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchspinbutton.png" contenteditable="false"><br></p><p>（図）スピンボタン</p><p>SideButton （サイドボタン）や SymbolButton （シンボルボタン）では、タッチ操作しやすいボタンをカスタマイズする機能を提供します。サイドボタンやシンボルボタンを使用すると、タッチしやすいボタンの大きさを提供でき、またボタンを水平に隣接したり、コントロールの両端に配置することも可能です。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>GcColorPicker、GcComboFrame コントロールは、サイドボタンとシンボルボタンに、スピン動作の割り当てを設定する Behavior プロパティを提供しますが、コントロールの設定に関わらず、スピン機能は無効です。</p></li></ul></blockquote><p>これらのボタンにスピン機能を設定する手順は以下のとおりです。</p><ol><li><p>コントロールにサイドボタンあるいはシンボルボタンを2つ追加します。</p></li><li><p>各ボタンにスピン機能を割り当てます。一つのボタンにはスピンアップ機能を、もう一つにはスピンダウン機能を設定します。</p></li><li><p>必要に応じて、Positionプロパティによりボタンの配置を設定します。</p></li><li><p>必要に応じて、ボタンに表示するテキストやシンボル、あるいは画像などを設定します。</p></li></ol><p>各ボタンの詳細な設定については、次項以降を参照してください。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchsidebutton.png" contenteditable="false"><br></p><p>（図）スピン機能を割り当てたサイドボタンの例</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchsymbolbutton.png" contenteditable="false"><br></p><p>（図）スピン機能を割り当てたシンボルボタンの例</p><p>GcFontPicker のスピン機能やサイドボタンの詳細については、下記のページを参照してください。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=1432c54d-a76f-42dc-a537-e5f6912e5615" title="">コントロールのカスタマイズ (GcFontPicker)</a></p></li></ul><blockquote type="warning"><p>!type=warning</p><p>この機能はタッチ操作だけでなく、マウスやキーボードによる操作でも利用できます。</p></blockquote><h2>サイドボタンの利用</h2><p>ボタンに「＋」「－」といった任意のテキストや画像を設定したい場合は、SideButton（サイドボタン）を使用します。サイドボタンにスピン機能を割り当てるには、Behaviorプロパティを使用します。また、Behaviorプロパティに設定した値により、IntervalプロパティとTextプロパティの初期値が自動的に変更されます。</p><p>Behaviorプロパティに設定可能な値は以下の通りです。</p><table><thead><tr><th><p>Behaviorの値</p></th><th><p>説明</p></th><th><p>Intervalプロパティの初期値</p></th><th><p>Textプロパティの初期値</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>スピン動作を割り当てません。</p></td><td><p>0</p></td><td><p>なし</p></td></tr><tr><td><p>SpinUp</p></td><td><p>スピンアップ（値を増加）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>"+"</p></td></tr><tr><td><p>SpinDown</p></td><td><p>スピンダウン（値を減少）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>"-"</p></td></tr></tbody></table><p>以下のサンプルコードは、GcFontPicker コントロールにスピン動作を割り当てたサイドボタンを追加します。コントロールの左端にスピンダウン機能を持つボタン、右端にスピンアップ機能を持つボタンを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Common;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Pickers;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// GcFontPicker コントロールのサイドボタンをクリアします。</span>
+    gcFontPicker1.SideButtons.Clear();
+
+    <span class="hljs-comment">// スピンダウン機能を持つサイドボタンを設定します。</span>
+    SideButton downSideButton = <span class="hljs-keyword">new</span> SideButton();
+    downSideButton.Behavior = SideButtonBehavior.SpinDown;
+    downSideButton.Position = ButtonPosition.LeftInside;
+
+    <span class="hljs-comment">// GcFontPicker コントロールにサイドボタンを追加します。</span>
+    gcFontPicker1.SideButtons.Add(downSideButton);
+
+    <span class="hljs-comment">// スピンアップ機能を持つサイドボタンを設定します。</span>
+    SideButton upSideButton = <span class="hljs-keyword">new</span> SideButton();
+    upSideButton.Behavior = SideButtonBehavior.SpinUp;
+
+    <span class="hljs-comment">// GcFontPicker コントロールにサイドボタンを追加します。</span>
+    gcFontPicker1.SideButtons.Add(upSideButton);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Common
+Imports GrapeCity.Win.Pickers
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' GcFontPicker コントロールのサイドボタンをクリアします。
+    GcFontPicker1.SideButtons.Clear()
+
+    ' スピンダウン機能を持つサイドボタンを設定します。
+    Dim downSideButton As New SideButton()
+    downSideButton.Behavior = SideButtonBehavior.SpinDown
+    downSideButton.Position = ButtonPosition.LeftInside
+
+    ' GcFontPicker コントロールにサイドボタンを追加します。
+    GcFontPicker1.SideButtons.Add(downSideButton)
+
+    ' スピンアップ機能を持つサイドボタンを設定します。
+    Dim upSideButton As New SideButton()
+    upSideButton.Behavior = SideButtonBehavior.SpinUp
+
+    ' GcFontPicker コントロールにサイドボタンを追加します。
+    GcFontPicker1.SideButtons.Add(upSideButton)
+End Sub</code></pre></div><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchruntimespinbutton.png" contenteditable="false"><br></p><p>（図）上記サンプルコードの実行結果</p><h2>スピンボタンからシンボルボタンへの置き換え</h2><p>ボタンに提供されたイメージを設定したい場合は、SymbolButton（シンボルボタン）を使用します。シンボルボタンにスピン機能を割り当てるには、Behaviorプロパティを使用します。また、Behaviorプロパティに設定した値により、Intervalプロパティ、SymbolプロパティおよびSymbolDirectionプロパティの初期値が自動的に変更されます。</p><p>Behaviorプロパティに設定可能な値は以下の通りです。</p><table><thead><tr><th><p>Behaviorの値</p></th><th><p>説明</p></th><th><p>Intervalプロパティの初期値</p></th><th><p>Symbolプロパティの初期値</p></th><th><p>SymbolDirectionプロパティの初期値</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>スピン動作を割り当てません。</p></td><td><p>0</p></td><td><p>None</p></td><td><p>Left</p></td></tr><tr><td><p>SpinUp</p></td><td><p>スピンアップ（値を増加）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>Arrow</p></td><td><p>Up</p></td></tr><tr><td><p>SpinDown</p></td><td><p>スピンダウン（値を減少）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>Arrow</p></td><td><p>Down</p></td></tr></tbody></table><p>以下のサンプルコードは、GcFontPicker コントロールにスピン動作を割り当てたシンボルボタンを追加します。コントロールの左端にスピンダウン機能を持つボタン、右端にスピンアップ機能を持つボタンを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Common;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Pickers;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// サイドボタンをクリアします。 </span>
+    gcFontPicker1.SideButtons.Clear();
+
+    <span class="hljs-comment">// スピンダウン機能を持つシンボルボタンを設定します。 </span>
+    SymbolButton downSymbolButton = <span class="hljs-keyword">new</span> SymbolButton();
+    downSymbolButton.Behavior = SideButtonBehavior.SpinDown;
+    downSymbolButton.Position = ButtonPosition.LeftInside;
+
+    <span class="hljs-comment">// GcFontPicker コントロールにシンボルボタンを追加します。</span>
+    gcFontPicker1.SideButtons.Add(downSymbolButton);
+
+    <span class="hljs-comment">// スピンアップ機能を持つシンボルボタンを設定します。</span>
+    SymbolButton upSymbolButton = <span class="hljs-keyword">new</span> SymbolButton();
+    upSymbolButton.Behavior = SideButtonBehavior.SpinUp;
+
+    <span class="hljs-comment">// GcFontPicker コントロールにシンボルボタンを追加します。</span>
+    gcFontPicker1.SideButtons.Add(upSymbolButton);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Common
+Imports GrapeCity.Win.Pickers
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' サイドボタンをクリアします。 
+    GcFontPicker1.SideButtons.Clear()
+
+    ' スピンダウン機能を持つシンボルボタンを設定します。 
+    Dim DownSymbolButton As New SymbolButton()
+    DownSymbolButton.Behavior = SideButtonBehavior.SpinDown
+    DownSymbolButton.Position = ButtonPosition.LeftInside
+
+    ' GcFontPicker コントロールにシンボルボタンを追加します。
+    GcFontPicker1.SideButtons.Add(DownSymbolButton)
+
+    ' スピンアップ機能を持つシンボルボタンを設定します。
+    Dim UpSymbolButton As New SymbolButton()
+    UpSymbolButton.Behavior = SideButtonBehavior.SpinUp
+
+    ' GcFontPicker コントロールにシンボルボタンを追加します。
+    GcFontPicker1.SideButtons.Add(UpSymbolButton)
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfontpicker.touchruntimesymbolbutton.png" contenteditable="false"><br></p><p>（図）上記サンプルコードの実行結果</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=10852f92-bae6-4537-83b2-9ffb91cc0658" title="">タッチ機能 (すべてのコントロール)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a5a23ee3-4400-44e1-a1b7-50e6fd584a7d" title="">GcFontPickerコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=57e75376-8f4d-40ea-912f-01d5ac18d553" title="">フォントの設定と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1432c54d-a76f-42dc-a537-e5f6912e5615" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a200e44c-ce58-4962-9ba2-af9c25a5da19" title="">ドロップダウンダイアログの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d073875c-be5b-49f6-ad57-861b1cb5f9db" title="">IME モードの切り替え</a></p>

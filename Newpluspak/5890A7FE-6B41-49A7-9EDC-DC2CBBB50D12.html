@@ -1,0 +1,26 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=59cde57e-418a-4e0c-9cb3-b5b12d683b18" title="">GcSplitButton</a>コントロールでは、DropDownOpening イベントと DropDownOpened イベントでタッチ操作によってドロップダウンウィンドウが開かれたかを判定できます。ここでは、イベント内でタッチ操作の判定を行う方法について説明します。</p><h2>ドロップダウンイベントでタッチ操作を判定</h2><p>次のコードでは、GcSplitButton コントロールの DropDownOpening イベントでタッチ操作の判定を行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcSplitButton1_DropDownOpening(object sender, CancelEventArgs e)</span>
+{
+    GrapeCity.Win.Common.DropDownCancelEventArgs args = e <span class="hljs-keyword">as</span> GrapeCity.Win.Common.DropDownCancelEventArgs;
+
+    <span class="hljs-keyword">if</span> (args != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-keyword">if</span> (args.ByTouch)
+        {
+            MessageBox.Show(<span class="hljs-string">"タッチ操作です。"</span>);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            MessageBox.Show(<span class="hljs-string">"タッチ操作ではありません。"</span>);
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcSplitButton1_DropDownOpening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles GcSplitButton1.DropDownOpening
+    Dim args As GrapeCity.Win.Common.DropDownCancelEventArgs = DirectCast(e, GrapeCity.Win.Common.DropDownCancelEventArgs)
+
+    If args IsNot Nothing Then
+        If args.ByTouch Then
+            MessageBox.Show("タッチ操作です。")
+        Else
+            MessageBox.Show("タッチ操作ではありません。")
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=10852f92-bae6-4537-83b2-9ffb91cc0658" title="">タッチ機能 (すべてのコントロール)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7da7aa65-1e3b-4f39-b542-da0459d6ef6e" title="">GcSplitButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=120ae8aa-891c-4eb3-8826-c379d1ac7b06" title="">ドロップダウンとボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d07f27f6-8359-4e4b-a335-dbb9d532c34e" title="">イベントとキーボード操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5f5407db-447e-494d-a780-32dad775f78d" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9b0be9dd-597b-4e67-ab88-73003ccfdb9c" title="">文字の配置と特殊効果</a></p>

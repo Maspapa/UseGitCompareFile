@@ -1,0 +1,127 @@
+<p>コマンドアイコンは、タブのリストを表示するメニューアイコンと独自のアイコンを表示できます。アイコンにはイメージの設定やツールチップの表示などが可能です。</p><p>コマンドアイコンは、<a href="gcdocsite__documentlink?toc-item-id=550e6c09-60ae-40e0-9c63-45949c5c2d81" title="">CommandIconList</a> プロパティに設定する<a href="gcdocsite__documentlink?toc-item-id=04d8854e-28d0-47f7-852d-36339d821a8c" title="">CommandIconList</a> オブジェクトの<a href="gcdocsite__documentlink?toc-item-id=c49004b2-9f51-49a6-ba5c-f5f9412eafb5" title="">MenuIcon</a>.<a href="gcdocsite__documentlink?toc-item-id=62655b79-50e0-409a-9dc0-2729f64dd306" title="">Visible</a> プロパティを<strong>True</strong> に設定することで表示することができます。また、コマンドアイコンのサイズは CommandIconList.<a href="gcdocsite__documentlink?toc-item-id=b69f7ce3-5123-48e3-a7fb-0fd756dfe15e" title="">IconSize</a> プロパティで設定します。なお、メニューアイコンと独自に追加したアイコンとで、それぞれ異なるサイズを設定することはできません。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.commandicon.png" contenteditable="false"><br></p><h2>メニューアイコン</h2><p>メニューアイコンをクリックすると、GcTabControlコントロールが保持する全てのタブをリスト形式で表示します。リストの項目はタブに表示しているテキストで作成されます。リストからタブを決定すると、そのタブが選択された状態となります。</p><p>メニューアイコンは、以下の 4 パターンの動作に対してにイメージを設定できます。</p><ul><li><p>CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=76e6d55b-8e50-4727-b652-18e8ffb5b015" title="">NormalImage</a> プロパティ ― 通常の状態のイメージ</p></li><li><p>CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=250a3f24-2fd1-47f4-9b7e-c56a49b97a9f" title="">PushedImage</a> プロパティ ― アイコンを押下した際のイメージ</p></li><li><p>CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=020e5aea-76d5-46e4-8171-5bb08c3ce009" title="">HotTrackImage</a> プロパティ ― ホットトラック時のイメージ</p></li><li><p>CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=ed789252-603d-45c5-88c3-3c824cbf3f1d" title="">DisabledImage</a> プロパティ ― アイコンが無効時のイメージ</p><p><br></p></li></ul><p>また、<a href="gcdocsite__documentlink?toc-item-id=7b639953-7aca-4914-8eb0-f535b1fb4f20" title="">ShowToolTips</a> プロパティを <strong>True</strong> に設定し、CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=5fa28e75-d0e4-4c1c-8206-d6f15a61f408" title="">ToolTipText</a> プロパティによるテキストを設定することで、ツールチップを表示させることができます。そのほか、CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=926075e9-8074-46e3-96fb-71d42170c583" title="">Enabled</a> プロパティ、CommandIcon.<a href="gcdocsite__documentlink?toc-item-id=bb5c12cb-7a93-42db-bf7c-c782dd119328" title="">Visible</a> プロパティ によるメニューアイコンの有効/無効、表示/非表示の切り替えも可能です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// コマンドアイコンを表示します</span>
+gcTabControl1.CommandIconList.MenuIcon.Visible = <span class="hljs-literal">true</span>; 
+<span class="hljs-comment">// コマンドアイコンのサイズを指定します</span>
+gcTabControl1.CommandIconList.IconSize = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">18</span>, <span class="hljs-number">18</span>); 
+<span class="hljs-comment">// メニューアイコンにイメージを設定します</span>
+gcTabControl1.CommandIconList.MenuIcon.NormalImage = 
+    <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>); 
+gcTabControl1.CommandIconList.MenuIcon.PushedImage = 
+    <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>); 
+gcTabControl1.CommandIconList.MenuIcon.HotTrackImage = 
+    <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>); 
+gcTabControl1.CommandIconList.MenuIcon.DisabledImage = 
+    <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>); 
+<span class="hljs-comment">// ツールチップを表示します</span>
+gcTabControl1.ShowToolTips = <span class="hljs-literal">true</span>; 
+gcTabControl1.CommandIconList.MenuIcon.ToolTipText = <span class="hljs-string">"MenuIcon"</span>;
+<span class="hljs-comment">// メニューアイコンの有効/無効を切り替えます</span>
+<span class="hljs-comment">//gcTabControl1.CommandIconList.MenuIcon.Enabled = true;</span>
+<span class="hljs-comment">// メニューアイコンの表示/非表示を切り替えます</span>
+<span class="hljs-comment">//gcTabControl1.CommandIconList.MenuIcon.Visible = true;</span></code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' コマンドアイコンを表示します
+GcTabControl1.CommandIconList.MenuIcon.Visible = True
+' コマンドアイコンのサイズを指定します
+GcTabControl1.CommandIconList.IconSize = New Size(18, 18)
+' メニューアイコンにイメージを設定します
+GcTabControl1.CommandIconList.MenuIcon.NormalImage = _
+    New Bitmap("ここにファイルのフルパス名を入力してください")
+GcTabControl1.CommandIconList.MenuIcon.PushedImage = _
+    New Bitmap("ここにファイルのフルパス名を入力してください")
+GcTabControl1.CommandIconList.MenuIcon.HotTrackImage = _
+    New Bitmap("ここにファイルのフルパス名を入力してください")
+GcTabControl1.CommandIconList.MenuIcon.DisabledImage = _
+    New Bitmap("ここにファイルのフルパス名を入力してください")
+' ツールチップを表示します
+GcTabControl1.ShowToolTips = True
+GcTabControl1.CommandIconList.MenuIcon.ToolTipText = "メニューアイコン"
+' メニューアイコンの有効/無効を切り替えます
+'GcTabControl1.CommandIconList.MenuIcon.Enabled = True
+' メニューアイコンの表示/非表示を切り替えます
+'GcTabControl1.CommandIconList.MenuIcon.Visible = True</code></pre></div><h2>独自のアイコン</h2><p>コマンドアイコンは、メニューアイコンのほかに、独自のアイコンを表示することができます。アイコンをクリックした際の動作を独自に割り当てることで、さまざまな機能を提供できます。このアイコンには、メニューアイコンと同様、4パターンの動作に対するイメージの設定とツールチップの設定、アイコンの有効/無効、表示/非表示の切り替えが可能です。</p><p>以下のサンプルコードは、クリックした際に選択タブが削除される動作を持つアイコンの追加例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Form1</span> : <span class="hljs-title">Form</span>
+{
+    <span class="hljs-function">public Form1()</span>
+    {
+        InitializeComponent();
+    }
+
+    <span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+    {
+        <span class="hljs-comment">// コマンドアイコンを表示します</span>
+        gcTabControl1.CommandIconList.ShowMenuIcon = <span class="hljs-literal">true</span>;
+        <span class="hljs-comment">// 独自のアイコンを作成します</span>
+        CustomCommandIcon objCustomCommandIcon = <span class="hljs-keyword">new</span> CustomCommandIcon();
+        <span class="hljs-comment">// 対象の GcTabControl をセットします</span>
+        objCustomCommandIcon.getTab = <span class="hljs-keyword">this</span>.gcTabControl1;
+        <span class="hljs-comment">// コマンドアイコン リストに追加します</span>
+        gcTabControl1.CommandIconList.CommandIcons.Add(objCustomCommandIcon); 
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomCommandIcon</span> : <span class="hljs-title">GrapeCity.Win.Containers.CommandIcon</span>
+{
+    <span class="hljs-keyword">private</span> GrapeCity.Win.Containers.GcTabControl gTab;
+
+    <span class="hljs-function">public CustomCommandIcon()</span>
+    {
+        <span class="hljs-comment">// コマンドアイコンにイメージを設定します</span>
+        <span class="hljs-keyword">base</span>.NormalImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>);
+        <span class="hljs-keyword">base</span>.PushedImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>);
+        <span class="hljs-keyword">base</span>.HotTrackImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>);
+        <span class="hljs-keyword">base</span>.DisabledImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"ここにファイルのフルパス名を入力してください"</span>);
+    }
+
+    <span class="hljs-comment">// 対象の GcTabControl を取得するプロパティ</span>
+    <span class="hljs-keyword">public</span> GrapeCity.Win.Containers.GcTabControl getTab
+    {
+        <span class="hljs-keyword">set</span>
+        {
+            gTab = <span class="hljs-keyword">value</span>;
+        }
+    }
+
+    <span class="hljs-function">public override void PerformClick()</span>
+    {
+        <span class="hljs-comment">// 選択されているタブを破棄します</span>
+        gTab.SelectedTab.Dispose();
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Public Class Form1
+
+    Private Sub Form1_Load(ByVal sender As System.Object, _
+        ByVal e As System.EventArgs) Handles MyBase.Load
+        ' コマンドアイコンを表示します
+        GcTabControl1.CommandIconList.ShowMenuIcon = True
+        ' 独自のアイコンを作成します
+        Dim objCustomCommandIcon As New CustomCommandIcon
+        ' 対象の GcTabControl をセットします
+        objCustomCommandIcon.getTab = Me.GcTabControl1
+        ' コマンドアイコン リストに追加します
+        GcTabControl1.CommandIconList.CommandIcons.Add(objCustomCommandIcon)
+    End Sub
+
+End Class
+
+Public Class CustomCommandIcon
+    Inherits GrapeCity.Win.Containers.CommandIcon
+
+    Private gTab As GrapeCity.Win.Containers.GcTabControl
+
+    Public Sub New()
+        ' コマンドアイコンにイメージを設定します
+        MyBase.NormalImage = New Bitmap("ここにファイルのフルパス名を入力してください")
+        MyBase.PushedImage = New Bitmap("ここにファイルのフルパス名を入力してください")
+        MyBase.HotTrackImage = New Bitmap("ここにファイルのフルパス名を入力してください")
+        MyBase.DisabledImage = New Bitmap("ここにファイルのフルパス名を入力してください")
+    End Sub
+
+    ' 対象の GcTabControl を取得するプロパティ
+    Public WriteOnly Property getTab() As GrapeCity.Win.Containers.GcTabControl
+        Set(ByVal value As GrapeCity.Win.Containers.GcTabControl)
+            gTab = value
+        End Set
+    End Property
+
+    Public Overrides Sub PerformClick()
+        ' 選択されているタブを破棄します
+        gTab.SelectedTab.Dispose()
+    End Sub
+
+End Class</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=41227543-a14d-488d-96ed-f61052baefe4" title="">GcTabControlコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=efa23818-5935-4782-b15f-d569b7e29b96" title="">GcTabControlプロパティページ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d3383196-0370-43c3-81b0-9776401b2fb2" title="">基本スタイルの選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8c33c00d-4354-45ae-8e79-70d4a1989154" title="">タブの配色の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=81d08d1b-9847-49f3-be16-bae8e29ce292" title="">タブのスキン機能</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6cb28b65-38ce-45e7-b316-264be84f4931" title="">タブのオーナー描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=49a0566f-d2f0-4bcd-ac34-ccf5aad63f6a" title="">さまざまな外観設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=11737120-c7df-4ef0-b2d1-49674a8d0c0b" title="">タブのホットトラック</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d1881619-641e-4fd0-987c-725f6d5be46f" title="">選択タブの外観</a></p><p><a href="gcdocsite__documentlink?toc-item-id=10779bdf-648f-4726-b1b7-8c667d9c298f" title="">テキストの縦表示とタブの配置</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8355cd6d-2680-46ba-8b93-45f9f78641ca" title="">レイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6f08a71f-3686-425b-a05c-06904a4d5863" title="">ナビゲーター</a></p><p><a href="gcdocsite__documentlink?toc-item-id=33511d7b-e5b5-49b9-b6b5-56b9e60248b4" title="">タブの閉じるボタン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cf9cfd30-1f6b-4b60-a4b7-e27537314787" title="">タブの固定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0b8155fb-6291-4643-ae44-d8394db354d4" title="">子コントロールに3D効果を追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=aa6f3293-b8ff-4384-bd8b-3dd7b1959653" title="">子コントロールにキャプションを追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e7896040-1f11-4e6f-a21c-e68c7ef976f4" title="">設定の保存と読み込み</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b8c674c4-9924-4bb8-a7f5-ac5d34a65c70" title="">タッチ機能</a></p>

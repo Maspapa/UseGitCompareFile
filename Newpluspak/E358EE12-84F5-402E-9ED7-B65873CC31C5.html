@@ -1,0 +1,68 @@
+<p>タブページ上に配置したコントロールに対し、キャプションを追加することができます。</p><p>キャプションの文字は GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=53151c3f-d46e-40c6-a83e-f8ba7e9e0b9a" title="">SetCaptionText</a> メソッドで設定します。また、キャプションのスタイルは、タブページ上の全てのコントロールに同じスタイルを適用する方法と、タブページ上の個々のコントロールにそれぞれ異なるスタイルを適用する方法があります。キャプションのスタイルの適用方法は GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=4f331b82-a7ca-422b-a106-67b69593d592" title="">ApplyCaptionFormat</a> プロパティにより行います。</p><h2>全てのコントロールに同一のスタイルを適用する場合</h2><p>タブページ上の全てのコントロールに同じスタイルを適用する場合は、GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=4f331b82-a7ca-422b-a106-67b69593d592" title="">ApplyCaptionFormat</a> プロパティを <strong>All</strong> に設定します。また、スタイルの各設定は GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=ba024d7c-c6ea-4929-a770-4800333c72a0" title="">CaptionFormat</a> プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=768a2a77-b39e-42fd-bb8c-8323da6a5f29" title="">CaptionFormat</a> クラス により行います。</p><p>キャプションは、次のような項目が設定できます。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=9d66d085-0d3f-431e-8e6b-fdf72c1b70c9" title="">BackColor</a></p></td><td><p>キャプションの背景色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=0eff5ab0-c8af-477c-b2b5-b4b29ae62dae" title="">Font</a></p></td><td><p>フォント</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=46ff2028-52d1-41b4-ba9d-537347771fb6" title="">ForeColor</a></p></td><td><p>キャプションの文字色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=0de47323-9c6c-4e3a-baa2-e41c5580e108" title="">Orientation</a></p></td><td><p>コントロールに対するキャプションの位置 ( 左、上 ）</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=1b68aae0-889d-4200-8551-d73c2a238909" title="">Size</a></p></td><td><p>キャプションの表示領域のサイズ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=75c0f399-86d6-48b3-a326-14efab7e0198" title="">Spacing</a></p></td><td><p>キャプションとコントロールの間隔</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=7143b066-be5d-4045-b771-2c98c3555096" title="">TextEffect</a></p></td><td><p>文字の 3D 効果 ( フラット、強いくぼみ、強い浮き出し、くぼみ、浮き出し )</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=4b00d0c5-97aa-4728-8daa-b91795c8cf44" title="">TextHAlign</a></p></td><td><p>文字の水平方向の配置</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=c02ad12d-a0a1-4ce1-b33e-011ffc655161" title="">TextVAlign</a></p></td><td><p>文字の垂直方向の配置 ( タブと同様に均等割付も可能 )</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=e85b4490-3898-4dea-a5ce-61ae50e10766" title="">WrapMode</a></p></td><td><p>ワードラップ</p></td></tr></tbody></table><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.containercaption.png" contenteditable="false"><br></p><p>以下はコードで設定する場合の例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 全ての子コントロールにキャプションのスタイルを適用します</span>
+gcTabPage1.ApplyCaptionFormat = GrapeCity.Win.Containers.ApplyToChild.All;
+<span class="hljs-comment">// キャプションのスタイルを設定します</span>
+GrapeCity.Win.Containers.CaptionFormat MyFormat = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.CaptionFormat();
+MyFormat.BackColor = Color.PeachPuff;
+MyFormat.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">10</span>, FontStyle.Bold);
+MyFormat.ForeColor = Color.DarkGreen;
+MyFormat.Orientation = GrapeCity.Win.Containers.CaptionOrientation.Left;
+MyFormat.Size = <span class="hljs-number">80</span>;
+MyFormat.Spacing = <span class="hljs-number">10</span>;
+MyFormat.TextEffect = GrapeCity.Win.Common.TextEffect.Raised;
+MyFormat.TextHAlign = GrapeCity.Win.Common.TextHAlign.Justify;
+MyFormat.TextVAlign = GrapeCity.Win.Common.TextVAlign.Middle;
+MyFormat.WrapMode = GrapeCity.Win.Common.TextWrapMode.WordWrap;
+gcTabPage1.CaptionFormat = MyFormat;
+<span class="hljs-comment">// キャプションの文字を設定します</span>
+gcTabPage1.SetCaptionText(textBox1, <span class="hljs-string">"キャプション"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 全ての子コントロールにキャプションのスタイルを適用します
+GcTabPage1.ApplyCaptionFormat = GrapeCity.Win.Containers.ApplyToChild.All
+' キャプションのスタイルを設定します
+Dim MyFormat As GrapeCity.Win.Containers.CaptionFormat = New GrapeCity.Win.Containers.CaptionFormat
+MyFormat.BackColor = Color.PeachPuff
+MyFormat.Font = New Font("MS UI Gothic", 10, FontStyle.Bold)
+MyFormat.ForeColor = Color.DarkGreen
+MyFormat.Orientation = GrapeCity.Win.Containers.CaptionOrientation.Left
+MyFormat.Size = 80
+MyFormat.Spacing = 10
+MyFormat.TextEffect = GrapeCity.Win.Common.TextEffect.Raised
+MyFormat.TextHAlign = GrapeCity.Win.Common.TextHAlign.Justify
+MyFormat.TextVAlign = GrapeCity.Win.Common.TextVAlign.Middle
+MyFormat.WrapMode = GrapeCity.Win.Common.TextWrapMode.WordWrap
+GcTabPage1.CaptionFormat = MyFormat
+' キャプションの文字を設定します
+GcTabPage1.SetCaptionText(TextBox1, "キャプション")</code></pre></div><h2>個々のコントロールに異なるスタイルを設定する場合</h2><p>タブページ上の個々のコントロールに異なるスタイルを適用する場合は、GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=ba024d7c-c6ea-4929-a770-4800333c72a0" title="">CaptionFormat</a> プロパティを <strong>Individual</strong> に設定します。また、キャプションのスタイルは GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=ba024d7c-c6ea-4929-a770-4800333c72a0" title="">CaptionFormat</a> プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=768a2a77-b39e-42fd-bb8c-8323da6a5f29" title="">CaptionFormat</a> クラスにより行います。</p><p>タブページ上にコントロールを配置したとき、Visual Studio のデザイン画面でそのコントロールのプロパティウィンドウを見ると、次の項目が追加されます。キャプションのスタイルと文字の設定はここで行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.containerproperty2.png" contenteditable="false"><br></p><p>また、コードで設定を行う場合は、GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=5b1dc311-6ce6-4c3b-9143-6bea187a0424" title="">SetCaptionFormat</a> メソッドで キャプションのスタイルを適用するコントロールを指定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 個々の子コントロールに異なるキャプションのスタイルを適用します</span>
+gcTabPage1.ApplyCaptionFormat = GrapeCity.Win.Containers.ApplyToChild.Individual;
+<span class="hljs-comment">// キャプションのスタイルを設定します</span>
+GrapeCity.Win.Containers.CaptionFormat MyFormat = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.CaptionFormat();
+MyFormat.BackColor = Color.PeachPuff;
+MyFormat.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">10</span>, FontStyle.Bold);
+MyFormat.ForeColor = Color.DarkGreen;
+MyFormat.Orientation = GrapeCity.Win.Containers.CaptionOrientation.Left;
+MyFormat.Size = <span class="hljs-number">80</span>;
+MyFormat.Spacing = <span class="hljs-number">10</span>;
+MyFormat.TextEffect = GrapeCity.Win.Common.TextEffect.Raised;
+MyFormat.TextHAlign = GrapeCity.Win.Common.TextHAlign.Justify;
+MyFormat.TextVAlign = GrapeCity.Win.Common.TextVAlign.Middle;
+MyFormat.WrapMode = GrapeCity.Win.Common.TextWrapMode.WordWrap;
+gcTabPage1.CaptionFormat = MyFormat;
+<span class="hljs-comment">// 適用するコントロールを指定します</span>
+gcTabPage1.SetCaptionFormat(textBox1, MyFormat);
+<span class="hljs-comment">// キャプションの文字を設定します</span>
+gcTabPage1.SetCaptionText(textBox1, <span class="hljs-string">"キャプション"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 個々の子コントロールに異なるキャプションのスタイルを適用します
+GcTabPage1.ApplyCaptionFormat = GrapeCity.Win.Containers.ApplyToChild.Individual
+' キャプションのスタイルを設定します
+Dim MyFormat As GrapeCity.Win.Containers.CaptionFormat = New GrapeCity.Win.Containers.CaptionFormat
+MyFormat.BackColor = Color.PeachPuff
+MyFormat.Font = New Font("MS UI Gothic", 10, FontStyle.Bold)
+MyFormat.ForeColor = Color.DarkGreen
+MyFormat.Orientation = GrapeCity.Win.Containers.CaptionOrientation.Left
+MyFormat.Size = 80
+MyFormat.Spacing = 10
+MyFormat.TextEffect = GrapeCity.Win.Common.TextEffect.Raised
+MyFormat.TextHAlign = GrapeCity.Win.Common.TextHAlign.Justify
+MyFormat.TextVAlign = GrapeCity.Win.Common.TextVAlign.Middle
+MyFormat.WrapMode = GrapeCity.Win.Common.TextWrapMode.WordWrap
+' 適用するコントロールを指定します
+GcTabPage1.SetCaptionFormat(TextBox1, MyFormat)
+' キャプションの文字を設定します
+GcTabPage1.SetCaptionText(TextBox1, "キャプション")</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=41227543-a14d-488d-96ed-f61052baefe4" title="">GcTabControlコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=efa23818-5935-4782-b15f-d569b7e29b96" title="">GcTabControlプロパティページ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d3383196-0370-43c3-81b0-9776401b2fb2" title="">基本スタイルの選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8c33c00d-4354-45ae-8e79-70d4a1989154" title="">タブの配色の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=81d08d1b-9847-49f3-be16-bae8e29ce292" title="">タブのスキン機能</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6cb28b65-38ce-45e7-b316-264be84f4931" title="">タブのオーナー描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=49a0566f-d2f0-4bcd-ac34-ccf5aad63f6a" title="">さまざまな外観設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=11737120-c7df-4ef0-b2d1-49674a8d0c0b" title="">タブのホットトラック</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d1881619-641e-4fd0-987c-725f6d5be46f" title="">選択タブの外観</a></p><p><a href="gcdocsite__documentlink?toc-item-id=10779bdf-648f-4726-b1b7-8c667d9c298f" title="">テキストの縦表示とタブの配置</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8355cd6d-2680-46ba-8b93-45f9f78641ca" title="">レイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6f08a71f-3686-425b-a05c-06904a4d5863" title="">ナビゲーター</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6ed8101-373a-460d-9c49-2411ea9f3622" title="">コマンドアイコン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=33511d7b-e5b5-49b9-b6b5-56b9e60248b4" title="">タブの閉じるボタン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cf9cfd30-1f6b-4b60-a4b7-e27537314787" title="">タブの固定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0b8155fb-6291-4643-ae44-d8394db354d4" title="">子コントロールに3D効果を追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e7896040-1f11-4e6f-a21c-e68c7ef976f4" title="">設定の保存と読み込み</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b8c674c4-9924-4bb8-a7f5-ac5d34a65c70" title="">タッチ機能</a></p>

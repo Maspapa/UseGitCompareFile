@@ -1,0 +1,43 @@
+<p>GcCalendar コントロールでは、カレンダーの日付および月領域に独自の文字列や画像などを使用して描画する方法を提供しています。</p><h2>概要</h2><p>DrawModeプロパティを使用してカレンダーを描画する方法を設定できます。デフォルトでは、Normalです。</p><table><thead><tr><th><p>DrawModeの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>Normal</p></td><td><p>GcCalendar コントロールの日付および月領域はシステムによって描画されます。</p></td></tr><tr><td><p>OwnerDrawDay</p></td><td><p>CalendarTypeがMonthDayの場合、DrawDayイベントを使用して日付領域を描画できます。</p></td></tr><tr><td><p>OwnerDrawMonth</p></td><td><p>CalendarTypeがYearMonthの場合、DrawMonthイベントを使用して日付領域を描画できます。</p></td></tr><tr><td><p>OwnerDrawDayAndMonth</p></td><td><p>DrawDayイベントとDrawMonthイベントを使用して日付および月領域を描画できます。</p></td></tr></tbody></table><p>GcCalendar コントロールのDrawModeプロパティがOwnerDrawDayまたはOwnerDrawDayAndMonthの場合、日付領域が変わるときに<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#DRAWDAY" title="">DrawDay</a>イベントが発生します。イベントハンドラのパラメーターとして渡されたDrawDayEventArgsクラスのプロパティとメソッドを使用して日付部分を描画できます。DrawModeプロパティがOwnerDrawMonthまたはOwnerDrawDayAndMonthの場合、月領域が変わるときに<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#DRAWMONTH" title="">DrawMonth</a>イベントが発生します。DrawMonthEventArgsクラスのプロパティとメソッドを使用して月部分を描画します。使用できるプロパティとメソッド、および使用方法に関する詳細については、<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#DRAWDAY" title="">DrawDay</a>イベントと<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#DRAWMONTH" title="">DrawMonth</a>イベントの解説と使用例をご参照ください。</p><h2>サンプルコード</h2><p>次のサンプルコードは、特定の日付領域に任意のテキストと画像を使用して描画する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+gcCalendar1.Lines.Vertical = <span class="hljs-function">New Line(LineStyle.Hair, Color.Gray)</span>;
+gcCalendar1.Lines.Horizontal = <span class="hljs-function">New Line(LineStyle.Single, Color.Gray)</span>;
+
+<span class="hljs-function">private void gcCalendar1_DrawDay(object sender, DrawDayEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Month == <span class="hljs-number">6</span> &amp;&amp; e.Day == <span class="hljs-number">4</span>)
+    {
+        Brush myBrush = Brushes.Red;
+        e.DrawBackground();
+        StringFormat format = <span class="hljs-keyword">new</span> StringFormat();
+        format.Alignment = StringAlignment.Far;
+        format.LineAlignment = StringAlignment.Center;
+        e.Graphics.DrawString(<span class="hljs-string">"休"</span>, gcCalendar1.Font, myBrush, e.Bounds, format);
+        e.Graphics.DrawImage(<span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">"D:\icon.png"</span>), <span class="hljs-keyword">new</span> Point(e.Bounds.X, e.Bounds.Y));
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        e.DrawBackground();
+        e.DrawTodayImageAndFocusRectangle();
+        e.DrawForeground();
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+GcCalendar1.DrawMode = CalendarDrawMode.OwnerDrawDay
+
+GcCalendar1.Lines.Vertical = New Line(LineStyle.Hair, Color.Gray)
+GcCalendar1.Lines.Horizontal = New Line(LineStyle.Single, Color.Gray)
+
+If e.Month = 6 And e.Day = 4 Then
+    Dim myBrush As Brush = Brushes.Red
+    e.DrawBackground()
+    Dim format As New StringFormat()
+    format.Alignment = StringAlignment.Far
+    format.LineAlignment = StringAlignment.Center
+    e.Graphics.DrawString("休", GcCalendar1.Font, myBrush, e.Bounds, format)
+    e.Graphics.DrawImage(New Bitmap("D:\icon.png"), New Point(e.Bounds.X, e.Bounds.Y))
+Else
+    e.DrawBackground()
+    e.DrawTodayImageAndFocusRectangle()
+    e.DrawForeground()
+End If</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.ownerdraw.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea" title="">GcCalendarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e66c4893-3b5b-4507-971f-c09edf9557c3" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80b84915-ff83-478e-810b-597b80912e4d" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=de21e2fe-95a3-4c39-9073-4acaa8eb54c2" title="">他コントロールとの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c40c7d0e-6f68-44d2-8ce4-b0aa396e4892" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=85cf0462-1301-4b6b-aa5e-67e1c3001940" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7e869caf-4b0c-450c-a2f7-65de33a638ee" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bd678a2a-5dc3-49d2-bf10-7e1d6b8682b9" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=248792c9-1244-4cda-95a4-4aa017776bc4" title="">今日の書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f47e6259-8f3b-4353-9f00-ea93a81d5eba" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fbc47142-f954-4edd-ad6a-bd9d93e026cc" title="">ショートカットキーの割り当て</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c9f769bb-c91c-46fb-8c72-ad3fcc1940d1" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1d011cfa-a662-45d4-9bc2-c7b90899337b" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f347df74-4201-4c70-a287-57693eee6202" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2fd5902b-8728-4967-b45e-41744d6cdeae" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123" title="">和暦表示の設定変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=066f939c-562e-4601-bc52-17dfd94f85e9" title="">add要素</a></p><p><a href="gcdocsite__documentlink?toc-item-id=209c31c3-d8f3-45b5-bdbe-3ed713735acc" title="">タッチ機能</a></p>

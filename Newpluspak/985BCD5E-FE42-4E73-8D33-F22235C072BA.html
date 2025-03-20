@@ -1,0 +1,109 @@
+<p>GcCalendar コントロールの今日の日付の表示書式の設定について解説します。</p>
+<h2 id="今日の書式設定">今日の書式設定</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#SHOWTODAY">ShowToday</a> プロパティが True のとき、カレンダーの今日領域に今日の日付を表示することができます。今日の日付の表示書式は <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#TODAYFORMAT">TodayFormat</a> プロパティで設定します。 TodayFormat プロパティに以下のキーワードとリテラル文字を設定することで、書式を作成します。</p>
+<table>
+<thead>
+<tr>
+<th>キーワード</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>g</td>
+<td>年号の頭文字をアルファベットで表示（M、T、S、H、R）</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>年号の頭文字を漢字で表示（明、大、昭、平、令）</td>
+</tr>
+<tr>
+<td>ggg</td>
+<td>年号の正式名称を漢字で表示（明治、大正、昭和、平成、令和）</td>
+</tr>
+<tr>
+<td>e</td>
+<td>和暦年を２桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>ee</td>
+<td>和暦年を２桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>E</td>
+<td>和暦年を２桁で表示し開始年を元と表示（先頭に0を付けない）<br />（例：平成元年）<br /></td>
+</tr>
+<tr>
+<td>EE</td>
+<td>和暦年を２桁で表示し開始年を元と表示（先頭に0を付ける）<br />（例：平成元年）<br /></td>
+</tr>
+<tr>
+<td>y</td>
+<td>年を２桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>年を２桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>yyy</td>
+<td>年を４桁で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>yyyy</td>
+<td>年を４桁で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>M</td>
+<td>月を２桁の数字で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>MM</td>
+<td>月を２桁の数字で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>MMM</td>
+<td>月を省略形で表示<br />（DateTimeFormatInfo.AbbreviatedMonthNames() で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>MMMM</td>
+<td>月を正式名称で表示<br />（DateTimeFormatInfo.MonthNames()で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>d</td>
+<td>日を２桁の数字で表示（先頭に0を付けない）</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>日を２桁の数字で表示（先頭に0を付ける）</td>
+</tr>
+<tr>
+<td>ddd</td>
+<td>曜日を省略形で表示<br />（DateTimeFormatInfo.AbbreviatedDayNames() で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>dddd</td>
+<td>曜日を正式名称で表示<br />（DateTimeFormatInfo.DayNames()で指定された形式）<br /></td>
+</tr>
+<tr>
+<td>\（Chr(92)）</td>
+<td>キーワードをリテラル文字として表示</td>
+</tr>
+</tbody>
+</table>
+<br />
+<blockquote type="warning">
+<p>type=warning</p>
+<ul>
+<li>キーワード&quot;e&quot;、&quot;ee&quot;、&quot;E&quot;、または&quot;EE&quot;を使用する場合は、元号を表すキーワード&quot;g&quot;、&quot;gg&quot;、または&quot;ggg&quot;を必ず併用してください。</li>
+<li>和暦表示が可能な日付の範囲は、1868年9月1日～2087年12月31日です。この範囲を超えた場合は、西暦で表示されます。</li>
+</ul>
+</blockquote>
+<p>次のサンプルコードは今日の書式を設定する例です。</p>
+<pre><code class="language-csharp">gcCalendar1.ShowToday = true;
+gcCalendar1.TodayFormat = &quot;ggg e年M月d日&quot;;
+</code></pre>
+<pre><code class="language-vbnet">GcCalendar1.ShowToday = True
+GcCalendar1.TodayFormat = &quot;ggg e年M月d日&quot;
+</code></pre>
+<br />

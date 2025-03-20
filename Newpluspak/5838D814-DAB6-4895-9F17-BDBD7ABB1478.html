@@ -1,0 +1,26 @@
+<p>GcComboFrame コントロールのタッチ機能について、以下に解説します。</p><h2>サイドボタンによる自動繰り返し</h2><p>GcComboFrame コントロールでは、サイドボタンを長押しすることで自動繰り返しの処理を行うことができます。自動繰り返し機能により、コントロールを繰り返しタップすることなく、連続した処理を行うことができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccomboframe.touchautorepeat.png" contenteditable="false"><br></p><p>サイドボタンである SpinButton、SymbolButton および SideButton の Delay プロパティを設定すると、サイドボタンを押ししても Delay プロパティに設定された時間はボタン押下時の処理が実行されません。この機能は、タッチによる誤操作を防ぐ効果があります。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>Delay プロパティの設定はマウス操作の場合にも有効です。</p></li></ul></blockquote><p>次のコードでは、GcFontPicker コントロールの2番目のサイドボタンに追加しているスピンボタンを1秒以上押し続けたときにボタン押下処理を実行します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">(gcFontPicker1.SideButtons[<span class="hljs-number">1</span>] <span class="hljs-keyword">as</span> GrapeCity.Win.Common.SpinButton).Delay = <span class="hljs-number">1000</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">DirectCast(GcFontPicker1.SideButtons(1), GrapeCity.Win.Common.SpinButton).Delay = 1000</code></pre></div><h2>ドロップダウンイベントでタッチ操作を判定</h2><p>GcComboFrameコントロールでは、DropDownOpening イベントと DropDownOpened イベントでタッチ操作によってドロップダウンウィンドウが開かれたかを判定できます。ここでは、イベント内でタッチ操作の判定を行う方法について説明します。</p><p>次のコードでは、GcSplitButton コントロールの DropDownOpening イベントでタッチ操作の判定を行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcSplitButton1_DropDownOpening(object sender, CancelEventArgs e)</span>
+{
+    GrapeCity.Win.Common.DropDownCancelEventArgs args = e <span class="hljs-keyword">as</span> GrapeCity.Win.Common.DropDownCancelEventArgs;
+
+    <span class="hljs-keyword">if</span> (args != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-keyword">if</span> (args.ByTouch)
+        {
+            MessageBox.Show(<span class="hljs-string">"タッチ操作です。"</span>);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            MessageBox.Show(<span class="hljs-string">"タッチ操作ではありません。"</span>);
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcSplitButton1_DropDownOpening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles GcSplitButton1.DropDownOpening
+    Dim args As GrapeCity.Win.Common.DropDownCancelEventArgs = DirectCast(e, GrapeCity.Win.Common.DropDownCancelEventArgs)
+
+    If args IsNot Nothing Then
+        If args.ByTouch Then
+            MessageBox.Show("タッチ操作です。")
+        Else
+            MessageBox.Show("タッチ操作ではありません。")
+        End If
+    End If
+End Sub</code></pre></div><h2>コントロールのスピン機能</h2><p>コントロールのスピン機能についてはGcFontPickerコントロールと同様の機能を搭載します。詳細はGcFontPickerコントロールの<a href="gcdocsite__documentlink?toc-item-id=f16eebb7-6a58-498d-a0cc-fad6418d09cc" title="">タッチ機能</a>をご確認ください。</p><h2>サイドボタンの利用</h2><p>サイドボタンの利用についてはGcFontPickerコントロールと同様の機能を搭載します。詳細はGcFontPickerコントロールの<a href="gcdocsite__documentlink?toc-item-id=f16eebb7-6a58-498d-a0cc-fad6418d09cc" title="">タッチ機能</a>をご確認ください。</p><h2>スピンボタンからシンボルボタンへの置き換え</h2><p>スピンボタンからシンボルボタンへの置き換えについてはGcFontPickerコントロールと同様の機能を搭載します。詳細はGcFontPickerコントロールの<a href="gcdocsite__documentlink?toc-item-id=f16eebb7-6a58-498d-a0cc-fad6418d09cc" title="">タッチ機能</a>をご確認ください。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=10852f92-bae6-4537-83b2-9ffb91cc0658" title="">タッチ機能 (すべてのコントロール)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=46b2c5fc-42b5-412a-8fc6-3abb9fac0188" title="">GcComboFrameコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=650c1f9b-78a4-4a3c-8ca5-207dfeaaf193" title="">コンテントパネルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9de04797-5cfc-4655-8255-aaa62f60a947" title="">サイドボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7b31f358-810b-4293-8948-ed9b950fac7f" title="">ドロップダウンウィンドウの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c914cbda-3c37-493e-b6ec-67ebfa774a1b" title="">機能の実装</a></p>

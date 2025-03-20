@@ -1,0 +1,24 @@
+<p>GcDropDownButton コントロールのイベントとキーボードの操作について、以下に解説します。</p><h2>イベント</h2><p>ドロップダウン項目をクリックしたとき、<a href="gcdocsite__documentlink?toc-item-id=ac1241ec-52fb-4acf-97b1-5dda83041bec" title="">DropDownItemClicked</a> イベントが発生します。また、ドロップダウンを開くそして閉じるとき、<a href="gcdocsite__documentlink?toc-item-id=a37d168e-ee55-4e92-af83-e0b98d664724" title="">DropDownOpening</a>、<a href="gcdocsite__documentlink?toc-item-id=ca856bfe-36e6-4c28-99f2-40bdbf6f5ae6" title="">DropDownOpened</a>、<a href="gcdocsite__documentlink?toc-item-id=a6389853-f394-4641-b752-5a379f78024e" title="">DropDownClosing</a>、<a href="gcdocsite__documentlink?toc-item-id=940f8c86-1aa0-40c5-8471-b5e64a3b2992" title="">DropDownClosed</a> イベントが発生します。GcDropDownButton コントロールを開いて項目をクリックしたとき、これらのイベントは次の順序で発生します。</p><ol><li><p><a href="gcdocsite__documentlink?toc-item-id=a37d168e-ee55-4e92-af83-e0b98d664724" title="">DropDownOpening</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=ca856bfe-36e6-4c28-99f2-40bdbf6f5ae6" title="">DropDownOpened</a></p></li><li><p>Click</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=ac1241ec-52fb-4acf-97b1-5dda83041bec" title="">DropDownItemClicked</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=a6389853-f394-4641-b752-5a379f78024e" title="">DropDownClosing</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=940f8c86-1aa0-40c5-8471-b5e64a3b2992" title="">DropDownClosed</a></p></li></ol><p>以下は、<a href="gcdocsite__documentlink?toc-item-id=ac1241ec-52fb-4acf-97b1-5dda83041bec" title="">DropDownItemClicked</a> イベントを利用して、GcDropDownButton コントロールにカスタム処理を実装する例を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcDropDownButton1_DropDownItemClicked(object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)</span>
+{
+    <span class="hljs-keyword">switch</span> (e.ClickedItem.Name)
+    {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"PDF"</span>:
+            <span class="hljs-comment">// PDFに出力する処理</span>
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"Text"</span>:
+            <span class="hljs-comment">// Textに出力する処理</span>
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"Printer"</span>:
+            <span class="hljs-comment">// プリンタに出力する処理</span>
+            <span class="hljs-keyword">break</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcDropDownButton1_DropDownItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles GcDropDownButton1.DropDownItemClicked
+    Select Case e.ClickedItem.Name
+        Case "PDF"
+            ' PDFに出力する処理
+        Case "Text"
+            ' Textに出力する処理
+        Case "Printer"
+            ' プリンタに出力する処理
+    End Select
+End Sub</code></pre></div><h2>キーボード操作</h2><p>キーボードを用いて GcDropDownButton コントロールを操作することも可能です。フォーカスが GcDropDownButton コントロールにあるとき、下記のキーを使ってドロップダウンを開きます。</p><ul><li><p>[Enter]</p></li><li><p>[Space]</p></li><li><p>[Alt] + [↓]</p></li></ul><p>[Tab] または矢印キーを使って項目を移動し、[Enter] キーで選択してドロップダウンを閉じます。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=992228f0-0fea-472c-a341-57da1b77e6df" title="">GcDropDownButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=639c60ae-4fd6-4ae9-bad5-1b87450fbec7" title="">ドロップダウンとボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0b05adb8-a7fa-4002-9875-048a5ff40a84" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=835e1df3-423d-43e9-a56f-a41bd53f30ef" title="">文字の配置と特殊効果</a></p><p><a href="gcdocsite__documentlink?toc-item-id=822c27f6-4c3a-48a2-9034-56f496ae486b" title="">タッチ機能</a></p>

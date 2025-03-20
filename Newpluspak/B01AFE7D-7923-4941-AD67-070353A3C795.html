@@ -1,0 +1,48 @@
+<h2><span style="color: rgb(63, 82, 156); font-family: &quot;Segoe UI&quot;, Verdana, Arial; font-size: 20.5067px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">2重クリックの防止</span></h2><p>GcButtonコントロールには、クリックイベントの処理中に誤ってもう一度ボタンをクリックしてしまった場合などに、イベントを2重に発生させないようにするPreventMultipleClickプロパティを搭載しています。</p><p>PreventMultipleClickプロパティをTrueに設定することでイベント発生中にボタンが押下されてもClickイベントは発生しません。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 2重クリックを防止します。</span>
+gcButton1.PreventMultipleClick = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 2重クリックを防止します。
+GcButton1.PreventMultipleClick = True</code></pre></div><p>たとえばボタンクリックで課金処理を行う場合などに、誤ってボタンが複数回クリックされることを防ぐことができます。</p><p>以下の手順で動作を確認できます。</p><ol><li><p>新規フォームにGcButtonコントロール、標準CheckBox、標準ProgressBar、標準Labelを配置します。</p></li><li><p>以下のサンプルコードを実装します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    gcButton1.PreventMultipleClick = <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-function">private void checkBox1_CheckedChanged(object sender, EventArgs e)</span>
+{
+    gcButton1.PreventMultipleClick = checkBox1.Checked;
+}
+
+<span class="hljs-function">private void gcButton1_Click(object sender, EventArgs e)</span>
+{
+    label1.Text = <span class="hljs-string">""</span>;
+
+    progressBar1.Maximum = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++)
+    {
+        System.Threading.Thread.Sleep(<span class="hljs-number">2</span>);
+        progressBar1.Value = i + <span class="hljs-number">1</span>;
+        progressBar1.Value = i;
+    }
+    progressBar1.Maximum--;
+
+    label1.Text = <span class="hljs-string">"処理完了"</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    GcButton1.PreventMultipleClick = False
+End Sub
+
+Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+    GcButton1.PreventMultipleClick = CheckBox1.Checked
+End Sub
+
+Private Sub GcButton1_Click(sender As Object, e As EventArgs) Handles GcButton1.Click
+    Label1.Text = ""
+
+    ProgressBar1.Maximum = 1000
+
+    For i As Integer = 0 To 999
+        System.Threading.Thread.Sleep(1)
+        ProgressBar1.Value = i + 1
+        ProgressBar1.Value = i
+    Next
+    ProgressBar1.Maximum -= 1
+
+    Label1.Text = "処理完了"
+End Sub</code></pre></div></li><li><p>プロジェクトを実行します。</p></li><li><p>ChecckBoxにチェックがないことを確認してGcButtonコントロールを押下します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.tc_progress00_c.png" contenteditable="false"><br></p><p><br></p></li><li><p>プログレスバーの動作中に再度GcButtonコントロールを押下します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.tc_progress01_c.png" contenteditable="false"><br></p><p><br></p><p>→プログレスバーが溜まると同時に再度GcButtonコントロールのクリックイベントが発生します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.tc_001.png" contenteditable="false"><br></p><p><br></p></li><li><p>CheckBoxをチェックしてGcButtonコントロールを押下します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.tc_progress10_c.png" contenteditable="false"><br></p><p><br></p></li><li><p>プログレスバーの動作中に再度GcButtonコントロールを押下します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.tc_progress11_c.png" contenteditable="false"><br></p><p><br></p><p>→プログレスバーの動作中にGcButtonコントロールを押下してもクリックイベントは発生しません。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcbutton.tc_progress12.png" contenteditable="false"><br></p></li></ol><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=2a763373-6f6a-4d64-a251-8934cf77633c" title="">GcButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3e5b3ac6-cad1-4e4b-a6db-1879c5b4eb3b" title="">ボタン押下の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c4887e71-ea9e-47af-b5a3-8e27210a8aeb" title="">文字の配置と特殊効果</a></p><p><a href="gcdocsite__documentlink?toc-item-id=efaaa3e7-0fe7-4f4c-815e-ce8dc133609d" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3bc7404-cf8f-4570-9a8a-db064af9fe6c" title="">タッチ機能</a></p>

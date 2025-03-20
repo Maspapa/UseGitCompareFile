@@ -1,0 +1,81 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=4a5fb6e2-cd68-418b-b7f7-31d22cd2f3b7" title="">GcSplitButton</a>コントロールのイベントとキーボード操作について、以下に解説します。</p><h2>イベント</h2><p>GcSplitButton コントロールの<strong>ボタン領域</strong>をクリックすると、標準のClickイベントの直後に ButtonClick イベントが発生します。<strong>ドロップダウン領域</strong>をクリックしてドロップダウン項目を操作したときは、以下のイベントが順次に発生します。ButtonClick と DropDownItemClicked イベントを使い分けることで、ボタン領域とドロップダウン領域に別々の処理を実装できます。</p><ol><li><p>DropDownOpening</p></li><li><p>DropDownOpened</p></li><li><p>Click</p></li><li><p>DropDownItemClicked</p></li><li><p>DropDownClosing</p></li><li><p>DropDownClosed</p></li></ol><p>以下は、ButtonClick と DropDownItemClicked イベントを利用して、GcSplitButton コントロールにカスタム処理を実装する例を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> Microsoft.VisualBasic.FileIO;
+    <span class="hljs-comment">// 参照にMicrosoft.VisualBasic.dllが追加されている必要があります</span>
+    <span class="hljs-function">private void form1_Load(object sender, EventArgs e)</span>
+    {
+        <span class="hljs-comment">// ドロップダウン項目を作成します。 </span>
+        ToolStripMenuItem ddItem1 = <span class="hljs-keyword">new</span> ToolStripMenuItem();
+        ToolStripMenuItem ddItem2 = <span class="hljs-keyword">new</span> ToolStripMenuItem();
+    
+        <span class="hljs-comment">// ドロップダウン項目を設定します。 </span>
+        ddItem1.Name = <span class="hljs-string">"SendToRecycleBin"</span>;
+        ddItem1.Text = <span class="hljs-string">"ゴミ箱に移動します"</span>;
+        ddItem2.Name = <span class="hljs-string">"DeletePermanently"</span>;
+        ddItem2.Text = <span class="hljs-string">"完全に削除します"</span>;
+    
+        <span class="hljs-comment">// ドロップダウン項目を ContextMenuStrip に追加します。 </span>
+        contextMenuStrip1.Items.Clear();
+        contextMenuStrip1.Items.AddRange(<span class="hljs-keyword">new</span> ToolStripItem[] {ddItem1, ddItem2});
+    
+        <span class="hljs-comment">// ContextMenuStrip を GcSplitButton に関連付けます。 </span>
+        gcSplitButton1.DropDown = contextMenuStrip1;
+        gcSplitButton1.Text = <span class="hljs-string">"削  除"</span>;
+    }
+            
+    <span class="hljs-function">private void gcSplitButton1_ButtonClick(object sender, System.EventArgs e)</span>
+    {
+        <span class="hljs-comment">// ファイルをゴミ箱に移動します。</span>
+        FileSystem.DeleteFile(<span class="hljs-string">@"D:\test.txt"</span>, UIOption.AllDialogs, 
+            RecycleOption.SendToRecycleBin, UICancelOption.DoNothing);
+    }
+    
+    <span class="hljs-function">private void gcSplitButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)</span>
+    {
+        <span class="hljs-keyword">switch</span> (e.ClickedItem.Name)
+        {
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"SendToRecycleBin"</span>:
+            <span class="hljs-comment">// ファイルをゴミ箱に移動します。</span>
+                FileSystem.DeleteFile(<span class="hljs-string">@"D:\test.txt"</span>, UIOption.AllDialogs, 
+                    RecycleOption.SendToRecycleBin, UICancelOption.DoNothing);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"DeletePermanently"</span>:
+            <span class="hljs-comment">// ファイルを完全に削除します。</span>
+                FileSystem.DeleteFile(<span class="hljs-string">@"D:\test.txt"</span>, UIOption.AllDialogs, 
+                    RecycleOption.DeletePermanently, UICancelOption.DoNothing);
+                <span class="hljs-keyword">break</span>;
+        }
+    }</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' ドロップダウン項目を作成します。 
+    Dim ddItem1 As New ToolStripMenuItem
+    Dim ddItem2 As New ToolStripMenuItem
+    
+    ' ドロップダウン項目を設定します。 
+    ddItem1.Name = "SendToRecycleBin"
+    ddItem1.Text = "ゴミ箱に移動します"
+    ddItem2.Name = "DeletePermanently"
+    ddItem2.Text = "完全に削除します"
+    
+    ' ドロップダウン項目を ContextMenuStrip に追加します。 
+    ContextMenuStrip1.Items.Clear()
+    ContextMenuStrip1.Items.AddRange(New ToolStripItem() {ddItem1, ddItem2, ddSeparator1, ddItem3})
+    
+    ' ContextMenuStrip を GcSplitButton に関連付けます。 
+    GcSplitButton1.DropDown = ContextMenuStrip1
+    GcSplitButton1.Text = "削  除"
+    
+    Private Sub GcSplitButton1_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GcSplitButton1.ButtonClick
+            ' ファイルをゴミ箱に移動します。
+            My.Computer.FileSystem.DeleteFile("D:\test.txt", FileIO.UIOption.AllDialogs, _
+                    FileIO.RecycleOption.SendToRecycleBin, FileIO.UICancelOption.DoNothing)
+    End Sub
+    
+    Private Sub GcSplitButton1_DropDownItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles GcSplitButton1.DropDownItemClicked
+        Select Case e.ClickedItem.Name
+            Case "SendToRecycleBin"
+                ' ファイルをゴミ箱に移動します。
+                My.Computer.FileSystem.DeleteFile("D:\test.txt", FileIO.UIOption.AllDialogs, _
+                        FileIO.RecycleOption.SendToRecycleBin, FileIO.UICancelOption.DoNothing)
+            Case "DeletePermanently"
+                ' ファイルを完全に削除します。
+                My.Computer.FileSystem.DeleteFile("D:\test.txt", FileIO.UIOption.AllDialogs, _
+                        FileIO.RecycleOption.DeletePermanently, FileIO.UICancelOption.DoNothing)
+        End Select
+    End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcsplitbutton.sample.png" contenteditable="false"><br></p><h2>キーボード操作</h2><p>キーボードを用いて GcSplitButton コントロールを操作することも可能です。フォーカスが GcSplitButton コントロールにあるとき、[Space]キーを押すとボタン領域が押下されます。また、[Alt] + [↓]を使うと、ドロップダウンが開きます。[Tab] または矢印キーを使って項目を移動し、[Enter] キーで選択してドロップダウンを閉じます。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7da7aa65-1e3b-4f39-b542-da0459d6ef6e" title="">GcSplitButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=120ae8aa-891c-4eb3-8826-c379d1ac7b06" title="">ドロップダウンとボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5f5407db-447e-494d-a780-32dad775f78d" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9b0be9dd-597b-4e67-ab88-73003ccfdb9c" title="">文字の配置と特殊効果</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2c82623f-b500-4366-8204-79b5b3a655cb" title="">タッチ機能</a></p>

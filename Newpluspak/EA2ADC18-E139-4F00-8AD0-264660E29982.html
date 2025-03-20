@@ -1,0 +1,36 @@
+<h2><span style="color: rgb(63, 82, 156); font-family: &quot;Segoe UI&quot;, Verdana, Arial; font-size: 20.5067px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">概要</span></h2><p>GcTouchToolBarコントロールではコピーや貼り付けなど、デフォルトツールボタンの動作として用意されたアクションをツールボタンに設定できるほか、独自のアクションを設定することができます。独自のアクションを作成してタッチツールバー上のツールボタンに割り当てることで、ツールボタンの押下に応じて独自の動作を実行させることが可能です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.customaction.png" contenteditable="false"><br></p><h2>アクションの作成と割り当て</h2><p>独自のアクションを作成しタッチツールバー上で利用するには、下記の手順でアクションを作成し、ツールボタンに割り当てる必要があります。</p><ol><li><p>カスタムアクションの作成</p></li><li><p>ツールボタンへのカスタムアクション設定</p></li></ol><p>上記の手順について詳細を解説します。</p><h4>1.カスタムアクションの作成</h4><p>GcTouchToolBarにはカスタムアクション用のインターフェイス（<a href="gcdocsite__documentlink?toc-item-id=99e8279c-3c95-4d3d-8490-1745f673d2b5" title="">ITouchBarAction</a>）が実装されており、これを使用して独自のアクションを作成します。</p><p><strong>ITouchBarActionインターフェイス</strong></p><table><thead><tr><th><p>メソッド名</p></th><th><p>機能</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=b7f39ba1-6d52-45dd-9eea-ecf0f89f10b9" title="">CanExecute</a></p></td><td><p>アクション実行の可・不可を返します</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=8dbe2d92-23c0-427a-9a1e-ffbd5fa5b89b" title="">Execute</a></p></td><td><p>アクション動作を実装します</p></td></tr></tbody></table><p>以下のサンプルコードはタッチツールバーに追加した独自のアイテムをタップしたときにメッセージボックスを表示するカスタムアクションクラスの実装例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//カスタムアクションクラス</span>
+<span class="hljs-comment">//ITouchBarActionインターフェイスを使用します</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomToolBarAction</span> : <span class="hljs-title">GrapeCity.Win.Components.ITouchBarAction</span>
+{
+    <span class="hljs-comment">//アクション実行の可・不可を返します</span>
+    <span class="hljs-built_in">bool</span> GrapeCity.Win.Components.ITouchBarAction.CanExecute(Control target)
+    {
+       <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    
+    <span class="hljs-comment">//アクションの設定</span>
+    <span class="hljs-keyword">void</span> GrapeCity.Win.Components.ITouchBarAction.Execute(Control target)
+    {
+        MessageBox.Show(<span class="hljs-string">"CustomAction"</span>);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'カスタムアクションクラス
+Public Class CustomToolBarAction
+    'ITouchBarActionインターフェイスを使用します
+    Implements GrapeCity.Win.Components.ITouchBarAction
+    
+    'アクション実行の可・不可を返します
+    Private Function CanExecute(target As Control) As Boolean Implements GrapeCity.Win.Components.ITouchBarAction.CanExecute
+        Return True
+    End Function
+    
+    'アクションの設定
+    Private Sub Execute(target As Control) Implements GrapeCity.Win.Components.ITouchBarAction.Execute
+        MessageBox.Show("CustomAction")
+    End Sub
+End Class</code></pre></div><h4>2.ツールボタンへのカスタムアクション設定</h4><p>作成したアクションはTouchToolBarItem コレクションエディターやコードから、タッチツールバー上のツールボタンに設定できます。</p><p><br></p><p><strong>TouchToolBarItem コレクションエディターからの設定</strong></p><p>下記の手順にしたがって操作を行うことで、TouchToolBarItem コレクションエディターからの設定が可能です。</p><ol><li><p>gcTouchToolBarのスマートタグから「ツールボタンの編集...」を選択し、TouchToolBarItem コレクションエディターを起動します。</p></li><li><p>エディタ画面のメンバー欄からカスタムアクションを割り当てたいアイテムを選択します。</p></li><li><p>プロパティウィンドウのActionプロパティでは作成したアクションが選択可能になっているので、これを選択しOKボタンを押して設定を完了します。</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctouchtoolbarprovider.setcustomaction.png" contenteditable="false"><br></p><p><strong>コードからの設定</strong></p><p>コードから動的にカスタムアクションを設定する場合には、タッチツールバーのアイテムが保有する<a href="gcdocsite__documentlink?toc-item-id=2c24c25f-15db-4e18-9079-bb043e70aae5" title="">Action</a>プロパティにアクセスして、直接アクションを設定します。以下のサンプルはタッチツールバー上にある先頭のアイテムを取得してカスタムアクション”CustomToolBarAction”を設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">//タッチツールバーにある先頭のボタンを取得します</span>
+GrapeCity.Win.Components.TouchToolBarButton TouchToolBarButton1 = (GrapeCity.Win.Components.TouchToolBarButton)gcTouchToolBar1.Items[<span class="hljs-number">0</span>];
+<span class="hljs-comment">//作成したカスタムアクションを設定します</span>
+TouchToolBarButton1.Action = <span class="hljs-keyword">new</span> CustomToolBarAction();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">'タッチツールバーにある先頭のボタンを取得します
+Dim TouchToolBarButton1 As GrapeCity.Win.Components.TouchToolBarButton = GcTouchToolBar1.Items(0)
+'作成したカスタムアクションを設定します
+TouchToolBarButton1.Action = New CustomToolBarAction()</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=f1b374d4-b282-48c4-ac60-87ca625277bf" title="">GcTouchToolBarProviderコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=11d8177e-fd58-4651-8e77-5cc138ffa762" title="">タッチツールバーの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=37b52fe2-cd43-4369-a104-c9d6fb2c497d" title="">タッチツールバーの利用</a></p><p><br></p><p><br></p><p><br></p>

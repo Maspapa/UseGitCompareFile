@@ -1,0 +1,27 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=aa496d43-7c3e-409a-9e7c-8b5d33d016dc" title="">GcProgressBar</a>コントロールの基本的な使用方法について、以下に解説します。</p><h2>進行範囲の指定</h2><p>タスクの進行状況を表す値の範囲を指定するには、GcProgressBar コントロールの<a href="gcdocsite__documentlink?toc-item-id=c481fe78-98b4-4803-9ce7-193ebbaba40a" title="">Maximum</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=9191fc8a-0ad6-4973-afb9-9c0b7e81eb4d" title="">Minimum</a>プロパティを使用します。通常、Minimum プロパティは 0 に設定され、Maximum プロパティはタスクの完了を示す値に設定します。</p><h2>進行状況の変更</h2><p>タスクの進行状況を表すには、<a href="gcdocsite__documentlink?toc-item-id=227b140f-88ba-4118-bf75-e0862f63deb1" title="">Value</a>プロパティを使用します。GcProgressBar コントロールは Value プロパティの値を基にコントロールを塗りつぶします。</p><p>進行状況の値を変更するには、<a href="gcdocsite__documentlink?toc-item-id=a1a7ec58-c620-4242-b35b-e83c02c65c30" title="">Step</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=c2f0dbe2-3840-430b-9d1c-f5421c086480" title="">PerformStep</a>メソッドを組み合わせて使用する方法もあります。毎回特定の量だけ増やすには、Step プロパティに増加分を設定し、PerformStep メソッドを呼び出すことで進行を表します。</p><p>また、特定の値だけ増加させるには、<a href="gcdocsite__documentlink?toc-item-id=6756933a-e69d-4393-be32-f393343ae51e" title="">Increment</a>メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">private</span> <span class="hljs-built_in">decimal</span> cnt = <span class="hljs-number">2</span>;
+
+<span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// 現在の位置をStepプロパティの量だけ進めます。</span>
+    gcProgressBar1.Step = cnt;
+    gcProgressBar1.PerformStep();
+    cnt *= <span class="hljs-number">2</span>;
+}
+
+<span class="hljs-function">private void button2_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// 現在の位置を指定の量（10）だけ進めます。</span>
+    gcProgressBar1.Increment(<span class="hljs-number">10</span>);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private cnt As Decimal = 2
+
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    ' 現在の位置をStepプロパティの量だけ進めます。
+    GcProgressBar1.Step = cnt
+    GcProgressBar1.PerformStep()
+    cnt *= 2
+End Sub
+
+Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    ' 現在の位置を指定の量（10）だけ進めます。
+    GcProgressBar1.Increment(10)
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=d33d3278-ef9c-4ab3-906a-e06a035034f7" title="">GcProgressBarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ef661071-c4ef-473f-81f5-085a30474652" title="">バーの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=291ed72c-d142-4c90-837c-b4f2d43fd539" title="">バーの外観のカスタマイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=27a0a00c-5dfe-4596-a7c7-5d58a5710c73" title="">テキストの設定</a></p>

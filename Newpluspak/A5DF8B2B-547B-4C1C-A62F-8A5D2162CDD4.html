@@ -1,0 +1,33 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=0b6c08a5-34a0-4dff-8c81-07b85fc58484" title="">GcStylePlus</a>コンポーネントの使用方法について、以下に解説します。</p><h2>デザイン画面での設定</h2><p>GcStylePlus コンポーネントを使用するには、フォームにコンポーネントを追加します。</p><p>デザイン画面で GcStylePlus コンポーネントによるコントロールの外観を設定するには、次の方法があります。</p><h4>個別にコントロールを設定</h4><p>フォームに GcStylePlus コンポーネントが追加されると、次のプロパティがフォーム上の各コントロールのプロパティウィンドウに追加されます。</p><ul><li><p>ActiveStyle</p></li><li><p>DisableStyle</p></li><li><p>HoverStyle</p></li><li><p>PressedStyle</p></li><li><p>ReadOnlyStyle</p></li></ul><p>また、各コントロールのスマートタグにも「スタイルの編集...」が追加されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcstyleplus.smarttag.png" contenteditable="false"><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcstyleplus.style_editor.png" contenteditable="false"><br></p><h4>フォーム上のすべてのコントロールを設定</h4><p>GcStylePlus コンポーネントのコンテキストメニューあるいはプロパティウィンドウのコマンドペインから「スタイルの編集…」を選択すると、スタイルエディタが表示されます。スタイルエディタを使用することで、フォーム上に存在するすべてのコントロール設定を制御することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcstyleplus.editer.png" contenteditable="false"><br></p><h4>複数のフォーム間でスタイルを設定</h4><p>GcStylePlus コンポーネントのコンテキストメニューから開く「スタイル エディタ」を使用して、複数のフォームにあるコントロールにスタイルを一括して設定することができます。「スタイル エディタ」で対象のフォームを表示するには、次の条件があります。</p><ol><li><p>該当フォームがVisual Studioのフォームエディタで開かれている</p></li><li><p>該当フォームにGcStylePlus コンポーネントが追加されている</p></li></ol><p>「スタイル エディタ」のコンポーネントツールバーにある「開いているフォームをすべて表示」をクリックすると、現在のソリューションに上記の条件を満たしたすべてのフォームが一覧に表示されます。それらに含まれるコントロールを選択し、スタイルのプロパティを設定すれば、すべてのコントロールに適用できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcstyleplus.editerall.png" contenteditable="false"><br></p><h2>コードでの設定</h2><p>コードから GcStylePlus コンポーネントを使用して、フォーム上のコントロールのスタイルを設定するには、ThemeStateStyle オブジェクトを生成する必要があります。また GcStylePlus コンポーネントには、スタイルの設定に使用する以下のメソッドが用意されています。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=49e9f446-2a20-4c47-89f6-fdf630dffb3a" title="">SetActiveStyle</a>メソッド（フォーカスを持っている状態のスタイル設定）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=2e223c3d-5351-446c-b737-86c2d80ca21f" title="">SetDisableStyle</a>メソッド（無効な状態のスタイル設定）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=6a0536c6-1521-4cad-80a0-ba46e56ed5b7" title="">SetHoverStyle</a>メソッド（マウス通過時のスタイル設定）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=c69dc2a7-0283-4917-964a-e6da0e3c8b74" title="">SetPressedStyle</a>メソッド（マウスが押された状態のスタイル設定）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=6ad12026-9412-440c-aacf-0b78b49c09a6" title="">SetReadOnlyStyle</a>メソッド（読み取り専用時のスタイル設定）</p></li></ul><p>これらのメソッドの第一引数の値により、スタイルを適用するコントロールが一つ、あるいは複数かを設定できます。</p><h4>個別にコントロールを設定</h4><p>次のサンプルコードでは、TextBox コントロールがフォーカスを持っている（アクティブな）状態のときのスタイルを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-comment">// ThemeStateStyle オブジェクトを生成します</span>
+ThemeStateStyle aStyle = <span class="hljs-keyword">new</span> ThemeStateStyle();
+aStyle.BackColor = Color.LightBlue;
+aStyle.ForeColor = Color.Blue;
+aStyle.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"ＭＳ ゴシック"</span>, <span class="hljs-number">9</span>);
+<span class="hljs-comment">// TextBoxコントロールのアクティブな状態のスタイルを設定します</span>
+gcStylePlus1.SetActiveStyle(textBox1, aStyle);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+' ThemeStateStyle オブジェクトを生成します
+Dim aStyle As New ThemeStateStyle
+aStyle.BackColor = Color.LightBlue
+aStyle.ForeColor = Color.Blue
+aStyle.Font = New Font("ＭＳ ゴシック", 9)
+' TextBoxコントロールのアクティブな状態のスタイルを設定します
+GcStylePlus1.SetActiveStyle(TextBox1, aStyle)</code></pre></div><h4>複数のコントロールの設定</h4><p>次のサンプルコードでは、フォーム上にある TextBox コントロールと Button コントロールに共通の、マウス通過時のスタイルを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-comment">// ThemeStateStyle オブジェクトを生成します</span>
+ThemeStateStyle aStyle = <span class="hljs-keyword">new</span> ThemeStateStyle();
+aStyle.BackColor = Color.LightCyan;
+aStyle.ForeColor = Color.Red;
+aStyle.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"メイリオ"</span>, <span class="hljs-number">9</span>);
+<span class="hljs-comment">// 各コントロールのマウス通過時のスタイルを設定します</span>
+gcStylePlus1.SetHoverStyle(<span class="hljs-keyword">new</span> Control[] {textBox1, button1}, aStyle);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+' ThemeStateStyle オブジェクトを生成します
+Dim aStyle As New ThemeStateStyle
+aStyle.BackColor = Color.LightCyan
+aStyle.ForeColor = Color.Red
+aStyle.Font = New Font("メイリオ", 9)
+' 各コントロールのマウス通過時のスタイルを設定します
+GcStylePlus1.SetHoverStyle(New Control() {TextBox1, Button1}, aStyle)</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4cd3f681-c14f-4e73-ad72-6bb6a9f9339f" title="">GcStylePlusコンポーネント</a></p>

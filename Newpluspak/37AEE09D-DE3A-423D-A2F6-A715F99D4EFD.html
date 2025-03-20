@@ -1,0 +1,40 @@
+<p>GcDropDownButtonコントロールでは、DropDownOpening イベントと DropDownOpened イベントでタッチ操作によってドロップダウンウィンドウが開かれたかを判定できます。ここでは、イベント内でタッチ操作の判定を行う方法について説明します。</p>
+<h2 id="ドロップダウンイベントでタッチ操作を判定する">ドロップダウンイベントでタッチ操作を判定する</h2>
+<p>次のコードでは、GcSplitButton コントロールの DropDownOpening イベントでタッチ操作の判定を行います。<br /></p>
+<pre><code class="language-csharp">private void gcSplitButton1_DropDownOpening(object sender, CancelEventArgs e)
+{
+    GrapeCity.Win.Common.DropDownCancelEventArgs args = e as GrapeCity.Win.Common.DropDownCancelEventArgs;
+
+    if (args != null)
+    {
+        if (args.ByTouch)
+        {
+            MessageBox.Show(&quot;タッチ操作です。&quot;);
+        }
+        else
+        {
+            MessageBox.Show(&quot;タッチ操作ではありません。&quot;);
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-vbnet">Private Sub GcSplitButton1_DropDownOpening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles GcSplitButton1.DropDownOpening
+    Dim args As GrapeCity.Win.Common.DropDownCancelEventArgs = DirectCast(e, GrapeCity.Win.Common.DropDownCancelEventArgs)
+
+    If args IsNot Nothing Then
+        If args.ByTouch Then
+            MessageBox.Show(&quot;タッチ操作です。&quot;)
+        Else
+            MessageBox.Show(&quot;タッチ操作ではありません。&quot;)
+        End If
+    End If
+End Sub
+</code></pre>
+<p><br /><br /></p>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=10852f92-bae6-4537-83b2-9ffb91cc0658">タッチ機能 (すべてのコントロール)</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=992228f0-0fea-472c-a341-57da1b77e6df">GcDropDownButtonコントロール</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=639c60ae-4fd6-4ae9-bad5-1b87450fbec7">ドロップダウンとボタンの設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=fb101ee6-b394-4403-8661-c92620e23b81">イベントとキーボード操作</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=0b05adb8-a7fa-4002-9875-048a5ff40a84">外観の変更</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=835e1df3-423d-43e9-a56f-a41bd53f30ef">文字の配置と特殊効果</a></p>

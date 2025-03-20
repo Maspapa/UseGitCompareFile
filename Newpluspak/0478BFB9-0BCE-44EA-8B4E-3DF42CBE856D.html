@@ -1,0 +1,44 @@
+<p>GcCalculator コントロールを他のコントロールとの値の受け渡しの方法について、以下に解説します。</p><h2>他コントロールとの接続</h2><p>GcCalculator コントロールの<a href="gcdocsite__documentlink?toc-item-id=3e859e63-8f5f-4ff8-944f-59b53cd7d440" title="">Value</a>プロパティの値を他のコントロールに渡すには、GcCalculator コントロールのOutputTextChangedイベントと、接続先のコントロールの<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/weblink.png" alt="Web サイト" contenteditable="false"><a href="http://msdn.microsoft.com/ja-jp/library/system.windows.forms.control.databindings%28v=vs.110%29.aspx" title="">DataBindings</a> プロパティを使用します。以下に、その手順と具体例を紹介します。</p><h4>手順</h4><ol><li><p>GcCalculator コントロールの Binding オブジェクトを生成します。</p></li><li><p>コントロール間のデータ型が異なる場合は、ConvertEventHandler デリゲートを使ってデータ変換を行います。</p></li><li><p>Binding オブジェクトを接続先のコントロールの ControlBindingsCollection に追加します。</p></li><li><p>Binding オブジェクトを管理する <img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/weblink.png" alt="Web サイト" contenteditable="false"><a href="http://msdn.microsoft.com/ja-jp/library/system.windows.forms.bindingmanagerbase%28v=vs.110%29.aspx" title="">BindingManagerBase</a> を生成します。</p></li><li><p>GcCalculator コントロールの OutputTextChanged イベント内で、BindingManagerBaseのResumeBinding メソッドを実行して、GcCalculator コントロールの値が変更されるたびにデータ連結を再開します。</p></li></ol><p>次のサンプルコードは、GcCalculator コントロールの Value プロパティをテキストボックスコントロールの Text プロパティに接続する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">private</span> BindingManagerBase bmValue;
+
+<span class="hljs-function">private void Form1_Load(object sender, System.EventArgs e)</span>
+{
+    <span class="hljs-comment">// データを接続するためにBindingオブジェクトを生成します。</span>
+    Binding b = <span class="hljs-keyword">new</span> Binding(<span class="hljs-string">"Text"</span>, gcCalculator1, <span class="hljs-string">"Value"</span>);
+    <span class="hljs-comment">// ControlBindingsCollectionに追加します。</span>
+    textBox1.DataBindings.Add(b);
+    <span class="hljs-comment">// BindingManagerBaseを生成します。</span>
+    bmValue = <span class="hljs-keyword">this</span>.BindingContext[gcCalculator1];
+}
+
+<span class="hljs-function">private void gcCalculator1_OutputTextChanged(object sender, System.EventArgs e)</span>
+{
+    <span class="hljs-keyword">try</span>
+    {
+        <span class="hljs-comment">// GcCalculator コントロールをテキストボックスに接続します。</span>
+        bmValue.ResumeBinding();
+    }
+    <span class="hljs-keyword">catch</span> (System.Exception aException)
+    {
+        <span class="hljs-comment">// エラー発生時にはメッセージを表示します。</span>
+        textBox1.Text = aException.Message;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Friend bmValue As BindingManagerBase
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    ' データを接続するためにBindingオブジェクトを生成します。
+    Dim b As Binding = New Binding("Text", GcCalculator1, "Value")
+    ' ControlBindingsCollectionに追加します。
+    TextBox1.DataBindings.Add(b)
+    ' BindingManagerBaseを生成します。
+    bmValue = Me.BindingContext(GcCalculator1)
+End Sub
+
+Private Sub GcCalculator1_OutputTextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GcCalculator1.OutputTextChanged
+    Try
+        ' GcCalculator コントロールをテキストボックスに接続します。
+        bmValue.ResumeBinding()
+    Catch aException As System.Exception
+        ' エラー発生時にはメッセージを表示します。
+        TextBox1.Text = aException.Message
+    End Try
+End Sub</code></pre></div><h2>クリップボードの利用をサポート</h2><p>GcCalculator コントロールはクリップボードを使用したコピー＆ペーストの操作に対応しています。</p><p>クリップボードからGcCalculatorコントロールへ値をペーストする場合は、数値だけでなく、”1+2=”といった計算式を貼り付けペーストすると、計算した結果を表示することができます。</p><p>なお、コードで設定する場合には、計算式をペーストすることはできません。また、ペースト可能な文字は"0～9"の数字および"+"、"-"、"*"、"/"、"="のみになります。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=020d253d-f12e-416d-84be-0aabaf1bce55" title="">GcCalculatorコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4348356e-9217-4cde-8f63-8913552eb24c" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9e0f8245-9dce-4b8a-94c2-15fa3811a763" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=884638ab-c590-4ee1-9c1d-a4e00437ac49" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0aaf6328-034b-435c-9ee6-3a4523f1923f" title="">ボタンへのキー割り当て</a></p>

@@ -1,0 +1,485 @@
+<p>GcCalendar コントロールで休日を設定する方法について解説します。</p><h2>概要の説明</h2><p>GcCalendar コントロールの休日設定は、<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#HOLIDAYSTYLES" title="">HolidayStyles</a> プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=e17def48-7d92-4ac3-808b-175923c2e102" title="">HolidayStyleCollection</a> を初めとする下図のオブジェクト（着色された９つ）を使って行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.06_01.png" contenteditable="false"><br></p><p><a href="gcdocsite__documentlink?toc-item-id=e17def48-7d92-4ac3-808b-175923c2e102" title="">HolidayStyleCollection</a> コレクションには、複数の休日スタイル（複数の休日からなる集合体）を保持できます。たとえば、「国民の祝日」、「会社の休日」、「個人の休日」などを休日スタイルとして登録することで、休日を種類ごとに管理できるようになります。</p><p>休日スタイルを設定する <a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e" title="">HolidayStyle</a> オブジェクトは、その <a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e#HOLIDAYS" title="">Holidays</a> プロパティを経由して、複数の休日を保持する <a href="gcdocsite__documentlink?toc-item-id=cbc5c45b-c4b0-4fe7-bb7e-176c4e9b70dd" title="">HolidayCollection</a> コレクションにアクセスします。たとえば、「国民の祝日」と名づけた休日スタイルが参照する HolidayCollection コレクションには、「1月1日、1月15日、2月11日、・・・」などの休日が含まれることになります。 <a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377" title="">Holiday</a> オブジェクトは、休日そのものを指定するために用意されています。国民の祝日のように１日だけの休日のほかに、会社の夏期休暇などのように期間を指定した休日も設定できます。</p><p><a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c" title="">DayOfWeekHoliday</a> オブジェクトもHolidayオブジェクト同様、休日そのものを指定するために用意されています。Holidayオブジェクトとの違いは、ハッピーマンデーと呼ばれる成人の日、海の日、敬老の日、体育の日のように特定の月において特定の週の月曜日が祝日になるような場合に使用することができます。</p><p><a href="gcdocsite__documentlink?toc-item-id=2cea39ed-e32f-405a-996f-8f4f34052e5b" title="">ForceHoliday</a> オブジェクトは、Holidayオブジェクトと同じように休日を指定するためのものですが、Holidayオブジェクトの休日は毎年繰り返される永続的なものなのに対し、ForceHolidayオブジェクトの休日は特定の年にだけ適用される一時的なものという違いがあります。</p><p><a href="gcdocsite__documentlink?toc-item-id=8f110320-ef17-45ec-b638-6b6b8c66f40d" title="">ForceWorkday</a> オブジェクトは、Holidayオブジェクトの設定に関わらず、特定の日を強制的に営業日にするときに使用します。この営業日も、ForceHolidayオブジェクトの休日と同じように、特定の年に対してのみ設定することができます。</p><p><a href="gcdocsite__documentlink?toc-item-id=7cfa9874-9188-4f2e-8fda-52d322de5deb" title="">ForceDayOfWeekHoliday</a> オブジェクトは、ForceHolidayオブジェクトと同様に特定の年にだけ適用される一時的な休日を設定しますが、特定の月、週、曜日が休日になるような場合に使用することができます。</p><p><a href="gcdocsite__documentlink?toc-item-id=94522575-e861-41ca-a609-31785075aa91" title="">ForceDayOfWeekWorkday</a> オブジェクトは、ForceWorkdayオブジェクトと同様に特定の日を強制的に営業日にするときに使用しますが、特定の月、週、曜日が営業日になるような場合に使用することができます。</p><h2>休日スタイルの生成</h2><p>休日スタイルは、<a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e" title="">HolidayStyle</a> オブジェクトを使って設定します。HolidayStyleオブジェクトには、次の3つのプロパティが用意されており、これらを使って、休日スタイルに含まれているすべての休日の属性を設定することができます。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e#NAME" title="">Name</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e#SUBSTYLE" title="">SubStyle</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e#HOLIDAYS" title="">Holidays</a></p></li></ul><p>Nameプロパティには、HolidayStyleオブジェクトの内容を分かりやすく示す名称を設定します。</p><p>SubStyleプロパティは、休日の日付スタイルを設定します。日付の文字色、背景色、太字、下線を指定できます。</p><p>Holidaysプロパティは、休日そのものを保持するHolidayCollectionコレクションにアクセスするためのものです。</p><p>これらのプロパティは、次のようにしてHolidayStyleオブジェクトを生成した後に設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// 休日スタイルを生成します。</span>
+HolidayStyle aHS = <span class="hljs-keyword">new</span> HolidayStyle();
+aHS.Name = <span class="hljs-string">"国民の祝日"</span>;
+aHS.SubStyle = <span class="hljs-keyword">new</span> SubStyle(Color.White, Color.Red, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);
+aHS.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"誕生日"</span>, <span class="hljs-number">3</span>, <span class="hljs-number">13</span>));</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' 休日スタイルを生成します。
+Dim aHS As HolidayStyle = New HolidayStyle()
+aHS.Name = "国民の祝日"
+aHS.SubStyle = New SubStyle(Color.White, Color.Red, True, False)
+aHS.Holidays.Add(New Holiday("誕生日", 3, 13))</code></pre></div><h2>休日の追加</h2><p>休日は、<a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377" title="">Holiday</a> オブジェクトで設定します。Holidayオブジェクトは、HolidayStyleオブジェクトのHolidaysプロパティが参照するHolidayCollectionに保持されます。このHolidayオブジェクトは、次の5つの基本属性（プロパティ）を持っています。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377#NAME" title="">Name</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377#STARTMONTH" title="">StartMonth</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377#STARTDAY" title="">StartDay</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377#ENDMONTH" title="">EndMonth</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377#ENDDAY" title="">EndDay</a></p></li></ul><p>Nameプロパティには、休日を識別するための名前を設定し、StartMonthとStartDayの2つのプロパティには休日の開始日を、また、EndMonthとEndDayの各プロパティには休日の終了日を指定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 休日を追加します。</span>
+aHS.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"新婚旅行"</span>, <span class="hljs-number">6</span>, <span class="hljs-number">28</span>, <span class="hljs-number">7</span>, <span class="hljs-number">12</span>));</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 休日を追加します。
+aHS.Holidays.Add(New Holiday("新婚旅行", 6, 28, 7, 12))</code></pre></div><p>また、ハッピーマンデーと呼ばれる特定の月、週、曜日を指定して設定する休日は、<a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c" title="">DayOfWeekHoliday</a> オブジェクトで設定します。このDayOfWeekHolidayオブジェクトは、次の５つの基本属性（プロパティ）を持っています。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c#DAYOFWEEK" title="">DayOfWeek</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c#DAYOFWEEKINMONTH" title="">DayOfWeekInMonth</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c#ISYEARLY" title="">IsYearly</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c#MONTH" title="">Month</a></p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=d5405244-ed5c-4164-b388-77c84045cd9c" title="">Name</a></p></li></ul><p>Nameプロパティには、休日を識別するための名前を設定し、Monthには休日を設定する月、DayOfWeekInMonthには週、DayOfWeekには曜日を指定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 成人の日を追加します。</span>
+aHs.Holidays.Add(<span class="hljs-keyword">new</span> DayOfWeekHoliday(<span class="hljs-string">"成人の日"</span>,MonthFlags.January, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 成人の日を追加します。
+aHs.Holidays.Add(New DayOfWeekHoliday("成人の日",MonthFlags.January, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday)</code></pre></div><h2>休日スタイルの適用</h2><p>以上のようにして作成した休日スタイルは、<a href="gcdocsite__documentlink?toc-item-id=e17def48-7d92-4ac3-808b-175923c2e102" title="">HolidayStyleCollection</a> コレクションに登録して初めて有効になります。さらに、このHolidayStyleCollectionコレクションには、複数の休日スタイルが登録されるので、どの休日スタイルをカレンダーに適用するかも指定する必要があります。</p><p>HolidayStyleCollectionコレクションへの登録は、カレンダーコントロールの <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#HOLIDAYSTYLES" title="">HolidayStyles</a> プロパティを経由して行います。また、休日スタイルをカレンダーに適用するには、カレンダーコントロールの <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#ACTIVEHOLIDAYSTYLES" title="">ActiveHolidayStyles</a> プロパティを使用します。</p><p>実行時に、カレンダーコントロールを右クリックすると、<a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e" title="">HolidayStyle</a> オブジェクトの <a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e#NAME" title="">Name</a> プロパティに設定されている休日スタイル名のリストが表示されます。さらに、リストの各項目をクリックすると、それぞれの休日スタイルの有効と無効を切り替えることができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// コレクションに登録します。</span>
+gcCalendar1.HolidayStyles.Add(<span class="hljs-string">"個人の休日"</span>, aHS);
+
+<span class="hljs-comment">// カレンダーに反映させます。</span>
+gcCalendar1.ActiveHolidayStyles = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] {<span class="hljs-string">"個人の休日"</span>};</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' コレクションに登録します。
+GcCalendar1.HolidayStyles.Add("個人の休日", aHS)
+
+' カレンダーに反映させます。
+GcCalendar1.ActiveHolidayStyles = New string() {"個人の休日"}</code></pre></div><h2>臨時の休日と営業日</h2><p>上記の「休日の追加」での説明では、新婚旅行を <a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377" title="">Holiday</a> オブジェクトに設定しましたが、これは適切ではありませんでした。通常、新婚旅行は、毎年繰り返されるものではなく、特定の年だけに行われるものです。</p><p>このように、特定の年にしか適用できないものや、年によって日付が異なるものについては、Holidayオブジェクトではなく <a href="gcdocsite__documentlink?toc-item-id=2cea39ed-e32f-405a-996f-8f4f34052e5b" title="">ForceHoliday</a> オブジェクトを使用します。下の「サンプルコード」では、次の祝日をForceHolidayオブジェクトを使って登録しています。</p><ul><li><p>成人の日</p></li><li><p>体育の日</p></li><li><p>春分の日</p></li><li><p>秋分の日</p></li></ul><p>また、Holidayオブジェクトで設定された休日にも関わらず、その年だけは営業日になるということもあります。このような場合、<a href="gcdocsite__documentlink?toc-item-id=8f110320-ef17-45ec-b638-6b6b8c66f40d" title="">ForceWorkday</a> オブジェクトを使うことで、Holidayオブジェクトを削除することなく、臨時に営業日に設定することが可能です。</p><p>以下は、「休日スタイルの生成」で設定した誕生日（3月13日）を2013年に限って臨時営業日（仕事）にし、翌日を臨時休日（代休）に設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// 2019年3月13日を臨時営業日（仕事）に設定します。</span>
+DateTime aDateA = DateTime.Parse(<span class="hljs-string">"2019/3/13"</span>);
+gcCalendar1.HolidayStyles[<span class="hljs-string">"個人の休日"</span>].Holidays.Add(<span class="hljs-keyword">new</span> ForceWorkday(<span class="hljs-string">"仕事"</span>, aDateA));
+
+<span class="hljs-comment">// 2019年3月14日を臨時休日（代休）に設定します。</span>
+DateTime aDateB = DateTime.Parse(<span class="hljs-string">"2019/3/14"</span>);
+gcCalendar1.HolidayStyles[<span class="hljs-string">"個人の休日"</span>].Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"代休"</span>, aDateB));</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' 2019年3月13日を臨時営業日（仕事）に設定します。
+Dim aDateA As DateTime = DateTime.Parse("2019/3/13")
+GcCalendar1.HolidayStyles("個人の休日").Holidays.Add(New ForceWorkday("仕事", aDateA))
+
+' 2019年3月14日を臨時休日（代休）に設定します。
+Dim aDateB As DateTime = DateTime.Parse("2019/3/14")
+GcCalendar1.HolidayStyles("個人の休日").Holidays.Add(New ForceHoliday("代休", aDateB))</code></pre></div><h2>振替休日</h2><p>国民の祝日が日曜日に重なったとき、「翌日（休日か営業日か問わず）」もしくは「次の営業日」を休日にするというシステムに対応して、カレンダーコントロールにはこの振替休日を自動的に設定する機能があります。</p><p>振替休日は、HolidayCollectionの <a href="gcdocsite__documentlink?toc-item-id=cbc5c45b-c4b0-4fe7-bb7e-176c4e9b70dd#WEEKDAYS" title="">Weekdays</a> プロパティを経由して <a href="gcdocsite__documentlink?toc-item-id=390b5243-e531-434a-8849-45d47c1fe6d5" title="">DayOfWeekHolidayPolicy</a> 構造体にアクセスすることで設定できます。以下にその例を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+aHS.Holidays.Weekdays.Sunday = <span class="hljs-keyword">new</span> DayOfWeekHolidayPolicy(
+    WeekFlags.All, HolidayOverride.NextWorkDay);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+aHS.Holidays.Weekdays.Sunday = New DayOfWeekHolidayPolicy( _
+    WeekFlags.All, HolidayOverride.NextWorkDay)</code></pre></div><p>カレンダーコントロールでは、カレンダー上に表示された休日が、休日そのものか振替休日かを示すためにツールチップ機能が用意されています。</p><p>カレンダー上の振替休日にマウスカーソルが位置したときに表示するツールチップを <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#OVERRIDETIPTEXT" title="">OverrideTipText</a> プロパティで設定できます。また、ツールチップを表示するタイミングは、<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#TIPINTERVAL" title="">TipInterval</a> プロパティで指定します。</p><h2>休日の確認</h2><p>HolidayCollectionコレクションの <a href="gcdocsite__documentlink?toc-item-id=cbc5c45b-c4b0-4fe7-bb7e-176c4e9b70dd#ISHOLIDAY" title="">IsHoliday</a> メソッドを使うと、特定の日付が休日（営業日でない日）に設定されているかどうかを確認することができます。IsHolidayメソッドがTrueを戻すのは、以下の３種類の日です。</p><ul><li><p>臨時営業日でない休日</p></li><li><p>臨時休日</p></li><li><p>休業日</p></li></ul><p>また、HolidayCollectionコレクションの <a href="gcdocsite__documentlink?toc-item-id=cbc5c45b-c4b0-4fe7-bb7e-176c4e9b70dd#GETTYPEOFDAY" title="">GetTypeOfDay</a> メソッドを使うと、指定した日付が次のどれに該当するかを簡単に調べられます。</p><table><thead><tr><th><p>日付の種類</p></th><th><p>GetTypeOfDay メソッドの戻り値</p></th></tr></thead><tbody><tr><td><p>営業日</p></td><td><p>0 - GrapeCity.Win.Calendar.DayType.Normal</p></td></tr><tr><td><p>休日</p></td><td><p>1 - GrapeCity.Win.Calendar.DayType.Holiday</p></td></tr><tr><td><p>臨時営業日</p></td><td><p>2 - GrapeCity.Win.Calendar.DayType.ForcedWorkday</p></td></tr><tr><td><p>臨時休日</p></td><td><p>3 - GrapeCity.Win.Calendar.DayType.ForcedHoliday</p></td></tr><tr><td><p>振替休日</p></td><td><p>4 - GrapeCity.Win.Calendar.DayType.OverriddenHoliday</p></td></tr><tr><td><p>休業日</p></td><td><p>5 - GrapeCity.Win.Calendar.DayType.DayOfWeekHoliday</p></td></tr></tbody></table><p>以下は、GetTypeOfDayメソッドを使って日付の種類を調べるプログラムの例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Diagnostics;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// 対象の日付を設定します。</span>
+DateTime aDate = DateTime.Parse(<span class="hljs-string">"2019/8/25"</span>);
+
+<span class="hljs-comment">// 日付の種類を調べます。</span>
+HolidayStyle aHS = gcCalendar1.HolidayStyles[gcCalendar1.ActiveHolidayStyles[<span class="hljs-number">0</span>]];
+<span class="hljs-built_in">object</span> dayInCollection;
+System.Diagnostics.Debug.WriteLine(aHS.Holidays.GetTypeOfDay(aDate, <span class="hljs-keyword">out</span> dayInCollection).ToString());
+
+<span class="hljs-comment">// 休日、臨時休日、臨時営業日の場合は、その名称を調べます。</span>
+<span class="hljs-keyword">if</span> (dayInCollection != <span class="hljs-literal">null</span>)
+{
+    System.Diagnostics.Debug.WriteLine(((IHoliday)dayInCollection).Name);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' 対象の日付を設定します。
+Dim aDate As DateTime = DateTime.Parse("2019/8/25")
+
+' 日付の種類を調べます。
+Dim aHS As HolidayStyle = Calendar1.HolidayStyles(GcCalendar1.ActiveHolidayStyles(0))
+Dim dayInCollection As Object
+Debug.WriteLine(aHS.Holidays.GetTypeOfDay(aDate, dayInCollection).ToString())
+
+' 休日、臨時休日、臨時営業日の場合は、その名称を調べます。
+If Not IsNothing(dayInCollection) Then
+    Debug.WriteLine(CType(dayInCollection, IHoliday).Name)
+End If</code></pre></div><p>さらに、IHolidayインターフェイスを持つ3つのオブジェクト（<a href="gcdocsite__documentlink?toc-item-id=dc3b9b57-d4fb-4c74-91b3-d8a70e7ca377" title="">Holiday</a>、<a href="gcdocsite__documentlink?toc-item-id=2cea39ed-e32f-405a-996f-8f4f34052e5b" title="">ForceHoliday</a>、<a href="gcdocsite__documentlink?toc-item-id=8f110320-ef17-45ec-b638-6b6b8c66f40d" title="">ForceWorkday</a>）のIsHolidayメソッドとIsYearlyプロパティを調べることで、臨時営業日の内容を判別することができます。</p><table><thead><tr><th><p>臨時営業日の種類</p></th><th><p>IsHoliday</p></th><th><p>IsYearly</p></th></tr></thead><tbody><tr><td><p>通常は休日</p></td><td><p>True + True</p></td><td><p>True + False</p></td></tr><tr><td><p>通常は臨時休日</p></td><td><p>True + True</p></td><td><p>False + False</p></td></tr><tr><td><p>通常は休業日</p></td><td><p>(False) + True</p></td><td><p>(False) + False</p></td></tr></tbody></table><p>言葉だけをみると、表の中の「通常は臨時休日（臨時休日を臨時営業日に設定する）」は無意味ですが、「臨時休日」には毎年変化する祝日（成人の日、体育の日、春分の日、秋分の日）なども含まれます。そのため、カレンダーコントロール内では意味のある設定になります。</p><p>以下は、上の表を使って日付を判別するプログラムの例です。少なくとも１つのHolidayStyleが設定されていることを前提にしています。また、休日、臨時休日、および休業日なども事前に設定しておく必要があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// チェック用の変数</span>
+<span class="hljs-built_in">int</span> checkValue = <span class="hljs-number">0</span>;
+
+<span class="hljs-comment">// 対象の日付を設定します。</span>
+DateTime aDate = DateTime.Parse(<span class="hljs-string">"2019/8/25"</span>);
+
+<span class="hljs-comment">// 各オブジェクトのIsHolidayメソッドがTrueを返したときに、</span>
+<span class="hljs-comment">// IsYearlyプロパティを調べます。</span>
+HolidayStyle aHS = gcCalendar1.HolidayStyles[gcCalendar1.ActiveHolidayStyles[<span class="hljs-number">0</span>]];
+<span class="hljs-keyword">foreach</span> (IHoliday item <span class="hljs-keyword">in</span> aHS.Holidays)
+{
+    <span class="hljs-keyword">if</span> (item.IsHoliday(aDate))
+    {
+        checkValue += <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (item.IsYearly) checkValue += <span class="hljs-number">3</span>;
+    }
+}
+
+<span class="hljs-comment">// 調べた結果を表示します。</span>
+<span class="hljs-keyword">switch</span> (checkValue)
+{
+    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+        MessageBox.Show(aDate.ToString(<span class="hljs-string">"yyyy年MM月dd日"</span>) + <span class="hljs-string">" : 通常は休業日"</span>);
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+        MessageBox.Show(aDate.ToString(<span class="hljs-string">"yyyy年MM月dd日"</span>) + <span class="hljs-string">" : 通常は臨時休日"</span>);
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:
+        MessageBox.Show(aDate.ToString(<span class="hljs-string">"yyyy年MM月dd日"</span>) + <span class="hljs-string">" : 通常は休日"</span>);
+        <span class="hljs-keyword">break</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' チェック用の変数
+Dim checkValue As Integer = 0
+
+' 対象の日付を設定します。
+Dim aDate As DateTime = DateTime.Parse("2019/8/25")
+
+' 各オブジェクトのIsHolidayメソッドがTrueを返したときに、
+' IsYearlyプロパティを調べます。
+Dim aHS As HolidayStyle = GcCalendar1.HolidayStyles(GcCalendar1.ActiveHolidayStyles(0))
+Dim item As IHoliday
+For Each item In aHS.Holidays
+    If item.IsHoliday(aDate) Then
+        checkValue += 1
+        If item.IsYearly Then checkValue += 3
+    End If
+Next
+
+' 調べた結果を表示します。
+Select checkValue
+    Case 1
+        MessageBox.Show(aDate.ToString("yyyy年MM月dd日") + " : 通常は休業日")
+    Case 2
+        MessageBox.Show(aDate.ToString("yyyy年MM月dd日") + " : 通常は臨時休日")
+    Case 5
+        MessageBox.Show(aDate.ToString("yyyy年MM月dd日") + " : 通常は休日")
+End Select</code></pre></div><h2>サンプルコード</h2><p>次のサンプルコードは、ハッピーマンデーに対応した国民の祝日を設定しています。これらのコードは、ロジックのサンプルとしてご利用ください。</p><h4>春分の日と秋分の日について</h4><p>以下の処理で得られたものは、実際の祝日とは異なる可能性があります。春分の日と秋分の日は、毎年2月に翌年分が閣議決定され、官報によって公布されます。天文学に基づく計算結果とは異なる可能性があります。</p><h4>ハッピーマンデーについて</h4><p>法律改正前の暦については、成人の日、海の日、敬老の日、体育の日が異なります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+HolidayStyle nationalHoliday = <span class="hljs-keyword">new</span> HolidayStyle();
+HolidayStyle normalday = <span class="hljs-keyword">new</span> HolidayStyle();
+
+<span class="hljs-function">private void SetNationalHoliday()</span>
+{
+    <span class="hljs-comment">// 2019年4月現在の国民の祝日を設定します。</span>
+    <span class="hljs-comment">// 固定の祝日を設定します。</span>
+    nationalHoliday.Name = <span class="hljs-string">"国民の祝日"</span>;
+    nationalHoliday.SubStyle = <span class="hljs-keyword">new</span> SubStyle(Color.LightPink, Color.Red);
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"元旦"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"建国記念の日"</span>, <span class="hljs-number">2</span>, <span class="hljs-number">11</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"昭和の日"</span>, <span class="hljs-number">4</span>, <span class="hljs-number">29</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"憲法記念日"</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"みどりの日"</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"こどもの日"</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"文化の日"</span>, <span class="hljs-number">11</span>, <span class="hljs-number">3</span>));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> Holiday(<span class="hljs-string">"勤労感謝の日"</span>, <span class="hljs-number">11</span>, <span class="hljs-number">23</span>));
+
+    <span class="hljs-comment">// ハッピーマンデーを設定します。</span>
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> DayOfWeekHoliday(<span class="hljs-string">"成人の日"</span>, MonthFlags.January, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> DayOfWeekHoliday(<span class="hljs-string">"海の日"</span>, MonthFlags.July, DayOfWeekInMonthFlags.Third, DayOfWeekFlags.Monday));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> DayOfWeekHoliday(<span class="hljs-string">"敬老の日"</span>, MonthFlags.September, DayOfWeekInMonthFlags.Third, DayOfWeekFlags.Monday));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> DayOfWeekHoliday(<span class="hljs-string">"体育の日"</span>, MonthFlags.October, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday));
+
+    <span class="hljs-comment">// 天皇即位にともなう休日を設定します。</span>
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"休日"</span>, DateTime.Parse(<span class="hljs-string">"2019/4/30"</span>)));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"休日"</span>, DateTime.Parse(<span class="hljs-string">"2019/5/1"</span>)));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"休日"</span>, DateTime.Parse(<span class="hljs-string">"2019/5/2"</span>)));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"休日"</span>, DateTime.Parse(<span class="hljs-string">"2019/10/22"</span>)));
+
+    <span class="hljs-comment">// 2020年の東京オリンピック・東京パラリンピックにともなう休日を設定します。</span>
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"海の日"</span>, DateTime.Parse(<span class="hljs-string">"2020/7/23"</span>)));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"スポーツの日"</span>, DateTime.Parse(<span class="hljs-string">"2020/7/24"</span>)));
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"山の日"</span>, DateTime.Parse(<span class="hljs-string">"2020/8/10"</span>)));
+
+    <span class="hljs-comment">// 2020年の「7月20日」「10月12日」を通常日に設定します。</span>
+    normalday.Name = <span class="hljs-string">"通常日"</span>;
+    normalday.Holidays.Add(<span class="hljs-keyword">new</span> ForceWorkday(<span class="hljs-string">""</span>, DateTime.Parse(<span class="hljs-string">"2020/7/20"</span>)));
+    normalday.Holidays.Add(<span class="hljs-keyword">new</span> ForceWorkday(<span class="hljs-string">""</span>, DateTime.Parse(<span class="hljs-string">"2020/10/12"</span>)));
+    <span class="hljs-comment">//normalday.Holidays.Add(new ForceDayOfWeekWorkday(2020 , MonthFlags.July, DayOfWeekInMonthFlags.Third, DayOfWeekFlags.Monday));</span>
+    <span class="hljs-comment">//normalday.Holidays.Add(new ForceDayOfWeekWorkday(2020, MonthFlags.October, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday));</span>
+
+    <span class="hljs-comment">// 年によって変化する祝日を2000年～2050年の分を設定します。</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">2000</span>; i &lt;= <span class="hljs-number">2050</span>; i++)
+    {
+        SetYearHoliday(i);
+    }
+
+    <span class="hljs-comment">// 振替休日の扱いを設定します。</span>
+    nationalHoliday.Holidays.Weekdays.Sunday = <span class="hljs-keyword">new</span> DayOfWeekHolidayPolicy(WeekFlags.All, HolidayOverride.NextWorkDay);
+    gcCalendar1.OverrideTipText = <span class="hljs-string">"振替休日"</span>;
+
+    <span class="hljs-comment">// 休日スタイルをコレクションに追加してカレンダーに反映させます。</span>
+    gcCalendar1.HolidayStyles.Add(<span class="hljs-string">"国民の祝日"</span>, nationalHoliday);
+    gcCalendar1.HolidayStyles.Add(<span class="hljs-string">"通常日"</span>, normalday);
+    gcCalendar1.ActiveHolidayStyles = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"国民の祝日"</span> , <span class="hljs-string">"通常日"</span> };
+}
+
+<span class="hljs-function">private void SetYearHoliday(int Year)</span>
+{
+    <span class="hljs-comment">// 年によって変化する国民の祝日を設定します。</span>
+    <span class="hljs-built_in">int</span> currentYear = Year;
+
+    <span class="hljs-comment">// 春分の日と秋分の日の初期値として2019年の祝日を設定します。</span>
+    DateTime syunbun = DateTime.Parse(<span class="hljs-string">"2019/3/21"</span>);
+    DateTime syubun = DateTime.Parse(<span class="hljs-string">"2019/9/23"</span>);
+
+    <span class="hljs-keyword">switch</span> (currentYear % <span class="hljs-number">4</span>)
+    {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+            <span class="hljs-comment">// 春分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">1960</span>)
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/21"</span>);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currentYear &gt;= <span class="hljs-number">1960</span> &amp;&amp; currentYear &lt; <span class="hljs-number">2092</span>)
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/20"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/19"</span>);
+            }
+            <span class="hljs-comment">// 秋分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">2012</span>)
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/23"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/22"</span>);
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            <span class="hljs-comment">// 春分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">1993</span>)
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/21"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/20"</span>);
+            }
+            <span class="hljs-comment">// 秋分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">1921</span>)
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/24"</span>);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currentYear &gt;= <span class="hljs-number">1921</span> &amp;&amp; currentYear &lt; <span class="hljs-number">2045</span>)
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/23"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/22"</span>);
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            <span class="hljs-comment">// 春分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">2026</span>)
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/21"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/20"</span>);
+            }
+            <span class="hljs-comment">// 秋分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">1950</span>)
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/24"</span>);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currentYear &gt;= <span class="hljs-number">1950</span> &amp;&amp; currentYear &lt; <span class="hljs-number">2078</span>)
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/23"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/22"</span>);
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+            <span class="hljs-comment">// 春分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">1927</span>)
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/22"</span>);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currentYear &gt;= <span class="hljs-number">1927</span> &amp;&amp; currentYear &lt; <span class="hljs-number">2059</span>)
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/21"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syunbun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/3/20"</span>);
+            }
+            <span class="hljs-comment">// 秋分の日を設定します。</span>
+            <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">1983</span>)
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/24"</span>);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                syubun = DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/9/23"</span>);
+            }
+            <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-comment">// 春分の日を設定します。</span>
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"春分の日"</span>, syunbun));
+    <span class="hljs-comment">// 秋分の日を設定します。</span>
+    nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"秋分の日"</span>, syubun));
+
+    <span class="hljs-comment">// 2つの祝日に挟まれた営業日を休日に設定します。</span>
+    <span class="hljs-keyword">if</span> (currentYear &gt; <span class="hljs-number">2003</span>)
+    {
+        <span class="hljs-keyword">if</span> (syubun.DayOfWeek == System.DayOfWeek.Wednesday)
+        {
+            nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"休日"</span>, syubun.AddDays(<span class="hljs-number">-1</span>)));
+        }
+    }
+
+    <span class="hljs-comment">// 2016年以降「山の日」を追加します。</span>
+    <span class="hljs-keyword">if</span> (currentYear &gt; <span class="hljs-number">2015</span> &amp;&amp; currentYear != <span class="hljs-number">2020</span>)
+    {
+        nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"山の日"</span>, DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/8/11"</span>)));
+    }
+
+    <span class="hljs-comment">// 天皇誕生日を追加します。</span>
+    <span class="hljs-keyword">if</span> (currentYear &lt; <span class="hljs-number">2019</span>)
+    {
+        nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"天皇誕生日"</span>, DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/12/23"</span>)));
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currentYear &gt; <span class="hljs-number">2019</span>)
+    {
+        nationalHoliday.Holidays.Add(<span class="hljs-keyword">new</span> ForceHoliday(<span class="hljs-string">"天皇誕生日"</span>, DateTime.Parse(currentYear.ToString() + <span class="hljs-string">"/2/23"</span>)));
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+Dim nationalHoliday As HolidayStyle = New HolidayStyle()
+Dim normalday As HolidayStyle = New HolidayStyle()
+
+Private Sub SetNationalHoliday()
+    ' 2019年4月現在の国民の祝日を設定します。
+    ' 固定の祝日を設定します。
+    nationalHoliday.Name = "国民の祝日"
+    nationalHoliday.SubStyle = New SubStyle(Color.Pink, Color.White)
+    nationalHoliday.Holidays.Add(New Holiday("元日", 1, 1))
+    nationalHoliday.Holidays.Add(New Holiday("建国記念の日", 2, 11))
+    nationalHoliday.Holidays.Add(New Holiday("昭和の日", 4, 29))
+    nationalHoliday.Holidays.Add(New Holiday("憲法記念日", 5, 3))
+    nationalHoliday.Holidays.Add(New Holiday("みどりの日", 5, 4))
+    nationalHoliday.Holidays.Add(New Holiday("こどもの日", 5, 5))
+    nationalHoliday.Holidays.Add(New Holiday("文化の日", 11, 3))
+    nationalHoliday.Holidays.Add(New Holiday("勤労感謝の日", 11, 23))
+
+    ' ハッピーマンデーを設定します。
+    nationalHoliday.Holidays.Add(New DayOfWeekHoliday("成人の日", MonthFlags.January, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday))
+    nationalHoliday.Holidays.Add(New DayOfWeekHoliday("海の日", MonthFlags.July, DayOfWeekInMonthFlags.Third, DayOfWeekFlags.Monday))
+    nationalHoliday.Holidays.Add(New DayOfWeekHoliday("敬老の日", MonthFlags.September, DayOfWeekInMonthFlags.Third, DayOfWeekFlags.Monday))
+    nationalHoliday.Holidays.Add(New DayOfWeekHoliday("体育の日", MonthFlags.October, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday))
+
+    ' 天皇即位にともなう休日を設定します。
+    nationalHoliday.Holidays.Add(New ForceHoliday("休日", DateTime.Parse("2019/4/30")))
+    nationalHoliday.Holidays.Add(New ForceHoliday("休日", DateTime.Parse("2019/5/1")))
+    nationalHoliday.Holidays.Add(New ForceHoliday("休日", DateTime.Parse("2019/5/2")))
+    nationalHoliday.Holidays.Add(New ForceHoliday("休日", DateTime.Parse("2019/10/22")))
+
+    ' 2020年の東京オリンピック・東京パラリンピックにともなう休日を設定します。
+    nationalHoliday.Holidays.Add(New ForceHoliday("海の日", DateTime.Parse("2020/7/23")))
+    nationalHoliday.Holidays.Add(New ForceHoliday("スポーツの日", DateTime.Parse("2020/7/24")))
+    nationalHoliday.Holidays.Add(New ForceHoliday("山の日", DateTime.Parse("2020/8/10")))
+
+    ' 2020年の「7月20日」「10月12日」を通常日に設定します。
+    normalday.Name = "通常日"
+    normalday.Holidays.Add(New ForceWorkday("", DateTime.Parse("2020/7/20")))
+    normalday.Holidays.Add(New ForceWorkday("", DateTime.Parse("2020/10/12")))
+    'normalday.Holidays.Add(New ForceDayOfWeekWorkday(2020 , MonthFlags.July, DayOfWeekInMonthFlags.Third, DayOfWeekFlags.Monday))
+    'normalday.Holidays.Add(New ForceDayOfWeekWorkday(2020, MonthFlags.October, DayOfWeekInMonthFlags.Second, DayOfWeekFlags.Monday))
+
+    ' 年によって変化する祝日を2000年～2050年の分を設定します。
+    For i As Integer = 2000 To 2050
+        SetYearHoliday(i)
+    Next i
+
+    ' 振替休日の扱いを設定します。
+    nationalHoliday.Holidays.Weekdays.Sunday = New DayOfWeekHolidayPolicy(WeekFlags.All, HolidayOverride.NextWorkday)
+    GcCalendar1.OverrideTipText = "振替休日"
+
+    ' 休日スタイルをコレクションに追加してカレンダーに反映させます。
+    GcCalendar1.HolidayStyles.Add("国民の祝日", nationalHoliday)
+    GcCalendar1.HolidayStyles.Add("通常日", normalday)
+    GcCalendar1.ActiveHolidayStyles = New String() {"国民の祝日", "通常日"}
+End Sub
+
+Private Sub SetYearHoliday(ByVal Year As Integer)
+    ' 年によって変化する国民の祝日を設定します。
+    Dim currentYear As Integer = Year
+
+    ' 春分の日と秋分の日の初期値として2019年の祝日を設定します。
+    Dim syunbun As DateTime = DateTime.Parse(DateTime.Parse(currentYear.ToString() + "/3/21"))
+    Dim syubun As DateTime = DateTime.Parse(DateTime.Parse(currentYear.ToString() + "/9/23"))
+
+    Select Case currentYear Mod 4
+        Case 0
+            ' 春分の日を設定します。
+            If currentYear &lt; 1960 Then
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/21")
+            ElseIf currentYear &gt;= 1960 AndAlso currentYear &lt; 2092 Then
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/20")
+            Else
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/19")
+            End If
+            ' 秋分の日を設定します。
+            If currentYear &lt; 2012 Then
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/23")
+            Else
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/22")
+            End If
+        Case 1
+            ' 春分の日を設定します。
+            If currentYear &lt; 1993 Then
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/21")
+            Else
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/20")
+            End If
+            ' 秋分の日を設定します。
+            If currentYear &lt; 1921 Then
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/24")
+            ElseIf currentYear &gt;= 1921 AndAlso currentYear &lt; 2045 Then
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/23")
+            Else
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/22")
+            End If
+        Case 2
+            ' 春分の日を設定します。
+            If currentYear &lt; 2026 Then
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/21")
+            Else
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/20")
+            End If
+            ' 秋分の日を設定します。
+            If currentYear &lt; 1950 Then
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/24")
+            ElseIf currentYear &gt;= 1950 AndAlso currentYear &lt; 2078 Then
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/23")
+            Else
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/22")
+            End If
+        Case 3
+            ' 春分の日を設定します。
+            If currentYear &lt; 1927 Then
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/22")
+            ElseIf currentYear &gt;= 1927 AndAlso currentYear &lt; 2059 Then
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/21")
+            Else
+                syunbun = DateTime.Parse(currentYear.ToString() + "/3/20")
+            End If
+            ' 秋分の日を設定します。
+            If currentYear &lt; 1983 Then
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/24")
+            Else
+                syubun = DateTime.Parse(currentYear.ToString() + "/9/23")
+            End If
+    End Select
+
+    ' 春分の日を設定します。
+    nationalHoliday.Holidays.Add(New ForceHoliday("春分の日", syunbun))
+    ' 秋分の日を設定します。
+    nationalHoliday.Holidays.Add(New ForceHoliday("秋分の日", syubun))
+
+    ' 2つの祝日に挟まれた営業日を休日に設定します。
+    If currentYear &gt; 2003 Then
+        If syubun.DayOfWeek = System.DayOfWeek.Wednesday Then
+            nationalHoliday.Holidays.Add(New ForceHoliday("休日", syubun.AddDays(-1)))
+        End If
+    End If
+
+    ' 2016年以降「山の日」を追加します。
+    If (currentYear &gt; 2015 AndAlso currentYear &lt;&gt; 2020) Then
+        nationalHoliday.Holidays.Add(New ForceHoliday("山の日", DateTime.Parse(currentYear.ToString() + "/8/11")))
+    End If
+
+    ' 天皇誕生日を追加します。
+    If (currentYear &lt; 2019) Then
+        nationalHoliday.Holidays.Add(New ForceHoliday("天皇誕生日", DateTime.Parse(currentYear.ToString() + "/12/23")))
+
+    ElseIf (currentYear &gt; 2019) Then
+        nationalHoliday.Holidays.Add(New ForceHoliday("天皇誕生日", DateTime.Parse(currentYear.ToString() + "/2/23")))
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea" title="">GcCalendarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e66c4893-3b5b-4507-971f-c09edf9557c3" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80b84915-ff83-478e-810b-597b80912e4d" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=de21e2fe-95a3-4c39-9073-4acaa8eb54c2" title="">他コントロールとの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c40c7d0e-6f68-44d2-8ce4-b0aa396e4892" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7e869caf-4b0c-450c-a2f7-65de33a638ee" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bd678a2a-5dc3-49d2-bf10-7e1d6b8682b9" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=248792c9-1244-4cda-95a4-4aa017776bc4" title="">今日の書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f47e6259-8f3b-4353-9f00-ea93a81d5eba" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fbc47142-f954-4edd-ad6a-bd9d93e026cc" title="">ショートカットキーの割り当て</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c9f769bb-c91c-46fb-8c72-ad3fcc1940d1" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1d011cfa-a662-45d4-9bc2-c7b90899337b" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f347df74-4201-4c70-a287-57693eee6202" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0bf2eeee-9eb4-4fe7-b19d-b22284a06d0d" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2fd5902b-8728-4967-b45e-41744d6cdeae" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123" title="">和暦表示の設定変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=066f939c-562e-4601-bc52-17dfd94f85e9" title="">add要素</a></p><p><a href="gcdocsite__documentlink?toc-item-id=209c31c3-d8f3-45b5-bdbe-3ed713735acc" title="">タッチ機能</a></p>

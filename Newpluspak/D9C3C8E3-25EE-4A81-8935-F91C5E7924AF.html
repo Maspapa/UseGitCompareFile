@@ -1,0 +1,125 @@
+<p>カレンダーコントロールで使用される表示スタイルについて解説します。</p><h2>描画スタイル</h2><p>描画スタイルは、<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754" title="">Style</a> オブジェクトを使って設定します。カレンダーを構成する要素の中で、描画スタイルが適用されるのは次の6種類です。</p><ol><li><p>コントロール（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#CONTROLSTYLE" title="">ControlStyle</a> プロパティ）</p></li><li><p>ヘッダー（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#HEADERSTYLE" title="">HeaderStyle</a> プロパティ）</p></li><li><p>曜日タイトル（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#TITLESTYLE" title="">TitleStyle</a> プロパティ）</p></li><li><p>日付領域と月領域（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#ITEMSTYLE" title="">ItemStyle</a> プロパティ）</p></li><li><p>週番号領域（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#WEEKNUMBERSTYLE" title="">WeekNumberStyle</a> プロパティ）</p></li><li><p>今日の日付領域（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#LEGENDSTYLE" title="">LegendStyle</a> プロパティ）</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.youso_kousei.png" contenteditable="false"><br></p><p>コントロールに対して、ControlStyleプロパティで設定した描画スタイルを適用するかどうかは、<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#USECONTROLSTYLE" title="">UseControlStyle</a> プロパティで指定します。</p><p>これらの描画スタイルで設定できる項目は、次のとおりです。</p><ul><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#BACKCOLOR" title="">BackColor</a> プロパティ）</p></li><li><p>3D効果のベベル（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#BEVEL" title="">Bevel</a> プロパティ）</p></li><li><p>境界線の色（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#BORDERCOLOR" title="">BorderColor</a> プロパティ）</p></li><li><p>境界線の種類（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#BORDERSTYLE" title="">BorderStyle</a> プロパティ）</p></li><li><p>フォント（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#FONT" title="">Font</a> プロパティ）</p></li><li><p>文字色（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#FORECOLOR" title="">ForeColor</a> プロパティ）</p></li><li><p>文字スタイル（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#TEXTEFFECT" title="">TextEffect</a> プロパティ）</p></li><li><p>文字の水平方向の配置（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#TEXTHALIGN" title="">TextHAlign</a> プロパティ）</p></li><li><p>文字の垂直方向の配置（<a href="gcdocsite__documentlink?toc-item-id=38910796-9496-474e-8a43-818760906754#TEXTVALIGN" title="">TextVAlign</a> プロパティ）</p></li></ul><p>次のサンプルコードは、カレンダーの各領域に描画スタイルを設定する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Common;
+
+<span class="hljs-comment">// 描画スタイルを追加します。</span>
+gcCalendar1.Styles.Add(<span class="hljs-string">"Standard"</span>);
+Style aStyle = gcCalendar1.Styles[<span class="hljs-string">"Standard"</span>];
+
+<span class="hljs-comment">// 描画スタイルの内容を設定します。</span>
+aStyle.BackColor = Color.White;
+aStyle.ForeColor = Color.Blue;
+aStyle.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"ＭＳ ゴシック"</span>, <span class="hljs-number">9</span>);
+aStyle.TextEffect = TextEffect.Flat;
+aStyle.Bevel = <span class="hljs-keyword">new</span> Bevel(Color.Black, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+aStyle.BorderColor = Color.Black;
+aStyle.BorderStyle = BorderStyle.None;
+aStyle.TextHAlign = AlignHorizontal.Center;
+aStyle.TextVAlign = AlignVertical.Middle;
+
+<span class="hljs-comment">// 描画スタイルを各領域へ適用し、細部を調節します。</span>
+gcCalendar1.Redraw = <span class="hljs-literal">false</span>;
+gcCalendar1.ControlStyle = (Style)aStyle.Clone();
+gcCalendar1.UseControlStyle = <span class="hljs-literal">true</span>;
+gcCalendar1.HeaderStyle = (Style)aStyle.Clone();
+gcCalendar1.HeaderStyle.BackColor = Color.Thistle;
+gcCalendar1.HeaderStyle.BorderColor = Color.Purple;
+gcCalendar1.HeaderStyle.Bevel = <span class="hljs-keyword">new</span> Bevel(Color.Purple, <span class="hljs-number">2</span>, <span class="hljs-number">25</span>, <span class="hljs-number">-25</span>);
+gcCalendar1.TitleStyle = (Style)aStyle.Clone();
+gcCalendar1.ItemStyle = (Style)aStyle.Clone();
+gcCalendar1.Redraw = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+Imports GrapeCity.Win.Common
+
+' 描画スタイルを追加します。
+GcCalendar1.Styles.Add("Standard")
+Dim aStyle As Style = GcCalendar1.Styles("Standard")
+
+' 描画スタイルの内容を設定します。
+aStyle.BackColor = Color.White
+aStyle.ForeColor = Color.Blue
+aStyle.Font = New Font("ＭＳ ゴシック", 9)
+aStyle.TextEffect = TextEffect.Flat
+aStyle.Bevel = New Bevel(Color.Black, 0, 0, 0)
+aStyle.BorderColor = Color.Black
+aStyle.BorderStyle = BorderStyle.None
+aStyle.TextHAlign = AlignHorizontal.Center
+aStyle.TextVAlign = AlignVertical.Middle
+
+' 描画スタイルを各領域へ適用し、細部を調節します。
+GcCalendar1.Redraw = False
+GcCalendar1.ControlStyle = aStyle.Clone()
+GcCalendar1.UseControlStyle = True
+GcCalendar1.HeaderStyle = aStyle.Clone()
+GcCalendar1.HeaderStyle.BackColor = Color.Thistle
+GcCalendar1.HeaderStyle.BorderColor = Color.Purple
+GcCalendar1.HeaderStyle.Bevel = New Bevel(Color.Purple, 2, 25, -25)
+GcCalendar1.TitleStyle = aStyle.Clone()
+GcCalendar1.ItemStyle = aStyle.Clone()
+GcCalendar1.Redraw = True</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.style_d.png" contenteditable="false"><br></p><h2>日付スタイル</h2><p>日付スタイルは、SubStyleオブジェクトを使って設定します。カレンダーを構成する要素の中で、日付スタイルが適用されるのは次の4種類です。</p><ol><li><p>特定の曜日（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#WEEKDAYS" title="">Weekdays</a> プロパティ）</p></li><li><p>休日（<a href="gcdocsite__documentlink?toc-item-id=6679c367-1c25-4e06-9e3f-2ed0b400852e" title="">HolidayStyle</a> オブジェクト）</p></li><li><p>隣接日（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#TRAILINGSTYLE" title="">TrailingStyle</a> プロパティ）</p></li><li><p>選択された日付（<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#SELECTIONSTYLE" title="">SelectionStyle</a> プロパティ）</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.style_b.png" contenteditable="false"><br></p><p><br></p><p>これらの日付スタイルで設定できる項目は、次のとおりです。</p><ul><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=4aa5d255-4de7-454b-813d-0f5e626242f3#BACKCOLOR" title="">BackColor</a> プロパティ）</p></li><li><p>太字（<a href="gcdocsite__documentlink?toc-item-id=4aa5d255-4de7-454b-813d-0f5e626242f3#BOLD" title="">Bold</a> プロパティ）</p></li><li><p>文字色（<a href="gcdocsite__documentlink?toc-item-id=4aa5d255-4de7-454b-813d-0f5e626242f3#FORECOLOR" title="">ForeColor</a> プロパティ）</p></li><li><p>下線（<a href="gcdocsite__documentlink?toc-item-id=4aa5d255-4de7-454b-813d-0f5e626242f3#UNDERLINE" title="">UnderLine</a> プロパティ）</p></li></ul><p>次のサンプルコードは、日曜日と土曜日の日付スタイルを変更する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// ちらつきを防止するために再描画を停止します。</span>
+gcCalendar1.Redraw = <span class="hljs-literal">false</span>;
+<span class="hljs-comment">// 日曜日の日付スタイルを設定します。</span>
+gcCalendar1.Weekdays.Sunday.ReflectToTitle = ReflectTitle.Both;
+gcCalendar1.Weekdays.Sunday.SubStyle.BackColor = Color.WhiteSmoke;
+gcCalendar1.Weekdays.Sunday.SubStyle.ForeColor = Color.Red;
+gcCalendar1.Weekdays.Sunday.WeekFlags = WeekFlags.All;
+<span class="hljs-comment">// 土曜日の日付スタイルを設定します。</span>
+gcCalendar1.Weekdays.Saturday.ReflectToTitle = ReflectTitle.Both;
+gcCalendar1.Weekdays.Saturday.SubStyle.BackColor = Color.WhiteSmoke;
+gcCalendar1.Weekdays.Saturday.SubStyle.ForeColor = Color.Blue;
+gcCalendar1.Weekdays.Saturday.WeekFlags = WeekFlags.All;
+<span class="hljs-comment">// 再描画を有効にします。</span>
+gcCalendar1.Redraw = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' ちらつきを防止するために再描画を停止します。
+GcCalendar1.Redraw = False
+' 日曜日の日付スタイルを設定します。
+GcCalendar1.Weekdays.Sunday.ReflectToTitle = ReflectTitle.Both
+GcCalendar1.Weekdays.Sunday.SubStyle.BackColor = Color.WhiteSmoke
+GcCalendar1.Weekdays.Sunday.SubStyle.ForeColor = Color.Red
+GcCalendar1.Weekdays.Sunday.WeekFlags = WeekFlags.All
+' 土曜日の日付スタイルを設定します。
+GcCalendar1.Weekdays.Saturday.ReflectToTitle = ReflectTitle.Both
+GcCalendar1.Weekdays.Saturday.SubStyle.BackColor = Color.WhiteSmoke
+GcCalendar1.Weekdays.Saturday.SubStyle.ForeColor = Color.Blue
+GcCalendar1.Weekdays.Saturday.WeekFlags = WeekFlags.All
+' 再描画を有効にします。
+GcCalendar1.Redraw = True</code></pre></div><h2>区切り線</h2><p>区切り線は、<a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#LINES" title="">Lines</a> プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483" title="">Grid</a> オブジェクトを経由して参照されるLine構造体を使って設定します。カレンダーを構成する要素の中で、区切り線が適用されるのは次の7種類です。</p><ol><li><p>水平区切り線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#HORIZONTAL" title="">Horizontal</a> プロパティ）</p></li><li><p>垂直区切り線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#VERTICAL" title="">Vertical</a> プロパティ）</p></li><li><p>外枠左側の線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#LEFT" title="">Left</a> プロパティ）</p></li><li><p>外枠右側の線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#RIGHT" title="">Right</a> プロパティ）</p></li><li><p>曜日タイトルと日付領域の区切り線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#SEPARATOR" title="">Separator</a> プロパティ）</p></li><li><p>外枠上部の線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#TOP" title="">Top</a> プロパティ）</p></li><li><p>外枠下部の線（<a href="gcdocsite__documentlink?toc-item-id=ed237b63-a139-47e8-bb2b-a3842adfc483#BOTTOM" title="">Bottom</a> プロパティ）</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.style_c.png" contenteditable="false"><br></p><p><br></p><p>これらの区切り線で設定できる項目は、次の2つです。</p><ul><li><p>線の色（<a href="gcdocsite__documentlink?toc-item-id=7e26378e-d4af-4368-b108-1505451c925a#COLOR" title="">Color</a> プロパティ）</p></li><li><p>線の種類（<a href="gcdocsite__documentlink?toc-item-id=7e26378e-d4af-4368-b108-1505451c925a#STYLE" title="">Style</a> プロパティ）</p></li></ul><p>次のサンプルコードは、日付領域の垂直および水平方向の区切り線を設定する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// 水平と垂直区切り線を定義します。</span>
+Line calHLine = <span class="hljs-keyword">new</span> Line();
+Line calVLine = <span class="hljs-keyword">new</span> Line();
+
+<span class="hljs-comment">// 水平線のスタイルを設定します。</span>
+calHLine.Style = LineStyle.Inset;
+calHLine.Color = Color.Gray;
+
+<span class="hljs-comment">// 垂直線のスタイルを設定します。</span>
+calVLine.Style = LineStyle.Dotted;
+calVLine.Color = Color.Brown;
+
+<span class="hljs-comment">// 区切り線をカレンダーに適用します。</span>
+gcCalendar1.Lines.Horizontal = calHLine;
+gcCalendar1.Lines.Vertical = calVLine;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' 水平と垂直区切り線を定義します。
+Dim calHLine As New Line
+Dim calVLine As New Line
+
+' 水平線のスタイルを設定します。
+calHLine.Style = LineStyle.Inset
+calHLine.Color = Color.Gray
+
+' 垂直線のスタイルを設定します。
+calVLine.Style = LineStyle.Dotted
+calVLine.Color = Color.Brown
+
+' 区切り線をカレンダーに適用します。
+GcCalendar1.Lines.Horizontal = calHLine
+GcCalendar1.Lines.Vertical = calVLine</code></pre></div><h2>フォーカス枠</h2><p><a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#FOCUSRECTANGLE" title="">FocusRectangle</a> プロパティは、コントロール内で使用するフォーカス枠の外観を設定します。設定可能な枠の種類は、次のとおりです。</p><ul><li><p>点線の枠</p></li><li><p>実線の枠</p></li><li><p>3Dの枠</p></li><li><p>3Dの枠（マウスポインタ連動型）</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.focus.png" contenteditable="false"><br></p><p>次のサンプルコードは、フォーカス枠の外観を設定する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// フォーカス枠を3D形式にします。</span>
+gcCalendar1.FocusRectangle = FocusRectangle.ThreeD;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' フォーカス枠を3D形式にします。
+GcCalendar1.FocusRectangle = FocusRectangle.ThreeD</code></pre></div><h2>今日マーク</h2><p>システム日付から取得した「今日」を明示する今日マークをカレンダーに表示できます。今日マークは、表示の有無を指定する <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#SHOWTODAYMARK" title="">ShowTodayMark</a> プロパティと、画像を指定する <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#TODAYIMAGE" title="">TodayImage</a> プロパティと、枠の色を指定する <a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#TODAYMARKCOLOR" title="">TodayMarkColor</a> プロパティで設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.todaymark.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea" title="">GcCalendarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e66c4893-3b5b-4507-971f-c09edf9557c3" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80b84915-ff83-478e-810b-597b80912e4d" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=de21e2fe-95a3-4c39-9073-4acaa8eb54c2" title="">他コントロールとの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=85cf0462-1301-4b6b-aa5e-67e1c3001940" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7e869caf-4b0c-450c-a2f7-65de33a638ee" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bd678a2a-5dc3-49d2-bf10-7e1d6b8682b9" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=248792c9-1244-4cda-95a4-4aa017776bc4" title="">今日の書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f47e6259-8f3b-4353-9f00-ea93a81d5eba" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fbc47142-f954-4edd-ad6a-bd9d93e026cc" title="">ショートカットキーの割り当て</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c9f769bb-c91c-46fb-8c72-ad3fcc1940d1" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1d011cfa-a662-45d4-9bc2-c7b90899337b" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f347df74-4201-4c70-a287-57693eee6202" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0bf2eeee-9eb4-4fe7-b19d-b22284a06d0d" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2fd5902b-8728-4967-b45e-41744d6cdeae" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123" title="">和暦表示の設定変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=066f939c-562e-4601-bc52-17dfd94f85e9" title="">add要素</a></p><p><a href="gcdocsite__documentlink?toc-item-id=209c31c3-d8f3-45b5-bdbe-3ed713735acc" title="">タッチ機能</a></p>

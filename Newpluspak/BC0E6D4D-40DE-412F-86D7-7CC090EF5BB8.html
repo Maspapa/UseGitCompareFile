@@ -1,0 +1,63 @@
+<p>GcFunctionKey コントロールのボタン押下時の処理について、以下に解説します。</p><h2>FunctionKeyDownイベント</h2><p><a href="gcdocsite__documentlink?toc-item-id=d82b98bc-2ef6-4686-a4fd-a8fca10e0bed" title="">FunctionKeyDown</a>イベントは、ファンクションキーボタンをキーボード上で押下したとき、または対応するボタンをマウスでクリックしたときに発生します。 <a href="gcdocsite__documentlink?toc-item-id=d82b98bc-2ef6-4686-a4fd-a8fca10e0bed" title="">FunctionKeyDown</a> イベントに任意のコードを記述することで、ファンクションキー操作時に目的の動作を実現することができます。</p><p>次のサンプルコードでは、[F2]キーでフォーム上のコントロールをクリアする動作をファンクションキーボタンに追加する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Bars;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// FunctionKeyButtonオブジェクトを作成します。</span>
+    FunctionKeyButton functionKeyButton1 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+    functionKeyButton1.FunctionKey = Keys.F2;
+    functionKeyButton1.Text = <span class="hljs-string">"全てクリア"</span>;
+    
+    <span class="hljs-comment">// FunctionKeyButtonオブジェクトをGcFunctionKey コントロールに追加します。</span>
+    gcFunctionKey1.FunctionKeyButtons.Add(functionKeyButton1);
+}
+
+<span class="hljs-function">private void GcFunctionKey1_FunctionKeyDown(object sender, KeyEventArgs e)</span>
+{
+    <span class="hljs-comment">// [F2]キーが押されたときの動作を実装します。</span>
+    <span class="hljs-keyword">if</span> (e.KeyCode == Keys.F2)
+    {
+        textBox1.Clear();
+        numericUpDown1.Value = <span class="hljs-number">0</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Bars
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    ' FunctionKeyButtonオブジェクトを作成します。
+    Dim FunctionKeyButton1 As New FunctionKeyButton
+    FunctionKeyButton1.FunctionKey = Keys.F2
+    FunctionKeyButton1.Text = "全てクリア"
+    
+    ' FunctionKeyButtonオブジェクトをGcFunctionKey コントロールに追加します。
+    GcFunctionKey1.FunctionKeyButtons.Add(FunctionKeyButton1)
+End Sub
+
+Private Sub GcFunctionKey1_FunctionKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles GcFunctionKey1.FunctionKeyDown
+    ' [F2]キーが押されたときの動作を実装します。
+    If e.KeyCode = Keys.F2 Then
+        TextBox1.Clear()
+        NumericUpDown1.Value = 0
+    End If
+End Sub</code></pre></div><p>さらに、InteractiveMouse プロパティを False に設定すると、マウスによるボタンクリックを禁止し、キーボード操作のみを対象にできます。KeyRepeat プロパティは、キーを押し続けている間、<a href="gcdocsite__documentlink?toc-item-id=d82b98bc-2ef6-4686-a4fd-a8fca10e0bed" title="">FunctionKeyDown</a> イベントを繰り返し発生させるかどうかを指定します。</p><h2>ButtonClickイベント</h2><p>GcFunctionKey コントロールには<a href="gcdocsite__documentlink?toc-item-id=d82b98bc-2ef6-4686-a4fd-a8fca10e0bed" title="">FunctionKeyDown</a> イベントのほか、<a href="gcdocsite__documentlink?toc-item-id=1b82392e-70ad-447e-bb90-aa86ec423b03" title="">ButtonClick</a>イベントが搭載されており、イベント内で押下されたファンクションキーのキーコードやNameプロパティを取得することができます。</p><p>次のサンプルコードでは<a href="gcdocsite__documentlink?toc-item-id=1b82392e-70ad-447e-bb90-aa86ec423b03" title="">ButtonClick</a>イベントでイベントパラメータからキーコードおよびファンクションキーのNameプロパティを取得する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcFunctionKey1_ButtonClick(object sender, GrapeCity.Win.Bars.FunctionKeyButtonEventArgs e)</span>
+{
+    <span class="hljs-comment">// イベントパラメータから押下されたキーを取得します。</span>
+    <span class="hljs-keyword">if</span> (e.Button.FunctionKey == Keys.F1)
+    {
+        Console.WriteLine(e.Button.Name);
+    }
+
+    <span class="hljs-comment">// イベントパラメータから押下されたキーのNameプロパティを取得します。</span>
+    <span class="hljs-keyword">if</span> (e.Button.Name == <span class="hljs-string">"functionKeyButton2"</span>)
+    {
+        Console.WriteLine(e.Button.Name);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcFunctionKey1_ButtonClick(sender As Object, e As GrapeCity.Win.Bars.FunctionKeyButtonEventArgs) Handles GcFunctionKey1.ButtonClick
+    ' イベントパラメータから押下されたキーを取得します。
+    If e.Button.FunctionKey = Keys.F1 Then
+        Console.WriteLine(e.Button.Name)
+    End If
+
+    ' イベントパラメータから押下されたキーのNameプロパティを取得します。
+    If String.CompareOrdinal(e.Button.Name, "FunctionKeyButton2") = 0 Then
+        Console.WriteLine(e.Button.Name)
+    End If
+End Sub</code></pre></div><h2>2重クリックの防止</h2><p>GcFunctionKeyコントロールは、GcButton コントロールと同様にコントロールの2重クリック防止機能を搭載しています。</p><p>これらの詳細については、GcButton コントロールの「<a href="gcdocsite__documentlink?toc-item-id=d6f09cfc-183f-4094-a0ac-346209c2a430" title="">2重クリックの防止</a>」を参照してください。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=60df31c2-966b-45a6-8e2d-17cc4f844f1a" title="">GcFunctionKeyコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e736ae36-a974-4236-ac02-338082b46aef" title="">ファンクションキーボタンの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=93fee8a2-304e-48cd-8f24-ca017c4b7f43" title="">ファンクションキーボタンのカスタマイズ</a></p>

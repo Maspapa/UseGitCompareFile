@@ -1,0 +1,13 @@
+<p>年号の開始日、名前、およびショートカットを指定します。</p><h2>必須属性</h2><table><thead><tr><th><p>属性</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>key</p></td><td><p>年号の開始日を指定します。yyyy MM ddの形式で、年月日の間は半角スペース" "で区切ります。</p><p>【例】 <strong>1868 09 08</strong></p></td></tr><tr><td><p>value</p></td><td><p>以下の順序で名前やショートカットを指定します。間はアンダーバー"_"で区切ります。</p><ol><li><p>年号を表すキーワード "ggg"で表示される、正式名称 </p></li><li><p>年号を表すキーワード "gg"で表示される、年号の頭文字 </p></li><li><p>年号を表すキーワード "g"で表示される、年号のアルファベットの頭文字 </p></li><li><p>年号をキーワードにより入力するためのショートカット</p><p>キーワードをカンマ","で区切って指定します。</p></li></ol><p>  【例】 <strong>明治_明_M_1,M</strong></p></td></tr></tbody></table><h2>例</h2><p>以下に、年号の設定例を示します。</p><div data-language="auto" class="toastui-editor-ww-code-block-highlighting"><pre><code><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="hljs-tag">&lt;configuration&gt;</span>
+  <span class="hljs-tag">&lt;configSections&gt;</span>
+    <span class="hljs-tag">&lt;section name="GrapeCityEra" type="System.Configuration.NameValueSectionHandler"/&gt;</span>
+  <span class="hljs-tag">&lt;/configSections&gt;</span>
+  <span class="hljs-tag">&lt;GrapeCityEra&gt;</span>
+    <span class="hljs-tag">&lt;add key="1868 09 08" value="明治_明_M_1,M"/&gt;</span>
+    <span class="hljs-tag">&lt;add key="1912 07 30" value="大正_大_T_2,T"/&gt;</span>
+    <span class="hljs-tag">&lt;add key="1926 12 25" value="昭和_昭_S_3,S"/&gt;</span>
+    <span class="hljs-tag">&lt;add key="1989 01 08" value="平成_平_H_4,H"/&gt;</span>
+    <span class="hljs-tag">&lt;add key="2019 05 01" value="令和_令_R_5,R"/&gt;</span>
+  <span class="hljs-tag">&lt;/GrapeCityEra&gt;</span>
+<span class="hljs-tag">&lt;/configuration&gt;</span></code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea" title="">GcCalendarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123" title="">和暦表示の設定変更</a></p>

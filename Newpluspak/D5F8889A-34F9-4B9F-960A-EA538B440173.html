@@ -1,0 +1,29 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=7e23e584-b0de-4bba-bbd8-db2087720c3e" title="">GcContainer</a>コントロールの背景の設定方法について、以下に解説します。</p><h2>パターン効果とグラデーション</h2><p>GcContainer コントロールは、ラベルの追加と立体表示機能に加えて GradientEffect プロパティによる背景のグラデーションと、PatternEffect プロパティによる模様も設定できます。また、SingleBorderColor プロパティで境界線の色を設定することも可能です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Common;
+
+<span class="hljs-comment">// グラデーションを作成します</span>
+GradientEffect objGradientEffect = <span class="hljs-keyword">new</span> GradientEffect(GradientStyle.Horizontal, GradientDirection.Forward, Color.Orange, Color.Yellow);
+<span class="hljs-comment">// グラデーションを適用します</span>
+gcContainer1.GradientEffect = objGradientEffect;
+
+<span class="hljs-comment">// パターン効果を作成します</span>
+PatternEffect objPatternEffect = <span class="hljs-keyword">new</span> PatternEffect(PatternStyle.BackwardDiagonal, Color.Green);
+<span class="hljs-comment">// パターン効果を適用します</span>
+gcContainer1.PatternEffect = objPatternEffect;
+
+<span class="hljs-comment">// 境界線の色を変更します</span>
+gcContainer1.BorderStyle = BorderStyle.FixedSingle;
+gcContainer1.SingleBorderColor = Color.Blue;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Common
+
+' グラデーションを作成します
+Dim objGradientEffect As New GradientEffect(GradientStyle.Horizontal, GradientDirection.Forward, Color.Orange, Color.Yellow)
+' グラデーションを適用します
+GcContainer1.GradientEffect = objGradientEffect
+
+' パターン効果を作成します
+Dim objPatternEffect As New PatternEffect(PatternStyle.BackwardDiagonal, Color.Green)
+' パターン効果を適用します
+GcContainer1.PatternEffect = objPatternEffect
+
+' 境界線の色を変更します
+GcContainer1.BorderStyle = Bordertyle.FixedSingle
+GcContainer1.SingleBorderColor = Color.Blue</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccontainer.effect.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6d2b9edf-9c20-4c51-9f3d-5437c28230b5" title="">GcContainerコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9d37abfe-0a14-4e46-8a4b-e92cd2f9299d" title="">子コントロールの追加</a></p>

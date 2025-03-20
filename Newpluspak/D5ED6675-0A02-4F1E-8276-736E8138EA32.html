@@ -1,0 +1,38 @@
+<p>PlusPak には、「JPAddress for Windows Forms（以下、JPAddress）」の機能を使用して、カスタマバーコードを生成する GcPostalBarCode コントロールがあります。GcPostalBarCode コントロールを利用するには JPAddress のインストールが必要です。</p>
+<h2 id="jpaddress-と連携するコントロール">JPAddress と連携するコントロール</h2>
+<p>JPAddress と連携するコントロールは以下のコントロールです。</p>
+<ul>
+<li><a href="gcdocsite__documentlink?toc-item-id=0730a06f-f335-417d-a155-281c74621ac0">郵便バーコードコントロール（GcPostalBarCode）</a></li>
+</ul>
+<h2 id="使用方法">使用方法</h2>
+<p>GcPostalBarCode は、JPAddress のアセンブリである GrapeCity.Win.JPAddress.dll を参照して動作します。また、GcPostalBarCode を配置する他に JPAddress が提供する GcJPAddress コンポーネントをフォーム上に配置する必要があります。</p>
+<p>JPAddress がインストールされていると、GcPostalBarCode をフォームに配置するとき、JPAddress に関する下記の設定が自動的に行われます。</p>
+<ol>
+<li><p>フォームに GcJPAddress コンポーネントが追加されます。</p>
+</li>
+<li><p>プロジェクトの参照設定に「GrapeCity.Win.JPAddress」が追加されます。</p>
+</li>
+<li><p>licenses.licx に「GrapeCity.Win.JPAddress.GcJPAddress」のライセンス情報が登録されます。</p>
+</li>
+</ol>
+<p>ただし、GcPostalBarCode を動的に追加する、あるいは GcPostalBarCode をフォームに配置した後に JPAddress のインストールが行われるなど、JPAddress の設定が自動的に行われない場合には、手動でツールボックスから JPAddress の GcJPAddress コンポーネントをページに追加する必要があります。</p>
+<p>JPAddress の手動での設定方法については、JPAddress のヘルプ（「はじめに」&gt;「コンポーネントをプロジェクトに組み込む」）を参照してください。</p>
+<h2 id="jpaddressがインストールされていない場合の動作">JPAddressがインストールされていない場合の動作</h2>
+<p>JPAddress がインストールされていないときは、以下のような動作となります。</p>
+<h4 id="設計時">設計時</h4>
+<ul>
+<li><p>ツールボックスから GcPostalBarCode をフォームに追加したとき、「JPAddress for Windows Formsのアセンブリ（GrapeCity.Win.JPAddress.dll）が見つかりません。」というダイアログが表示されます。</p>
+</li>
+<li><p>GcJPAddress コンポーネントはページに追加されず、JPAddress アセンブリへの参照やライセンス情報は設定されません。</p>
+</li>
+<li><p>GcPostalBarCode のプロパティ設定は可能です。</p>
+</li>
+<li><p>ビルド時にエラーは発生しません。</p>
+</li>
+</ul>
+<h4 id="実行時">実行時</h4>
+<ul>
+<li>GcPostalBarCode は、フォームロード時には正常に表示されます。ただし、GcPostalBarCode に値が設定され、バーコードの作成が開始されたときには例外が発生します。</li>
+</ul>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=a3150ed1-8629-4fb5-8a0d-cfc1024668d5">PlusPak の概要</a></p>

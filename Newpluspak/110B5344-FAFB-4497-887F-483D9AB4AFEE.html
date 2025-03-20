@@ -1,0 +1,27 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=ef5364bb-463b-45cd-9581-95dd294f10fa" title="">GcFlowLayoutContainer</a>コントロールに子コントロールを追加する方法について、以下に解説します。</p><h2>子コントロールの追加</h2><p>GcFlowLayoutContainer コントロールに子コントロールをコードで追加する方法は、.NET Frameowkr標準のFlowLayoutPanelコントロールの場合と同じです。生成したコントロールをGcFlowLayoutContainer コントロールのControlsプロパティが参照するControls コレクションのAdd メソッドで追加します。</p><p>以下は、フォームに配置済みのテキストコントロール（TextBox1、TextBox2）をGcFlowLayoutContainer コントロールに追加し、キャプションを追加するコードです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// TextBoxをGcFlowLayoutContainerに配置します。</span>
+textBox1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">100</span>, <span class="hljs-number">20</span>);
+gcFlowLayoutContainer1.Controls.Add(textBox1);
+
+textBox2.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">100</span>, <span class="hljs-number">20</span>);
+gcFlowLayoutContainer1.Controls.Add(textBox2);
+
+<span class="hljs-comment">// キャプションの文字を設定します。</span>
+gcFlowLayoutContainer1.SetCaptionText(textBox1, <span class="hljs-string">"都道府県："</span>);
+gcFlowLayoutContainer1.SetCaptionText(textBox2, <span class="hljs-string">"市区町村："</span>);
+
+<span class="hljs-comment">// レイアウトの設定をします。</span>
+gcFlowLayoutContainer1.FlowDirection = FlowDirection.LeftToRight;
+gcFlowLayoutContainer1.WrapContents = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' TextBoxをGcFlowLayoutContainerに配置します。
+TextBox1.Size = New Size(100, 20)
+GcFlowLayoutContainer1.Controls.Add(TextBox1)
+
+TextBox2.Size = New Size(100, 20)
+GcFlowLayoutContainer1.Controls.Add(TextBox2)
+
+' キャプションの文字を設定します。
+GcFlowLayoutContainer1.SetCaptionText(TextBox1, "都道府県：")
+GcFlowLayoutContainer1.SetCaptionText(TextBox2, "市区町村：")
+
+// レイアウトの設定をします。
+GcFlowLayoutContainer1.FlowDirection = FlowDirection.LeftToRight
+GcFlowLayoutContainer1.WrapContents = True</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcflowlayoutcontainer.childcontrol.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=1d1b19b3-7b14-4dde-95a0-1b6248c94e83" title="">GcFlowLayoutContainerコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=338bd774-0123-425f-b68d-d8e4592d643d" title="">背景の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4d681902-86e7-4a19-b70a-9b95d306983f" title="">子コントロールの配置位置設定</a></p>

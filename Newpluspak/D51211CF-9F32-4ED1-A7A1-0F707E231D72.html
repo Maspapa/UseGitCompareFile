@@ -1,0 +1,93 @@
+<p>GcClassicFunctionKey コントロールの外観の設定方法について、以下に解説します。</p><h2>概要</h2><p>GcClassicFunctionKey コントロールは、F1からF12までのファンクションキーと、Home、End、PageUp、PageDownの4つのキーの操作をフックし、それぞれに独自の機能を割り当てることを目的としています。キーボード上でこれら16個のキーのいずれかが押されると、GcClassicFunctionKey コントロールが一番最初にメッセージを受け取り、FunctionKeyPress イベントを発生させます。この処理は、GcClassicFunctionKey コントロールにフォーカスがあるかどうかに関わらず行われます。</p><p>GcClassicFunctionKey コントロールが持つ機能は、次の4つのグループに分類できます。</p><ul><li><p>外観の設定</p></li><li><p>操作とイベント</p></li><li><p>ボタン全体のスタイル設定</p></li><li><p>個々のボタン設定</p></li></ul><p>このページでは、1番目に分類されている内容「外観の設定」について説明しています。他の2つについては、それぞれ「「<a href="gcdocsite__documentlink?toc-item-id=887E51FF-EC5C-4D57-B642-630DE8394B61" title="">操作とイベント</a>」「<a href="gcdocsite__documentlink?toc-item-id=E4FE7D2E-E79F-440E-A26A-5B4100A71843" title="">ボタン全体のスタイル設定</a>」と「<a href="gcdocsite__documentlink?toc-item-id=48abf538-16d3-4172-9f1a-1d94f94df2c3" title="">個々のボタン設定</a>」を参照してください。</p><h2>コントロールの外観と配置</h2><p><a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#CONTROLBEVEL" title="">ControlBevel</a> プロパティを使用すると、GcClassicFunctionKey コントロールの外枠の内側に、3D効果を付加するベベルを設定することができます。ベベルの色、幅、明るさ、および暗さは、<a href="gcdocsite__documentlink?toc-item-id=ea3d0454-a7a8-42a8-a996-343eb6de8858" title="">Bevel</a> 構造体を使って設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcclassicfunctionkey.functionkey_boader.png" contenteditable="false"><br></p><p><br></p><p><a href="gcdocsite__documentlink?toc-item-id=ea3d0454-a7a8-42a8-a996-343eb6de8858" title="">Bevel</a> 構造体のコンストラクタの書式を以下に示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">new</span> GrapeCity.Win.Common.Bevel(color, width, Lightness, Darkness);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">New GrapeCity.Win.Common.Bevel(color, width, Lightness, Darkness)</code></pre></div><table><thead><tr><th><p>引数</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=ab56df03-c818-4686-849e-ea0c9ecded75" title="">Color</a></p></td><td><p>ベベルの色（System.Drawing.Color型）</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=87b21d15-8b80-4164-8039-449c5f4401c1" title="">Width</a></p></td><td><p>ベベルの幅（Int32型：ピクセル単位）</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=c70c43e9-14af-4f34-9ae8-4bbcd7c37a83" title="">Lightness</a></p></td><td><p>ベベルの明るさ（Int32型：-100～100）</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=0966beed-dabb-41ca-b39b-34c7667bec70" title="">Darkness</a></p></td><td><p>ベベルの暗さ（Int32型：-100～100）</p></td></tr></tbody></table><p>GcClassicFunctionKey コントロールの上下左右の端からボタン表示領域の端までの距離は、<a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#MARGINS" title="">Margins</a> プロパティで設定できます。また、GcClassicFunctionKey コントロールをフォーム（コンテナ）の上下左右のどの辺にドッキングするかは、<a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#DOCK" title="">Dock</a> プロパティで設定します。</p><h2>プロパティ設定時のちらつき防止</h2><p>通常、プロパティの設定を変更するたびにコントロールが再描画されます。Redrawプロパティを使用することで、この再描画による画面のちらつきを防止できます。</p><p>次のサンプルコードは、<a href="gcdocsite__documentlink?toc-item-id=03022816-c1e2-4ec8-b185-f11edd59c10d#REDRAW" title="">Redraw</a> プロパティを使用してちらつきを軽減させています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Bars;
+
+<span class="hljs-comment">// ちらつきを軽減させるため再描画を無効にします。</span>
+gcClassicFunctionKey1.Redraw = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// スタイルセットを作成します。</span>
+ThreeDStyleSet aStyle = <span class="hljs-keyword">new</span> ThreeDStyleSet();
+aStyle.AlignHorizontal = AlignHorizontal.Center;
+aStyle.AlignVertical = AlignVertical.Middle;
+gcClassicFunctionKey1.StyleSets.Add(<span class="hljs-string">"styleA"</span>,aStyle);
+
+<span class="hljs-comment">// 標準のキーセットを作成します。</span>
+<span class="hljs-built_in">int</span> aIndex = gcClassicFunctionKey1.KeySets.Add(<span class="hljs-string">"Normal"</span>);
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">0</span>].Text = <span class="hljs-string">"F1 ヘルプ"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">1</span>].Text = <span class="hljs-string">"F2"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">1</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">2</span>].Text = <span class="hljs-string">"F3 定型句挿入"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">3</span>].Text = <span class="hljs-string">"F4 繰り返し"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">4</span>].Text = <span class="hljs-string">"F5 ジャンプ"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">5</span>].Text = <span class="hljs-string">"F6 切り替え"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">6</span>].Text = <span class="hljs-string">"F7 スペルチェック"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">7</span>].Text = <span class="hljs-string">"F8"</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">7</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">8</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">8</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">9</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">9</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">10</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">10</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">11</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">11</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">12</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">12</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">13</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">13</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">14</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">14</span>].Enabled = <span class="hljs-literal">false</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">15</span>].ButtonIndex = <span class="hljs-number">-1</span>;
+gcClassicFunctionKey1.KeySets[aIndex][<span class="hljs-number">15</span>].Enabled = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// 作成したスタイルセットとキーセットをアクティブにします。</span>
+gcClassicFunctionKey1.ActiveStyleSet = <span class="hljs-string">"styleA"</span>;
+gcClassicFunctionKey1.ActiveKeySet = <span class="hljs-string">"Normal"</span>;
+gcClassicFunctionKey1.ColumnGroups = <span class="hljs-string">"8"</span>;
+
+<span class="hljs-comment">// 自動再描画を有効にします。</span>
+gcClassicFunctionKey1.Redraw = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Bars
+
+' ちらつきを軽減させるため再描画を無効にします。
+GcClassicFunctionKey1.Redraw = False
+
+' スタイルセットを作成します。
+Dim aStyle As ThreeDStyleSet = New ThreeDStyleSet()
+aStyle.AlignHorizontal = AlignHorizontal.Center
+aStyle.AlignVertical = AlignVertical.Middle
+GcClassicFunctionKey1.StyleSets.Add("styleA", aStyle)
+
+' 標準のキーセットを作成します。
+Dim aIndex As Integer = GcClassicFunctionKey1.KeySets.Add("Normal")
+GcClassicFunctionKey1.KeySets(aIndex)(0).Text = "F1 ヘルプ"
+GcClassicFunctionKey1.KeySets(aIndex)(1).Text = "F2"
+GcClassicFunctionKey1.KeySets(aIndex)(1).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(2).Text = "F3 定型句挿入"
+GcClassicFunctionKey1.KeySets(aIndex)(3).Text = "F4 繰り返し"
+GcClassicFunctionKey1.KeySets(aIndex)(4).Text = "F5 ジャンプ"
+GcClassicFunctionKey1.KeySets(aIndex)(5).Text = "F6 切り替え"
+GcClassicFunctionKey1.KeySets(aIndex)(6).Text = "F7 スペルチェック"
+GcClassicFunctionKey1.KeySets(aIndex)(7).Text = "F8"
+GcClassicFunctionKey1.KeySets(aIndex)(7).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(8).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(8).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(9).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(9).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(10).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(10).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(11).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(11).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(12).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(12).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(13).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(13).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(14).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(14).Enabled = False
+GcClassicFunctionKey1.KeySets(aIndex)(15).ButtonIndex = -1
+GcClassicFunctionKey1.KeySets(aIndex)(15).Enabled = False
+
+' 作成したスタイルセットとキーセットをアクティブにします。
+GcClassicFunctionKey1.ActiveStyleSet = "styleA"
+GcClassicFunctionKey1.ActiveKeySet = "Normal"
+GcClassicFunctionKey1.ColumnGroups = "8"
+
+' 自動再描画を有効にします。
+GcClassicFunctionKey1.Redraw = True</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=657de385-26c7-4db1-ab0f-f6f30e8a6d65" title="">GcClassicFunctionKeyコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=887e51ff-ec5c-4d57-b642-630de8394b61" title="">操作とイベント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e4fe7d2e-e79f-440e-a26a-5b4100a71843" title="">ボタン全体のスタイル設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=48abf538-16d3-4172-9f1a-1d94f94df2c3" title="">個々のボタン設定</a></p>

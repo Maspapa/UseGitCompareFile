@@ -1,0 +1,80 @@
+<p>作成する .NET Framework アプリケーションに、本製品のライセンスを組み込む方法について説明します。</p><blockquote type="note"><p>!type=note</p><p>.NET アプリケーションへのライセンス情報の埋め込みについては「<a href="10_NET6Licensing.html" title="">ライセンス情報の埋め込み</a>」をご参照ください。</p></blockquote><h2>licenses.licx ファイルの組み込み</h2><p>設計時にコントロールをフォームに貼り付けると licenses.licx ファイルが自動的に作成され、プロジェクトに組み込まれます。しかし、実行時にコントロールを生成する場合は、licenses.licx ファイルは作成されません。</p><p>この場合は、該当するすべてのコントロールの情報を含んだ licenses.licx ファイルを作成し、プロジェクトに組み込む必要があります。プロジェクトに licenses.licx ファイルが組み込まれていない場合は、実行時にコントロールが生成されたときに、ライセンスのエラーを示すダイアログが表示されます。</p><p>licenses.licx ファイルの作成とプロジェクトへの組み込みは、以下の手順で行います。</p><ol><li><p>Visual Studio で新しいプロジェクトを開きます。</p></li><li><p>PlusPak の次のコンポーネントを参照設定します。</p><table><thead><tr><th><p>コンポーネント名</p></th><th><p>バージョン</p></th></tr></thead><tbody><tr><td><p>GrapeCity.Framework.PlusPak</p></td><td><p><em>4.4.48xx.2017</em></p></td></tr><tr><td><p>GrapeCity.Win.PlusPak</p></td><td><p><em>12.0.48XX.2017</em></p></td></tr><tr><td><p>GrapeCity.Win.PlusPak.Calendar（使用する場合のみ）</p></td><td><p><em>12.0.48XX.2017</em></p></td></tr><tr><td><p>GrapeCity.Win.FunctionKey（使用する場合のみ）</p></td><td><p><em>12.0.48XX.2017</em></p></td></tr><tr><td><p>GrapeCity.Win.PlusPak.PDF（使用する場合のみ）</p></td><td><p><em>12.0.48XX.2017</em></p></td></tr></tbody></table><blockquote type="warning"><p>!type=warning</p><p><br></p><p><em>48xx.2012</em>は、製品アセンブリバージョンによって変わります。アセンブリバージョンについては、「<a href="gcdocsite__documentlink?toc-item-id=301e1434-bd0c-451a-bfec-9bcd46c46d63" title="">PlusPak の概要 - アセンブリ</a>」項目をご覧ください。</p></blockquote></li><li><p>Visual Basic のプロジェクトの場合は「My Project」フォルダ、C# のプロジェクトの場合は「Properties」フォルダの下に、ファイル名を「licenses.licx」とした空のテキストファイルを作成します。</p></li><li><p>作成した「licenses.licx」ファイルを開き、以下の文字列から該当するコントロールに関するものを選んで、licenses.licx に入力します。</p><div data-language="auto" class="toastui-editor-ww-code-block-highlighting"><pre><code><span class="hljs-tag">&lt;レイアウト&gt;</span>
+GrapeCity.Win.Containers.GcAccordionItem, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcAccordionContainer, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcApplicationResize, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcComboFrame, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcContainer, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcFlowLayoutContainer, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcHeadingContainer, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcMdiTabControl, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcResize, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcResizePanel, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcTabControl, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcTabPage, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcTableLayoutContainer, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+
+<span class="hljs-tag">&lt;UIコントロール&gt;</span>
+GrapeCity.Win.Buttons.GcButton, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Calendar.GcCalendar, GrapeCity.Win.PlusPak.Calendar.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Calculations.GcCalculator, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Buttons.GcCheckBox, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcCheckedGroupBox, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Bars.GcClassicFunctionKey, GrapeCity.Win.FunctionKey.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=aa208f7e417ecbb3
+GrapeCity.Win.Pickers.GcColorPicker, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Buttons.GcDropDownButton, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Pickers.GcFontPicker, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Bars.GcFunctionKey, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcGlobalHook, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcKeyLock, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcMouse, GrapeCity.Win.PlusPak.v120, Version=12.0.48xx.2012, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Buttons.GcRadioButton, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Containers.GcRadioGroupBox, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Buttons.GcSplitButton, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Buttons.GcShapeButton, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Bars.GcTrackBar, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcTouchToolBar, GrapeCity.Win.PlusPak.v120, Version=12.0.48xx.2012, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Components.GcTouchToolBarProvider, GrapeCity.Win.PlusPak.v120, Version=12.0.48xx.2012, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+
+<span class="hljs-tag">&lt;情報表示&gt;</span>
+GrapeCity.Win.Components.GcBalloonTip, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Buttons.GcLabel, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+GrapeCity.Win.Bars.GcProgressBar, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+
+<span class="hljs-tag">&lt;データ出力&gt;</span>
+GrapeCity.Win.BarCode.GcBarCode, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+
+<span class="hljs-tag">&lt;設計支援&gt;</span>
+GrapeCity.Win.Components.GcStylePlus, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243
+
+<span class="hljs-tag">&lt;JPAddress for .NET連携コントロール&gt;</span>
+GrapeCity.Win.BarCode.GcPostalBarCode, GrapeCity.Win.PlusPak.v120, Version=12.0.48XX.2017, Culture=neutral,PublicKeyToken=63a9ba12b6923243</code></pre></div><blockquote type="warning"><p>!type=warning</p><p><em>12.0.48XX.2017</em>は、製品アセンブリバージョンによって変わります。アセンブリバージョンについては、「<a href="gcdocsite__documentlink?toc-item-id=301e1434-bd0c-451a-bfec-9bcd46c46d63" title="">PlusPak の概要 - アセンブリ</a>」項目をご覧ください。</p></blockquote></li><li><p>プロパティウィンドウで licenses.licx のビルドアクションを「<strong>埋め込みリソース</strong>」に設定して保存します。</p></li></ol><h2>継承コントロールとユーザーコントロール</h2><p>PlusPak のコントロールを継承して独自のコントロールを作成したり、PlusPak のコントロールと他のコントロールを組み合わせてユーザーコントロールを作成する場合は、LicenseProvider 属性をそれらのコントロールに設定してください。これにより、PlusPak のライセンス情報が正しく継承されます。</p><p>LicenseProvider 属性を設定しなかった場合は、PlusPak のライセンス情報を参照できないので、作成したコントロールを使ったアプリケーションを実行したときに、ライセンスのエラーを示すダイアログが表示されます。</p><p>コントロールに LicenseProvider 属性を設定するには、次のように、クラスの宣言の前に LicenseProvider 属性を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Drawing;
+<span class="hljs-keyword">using</span> System.Windows.Forms;
+<span class="hljs-keyword">using</span> System.ComponentModel;
+
+<span class="hljs-comment">// 継承コントロールの場合</span>
+[<span class="hljs-meta">LicenseProviderAttribute(typeof(LicenseProvider))</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyControl</span> : <span class="hljs-title">GrapeCity.Win.Editors.GcTextBox</span>
+{
+    ・・・
+}
+
+<span class="hljs-comment">// ユーザーコントロールの場合</span>
+[<span class="hljs-meta">LicenseProviderAttribute(typeof(LicenseProvider))</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UserControl1</span> : <span class="hljs-title">UserControl</span>
+{
+    ・・・
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports System.Drawing
+Imports System.Windows.Forms
+Imports System.ComponentModel
+
+' 継承コントロールの場合
+&lt;LicenseProviderAttribute(GetType(LicenseProvider))&gt;_
+Public Class MyControl
+    ・・・
+End Class
+
+' ユーザーコントロールの場合
+&lt;LicenseProviderAttribute(GetType(LicenseProvider))&gt;_
+Public Class UserControl1
+    ・・・
+End Class</code></pre></div><h2>他のアセンブリからの利用</h2><p>PlusPak をクラスライブラリなどで使用し、他のアセンブリからクラスライブラリを通して再利用する場合、呼び出し元のプロジェクトにも PlusPak のライセンスが必要です。この場合、コントロールを動的に作成した場合と同じように呼び出し元のプロジェクトに licenses.licx ファイルの組み込みを行う必要があります。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/introduction.licenses.01.png" contenteditable="false"><br></p><p><br></p><p>複数のプロジェクトを使用している場合、最初に実行されるプロジェクト（アセンブリ）にライセンス情報が必要である点に注意してください。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/introduction.licenses.02.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=5a683186-3fa6-4dcb-a11a-1afc4e800b15" title="">はじめに</a></p>

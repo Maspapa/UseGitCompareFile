@@ -1,0 +1,79 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=022ae48e-d4ac-4751-a9f5-2102adec7179" title="">GcRadioGroupBox</a>コントロールのラジオボタンの操作方法について、以下に解説します。</p><h2>チェックボックスの操作</h2><p>GcRadioGroupBox コントロールに追加されたラジオボタンは、次のメソッドを利用してまとめて状態を変更することができます。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=1663342c-8e95-41eb-b055-4b9e9395b49e" title="">EnableAllItems</a>メソッド（GcRadioGroupBoxコントロールに含まれるすべてのラジオボタンを有効にします。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=e936b41a-7791-41e5-868b-e55f83a57af6" title="">DisableAllItems</a>メソッド（GcRadioGroupBoxコントロールに含まれるすべてのラジオボタンを無効にします。）</p></li></ul><h2>チェックされたラジオボタンの取得</h2><p>チェックされたラジオボタンを取得するには、<a href="gcdocsite__documentlink?toc-item-id=99d47f49-e39b-4193-96ed-98af8dff640a" title="">CheckedItem</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=6059ac45-2f36-42ea-bc17-7faa7898db57" title="">RadioButtonItem</a>オブジェクトを使用するか、または<a href="gcdocsite__documentlink?toc-item-id=35e711b7-d35e-4130-bfa3-831ae9a1c958" title="">CheckedIndex</a> プロパティを使います。前者のCheckedItemを使うとコントロール内のオンになっている項目（RadioButtonItem）を取得することができます。後者のCheckedIndexを使うとコントロール内のオンになっている項目のインデックスを取得することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Containers;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    RadioButtonItem radioButtonItem1 = <span class="hljs-keyword">new</span> RadioButtonItem();
+    radioButtonItem1.Text = <span class="hljs-string">"春"</span>;
+    radioButtonItem1.Checked = <span class="hljs-literal">true</span>;
+    gcRadioGroupBox1.Items.Add(radioButtonItem1);
+
+    RadioButtonItem radioButtonItem2 = <span class="hljs-keyword">new</span> RadioButtonItem();
+    radioButtonItem2.Text = <span class="hljs-string">"夏"</span>;
+    radioButtonItem2.Checked = <span class="hljs-literal">false</span>;
+    gcRadioGroupBox1.Items.Add(radioButtonItem2);
+
+    RadioButtonItem radioButtonItem3 = <span class="hljs-keyword">new</span> RadioButtonItem();
+    radioButtonItem3.Text = <span class="hljs-string">"秋"</span>;
+    radioButtonItem3.Checked = <span class="hljs-literal">true</span>;
+    gcRadioGroupBox1.Items.Add(radioButtonItem3);
+
+    RadioButtonItem radioButtonItem4 = <span class="hljs-keyword">new</span> RadioButtonItem();
+    radioButtonItem4.Text = <span class="hljs-string">"冬"</span>;
+    radioButtonItem4.Checked = <span class="hljs-literal">true</span>;
+    gcRadioGroupBox1.Items.Add(radioButtonItem4);
+
+    gcRadioGroupBox1.Text = <span class="hljs-string">"好きな季節"</span>;
+}
+
+<span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// CheckedItemを使ってコントロール内のオンになっている項目を取得します。</span>
+    RadioButtonItem radioButtonItem1 = gcRadioGroupBox1.CheckedItem;
+    System.Diagnostics.Debug.WriteLine(radioButtonItem1.Text);
+}
+
+<span class="hljs-function">private void button2_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// CheckedIndexを使ってコントロール内のオンになっている項目のインデックスを取得します。</span>
+    System.Diagnostics.Debug.WriteLine(gcRadioGroupBox1.CheckedIndex.ToString());
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Containers
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim RadioButtonItem1 As RadioButtonItem = New RadioButtonItem()
+    RadioButtonItem1.Text = "春"
+    RadioButtonItem1.Checked = True
+    GcRadioGroupBox1.Items.Add(RadioButtonItem1)
+
+    Dim RadioButtonItem2 As RadioButtonItem = New RadioButtonItem()
+    RadioButtonItem2.Text = "夏"
+    RadioButtonItem2.Checked = False
+    GcRadioGroupBox1.Items.Add(RadioButtonItem2)
+
+    Dim RadioButtonItem3 As RadioButtonItem = New RadioButtonItem()
+    checkitem3.Text = "秋"
+    RadioButtonItem3.Checked = True
+    GcRadioGroupBox1.Items.Add(checkitem3)
+
+    Dim RadioButtonItem4 As RadioButtonItem = New RadioButtonItem()
+    RadioButtonItem4.Text = "冬"
+    RadioButtonItem4.Checked = True
+    GcRadioGroupBox1.Items.Add(RadioButtonItem4)
+
+    GcRadioGroupBox1.Text = "好きな季節"
+End Sub
+
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    ' CheckedItemを使ってコントロール内のオンになっている項目を取得します。
+    Dim RadioButtonItem1 As RadioButtonItem = GcRadioGroupBox1.CheckedItem
+    System.Diagnostics.Debug.WriteLine(RadioButtonItem1.Text)
+End Sub
+
+Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    ' CheckedIndexを使ってコントロール内のオンになっている項目のインデックスを取得します。
+     System.Diagnostics.Debug.WriteLine(GcRadioGroupBox1.CheckedIndex.ToString())
+End Sub</code></pre></div><div data-language="auto" class="toastui-editor-ww-code-block-highlighting"><pre><code>出力結果：
+button1_Click
+冬
+
+button2_Click
+3</code></pre></div><p>実行時にラジオボタンのチェック状態が変更されると<a href="gcdocsite__documentlink?toc-item-id=aba8b2df-53d5-483e-961b-89f7a815be4c" title="">CheckedItemChanged</a>イベントと<a href="gcdocsite__documentlink?toc-item-id=f88d2c10-0312-46b4-9573-4ce63f25cc41" title="">CheckedIndexChanged</a>イベントが発生します。また、ラジオボタンをクリックしたときにはチェック状態の変更に関係なく<a href="gcdocsite__documentlink?toc-item-id=e5371dbb-fce6-481c-b6ad-7263bce5cb2c" title="">ItemClick</a> イベントが発生します。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=e3f85c87-3543-478d-9a58-27fdeb998de6" title="">GcRadioGroupBoxコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f5d0ea93-002e-4158-ae32-993393bdf11c" title="">アイテムの追加と削除</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1a890155-3517-444b-8c76-f81cad271b87" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1f57e2fd-379c-4368-a50e-c93b9370a989" title="">アイテムのレイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ef430c3f-daf4-48fc-9689-03390a95a5b3" title="">ラジオボタンの拡大</a></p>

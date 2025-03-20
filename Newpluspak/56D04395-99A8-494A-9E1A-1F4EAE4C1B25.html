@@ -1,0 +1,33 @@
+<p>ここでは、GcApplicationResize コンポーネントが配置されたプロジェクトにおいて、特定のフォームを設定する方法について解説します。</p><h2>特定のフォームでリサイズ機能を対象外に設定</h2><p>特定のフォームでリサイズ機能を対象外にするには、GcApplicationResize コンポーネントにフォームが関連付けられるタイミングでフォームの型に応じてキャンセルします。</p><p><br></p><p>以下のコードはプロジェクトに2つのフォーム（Form1、Form2）が存在するとき、Form1 に配置した GcApplicationResize コンポーネントから Form2 を除外します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiTouch;
+
+<span class="hljs-function">private void gcApplicationResize1_GcResizeAttaching(object sender, GrapeCity.Win.Components.GcResizeAttachingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Form <span class="hljs-keyword">is</span> Form2)
+    {
+        <span class="hljs-comment">// Form2はリサイズ機能の対象外にします。</span>
+        e.Cancel = <span class="hljs-literal">true</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+Private Sub GcApplicationResize1_GcResizeAttaching(sender As Object, e As GcResizeAttachingEventArgs) Handles GcApplicationResize1.GcResizeAttaching
+    If TypeOf e.Form Is Form2 Then
+        ' Form2はリサイズ機能の対象外にします
+        e.Cancel = True
+    End If
+End Sub</code></pre></div><h2>特定のフォームの設定変更</h2><p>次のコードは、プロジェクトに2つのフォーム（Form1、Form2）が存在するとき、Form2 だけリサイズ時フォームの縦横比を保持します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Components;
+
+<span class="hljs-function">private void gcApplicationResize1_GcResizeAttaching(object sender, GrapeCity.Win.Components.GcResizeAttachingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Form <span class="hljs-keyword">is</span> Form2)
+    {
+        <span class="hljs-comment">// Form2だけフォームのリサイズ時にアスペクト比を保持します。</span>
+        e.GcResize.KeepAspectRatio = <span class="hljs-literal">true</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Components
+
+Private Sub GcApplicationResize1_GcResizeAttaching(sender As Object, e As GcResizeAttachingEventArgs) Handles GcApplicationResize1.GcResizeAttaching
+    If TypeOf e.Form Is Form2 Then
+        ' Form2だけフォームのリサイズ時にアスペクト比を保持します。
+        e.GcResize.KeepAspectRatio = True
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=9d6e3991-6aca-44c1-acfd-236ba66bd808" title="">GcApplicationResizeコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5c8bb9a7-7249-4516-b24a-610423b509f7" title="">GcResizeコンポーネントの使用</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ca506c6a-1ebd-49bc-a124-5dbe6248b7a2" title="">リサイズポリシー</a></p>

@@ -1,0 +1,29 @@
+<p>GcCalendar コントロールで、休業日（毎週の定期的な休み）を設定する方法について、以下の項目に分けて解説します。</p><h2>概要の説明</h2><p>GcCalendar コントロールの休業日の設定は、HolidayStyles プロパティが参照する HolidayStyleCollection を初めとする下図のオブジェクト（着色された5つ）を使って行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.07_01.png" contenteditable="false"><br></p><p>休業日の設定に直接関連する部分をさらに詳しく示すと、下図のようになります。WeekdaysとDayOfWeekHolidayPolicy以外のオブジェクトについては、前述の「<a href="gcdocsite__documentlink?toc-item-id=85CF0462-1301-4B6B-AA5E-67E1C3001940" title="">休日の設定</a>」を参照してください。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccalendar.07_02.png" contenteditable="false"><br></p><p>Weekdaysオブジェクトには、SundayからSaturdayまでの7つのプロパティが用意されており、これらが参照するDayWeekHolidayPolicy構造体を使って休業日を設定します。</p><h2>休業日の設定</h2><p>休業日は、次の手順で設定します。</p><ol><li><p>通常の休日と同じように、HolidayStyle オブジェクトを生成します。</p></li><li><p>HolidayStyle オブジェクトの Name プロパティを設定します。</p></li><li><p>コントロールの Weekdays プロパティを経由して参照される DayOfWeekStyle オブジェクトの SubStyle プロパティを使って、休業日の日付スタイル（文字色、背景色、太字、下線）を設定します。</p></li><li><p>HolidayCollection コレクションの Weekdays プロパティが参照する Weekdays オブジェクトのプロパティ（Sunday～Saturday）を使うことで、休業日にする曜日を指定します。</p></li><li><p>指定したプロパティ（たとえばWednesday）が参照する DayOfWeekHolidayPolicy 構造体の WeekFlags プロパティで、休業日にする週（例：第２週と第３週）を指定します。</p></li><li><p>HolidayStyleオブジェクトを HolidayStyleCollection コレクションに登録します。</p></li><li><p>コントロールの ActiveHolidayStyles プロパティを使って、登録したHolidayStyleオブジェクトを有効にします。</p></li></ol><h2>サンプルコード</h2><p>次のサンプルコードは、第2と第4の土曜日を休業日に設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+<span class="hljs-comment">// 休日スタイルを生成します。</span>
+HolidayStyle aHS = <span class="hljs-keyword">new</span> HolidayStyle();
+<span class="hljs-comment">// 休日スタイルの名称を設定します。</span>
+aHS.Name = <span class="hljs-string">"休業日"</span>;
+<span class="hljs-comment">// 第2と第4土曜日を休業日に設定します。</span>
+aHS.Holidays.Weekdays.Saturday = <span class="hljs-keyword">new</span> DayOfWeekHolidayPolicy(WeekFlags.SecondWeek | WeekFlags.FourthWeek, HolidayOverride.None);
+<span class="hljs-comment">// 休業日の表示スタイルを設定します。</span>
+gcCalendar1.Weekdays.Saturday.SubStyle = <span class="hljs-keyword">new</span> SubStyle(Color.WhiteSmoke, Color.Red, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);
+gcCalendar1.Weekdays.Saturday.WeekFlags = WeekFlags.SecondWeek | WeekFlags.FourthWeek;
+<span class="hljs-comment">// 設定が完了した休日スタイルを登録します。</span>
+gcCalendar1.HolidayStyles.Add(<span class="hljs-string">"休業日"</span>, aHS);
+<span class="hljs-comment">// 登録した休日スタイルをコントロールに反映させます。</span>
+gcCalendar1.ActiveHolidayStyles = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[]{<span class="hljs-string">"休業日"</span>};</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Calendar
+
+' 休日スタイルを生成します。
+Dim aHS As HolidayStyle = New HolidayStyle()
+' 休日スタイルの名称を設定します。
+aHS.Name = "休業日"
+' 第2と第4土曜日を休業日に設定します。
+aHS.Holidays.Weekdays.Saturday = New DayOfWeekHolidayPolicy(WeekFlags.SecondWeek Or WeekFlags.FourthWeek, HolidayOverride.None)
+' 休業日の表示スタイルを設定します。
+GcCalendar1.Weekdays.Saturday.SubStyle = New SubStyle(Color.WhiteSmoke, Color.Red, True, False)
+GcCalendar1.Weekdays.Saturday.WeekFlags = WeekFlags.SecondWeek Or WeekFlags.FourthWeek
+' 設定が完了した休日スタイルを登録します。
+GcCalendar1.HolidayStyles.Add("休業日", aHS)
+' 登録した休日スタイルをコントロールに反映させます。
+GcCalendar1.ActiveHolidayStyles = New string(){"休業日"}</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea" title="">GcCalendarコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e66c4893-3b5b-4507-971f-c09edf9557c3" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80b84915-ff83-478e-810b-597b80912e4d" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=de21e2fe-95a3-4c39-9073-4acaa8eb54c2" title="">他コントロールとの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c40c7d0e-6f68-44d2-8ce4-b0aa396e4892" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=85cf0462-1301-4b6b-aa5e-67e1c3001940" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bd678a2a-5dc3-49d2-bf10-7e1d6b8682b9" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=248792c9-1244-4cda-95a4-4aa017776bc4" title="">今日の書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f47e6259-8f3b-4353-9f00-ea93a81d5eba" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fbc47142-f954-4edd-ad6a-bd9d93e026cc" title="">ショートカットキーの割り当て</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c9f769bb-c91c-46fb-8c72-ad3fcc1940d1" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1d011cfa-a662-45d4-9bc2-c7b90899337b" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f347df74-4201-4c70-a287-57693eee6202" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0bf2eeee-9eb4-4fe7-b19d-b22284a06d0d" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2fd5902b-8728-4967-b45e-41744d6cdeae" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123" title="">和暦表示の設定変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=066f939c-562e-4601-bc52-17dfd94f85e9" title="">add要素</a></p><p><a href="gcdocsite__documentlink?toc-item-id=209c31c3-d8f3-45b5-bdbe-3ed713735acc" title="">タッチ機能</a></p>

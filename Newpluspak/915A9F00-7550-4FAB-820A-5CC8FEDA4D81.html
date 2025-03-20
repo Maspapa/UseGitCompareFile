@@ -1,0 +1,29 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=ef5364bb-463b-45cd-9581-95dd294f10fa" title="">GcFlowLayoutContainer</a>コントロールの背景の設定方法について、以下に解説します。</p><h2>パターン効果とグラデーション</h2><p>GcFlowLayoutContainer コントロールは、ラベルの追加と立体表示機能に加えて GradientEffect プロパティによる背景のグラデーションと、PatternEffect プロパティによる模様も設定できます。また、SingleBorderColor プロパティで境界線の色を設定することも可能です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Common;
+
+<span class="hljs-comment">// グラデーションを作成します</span>
+GradientEffect objGradientEffect = <span class="hljs-keyword">new</span> GradientEffect(GradientStyle.Horizontal, GradientDirection.Center, Color.Blue, Color.AliceBlue);
+<span class="hljs-comment">// グラデーションを適用します</span>
+gcFlowLayoutContainer1.GradientEffect = objGradientEffect;
+
+<span class="hljs-comment">// パターン効果を作成します</span>
+PatternEffect objPatternEffect = <span class="hljs-keyword">new</span> PatternEffect(PatternStyle.LargeGrid, Color.DarkGray);
+<span class="hljs-comment">// パターン効果を適用します</span>
+gcFlowLayoutContainer1.PatternEffect = objPatternEffect;
+
+<span class="hljs-comment">// 境界線の色を変更します</span>
+gcFlowLayoutContainer1.BorderStyle = BorderStyle.FixedSingle;
+gcFlowLayoutContainer1.SingleBorderColor = Color.Blue;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Common
+
+' グラデーションを作成します
+Dim objGradientEffect As New GradientEffect(GradientStyle.Horizontal, GradientDirection.Center, Color.Blue, Color.AliceBlue)
+' グラデーションを適用します
+GcFlowLayoutContainer1.GradientEffect = objGradientEffect
+
+' パターン効果を作成します
+Dim objPatternEffect As New PatternEffect(PatternStyle.LargeGrid, Color.DarkGray)
+' パターン効果を適用します
+GcFlowLayoutContainer1.PatternEffect = objPatternEffect
+
+' 境界線の色を変更します
+GcFlowLayoutContainer1.BorderStyle = BorderStyle.FixedSingle
+GcFlowLayoutContainer1.SingleBorderColor = Color.Blue</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcflowlayoutcontainer.effect.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=1d1b19b3-7b14-4dde-95a0-1b6248c94e83" title="">GcFlowLayoutContainerコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=edcfc1b9-17bf-4a01-ae5b-d8bddc627c73" title="">子コントロールの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4d681902-86e7-4a19-b70a-9b95d306983f" title="">子コントロールの配置位置設定</a></p>

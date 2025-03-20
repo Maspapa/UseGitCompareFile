@@ -1,0 +1,155 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=1a7483c1-498d-4c07-9570-5bb6b65f369c#SHORTCUTS">Shortcuts</a> プロパティが参照するShortcutCollectionオブジェクトを使って、コントロールの機能を特定のキーに割り当てることができます。<br /><br /></p>
+<h2 id="登録可能な機能">登録可能な機能</h2>
+<p>カレンダーコントロールでは、以下の4つの機能をショートカットキーに登録できます。<br /><br /></p>
+<ul>
+<li>フォーカスを次のコントロールに移動する。</li>
+<li>フォーカスを前のコントロールに移動する。</li>
+<li>コントロールの内容をクリアする。</li>
+<li>システム日付を取得する。</li>
+</ul>
+<p><br /><br /><br /></p>
+<h2 id="キーの割り当て">キーの割り当て</h2>
+<p>ショートカットキーを登録するには、ShortcutCollectionオブジェクトのAddメソッドを使用します。<br /><br />たとえば、［Ctrl］＋［N］キーで次のコントロールへ移動する場合は、以下のようになります。<br /><br /></p>
+<pre><code class="language-csharp">gcCalendar1.Shortcuts.Add(
+    System.Windows.Forms.Keys.N | System.Windows.Forms.Keys.Control,
+    GrapeCity.Win.Calendar.KeyActions.NextControl);
+</code></pre>
+<pre><code class="language-vbnet">GcCalendar1.Shortcuts.Add( _
+    System.Windows.Forms.Keys.N Or System.Windows.Forms.Keys.Control, _
+    GrapeCity.Win.Calendar.KeyActions.NextControl)
+</code></pre>
+<p>KeyActions列挙体に設定可能な値は、次のとおりです。System.Windows.Forms.Keys列挙体については、「<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/weblink.png" alt="Web サイト" /><a href="http://msdn2.microsoft.com/ja-jp/library/system.windows.forms.keys.aspx">Keys 列挙体</a>（MSDN）」を参照してください。<br /><br /></p>
+<table>
+<thead>
+<tr>
+<th>KeyActionsの値</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NextControl</td>
+<td>フォーカスを次のコントロールに移動します。</td>
+</tr>
+<tr>
+<td>PreviousControl</td>
+<td>フォーカスを前のコントロールに移動します。</td>
+</tr>
+<tr>
+<td>Clear</td>
+<td>コントロールの内容をクリアします。この機能は、デフォルトで[F2]キーに割り当てられています。</td>
+</tr>
+<tr>
+<td>Now</td>
+<td>システム日付を取得します。この機能は、デフォルトで[F5]キーに割り当てられています。</td>
+</tr>
+</tbody>
+</table>
+<p><br /><br /><br /><br /><br /><br /><br /></p>
+<h2 id="注意事項">注意事項</h2>
+<p>ショートカットキーを割り当てるときの4つの注意点について説明します。<br /><br /></p>
+<h4 id="すでに使用されているキー">1. すでに使用されているキー</h4>
+<p>Windowsとコントロールが使用しているキーをショートカットキーに割り当てると、本来の動作が正しく行われなくなることがあります。<br /><br /></p>
+<table>
+<thead>
+<tr>
+<th><strong>Windowsが使用しているキー</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>キー</td>
+<td>説明</td>
+</tr>
+<tr>
+<td>［F1］</td>
+<td>Windowsヘルプの起動</td>
+</tr>
+<tr>
+<td>［F10］</td>
+<td>メニューバーをアクティブにする</td>
+</tr>
+<tr>
+<td>［Help］</td>
+<td>Windowsヘルプの起動</td>
+</tr>
+<tr>
+<td>［Shift］+［F1］</td>
+<td>コンテキストヘルプの起動</td>
+</tr>
+<tr>
+<td>［Shift］+［F10］</td>
+<td>コンテキストメニューの表示</td>
+</tr>
+<tr>
+<td>［Ctrl］+［Shift］+［Esc］</td>
+<td>タスクマネージャの起動</td>
+</tr>
+<tr>
+<td>［Ctrl］+［Esc］</td>
+<td>スタートメニューの表示</td>
+</tr>
+</tbody>
+</table>
+<br />
+<table>
+<thead>
+<tr>
+<th><strong>コントロールが使用しているキー</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>このヘルプの「<a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6">キーボードからの操作</a>」に記載されているキー</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="ボタン関連プロパティの設定">2. ボタン関連プロパティの設定</h4>
+<p>以下のプロパティの設定は、特定のキーの動作に影響を与えます。これらのキーをショートカットキーに割り当てる場合は、細心の注意が必要です。<br /><br /></p>
+<table>
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>関連するキー</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AcceptButton（フォーム）</td>
+<td>［Enter］</td>
+</tr>
+<tr>
+<td>CancelButton（フォーム）</td>
+<td>［Esc］</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h4 id="重複したキーの割り当て">3. 重複したキーの割り当て</h4>
+<p>ShortcutCollectionオブジェクトには、それぞれ異なるキーを登録してください。ただし、KeyActions列挙体のNextControlとNextField、PreviousControlとPreviousFieldの各組み合わせには、それぞれ同じキーを設定することが可能です。<br /><br /></p>
+<h4 id="keydownイベントによるキーフック">4. KeyDownイベントによるキーフック</h4>
+<p>ShortcutCollectionオブジェクトに割り当てたキーコードをコントロールのKeyDownイベントでフックすることはできません。これは、１つのキーに複数の動作が割り当てられ、予期できない結果をまねくことのないようにするためです。ショートカットキーに設定したキーについては、KeyDownイベントなどのキー関連イベント内で操作しないようにしてください。<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+<p><br /><br /></p>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=bb84a3bc-1bcc-472f-bc6e-ecba682743ea">GcCalendarコントロール</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=e66c4893-3b5b-4507-971f-c09edf9557c3">レイアウトの変更</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=80b84915-ff83-478e-810b-597b80912e4d">カレンダーの操作</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=9642960c-293a-4f11-a2af-d7a0240313c6">キーボードからの操作</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=de21e2fe-95a3-4c39-9073-4acaa8eb54c2">他コントロールとの接続</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c40c7d0e-6f68-44d2-8ce4-b0aa396e4892">スタイルの設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=85cf0462-1301-4b6b-aa5e-67e1c3001940">休日の設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=7e869caf-4b0c-450c-a2f7-65de33a638ee">休業日の設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=bd678a2a-5dc3-49d2-bf10-7e1d6b8682b9">ヘッダの書式設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=248792c9-1244-4cda-95a4-4aa017776bc4">今日の書式設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=f47e6259-8f3b-4353-9f00-ea93a81d5eba">日付の選択と取得</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c9f769bb-c91c-46fb-8c72-ad3fcc1940d1">データベースへの接続</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=1d011cfa-a662-45d4-9bc2-c7b90899337b">祝日定義ファイルのインポート／エクスポート</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=f347df74-4201-4c70-a287-57693eee6202">iCalendarファイルのインポート／エクスポート</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=0bf2eeee-9eb4-4fe7-b19d-b22284a06d0d">カレンダーの手動描画</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=2fd5902b-8728-4967-b45e-41744d6cdeae">日付のメモ設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=0aca298b-3436-4d0f-bf5d-fbd03c045123">和暦表示の設定変更</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=066f939c-562e-4601-bc52-17dfd94f85e9">add要素</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=209c31c3-d8f3-45b5-bdbe-3ed713735acc">タッチ機能</a></p>

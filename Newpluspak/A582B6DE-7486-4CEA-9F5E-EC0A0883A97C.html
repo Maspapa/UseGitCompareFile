@@ -1,0 +1,33 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=b68dbe77-8cc5-4871-8bb5-cea03307f520" title="">GcGlobalHook</a>コンポーネントのグローバルフックの使用方法について、以下に解説します。</p><h2>グローバルフックの開始</h2><p><a href="gcdocsite__documentlink?toc-item-id=0c4b6534-79a1-41e4-9bc3-ea602d948a8c" title="">EnableKeyboardHook</a>プロパティにTrueを設定すると、キーボード操作のグローバルフックを行うことができます。</p><p>マウス操作のグローバルフックを行うには<a href="gcdocsite__documentlink?toc-item-id=fab2e47e-c52f-4f22-9767-cd1a44d077f7" title="">EnableMouseHook</a>プロパティに True を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// キーボード操作のグローバルフックを行います</span>
+gcGlobalHook1.EnableKeyboardHook = <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// マウス操作のグローバルフックを行います</span>
+gcGlobalHook1.EnableMouseHook = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' キーボード操作のグローバルフックを行います
+GcGlobalHook1.EnableKeyboardHook = True
+
+' マウス操作のグローバルフックを行います
+GcGlobalHook1.EnableMouseHook = True</code></pre></div><p>また、<a href="gcdocsite__documentlink?toc-item-id=002402e9-7769-4d60-b07c-4b99028400d8" title="">StartKeyboardHook</a>メソッドおよび<a href="gcdocsite__documentlink?toc-item-id=6280e02d-b20c-479e-8f5c-1472913d331b" title="">StartMouseHook</a>メソッドを使用して、グローバルフックを開始することができます。</p><p>なお、これらのメソッドを実行すると EnableKeyboardHook プロパティと EnableMouseHook プロパティに True が設定されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// キーボード操作のグローバルフックを開始します</span>
+gcGlobalHook1.StartKeyboardHook();
+
+<span class="hljs-comment">// マウス操作のグローバルフックを開始します</span>
+gcGlobalHook1.StartMouseHook();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' キーボード操作のグローバルフックを開始します
+GcGlobalHook1.StartKeyboardHook()
+
+' マウス操作のグローバルフックを開始します
+GcGlobalHook1.StartMouseHook()</code></pre></div><h2>グローバルフックの終了</h2><p>EnableKeyboardHook プロパティに False を設定すると、キーボード操作のグローバルフックが終了します。</p><p>マウス操作のグローバルフックを終了するには EnableMouseHook プロパティに False を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// キーボード操作のグローバルフックを終了します</span>
+gcGlobalHook1.EnableKeyboardHook = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// マウス操作のグローバルフックを終了します</span>
+gcGlobalHook1.EnableMouseHook = <span class="hljs-literal">false</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' キーボード操作のグローバルフックを終了します
+GcGlobalHook1.EnableKeyboardHook = False
+
+' マウス操作のグローバルフックを終了します
+GcGlobalHook1.EnableMouseHook = False</code></pre></div><p>また、StopKeyboardHook メソッドおよび StopMouseHook メソッドを使用して、グローバルフックを終了することができます。</p><p>なお、これらのメソッドを実行すると EnableKeyboardHook プロパティと EnableMouseHook プロパティに False が設定されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// キーボード操作のグローバルフックを終了します</span>
+gcGlobalHook1.StopKeyboardHook();
+
+<span class="hljs-comment">// マウス操作のグローバルフックを終了します</span>
+gcGlobalHook1.StopMouseHook();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' キーボード操作のグローバルフックを終了します
+GcGlobalHook1.StopKeyboardHook()
+
+' マウス操作のグローバルフックを終了します
+GcGlobalHook1.StopMouseHook()</code></pre></div><p><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>EnableKeyboardHook プロパティに True を設定した場合には、処理完了後に必ず False に戻してください。</p></li><li><p>EnableMouseHook プロパティに True を設定した場合には、処理完了後に必ず False に戻してください。</p></li><li><p>これらのプロパティを False に戻さないと、メモリリークが発生する可能性があります。</p></li></ul></blockquote><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=51333e04-91fc-43af-a180-c9be06b2faa3" title="">GcGlobalHookコンポーネント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=630e0d45-8839-48b9-a915-3cb2aa112644" title="">キーボードおよびマウスの制御</a></p>

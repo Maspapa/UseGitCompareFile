@@ -1,0 +1,29 @@
+<h2>動作保証環境について</h2><p>11.0Jでは、次の環境での動作を保証していません。</p><ul><li><p>OS : Windows 7／8.1</p></li><li><p>開発ツール : Visual Studio 2012／2013／2015</p></li><li><p>.NET Framework 4.7.2以前、.NET Core 3.1</p></li></ul><p>一方、11.0Jでは新たに次の環境での動作を保証します。</p><ul><li><p>OS : Windows 11／Server 2022</p></li><li><p>開発ツール : Visual Studio 2022</p></li><li><p>.NET Framework 4.8／4.8.1／.NET 6</p></li></ul><h2>機能の追加</h2><h4>GcBarCode コントロール</h4><p>QR コード出力時に、文字の分割を Byte 単位での分割のほか、Character 単位で分割を指定できる <a href="gcdocsite__documentlink?toc-item-id=4b8d6835-febd-4bd0-81ce-f732dab6a433" title="">SplitMode</a> プロパティと、エンコードを指定する <a href="gcdocsite__documentlink?toc-item-id=43019b88-1c4b-4e71-b2d9-293beac45716" title="">ValueEncoding</a> プロパティを追加しました。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">var</span> bcd = <span class="hljs-keyword">new</span> GcBarCode()
+{
+  Type = GrapeCity.Win.BarCode.ValueType.BarType.QRCode,
+  Value = <span class="hljs-string">"文字列を設定します。"</span>,
+  QRCode = <span class="hljs-keyword">new</span> QRCode()
+  {
+    Model = QRCode.EnumModel.Model2,
+    Version = <span class="hljs-number">1</span>,
+    ErrorLevel = QRCode.EnumErrorLevel.H,
+    Connection = <span class="hljs-literal">true</span>,
+    <span class="hljs-comment">// SplitMode指定 (Byte or Character)</span>
+    SplitMode = QRCode.EnumSplitMode.Character,
+    <span class="hljs-comment">// ValueEncoding (CP932 or UTF8)</span>
+    ValueEncoding = QRCode.EnumValueEncoding.UTF8
+  }
+};</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim bcd = New GcBarCode() With
+{
+  .Type = GrapeCity.Win.BarCode.ValueType.BarType.QRCode,
+  .Value = "文字列を設定します。",
+  .QRCode = New QRCode() With
+  {
+    .Model = QRCode.EnumModel.Model2,
+    .Version = 1,
+    .ErrorLevel = QRCode.EnumErrorLevel.H,
+    .Connection = True,
+    .SplitMode = QRCode.EnumSplitMode.Character, ' SplitMode指定(Byte Or Character)
+    .ValueEncoding = QRCode.EnumValueEncoding.UTF8 ' ValueEncoding(CP932 or UTF8)
+  }
+}</code></pre></div><h3>フォームデザイン機能に対応</h3><p>.NET環境において以下のフォームデザイン機能に対応しました。 これらフォームデザイン機能を使用した外観等のカスタマイズを行うことができます。</p><ul><li><p>スマートタグのアクションリスト</p></li><li><p>カスタムエディタダイアログ</p></li><li><p>コレクションエディタダイアログ</p></li><li><p>各コントロール用のプロパティページ</p></li><li><p>ドロップダウンリスト</p></li><li><p>インタラクションエディタ</p></li></ul><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=a8f8f71b-9c6b-43a2-ab20-6e07363faf59" title="">旧バージョンからの変更点</a></p><p><br></p><p><a href="gcdocsite__documentlink?toc-item-id=5d73680d-523f-42bc-9f06-a53d5c18eb4a" title="">5.0J から 6.0J への変更点</a></p><p><br></p><p><a href="gcdocsite__documentlink?toc-item-id=69e366d9-9d07-498f-adcb-29247c16d264" title="">6.0J から 7.0J への変更点</a></p><p><br></p><p><a href="gcdocsite__documentlink?toc-item-id=4787a967-f2c3-4aef-9d76-0650196bc42b" title="">7.0J から 8.0J への変更点</a></p><p><br></p><p><a href="gcdocsite__documentlink?toc-item-id=06f0a20c-6ca4-430b-be8d-1bf7f2fc90ad" title="">8.0J から 10.0J への変更点</a></p>

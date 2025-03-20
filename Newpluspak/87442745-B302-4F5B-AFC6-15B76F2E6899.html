@@ -1,0 +1,59 @@
+<p>タブページ上に配置したコントロールに対し、3D 効果を施すことができます。</p><p>3D 効果は、タブページ上の全てのコントロールに同じ効果を適用する方法と、タブページ上の個々のコントロールにそれぞれ異なる効果を適用する方法があります。3D 効果の適用方法は GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=2ec55d99-91ac-4d68-814f-3864a230ac7b" title="">ApplyBevelEffect</a> プロパティで設定します。</p><h2>全てのコントロールに同一の効果を適用する場合</h2><p>タブページ上の全てのコントロールに同じ効果を適用する場合は、GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=2ec55d99-91ac-4d68-814f-3864a230ac7b" title="">ApplyBevelEffect</a> プロパティを <strong>All</strong> に設定します。また、3D 効果の各設定は GcTabPage.ApplyBevelEffect プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=116f2836-af41-4249-b846-7926244ccb3d" title="">BevelEffect</a> クラス により行います。</p><p>3D 効果は、次のような項目が設定できます。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=e2f4904b-7607-467a-94a4-b87ea434a996" title="">BackColor</a></p></td><td><p>3D 表示領域全体の背景色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=6c38d4d5-0d8a-41be-b970-ada9e79fd044" title="">BorderColor</a></p></td><td><p>境界線の色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=83ba6431-e6a4-4fc2-8b38-7e21ed2dbdb7" title="">BorderStyle</a></p></td><td><p>境界線のスタイル ( なし、単線、3D )</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=c66b7e21-abc3-41d7-bfae-ed92297c1021" title="">Inner</a></p></td><td><p>内側ベベルのスタイル ( 色、幅、明るさ、暗さ ）</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=d3a71cce-8586-479b-8459-f8abb4b008eb" title="">Margins</a></p></td><td><p>子コントロールとの間隔</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=617fe4ab-02df-4bfb-bf05-b7b67bc0aba0" title="">Outer</a></p></td><td><p>外側ベベルのスタイル ( 色、幅、明るさ、暗さ ）</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=ac87c1a4-07bc-4a7b-9379-5fd2f6643ad5" title="">Spacing</a></p></td><td><p>内側ベベルと外側ベベルの間隔</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=5878de70-df87-4d80-b90b-b383ee0710d2" title="">ShadowColor</a></p></td><td><p>ドロップシャドウの色</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=c46c3b94-3460-4f17-a98d-0e7bde000abc" title="">ShadowDarkness</a></p></td><td><p>ドロップシャドウの明るさ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=6c9ba2ea-06d2-4652-b3a4-e89d00303346" title="">ShadowWidth</a></p></td><td><p>ドロップシャドウの幅</p></td></tr></tbody></table><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.containerbevel.png" contenteditable="false"><br></p><p><br></p><p>以下はコードで設定する場合の例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 全ての子コントロールに 3D 効果を適用します</span>
+gcTabPage1.ApplyBevelEffect = GrapeCity.Win.Containers.ApplyToChild.All;
+<span class="hljs-comment">// 3D 効果を設定します</span>
+GrapeCity.Win.Containers.BevelEffect MyEffect = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.BevelEffect();
+MyEffect.BackColor = Color.PapayaWhip;
+MyEffect.BorderColor = Color.IndianRed;
+MyEffect.BorderStyle = BorderStyle.FixedSingle;
+MyEffect.Inner = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.Bevel(Color.Khaki, <span class="hljs-number">15</span>, <span class="hljs-number">25</span>, <span class="hljs-number">-25</span>);
+MyEffect.Margins = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.Margins(<span class="hljs-number">15</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>);
+MyEffect.Outer = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.Bevel(Color.BurlyWood, <span class="hljs-number">15</span>, <span class="hljs-number">25</span>, <span class="hljs-number">-25</span>);
+MyEffect.ShadowColor = Color.Tan;
+MyEffect.ShadowDarkness = <span class="hljs-number">35</span>;
+MyEffect.ShadowWidth = <span class="hljs-number">15</span>;
+MyEffect.Spacing = <span class="hljs-number">15</span>;
+gcTabPage1.BevelEffect = MyEffect;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 全ての子コントロールに 3D 効果を適用します
+GcTabPage1.ApplyBevelEffect = GrapeCity.Win.Containers.ApplyToChild.All
+' 3D 効果を設定します
+Dim MyEffect As GrapeCity.Win.Containers.BevelEffect = New GrapeCity.Win.Containers.BevelEffect
+MyEffect.BackColor = Color.PapayaWhip
+MyEffect.BorderColor = Color.IndianRed
+MyEffect.BorderStyle = BorderStyle.FixedSingle
+MyEffect.Inner = New GrapeCity.Win.Common.Bevel(Color.Khaki, 15, 25, -25)
+MyEffect.Margins = New GrapeCity.Win.Common.Margins(15, 15, 15, 15)
+MyEffect.Outer = New GrapeCity.Win.Common.Bevel(Color.BurlyWood, 15, 25, -25)
+MyEffect.ShadowColor = Color.Tan
+MyEffect.ShadowDarkness = 35
+MyEffect.ShadowWidth = 15
+MyEffect.Spacing = 15
+GcTabPage1.BevelEffect = MyEffect</code></pre></div><h2>個々のコントロールに異なる効果を設定する場合</h2><p>タブページ上の個々のコントロールに異なる効果を適用する場合は、GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=2ec55d99-91ac-4d68-814f-3864a230ac7b" title="">ApplyBevelEffect</a> プロパティを <strong>Individual</strong> に設定します。また、3D 効果の各設定は GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=9c5d5583-76b8-4173-9f04-b2976e1ec8eb" title="">BevelEffect</a> プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=116f2836-af41-4249-b846-7926244ccb3d" title="">BevelEffect</a> クラスにより行います。</p><p>タブページ上にコントロールを配置したとき、Visual Studio のデザイン画面でそのコントロールのプロパティウィンドウを見ると、次の項目が追加されます。3D 効果の各項目の設定はここで行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gctabcontrol.containerproperty.png" contenteditable="false"><br></p><p>また、コードで設定を行う場合は、GcTabPage.<a href="gcdocsite__documentlink?toc-item-id=fc432198-f684-4e83-a89d-be0a38e33340" title="">SetBevelEffect</a> メソッドで 3D 効果を適用するコントロールを指定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 個々の子コントロールに異なる効果を適用します</span>
+gcTabPage1.ApplyBevelEffect = GrapeCity.Win.Containers.ApplyToChild.Individual;
+<span class="hljs-comment">// 3D 効果を設定します</span>
+GrapeCity.Win.Containers.BevelEffect MyEffect = <span class="hljs-keyword">new</span> GrapeCity.Win.Containers.BevelEffect();
+MyEffect.BackColor = Color.PapayaWhip;
+MyEffect.BorderColor = Color.IndianRed;
+MyEffect.BorderStyle = BorderStyle.FixedSingle;
+MyEffect.Inner = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.Bevel(Color.Khaki, <span class="hljs-number">15</span>, <span class="hljs-number">25</span>, <span class="hljs-number">-25</span>);
+MyEffect.Margins = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.Margins(<span class="hljs-number">15</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>);
+MyEffect.Outer = <span class="hljs-keyword">new</span> GrapeCity.Win.Common.Bevel(Color.BurlyWood, <span class="hljs-number">15</span>, <span class="hljs-number">25</span>, <span class="hljs-number">-25</span>);
+MyEffect.ShadowColor = Color.Tan;
+MyEffect.ShadowDarkness = <span class="hljs-number">35</span>;
+MyEffect.ShadowWidth = <span class="hljs-number">15</span>;
+MyEffect.Spacing = <span class="hljs-number">15</span>;
+<span class="hljs-comment">// 適用するコントロールを指定します</span>
+gcTabPage1.SetBevelEffect(textBox1, MyEffect);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 個々の子コントロールに異なる効果を適用します
+GcTabPage1.ApplyBevelEffect = GrapeCity.Win.Containers.ApplyToChild.Individual
+' 3D 効果を設定します
+Dim MyEffect As GrapeCity.Win.Containers.BevelEffect = New GrapeCity.Win.Containers.BevelEffect
+MyEffect.BackColor = Color.PapayaWhip
+MyEffect.BorderColor = Color.IndianRed
+MyEffect.BorderStyle = BorderStyle.FixedSingle
+MyEffect.Inner = New GrapeCity.Win.Common.Bevel(Color.Khaki, 15, 25, -25)
+MyEffect.Margins = New GrapeCity.Win.Common.Margins(15, 15, 15, 15)
+MyEffect.Outer = New GrapeCity.Win.Common.Bevel(Color.BurlyWood, 15, 25, -25)
+MyEffect.ShadowColor = Color.Tan
+MyEffect.ShadowDarkness = 35
+MyEffect.ShadowWidth = 15
+MyEffect.Spacing = 15
+' 適用するコントロールを指定します
+GcTabPage1.SetBevelEffect(TextBox1, MyEffect)</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=41227543-a14d-488d-96ed-f61052baefe4" title="">GcTabControlコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=efa23818-5935-4782-b15f-d569b7e29b96" title="">GcTabControlプロパティページ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d3383196-0370-43c3-81b0-9776401b2fb2" title="">基本スタイルの選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8c33c00d-4354-45ae-8e79-70d4a1989154" title="">タブの配色の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=81d08d1b-9847-49f3-be16-bae8e29ce292" title="">タブのスキン機能</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6cb28b65-38ce-45e7-b316-264be84f4931" title="">タブのオーナー描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=49a0566f-d2f0-4bcd-ac34-ccf5aad63f6a" title="">さまざまな外観設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=11737120-c7df-4ef0-b2d1-49674a8d0c0b" title="">タブのホットトラック</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d1881619-641e-4fd0-987c-725f6d5be46f" title="">選択タブの外観</a></p><p><a href="gcdocsite__documentlink?toc-item-id=10779bdf-648f-4726-b1b7-8c667d9c298f" title="">テキストの縦表示とタブの配置</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8355cd6d-2680-46ba-8b93-45f9f78641ca" title="">レイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6f08a71f-3686-425b-a05c-06904a4d5863" title="">ナビゲーター</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6ed8101-373a-460d-9c49-2411ea9f3622" title="">コマンドアイコン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=33511d7b-e5b5-49b9-b6b5-56b9e60248b4" title="">タブの閉じるボタン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cf9cfd30-1f6b-4b60-a4b7-e27537314787" title="">タブの固定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=aa6f3293-b8ff-4384-bd8b-3dd7b1959653" title="">子コントロールにキャプションを追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e7896040-1f11-4e6f-a21c-e68c7ef976f4" title="">設定の保存と読み込み</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b8c674c4-9924-4bb8-a7f5-ac5d34a65c70" title="">タッチ機能</a></p>

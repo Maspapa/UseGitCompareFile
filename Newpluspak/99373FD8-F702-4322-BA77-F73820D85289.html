@@ -1,0 +1,37 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=15c64b85-573c-43c1-a589-a8a56f2ab146" title="">GcRadioButton</a>コントロールのチェックマークの変更方法について、以下に解説します。</p><h2>チェックマークイメージのカスタマイズ</h2><p>GcRadioButton コントロールのチェックマークをカスタマイズするには、プロパティウィンドウで<a href="gcdocsite__documentlink?toc-item-id=da1e43dd-6d94-4f54-903e-06caf49a08f7" title="">CheckMark</a>プロパティを開いて、各メンバに画像を設定します。複数の GcRadioButton コントロールに同じチェックマークイメージを定義したいときは、対象のコントロールをすべて選択して、設定を行うと効率的です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcradiobutton.checkmarkproperty.png" contenteditable="false"><br></p><p>次の一覧は、<a href="gcdocsite__documentlink?toc-item-id=da1e43dd-6d94-4f54-903e-06caf49a08f7" title="">CheckMark</a> プロパティで定義できるメンバとそれに対応する状態の説明です。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>CheckedHoverImage</p></td><td><p>チェックの状態がチェックで、マウスカーソルがコントロールの上に置かれている場合のチェックマーク イメージ</p></td></tr><tr><td><p>CheckedNormalImage</p></td><td><p>チェックの状態がチェックで、コントロールが通常の状態の場合のチェックマーク イメージ</p></td></tr><tr><td><p>CheckedPressedImage</p></td><td><p>チェックの状態がチェックで、マウスボタンがコントロールの上でクリックされた場合のチェックマーク イメージ</p></td></tr><tr><td><p>UncheckedHoverImage</p></td><td><p>チェックの状態が未チェックで、マウスカーソルがコントロールの上に置かれている場合のチェックマーク イメージ</p></td></tr><tr><td><p>UncheckedNormalImage</p></td><td><p>チェックの状態が未チェックで、コントロールが通常の状態の場合のチェックマーク イメージ</p></td></tr><tr><td><p>UncheckedPressedImage</p></td><td><p>チェックの状態が未チェックで、マウスボタンがコントロールの上でクリックされた場合のチェックマーク イメージ</p></td></tr></tbody></table><p><br></p><blockquote type="warning"><p>!type=warning</p><p>カスタム画像を設定していない状態は、デフォルトのイメージで表示されます。そのため、HoverImage や PressedImage に NormalImage と異なるイメージを使用しなくても、NormalImage と同じ画像で設定してください。</p></blockquote><p>次のサンプルコードは、コードでチェックマークイメージを定義する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">Image imgCheck = Image.FromFile(<span class="hljs-string">@"c:\image\Check.png"</span>);
+Image imgUnCheck = Image.FromFile(<span class="hljs-string">@"c:\image\UnCheck.png"</span>);
+
+<span class="hljs-comment">// 一つ目のラジオボタンの画像を設定します。</span>
+gcRadioButton1.CheckMark.CheckedHoverImage = imgCheck;
+gcRadioButton1.CheckMark.CheckedNormalImage = imgCheck;
+gcRadioButton1.CheckMark.CheckedPressedImage = imgCheck;
+gcRadioButton1.CheckMark.UncheckedHoverImage = imgUnCheck;
+gcRadioButton1.CheckMark.UncheckedNormalImage = imgUnCheck;
+gcRadioButton1.CheckMark.UncheckedPressedImage = imgUnCheck;
+
+<span class="hljs-comment">// 二つ目のラジオボタンに同様の画像を設定します。</span>
+...
+
+<span class="hljs-comment">// 三つ目のラジオボタンに同様の画像を設定します。</span>
+...</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim imgCheck As Image = Image.FromFile("c:\image\Check.png")
+Dim imgUnCheck As Image = Image.FromFile("c:\image\UnCheck.png")
+
+' 一つ目のラジオボタンの画像を設定します。
+GcRadioButton1.CheckMark.CheckedHoverImage = imgCheck
+GcRadioButton1.CheckMark.CheckedNormalImage = imgCheck
+GcRadioButton1.CheckMark.CheckedPressedImage = imgCheck
+GcRadioButton1.CheckMark.UncheckedHoverImage = imgUnCheck
+GcRadioButton1.CheckMark.UncheckedNormalImage = imgUnCheck
+GcRadioButton1.CheckMark.UncheckedPressedImage = imgUnCheck
+
+' 二つ目のラジオボタンに同様の画像を設定します。
+...
+
+' 三つ目のラジオボタンに同様の画像を設定します。
+...</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcradiobutton.sample1.png" contenteditable="false"><br></p><p>GcRadioButton コントロールは個々のラジオボタンに異なるイメージを設定することもできます。個々の内容に適したイメージを設定することで、エンドユーザーがより直感的に認識できるようになります。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcradiobutton.sample2.png" contenteditable="false"><br></p><h2>チェックマークのサイズ変更</h2><p>チェックマークのサイズを変更するには、<a href="gcdocsite__documentlink?toc-item-id=573702d0-c5df-4030-9fc4-9cf919a25bba" title="">CheckMarkAutoSize</a>と<a href="gcdocsite__documentlink?toc-item-id=8b894c2e-3940-4bbf-b9d3-5b19d44562fe" title="">CheckMarkSize</a>プロパティを使用します。</p><p>CheckMarkAutoSize プロパティを <strong>True</strong> に設定したとき、チェックマークはコントロールのフォントの高さに応じて自動的に調整します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcradiobutton.checkmarkautosize.png" contenteditable="false"><br></p><p>任意のサイズを指定したい場合は、CheckMarkAutoSize プロパティを <strong>False</strong> に設定し、CheckMarkSize プロパティに値を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// チェックマークの自動サイズ調整を無効にします。</span>
+gcRadioButton1.CheckMarkAutoSize = <span class="hljs-literal">false</span>;
+<span class="hljs-comment">// チェックマークのサイズを設定にします。</span>
+gcRadioButton1.CheckMarkSize = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">32</span>, <span class="hljs-number">32</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' チェックマークの自動サイズ調整を無効にします。
+GcRadioButton1.CheckMarkAutoSize = False
+' チェックマークのサイズを設定にします。
+GcRadioButton1.CheckMarkSize = New Size(32, 32)</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcradiobutton.checkmarksize.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=f1f38089-4d35-4bd2-8585-9566ec9f22a3" title="">GcRadioButtonコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0e8dda87-d3b9-4fe3-a3a6-f7707b9b4d1d" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=96e1e4e1-a7f4-478d-bd38-318cb18eb2f3" title="">文字の配置と特殊効果</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0b61fede-d7dd-4df2-bb45-e26b8912c1ec" title="">ラジオボタンの拡大</a></p>

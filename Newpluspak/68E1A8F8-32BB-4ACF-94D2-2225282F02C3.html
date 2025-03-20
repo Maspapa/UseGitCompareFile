@@ -1,0 +1,23 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=7e23e584-b0de-4bba-bbd8-db2087720c3e" title="">GcContainer</a>コントロールに子コントロールを追加する方法について、以下に解説します。</p><h2>子コントロールの追加</h2><p>GcContainer コントロールに子コントロールをコードで追加する方法は、.NET Framework標準のPanelコントロールの場合と同じです。生成したコントロールをGcContainer コントロールのControlsプロパティが参照するControls コレクションのAdd メソッドで追加します。</p><p>以下は、フォームに配置済みのテキストコントロール（TextBox1、TextBox2）をGcContainer コントロールに追加し、キャプションを追加するコードです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// TextBoxをGcContainerに配置します。</span>
+textBox1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>);
+textBox1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">100</span>, <span class="hljs-number">20</span>);
+gcContainer1.Controls.Add(textBox1);
+
+textBox2.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">100</span>, <span class="hljs-number">40</span>);
+textBox2.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">100</span>, <span class="hljs-number">20</span>);
+gcContainer1.Controls.Add(textBox2);
+
+<span class="hljs-comment">// キャプションの文字を設定します。</span>
+gcContainer1.SetCaptionText(textBox1, <span class="hljs-string">"都道府県："</span>);
+gcContainer1.SetCaptionText(textBox2, <span class="hljs-string">"市区町村："</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' TextBoxをGcContainerに配置します。
+TextBox1.Location = New Point(100, 10)
+TextBox1.Size = New Size(100, 20)
+GcContainer1.Controls.Add(TextBox1)
+
+TextBox2.Location = New Point(100, 40)
+TextBox2.Size = New Size(100, 20)
+GcContainer1.Controls.Add(TextBox2)
+
+' キャプションの文字を設定します。
+GcContainer1.SetCaptionText(TextBox1, "都道府県：")
+GcContainer1.SetCaptionText(TextBox2, "市区町村：")</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccontainer.childcontrol.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6d2b9edf-9c20-4c51-9f3d-5437c28230b5" title="">GcContainerコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=abb2a2f2-8399-4fb8-8f87-d67ea77e0bfa" title="">背景の設定</a></p>

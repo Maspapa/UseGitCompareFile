@@ -1,0 +1,165 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=9291262f-27d2-461f-aa0f-329cdd9d229d" title="">GcFunctionKey</a>コントロールでは、ボタンに画像を表示したり、ボタン上にマウスポインタが置かれたときにツールチップを表示したりすることも可能です。ここでは、個々のボタンに割り当てられる機能について説明します。</p><h2>画像を設定する</h2><p>ファンクションキーボタンに追加した、ファンクションキーのボタンは、<a href="gcdocsite__documentlink?toc-item-id=1b7b12bb-3a32-429c-919f-2220f84fbf48" title="">FunctionKeyButton</a>オブジェクトを使用して設定します。</p><p>DisplayStyle プロパティで画像を表示するように設定されている場合、画像をカスタマイズすることができます。GcFunctionKey コントロールには、独自のボタン画像が用意されており、デフォルトの状態では追加するキーに従い、下記のような画像が表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.buttonimage.png" contenteditable="false"><br></p><p>(図)デフォルトのボタン画像</p><p>デフォルトのイメージは、ボタンの<a href="gcdocsite__documentlink?toc-item-id=9829fe8c-f837-4e99-9efa-872fec74ced7" title="">FunctionKey</a>プロパティの設定値をコントロールが描画していますが、<a href="gcdocsite__documentlink?toc-item-id=8681e879-445b-48e0-8089-edde6757453f" title="">ImageText</a>プロパティを設定することで、イメージに表示する文字列を変更することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Bars;
+
+FunctionKeyButton functionKeyButton1 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton1.FunctionKey = Keys.F2;
+functionKeyButton1.ImageText = <span class="hljs-string">"F2:クリア"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Bars
+
+Dim FunctionKeyButton1 As New FunctionKeyButton
+FunctionKeyButton1.FunctionKey = Keys.F2
+FunctionKeyButton1.ImageText = "F2:クリア";</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.imagetext.png" contenteditable="false"><br></p><p>任意の画像をボタンに設定するには、Image プロパティを使用します。また、ボタン上のテキストと画像の位置については、TextImageRelation プロパティで設定します。</p><p>次のサンプルコードは、ファンクションキーボタンに追加したボタンに任意の画像を表示しています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Bars;
+
+FunctionKeyButton functionKeyButton1 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton1.FunctionKey = Keys.F1;
+functionKeyButton1.Text = <span class="hljs-string">"F1-保存"</span>;
+functionKeyButton1.ForeColor = Color.DarkOrange;
+functionKeyButton1.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">12</span>, FontStyle.Bold);
+functionKeyButton1.TextAlign = ContentAlignment.MiddleCenter;
+functionKeyButton1.Image = Image.FromFile(<span class="hljs-string">@"C:\images\Save.png"</span>);
+functionKeyButton1.ImageAlign = ContentAlignment.MiddleCenter;
+functionKeyButton1.TextImageRelation = TextImageRelation.ImageAboveText;
+
+gcFunctionKey1.FunctionKeyButtons.Add(functionKeyButton1);
+
+FunctionKeyButton functionKeyButton2 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton2.FunctionKey = Keys.F10;
+functionKeyButton2.Text = <span class="hljs-string">"F10-ホーム"</span>;
+functionKeyButton2.ForeColor = Color.DarkGreen;
+functionKeyButton2.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">12</span>, FontStyle.Bold);
+functionKeyButton2.TextAlign = ContentAlignment.MiddleCenter;
+functionKeyButton2.Image = Image.FromFile(<span class="hljs-string">@"C:\images\Home.png"</span>);
+functionKeyButton2.ImageAlign = ContentAlignment.MiddleCenter;
+functionKeyButton2.TextImageRelation = TextImageRelation.ImageAboveText;
+
+gcFunctionKey1.FunctionKeyButtons.Add(functionKeyButton2);
+
+FunctionKeyButton functionKeyButton3 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton3.FunctionKey = Keys.F12;
+functionKeyButton3.Text = <span class="hljs-string">"F12-ログアウト"</span>;
+functionKeyButton3.ForeColor = Color.RoyalBlue;
+functionKeyButton3.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">12</span>, FontStyle.Bold);
+functionKeyButton3.TextAlign = ContentAlignment.MiddleCenter;
+functionKeyButton3.Image = Image.FromFile(<span class="hljs-string">@"C:\images\Logout.png"</span>);
+functionKeyButton3.ImageAlign = ContentAlignment.MiddleCenter;
+functionKeyButton3.TextImageRelation = TextImageRelation.ImageAboveText;
+
+gcFunctionKey1.FunctionKeyButtons.Add(functionKeyButton3);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Bars
+
+Dim FunctionKeyButton1 As New FunctionKeyButton
+FunctionKeyButton1.FunctionKey = Keys.F1
+FunctionKeyButton1.Text = "F1-保存"
+FunctionKeyButton1.ForeColor = Color.DarkOrange
+FunctionKeyButton1.Font = new Font("Meiryo UI", 12, FontStyle.Bold)
+FunctionKeyButton1.TextAlign = ContentAlignment.MiddleCenter
+FunctionKeyButton1.Image = Image.FromFile("C:\images\Save.png")
+FunctionKeyButton1.ImageAlign = ContentAlignment.MiddleCenter
+FunctionKeyButton1.TextImageRelation = TextImageRelation.ImageAboveText
+
+GcFunctionKey1.FunctionKeyButtons.Add(FunctionKeyButton1)
+
+Dim FunctionKeyButton2 As New FunctionKeyButton
+FunctionKeyButton2.FunctionKey = Keys.F10
+FunctionKeyButton2.Text = "F10-ホーム"
+FunctionKeyButton2.ForeColor = Color.DarkGreen
+FunctionKeyButton2.Font = new Font("Meiryo UI", 12, FontStyle.Bold)
+FunctionKeyButton2.TextAlign = ContentAlignment.MiddleCenter
+FunctionKeyButton2.Image = Image.FromFile("C:\images\Home.png")
+FunctionKeyButton2.ImageAlign = ContentAlignment.MiddleCenter
+FunctionKeyButton2.TextImageRelation = TextImageRelation.ImageAboveText
+
+GcFunctionKey1.FunctionKeyButtons.Add(FunctionKeyButton2)
+
+Dim FunctionKeyButton3 As New FunctionKeyButton
+FunctionKeyButton3.FunctionKey = Keys.F12
+FunctionKeyButton3.Text = "F12-ログアウト"
+FunctionKeyButton3.ForeColor = Color.RoyalBlue
+FunctionKeyButton3.Font = new Font("Meiryo UI", 12, FontStyle.Bold)
+FunctionKeyButton3.TextAlign = ContentAlignment.MiddleCenter
+FunctionKeyButton3.Image = Image.FromFile("C:\images\Logout.png")
+FunctionKeyButton3.ImageAlign = ContentAlignment.MiddleCenter
+FunctionKeyButton3.TextImageRelation = TextImageRelation.ImageAboveText
+
+GcFunctionKey1.FunctionKeyButtons.Add(FunctionKeyButton3)</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.image.png" contenteditable="false"><br></p><h2>ツールチップの表示</h2><p>FunctionKeyButton クラスの ToolTipText プロパティに文字列を設定し、GcFunctionKey コントロールの ShowItemToolTips プロパティを True にすると、そのファンクションキーボタンにマウスポインタが置かれたときに、ツールチップ（ToolTipText プロパティで設定した文字列）を表示することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.tooltip.png" contenteditable="false"><br></p><h2>ファンクションキーボタンの表示</h2><p><a href="gcdocsite__documentlink?toc-item-id=81b9fd48-adfe-4311-9924-a2da3b68640d" title="">CombinationKeyDisplayMode</a>プロパティは、ファンクションキーボタンに追加されたボタンの表示モードを設定します。CombinationKeyDisplayMode.Dynamic に設定されている場合、ファンクションキーボタンの表示は修飾子(Ctrl、Shift、Altキー)によってフィルタされます。例えば、ファンクションキーボタンに[Shift]+[A]キーが設定されていると、[Shift]キー押下時のみこのキーボタンが表示されます。CombinationKeyDisplayMode.Always に設定されている場合は、修飾子によるフィルタは行われず、表示可能なファンクショントキーボタンはすべて表示されます。</p><p>次のサンプルコードで追加したファンクションキーボタンは表示モードによって以下のように表示されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Bars;
+
+FunctionKeyButton functionKeyButton1 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton1.FunctionKey = Keys.F1;
+functionKeyButton1.Text = <span class="hljs-string">"ヘルプ"</span>;
+
+FunctionKeyButton functionKeyButton2 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton2.FunctionKey = Keys.F2;
+functionKeyButton2.Text = <span class="hljs-string">"参照"</span>;
+
+FunctionKeyButton functionKeyButton3 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton3.FunctionKey = Keys.F4;
+functionKeyButton3.Text = <span class="hljs-string">"戻る"</span>;
+
+FunctionKeyButton functionKeyButton4 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton4.FunctionKey = Keys.F5;
+functionKeyButton4.Text = <span class="hljs-string">"検索"</span>;
+
+FunctionKeyButton functionKeyButton5 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton5.FunctionKey = Keys.F12;
+functionKeyButton5.Text = <span class="hljs-string">"更新"</span>;
+
+gcFunctionKey1.FunctionKeyButtons.AddRange(<span class="hljs-keyword">new</span> FunctionKeyButton[] {
+    functionKeyButton1, functionKeyButton2, functionKeyButton3, 
+    functionKeyButton4, functionKeyButton5});
+
+FunctionKeyButton functionKeyButton6 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton6.FunctionKey = Keys.Control | Keys.Down;
+functionKeyButton6.Text = <span class="hljs-string">"前のページ"</span>;
+
+FunctionKeyButton functionKeyButton7 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton7.FunctionKey = Keys.Control | Keys.Up;
+functionKeyButton7.Text = <span class="hljs-string">"次のページ"</span>;
+
+gcFunctionKey1.FunctionKeyButtons.AddRange(<span class="hljs-keyword">new</span> FunctionKeyButton[] {
+    functionKeyButton6, functionKeyButton7});
+
+FunctionKeyButton functionKeyButton8 = <span class="hljs-keyword">new</span> FunctionKeyButton();
+functionKeyButton8.FunctionKey = Keys.Shift | Keys.A;
+functionKeyButton8.Text = <span class="hljs-string">"全件選択"</span>;
+
+gcFunctionKey1.FunctionKeyButtons.Add(functionKeyButton8);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Bars
+
+Dim FunctionKeyButton1 As New FunctionKeyButton
+FunctionKeyButton1.FunctionKey = Keys.F1
+FunctionKeyButton1.Text = "ヘルプ"
+
+Dim FunctionKeyButton2 As New FunctionKeyButton
+FunctionKeyButton2.FunctionKey = Keys.F2
+FunctionKeyButton2.Text = "参照"
+
+Dim FunctionKeyButton3 As New FunctionKeyButton
+FunctionKeyButton3.FunctionKey = Keys.F4
+FunctionKeyButton3.Text = "戻る"
+
+Dim FunctionKeyButton4 As New FunctionKeyButton
+FunctionKeyButton4.FunctionKey = Keys.F5
+FunctionKeyButton4.Text = "検索"
+
+Dim FunctionKeyButton5 As New FunctionKeyButton
+FunctionKeyButton5.FunctionKey = Keys.F12
+FunctionKeyButton5.Text = "更新"
+
+GcFunctionKey1.FunctionKeyButtons.AddRange(New FunctionKeyButton() { _
+    FunctionKeyButton1, FunctionKeyButton2, FunctionKeyButton3, _
+    FunctionKeyButton4, FunctionKeyButton5})
+
+Dim FunctionKeyButton6 As New FunctionKeyButton
+FunctionKeyButton6.FunctionKey = Keys.Control Or Keys.Down
+FunctionKeyButton6.Text = "前のページ"
+
+Dim FunctionKeyButton7 As New FunctionKeyButton
+FunctionKeyButton7.FunctionKey = Keys.Control Or Keys.Up
+FunctionKeyButton7.Text = "次のページ"
+
+GcFunctionKey1.FunctionKeyButtons.AddRange(New FunctionKeyButton() { _
+    FunctionKeyButton6, FunctionKeyButton7})
+
+Dim FunctionKeyButton8 As New FunctionKeyButton
+FunctionKeyButton8.FunctionKey = Keys.Shift Or Keys.A
+FunctionKeyButton8.Text = "全件選択"
+
+GcFunctionKey1.FunctionKeyButtons.Add(FunctionKeyButton8)</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.combinationkeydisplaymodedynamic1.png" contenteditable="false"><br></p><p>(図)CombinationKeyDisplayMode プロパティがDynamic の場合の通常時</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.combinationkeydisplaymodedynamic2.png" contenteditable="false"><br></p><p>(図)CombinationKeyDisplayMode プロパティがDynamic の場合のControlキー押下時</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.combinationkeydisplaymodedynamic3.png" contenteditable="false"><br></p><p>(図)CombinationKeyDisplayMode プロパティがDynamic の場合のShiftキー押下時</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.combinationkeydisplaymodealways1.png" contenteditable="false"><br></p><p>(図)CombinationKeyDisplayMode プロパティがAlways の場合</p><p>また、<a href="gcdocsite__documentlink?toc-item-id=000c058a-ffbe-4bcb-8466-6c23870a024f" title="">Sorted</a> プロパティを True に設定すると、ファンクションキーボタンに追加されたボタンがソートされた状態で表示されます。</p><h2>クラシックスタイルの適用</h2><p>GcFunctionKey コントロールの描画スタイルを、Windows クラシックのようなスタイルに設定することができます。描画スタイルをクラシックスタイルに設定するには、スマートタグで「クラシックスタイルを使用する」をチェックします。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.classicstyle1.png" contenteditable="false"><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.classicstyle2.png" contenteditable="false"><br></p><p>「クラシックスタイルを使用する」をチェックした場合、「描画スタイル」（RenderMode プロパティ）が Custom に設定されます。チェックを外すと、デフォルト値の ManagedRenderMode にリセットされます。また、チェックした後、「描画スタイル」（RenderMode プロパティ）をほかの値に指定すると、「クラシックスタイルを使用する」のチェックは外されます。</p><p>また、下記のコードを記述することでも設定が可能です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcFunctionKey1.Renderer = <span class="hljs-keyword">new</span> GrapeCity.Win.Bars.ToolStripClassicRenderer;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcFunctionKey1.Renderer = New GrapeCity.Win.Bars.ToolStripClassicRenderer</code></pre></div><h2>ショートカットのソース</h2><p><a href="gcdocsite__documentlink?toc-item-id=6f4b3e60-19de-4a00-b18c-4e50de9a3592" title="">FunctionKeySource</a> プロパティを使って GcFunctionKey コントロールに外部コントロールのショートカット設定を読み込むことができます。指定できるコントロールは、MenuStrip とContextMenuStrip コントロールの2種類です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.functionkeysource1.png" contenteditable="false"><br></p><p>MenuStrip を指定した場合、その MenuStrip のショートカット設定が GcFunctionKey コントロールの FunctionKeyButton に表示されます。</p><p>ContextMenuStrip を指定した場合はフォーカスがその ContextMenuStrip のオーナーコントロールに移動したとき、ContextMenuStrip のショートカット設定が GcFunctionKey コントロールの FunctionKeyButton に表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gcfunctionkey.functionkeysource2.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// MenuStrip と ContextMenuStrip を GcFunctionKeyのソースに指定します。</span>
+gcFunctionKey1.FunctionKeySource = <span class="hljs-keyword">new</span> <span class="hljs-built_in">object</span>[] {menuStrip1, contextMenuStrip1};</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' MenuStrip と ContextMenuStrip を GcFunctionKeyのソースに指定します。
+GcFunctionKey1.FunctionKeySource = New Object() {MenuStrip1, ContextMenuStrip1}</code></pre></div><h2>ToolStripContainer に埋め込む</h2><p>.NET Framework標準のMenuStripやToolStripのように、GcFunctionKeyコントロールもToolStripContainerに埋め込むことができます。MenuStripやToolStripと同様に、デザイン画面でGcFunctionKey コントロールをフォームの上端、右端、下端、左端へ配置することが可能です。</p><p>GcFunctionKey コントロールの配置は、スマートタグから「ToolStripContainer に埋め込む」を選択するか、下記のようなコードで実現します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">toolStripContainer1.TopToolStripPanel.Controls.Add(gcFunctionKey1);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">ToolStripContainer1.TopToolStripPanel.Controls.Add(GcFunctionKey1)</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=60df31c2-966b-45a6-8e2d-17cc4f844f1a" title="">GcFunctionKeyコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e736ae36-a974-4236-ac02-338082b46aef" title="">ファンクションキーボタンの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bbb3c362-852e-4f7d-93cb-8cf35d4911ea" title="">ボタン押下時の処理</a></p>

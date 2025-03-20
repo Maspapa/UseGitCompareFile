@@ -1,0 +1,105 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=383d621e-436e-466b-b2a2-b3149c5f83a4" title="">GcCheckedGroupBox</a>コントロールのチェックボックスの設定方法について、以下に解説します。</p><h2>チェックボックスの追加と削除</h2><p>GcCheckedGroupBox コントロールにチェックボックスを追加または削除するには、プロパティウィンドウで Items プロパティを選択して右側のボタンから CheckBoxItem コレクション エディタを起動し、設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccheckedgroupbox.addcheckboxitem.png" contenteditable="false"><br></p><p>コードで行う場合は、GcCheckedGroupBox コントロールの Items プロパティの CheckBoxItemCollection の Add や Remove メソッドを呼び出します。次のサンプルコードは、コードでチェックボックスを追加する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Containers;
+
+CheckBoxItem checkitem1 = <span class="hljs-keyword">new</span> CheckBoxItem();
+checkitem1.Text = <span class="hljs-string">"月曜日"</span>;
+checkitem1.Checked = <span class="hljs-literal">true</span>;
+gcCheckedGroupBox1.Items.Add (checkitem1);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Containers
+
+Dim checkitem1 As New CheckBoxItem
+checkitem1.Text = "月曜日"
+checkitem1.Checked = True
+GcCheckedGroupBox1.Items.Add(checkitem1)</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/06fadbb1-c461-433a-b385-ae4966e56069/images/gccheckedgroupbox.addcheckboxitem2.png" contenteditable="false"><br></p><p>次のサンプルコードは、コードで先頭のチェックボックスを削除する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCheckedGroupBox1.Items.Remove(gcCheckedGroupBox1.Items[<span class="hljs-number">0</span>]);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCheckedGroupBox1.Items.Remove(GcCheckedGroupBox1.Items(0))</code></pre></div><h2>チェックボックスの操作</h2><p>GcCheckedGroupBox コントロールに追加されたチェックボックスは、次のメソッドを利用してまとめて状態を変更することができます。</p><ul><li><p>CheckAllItems メソッド（GcCheckedGroupBoxコントロールに含まれるすべての項目のチェックボックスをオンにします。）</p></li><li><p>UncheckAllItems メソッド（GcCheckedGroupBoxコントロールに含まれるすべての項目のチェックボックスをオフにします。）</p></li><li><p>EnableAllItems メソッド（GcCheckedGroupBoxコントロールに含まれるすべてのチェックボックスを有効にします。）</p></li><li><p>DisableAllItems メソッド（GcCheckedGroupBoxコントロールに含まれるすべてのチェックボックスを無効にします。）</p></li></ul><h2>チェックされたチェックボックスを取得</h2><p>チェックされたチェックボックスを取得するには、CheckedItems プロパティが参照するCheckedCheckBoxItemCollection オブジェクトを使用するか、またはCheckedIndices プロパティが参照するCheckedCheckBoxIndexCollection オブジェクトを使います。前者のCheckedItemsを使うとコントロール内のオンになっている項目（CheckBoxItem）のコレクションを取得することができます。後者のCheckedIndicesを使うとコントロール内のオンになっている項目のインデックスのコレクションを取得することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.Containers;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    CheckBoxItem checkitem1 = <span class="hljs-keyword">new</span> CheckBoxItem();
+    checkitem1.Text = <span class="hljs-string">"春"</span>;
+    checkitem1.Checked = <span class="hljs-literal">true</span>;
+    gcCheckedGroupBox1.Items.Add(checkitem1);
+
+    CheckBoxItem checkitem2 = <span class="hljs-keyword">new</span> CheckBoxItem();
+    checkitem2.Text = <span class="hljs-string">"夏"</span>;
+    checkitem2.Checked = <span class="hljs-literal">false</span>;
+    gcCheckedGroupBox1.Items.Add(checkitem2);
+
+    CheckBoxItem checkitem3 = <span class="hljs-keyword">new</span> CheckBoxItem();
+    checkitem3.Text = <span class="hljs-string">"秋"</span>;
+    checkitem3.Checked = <span class="hljs-literal">true</span>;
+    gcCheckedGroupBox1.Items.Add(checkitem3);
+
+    CheckBoxItem checkitem4 = <span class="hljs-keyword">new</span> CheckBoxItem();
+    checkitem4.Text = <span class="hljs-string">"冬"</span>;
+    checkitem4.Checked = <span class="hljs-literal">true</span>;
+    gcCheckedGroupBox1.Items.Add(checkitem4);
+
+    gcCheckedGroupBox1.Text = <span class="hljs-string">"好きな季節"</span>;
+}
+
+<span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// CheckedItemsを使ってコントロール内のオンになっている項目のコレクションを取得します。</span>
+    CheckedCheckBoxItemCollection checkeditems = gcCheckedGroupBox1.CheckedItems;
+    <span class="hljs-keyword">foreach</span> (CheckBoxItem item <span class="hljs-keyword">in</span> checkeditems)
+    {
+        System.Diagnostics.Debug.WriteLine(item.Text);
+    }
+}
+
+<span class="hljs-function">private void button2_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// CheckedIndicesを使ってコントロール内のオンになっている項目のインデックスのコレクションを取得します。</span>
+    CheckedCheckBoxIndexCollection checkeditems = gcCheckedGroupBox1.CheckedIndices;
+    <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">int</span> index <span class="hljs-keyword">in</span> checkeditems)
+    {
+        System.Diagnostics.Debug.WriteLine(index.ToString());
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.Containers
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim Checkitem1 As CheckBoxItem = New CheckBoxItem()
+    Checkitem1.Text = "春"
+    Checkitem1.Checked = True
+    GcCheckedGroupBox1.Items.Add(Checkitem1)
+
+    Dim Checkitem2 As CheckBoxItem = New CheckBoxItem()
+    Checkitem2.Text = "夏"
+    Checkitem2.Checked = False
+    GcCheckedGroupBox1.Items.Add(Checkitem2)
+
+    Dim Checkitem3 As CheckBoxItem = New CheckBoxItem()
+    checkitem3.Text = "秋"
+    Checkitem3.Checked = True
+    GcCheckedGroupBox1.Items.Add(checkitem3)
+
+    Dim Checkitem4 As CheckBoxItem = New CheckBoxItem()
+    Checkitem4.Text = "冬"
+    Checkitem4.Checked = True
+    GcCheckedGroupBox1.Items.Add(Checkitem4)
+
+    GcCheckedGroupBox1.Text = "好きな季節"
+End Sub
+
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    ' CheckedItemsを使ってコントロール内のオンになっている項目のコレクションを取得します。
+    Dim Checkeditems As CheckedCheckBoxItemCollection = GcCheckedGroupBox1.CheckedItems
+    For Each item As CheckBoxItem In Checkeditems
+        System.Diagnostics.Debug.WriteLine(item.Text)
+    Next
+End Sub
+
+Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    ' CheckedIndicesを使ってコントロール内のオンになっている項目のインデックスのコレクションを取得します。
+    Dim Checkeditems As CheckedCheckBoxIndexCollection = GcCheckedGroupBox1.CheckedIndices
+    For Each index As Integer In Checkeditems
+        System.Diagnostics.Debug.WriteLine(index.ToString())
+    Next
+End Sub</code></pre></div><div data-language="auto" class="toastui-editor-ww-code-block-highlighting"><pre><code>出力結果：
+button1_Click
+春
+秋
+冬
+
+button2_Click
+0
+2
+3</code></pre></div><p>実行時にチェックボックスのチェック状態が変更されるとItemCheckedChanged イベントが発生します。また、チェックボックスをクリックしたときにはチェック状態の変更に関係なくItemClick イベントが発生します。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0e22aa1a-10fd-4384-8e55-fb152bcb8865" title="">GcCheckedGroupBoxコントロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3ce78a00-9fdb-4ad7-b49e-8fe74b959406" title="">外観の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cbe8017f-3c54-413b-a12c-3ed521efa3bd" title="">チェックボックスのレイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cc68cdb0-262e-4b86-b640-b3287c27528b" title="">チェックマークの拡大</a></p>
