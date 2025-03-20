@@ -1,0 +1,29 @@
+<p>GcMultiRowコントロールは、3つのデータ連結モードをサポートしており、用途に合わせて最適なモードを選択できます。</p><h2>アンバウンド（非連結）モード</h2><p>アンバウンド モードは、比較的少量のデータを表示するのに適しています。このモードでは、データソースに直接接続せず、すべてのデータをGcMultiRowコントロール内に保持します。このモードは、表形式のデータを表示専用で提供する場合や、データソースとの接続を独自にコーディングする場合に使用できます。</p><p><a href="gcdocsite__documentlink?toc-item-id=3138724b-55fb-4c42-80a0-d0391d3a31f0" title="">GcMultiRow.DataSource</a>プロパティが空で、かつ<a href="gcdocsite__documentlink?toc-item-id=11002cc2-cd99-434d-bb97-0e9fbaae03fc" title="">GcMultiRow.VirtualMode</a>プロパティがFalseのとき、GcMultiRowコントロールはアンバウンド モードとして動作します。</p><p>アンバウンドモードにおけるデータの操作方法は「<a href="gcdocsite__documentlink?toc-item-id=a11001f1-e97b-4d87-98a5-66b8e222b3b1" title="">データの設定と取得</a>」を参照してください。</p><h2>バウンドモード</h2><p>バウンドモードはデータソースに接続し、データの同期と読み書きを行う場合に適しています。このモードでは、すべてのデータはデータソースに保持され、必要に応じてGcMultiRowコントロールの値が自動的に更新されます。GcMultiRowコントロールでデータを変更した場合も、自動的に反映されます。このモードは、一般的なデータベース アプリケーションの構築に使用できます。</p><p><a href="gcdocsite__documentlink?toc-item-id=3138724b-55fb-4c42-80a0-d0391d3a31f0" title="">GcMultiRow.DataSource</a>プロパティにデータソースが設定され、かつ<a href="gcdocsite__documentlink?toc-item-id=11002cc2-cd99-434d-bb97-0e9fbaae03fc" title="">GcMultiRow.VirtualMode</a>プロパティがFalseのとき、GcMultiRowコントロールはバウンドモードとして動作します。</p><p>次のコードでは、バウンドモードでデータソースの値を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.DataSource = myDataSet;
+gcMultiRow1.DataMember = myDataSet.Tables[<span class="hljs-number">0</span>].TableName;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.DataSource = myDataSet
+GcMultiRow1.DataMember = myDataSet.Tables(0).TableName</code></pre></div><p>バウンドモードの詳細は「<a href="gcdocsite__documentlink?toc-item-id=a28772a9-cd25-4f70-8cd2-b81866b3749e" title="">データベースとの連結</a>」を参照してください。</p><h2>仮想モード</h2><p>仮想モードは大量のデータを高速に扱う場合に適しています。このモードでは、GcMultiRowコントロールはデータを自動的にグリッドに読み込みません。開発者は、すべてのデータの更新や反映のタイミングをコーディングしてデータの表示や転送を指示します。このモードは、必要最小限のデータのみを保持してパフォーマンスを改善する用途に適しています。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>仮想モードが有効のとき、ColumnHeaderCellの組み込みフィルタおよび組み込みソートは動作しません。</p></li><li><p>仮想モードでは<a href="gcdocsite__documentlink?toc-item-id=c13b7b90-6d2c-4904-9cb6-afd7483f3d2f" title="">GcMultiRow.Sort</a>メソッドを使用できません。</p></li></ul></blockquote><p><a href="gcdocsite__documentlink?toc-item-id=11002cc2-cd99-434d-bb97-0e9fbaae03fc" title="">GcMultiRow.VirtualMode</a>プロパティがTrueのとき、GcMultiRowコントロールは仮想モードとして動作します。</p><p>仮想モードでは、グリッドにデータが必要になるタイミングで<a href="gcdocsite__documentlink?toc-item-id=8d1fc12e-2e00-49e0-94a3-4a877ba0e7bc" title="">GcMultiRow.CellValueNeeded</a>イベントが発生します。このタイミングには、スクロールやフォームの再描画が含まれます。次のコードは<a href="gcdocsite__documentlink?toc-item-id=8d1fc12e-2e00-49e0-94a3-4a877ba0e7bc" title="">GcMultiRow.CellValueNeeded</a>イベントを使用してセルの座標を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    gcMultiRow1.ReadOnly = <span class="hljs-literal">true</span>;
+    gcMultiRow1.VirtualMode = <span class="hljs-literal">true</span>;
+    gcMultiRow1.RowCount = <span class="hljs-number">1000</span>;
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellValueNeeded(object sender, CellValueEventArgs e)</span>
+{
+    e.Value = <span class="hljs-built_in">string</span>.Format(<span class="hljs-string">"{0},{1}"</span>, e.RowIndex, e.CellIndex);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load( _
+    ByVal sender As System.Object, ByVal e As System.EventArgs _
+    ) Handles MyBase.Load
+    GcMultiRow1.ReadOnly = True
+    GcMultiRow1.VirtualMode = True
+    GcMultiRow1.RowCount = 1000
+End Sub
+
+Private Sub GcMultiRow1_CellValueNeeded( _
+    ByVal sender As System.Object, ByVal e As CellValueEventArgs _
+    ) Handles GcMultiRow1.CellValueNeeded
+    e.Value = String.Format("{0},{1}", e.RowIndex, e.CellIndex)
+End Sub</code></pre></div><p>データの更新が必要となるタイミングには<a href="gcdocsite__documentlink?toc-item-id=415b9f09-4251-4159-95eb-cf96a60efb4f" title="">GcMultiRow.CellValuePushed</a>イベントが発生します。このイベントはユーザーの入力操作や開発者による入力操作で発生します。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c96288bd-334e-4b75-8bfc-43dc6af17e13" title="">データの管理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a11001f1-e97b-4d87-98a5-66b8e222b3b1" title="">データの設定と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2948cccd-4555-4304-b2de-0322638669c9" title="">データの並び替え</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c7f1257c-84eb-494a-ad04-3506e5b696a9" title="">クリップボードの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcb261f3-fa94-4023-b03a-7337535fe58a" title="">新しい行に既定値を設定</a></p>

@@ -1,0 +1,15 @@
+<p>ラベル型セル（LabelCell）に文字列を表示するには、LabelCell.Valueプロパティ（<a href="gcdocsite__documentlink?toc-item-id=bf06962f-f1e4-4a56-86b0-d66989468cc4" title="">Cell.Value</a>プロパティ）に文字列型の値を設定します。</p><h2>デザイナによる設定</h2><ol><li><p>行（Row）にラベル型セルを追加する。（例：labelCell1）</p></li><li><p>labelCell1を選択し、プロパティウィンドウでlabelCell1.Valueプロパティに任意の文字列を設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+LabelCell labelCell1 = <span class="hljs-keyword">new</span> LabelCell();
+labelCell1.Name = <span class="hljs-string">"labelCell1"</span>;
+labelCell1.Value = <span class="hljs-string">"Test"</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { labelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim LabelCell1 As New LabelCell()
+LabelCell1.Name = "LabelCell1"
+LabelCell1.Value = "Test"
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { LabelCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=132a7aa2-a81f-4736-8414-3b54657deea7" title="">ラベル型セル（LabelCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=06070c96-16ab-42d8-83e1-fd474d51b297" title="">クリックの処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=29716542-2d32-49f0-aa69-197a395f76d0" title="">アクセスキーの接頭文字</a></p>

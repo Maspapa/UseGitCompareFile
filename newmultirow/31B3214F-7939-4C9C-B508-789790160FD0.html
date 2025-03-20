@@ -1,0 +1,93 @@
+<p>ドロップダウンカレンダーで使用されている表示スタイルについて解説します。</p><h2>描画スタイル</h2><p>描画スタイルは、<a href="gcdocsite__documentlink?toc-item-id=25d24b17-7419-4a0d-8573-0ecde939b971" title="">Style</a>オブジェクトを使って設定します。カレンダーを構成する要素の中で、描画スタイルが適用されるのは次の6種類です。</p><ol><li><p>コントロール（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ControlStyle</a>プロパティ）</p></li><li><p>ヘッダ（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">HeaderStyle</a>プロパティ）</p></li><li><p>曜日タイトル（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">TitleStyle</a>プロパティ）</p></li><li><p>日付領域（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ItemStyle</a>プロパティ）</p></li><li><p>今日の日付領域（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">LegendStyle</a>プロパティ）</p></li><li><p>週番号領域（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">WeekNumberStyle</a>プロパティ）</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/style_a.png" contenteditable="false"><br></p><p>コントロールに対して、ControlStyleプロパティで設定した描画スタイルを適用するかどうかは、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">UseControlStyle</a>プロパティで指定します。</p><p>これらの描画スタイルで設定できる項目は、次のとおりです。</p><ul><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=717de81f-5cb8-41e1-8961-b6a1be945c14" title="">BackColor</a>プロパティ）</p></li><li><p>3D効果のべべル（<a href="gcdocsite__documentlink?toc-item-id=5f0fab86-7e49-46e5-b2d3-d104d73d069e" title="">Bevel</a>プロパティ）</p></li><li><p>境界線の色（<a href="gcdocsite__documentlink?toc-item-id=584ce28e-3f37-438c-a2f6-41cd29123707" title="">BorderColor</a>プロパティ）</p></li><li><p>境界線の種類（<a href="gcdocsite__documentlink?toc-item-id=2ffb09b9-8b08-485c-8c81-0dd14ef43c42" title="">BorderStyle</a>プロパティ）</p></li><li><p>テキストの配置（<a href="gcdocsite__documentlink?toc-item-id=1b9bcf75-37f5-4fab-935d-db01eb35bca3" title="">ContentAlignment</a>プロパティ）</p></li><li><p>フォント（<a href="gcdocsite__documentlink?toc-item-id=caad09cd-a350-4648-98c8-44a53c6b89f4" title="">Font</a>プロパティ）</p></li><li><p>文字色（<a href="gcdocsite__documentlink?toc-item-id=fbb3f323-7c66-4fb1-8f5b-7ef2fe6ee40f" title="">ForeColor</a>プロパティ）</p></li><li><p>文字の表示スタイル（<a href="gcdocsite__documentlink?toc-item-id=f8e57d90-91d9-4ded-809e-2e51788f156d" title="">TextEffect</a>プロパティ）</p></li></ul><p>次のサンプルコードは、日付領域にスタイルを適用する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+
+<span class="hljs-comment">// 描画スタイルの内容を設定します。</span>
+InputManCell.Style aStyle = <span class="hljs-keyword">new</span> InputManCell.Style();
+aStyle.BackColor = Color.AliceBlue;
+aStyle.ForeColor = Color.Black;
+aStyle.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"メイリオ"</span>, <span class="hljs-number">10</span>);
+aStyle.BorderColor = Color.Black;
+aStyle.BorderStyle = BorderStyle.FixedSingle;
+aStyle.ContentAlignment = ContentAlignment.MiddleCenter;
+
+<span class="hljs-comment">// 描画スタイルを日付領域へ適用します。</span>
+gcDateTimeCell1.DropDownCalendar.ItemStyle = aStyle;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+                                                                
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+
+' 描画スタイルの内容を設定します。
+Dim aStyle As New InputManCell.Style()
+aStyle.BackColor = Color.AliceBlue
+aStyle.ForeColor = Color.Black
+aStyle.Font = New Font("メイリオ", 10)
+aStyle.BorderColor = Color.Black
+aStyle.BorderStyle = BorderStyle.FixedSingle
+aStyle.ContentAlignment = ContentAlignment.MiddleCenter
+
+' 描画スタイルを日付領域へ適用します。
+GcDateTimeCell1.DropDownCalendar.ItemStyle = aStyle
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>日付スタイル</h2><p>日付スタイルは、<a href="gcdocsite__documentlink?toc-item-id=38466229-9ce8-4ca6-8b8e-eb4df5acc5ad" title="">SubStyle</a>オブジェクトを使って設定します。カレンダーを構成する要素の中で、日付スタイルが適用されるのは次の5種類です。</p><ol><li><p>特定の曜日（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">Weekdays</a>プロパティで指定）</p></li><li><p>休日（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">HolidayStyle</a>オブジェクトで指定）</p></li><li><p>隣接日（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">TrailingStyle</a>プロパティ）</p></li><li><p>選択された日（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">SelectionStyle</a>プロパティ）</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/style_b.png" contenteditable="false"><br></p><p><br></p><p>これらの日付スタイルで設定できる項目は、次のとおりです。</p><ul><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=c743c154-e2f0-43e3-8c80-d4d1928c4084" title="">BackColor</a>プロパティ）</p></li><li><p>太字（<a href="gcdocsite__documentlink?toc-item-id=6ebc777f-3342-4087-b492-a8b9a0d6b803" title="">Bold</a>プロパティ）</p></li><li><p>文字色（<a href="gcdocsite__documentlink?toc-item-id=7f96ea46-8a14-45bf-a7dc-2fcc503d4b6b" title="">ForeColor</a>プロパティ）</p></li><li><p>下線（<a href="gcdocsite__documentlink?toc-item-id=506cb76d-ed88-483f-8856-ce3aa4a92015" title="">UnderLine</a>プロパティ）</p></li></ul><p>次のサンプルコードは、日曜日と土曜日の日付スタイルを変更する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+                                                                
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+
+<span class="hljs-comment">// 日曜日の日付スタイルを設定します。</span>
+gcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.ReflectToTitle = GrapeCity.Win.Editors.ReflectTitle.Both;
+gcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.SubStyle.BackColor = Color.WhiteSmoke;
+gcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.SubStyle.ForeColor = Color.Red;
+gcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.WeekFlags = GrapeCity.Win.Editors.WeekFlags.All;
+<span class="hljs-comment">// 土曜日の日付スタイルを設定します。</span>
+gcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.ReflectToTitle = GrapeCity.Win.Editors.ReflectTitle.Both;
+gcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.SubStyle.BackColor = Color.WhiteSmoke;
+gcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.SubStyle.ForeColor = Color.Blue;
+gcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.WeekFlags = GrapeCity.Win.Editors.WeekFlags.All;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+
+' 日曜日の日付スタイルを設定します。
+GcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.ReflectToTitle = GrapeCity.Win.Editors.ReflectTitle.Both
+GcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.SubStyle.BackColor = Color.WhiteSmoke
+GcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.SubStyle.ForeColor = Color.Red
+GcDateTimeCell1.DropDownCalendar.Weekdays.Sunday.WeekFlags = GrapeCity.Win.Editors.WeekFlags.All
+' 土曜日の日付スタイルを設定します。
+GcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.ReflectToTitle = GrapeCity.Win.Editors.ReflectTitle.Both
+GcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.SubStyle.BackColor = Color.WhiteSmoke
+GcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.SubStyle.ForeColor = Color.Blue
+GcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.WeekFlags = GrapeCity.Win.Editors.WeekFlags.All
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>境界線と区切り線</h2><p><a href="gcdocsite__documentlink?toc-item-id=25d24b17-7419-4a0d-8573-0ecde939b971" title="">Style</a>オブジェクトの<a href="gcdocsite__documentlink?toc-item-id=584ce28e-3f37-438c-a2f6-41cd29123707" title="">BorderColor</a>および<a href="gcdocsite__documentlink?toc-item-id=2ffb09b9-8b08-485c-8c81-0dd14ef43c42" title="">BorderStyle</a>プロパティを設定することで、描画スタイルの設定が適用される各要素に境界線を表示することができます。</p><p>また、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">Lines</a>プロパティを使用すると、日付領域の区切り線を設定できます。Linesプロパティは<a href="gcdocsite__documentlink?toc-item-id=2eecc74d-78a4-4c92-8d3a-12bac3bf755b" title="">Grid</a>クラスを参照し、以下の区切り線の色および線種を設定することが可能です。</p><ul><li><p>日付領域の外枠下側の線（<a href="gcdocsite__documentlink?toc-item-id=aac00b29-0265-4fda-bdef-615a1eb24725" title="">Bottom</a>プロパティ）</p></li><li><p>日付領域の外枠上側の線（<a href="gcdocsite__documentlink?toc-item-id=f1098582-1c08-453c-a713-20b89e9c5d85" title="">Top</a>プロパティ）</p></li><li><p>日付領域の外枠左側の線（<a href="gcdocsite__documentlink?toc-item-id=4a912599-70ff-48cc-85ba-5304949a0243" title="">Left</a>プロパティ）</p></li><li><p>日付領域の外枠右側の線（<a href="gcdocsite__documentlink?toc-item-id=b7f9cc72-f630-4524-9630-56db0fa48596" title="">Right</a>プロパティ）</p></li><li><p>曜日タイトルと日付領域の区切り線（<a href="gcdocsite__documentlink?toc-item-id=69031021-56da-448c-89f8-7b93d987c9a5" title="">Separator</a>プロパティ）</p></li><li><p>日付領域の水平区切り線（<a href="gcdocsite__documentlink?toc-item-id=0e7cca8e-06cd-4b43-97d6-5420dec8d06c" title="">Horizontal</a>プロパティ）</p></li><li><p>日付領域の垂直区切り線（<a href="gcdocsite__documentlink?toc-item-id=db9d651b-ba8d-4426-9185-3f8bb0a7c049" title="">Vertical</a>プロパティ）</p></li><li><p>垂直区切り線を日付領域と曜日タイトルの両方に表示するかどうか（<a href="gcdocsite__documentlink?toc-item-id=46152072-8dad-458e-8f6e-6401213c68cf" title="">VerticalFlag</a>プロパティ）</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/style_c.png" contenteditable="false"><br></p><p>次のサンプルコードは、区切り線を設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+
+<span class="hljs-comment">// 垂直方向の区切り線を曜日タイトルに設定します。</span>
+gcDateTimeCell1.DropDownCalendar.Lines.VerticalFlag = GrapeCity.Win.Editors.VerticalFlags.HeaderOnly;
+<span class="hljs-comment">// 水平方向の区切り線を設定します。</span>
+gcDateTimeCell1.DropDownCalendar.Lines.Vertical = <span class="hljs-keyword">new</span> InputManCell.Line(GrapeCity.Win.Editors.LineStyle.Dotted, Color.Gray);
+gcDateTimeCell1.DropDownCalendar.Lines.Horizontal = <span class="hljs-keyword">new</span> InputManCell.Line(GrapeCity.Win.Editors.LineStyle.DashDot, Color.Green);
+
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+
+' 垂直方向の区切り線を曜日タイトルに設定します。
+GcDateTimeCell1.DropDownCalendar.Lines.VerticalFlag = GrapeCity.Win.Editors.VerticalFlags.HeaderOnly
+' 水平方向の区切り線を設定します。
+GcDateTimeCell1.DropDownCalendar.Lines.Vertical = New InputManCell.Line(LineStyle.Dotted, Color.Gray)
+GcDateTimeCell1.DropDownCalendar.Lines.Horizontal = New InputManCell.Line(LineStyle.DashDot, Color.Green)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b80001db-fab9-48f7-baab-a639554c60a2" title="">GcDateTimeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=636ed515-d9bd-4cd4-95e1-a248269ffe78" title="">ドロップダウンカレンダー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6de88de5-48fa-4c94-9bc3-fc9ddb74fe0c" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7e8d1ddd-87e5-4962-b603-454317a10781" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=979bc13b-9d8a-4852-adba-df726a52f186" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=023bbf34-13c0-4d73-a5b1-2fa5ca38e1b2" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4394a7f2-0d1c-4787-bfc9-217dd21811e2" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=076366ab-8236-4f4e-954b-9ee586810bce" title="">祝日定義ファイル</a></p>

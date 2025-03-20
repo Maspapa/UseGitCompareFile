@@ -1,0 +1,67 @@
+<p>セルに入力された値は、コントロールに対する入力と同じように２種類のイベントで検証できます。同様に、行単位での検証も可能です。</p><h2>検証エラーをアイコンとツールチップで通知</h2><p>ユーザーによってセルに入力された値にエラーがある場合、セルまたはセルが属する行にエラーアイコンを表示できます。ユーザーは、マウスカーソルをエラーアイコンにあわせることでエラーの詳細を確認できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/rowcell_errorinfo_cellerroricon.png" alt="検証エラーをアイコンとツールチップで通知する" contenteditable="false"><br></p><p>エラーメッセージの表示方法は「<a href="gcdocsite__documentlink?toc-item-id=c7f2f4ef-e8a2-4cdb-90be-1a4e8ded871a" title="">エラーメッセージの表示</a>」を参照してください。</p><h2>検証エラーをバルーンチップで通知</h2><p>ユーザーの入力内容にエラーがある場合、検証エラーの内容をバルーンチップで通知し、適切な値への編集を促すことができます。この方法は、常時入力モード（GcMultiRow.EditType=EditType.AlwaysEdit）を使用している場合など、エラーアイコンやエラーチップを表示できない場合に適しています。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/data_validation_balloontip.png" alt="検証エラーをバルーンチップで通知する" contenteditable="false"><br></p><p>次のコードは、最初の文字列型セルに５文字以上が入力されたとき、バルーンチップで検証エラーを通知し、ユーザーに再入力を促します。サンプルコードを実行するためには、あらかじめフォームにToolTipコンポーネント(ToolTip1)を追加する必要があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    gcMultiRow1.ShortcutKeyManager.Unregister(Keys.Enter);
+    gcMultiRow1.ShortcutKeyManager.Register(SelectionActions.MoveToNextCell, Keys.Enter);
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellValidating(object sender, CellValidatingEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = (GcMultiRow)sender;
+
+    <span class="hljs-keyword">if</span> (e.CellIndex == <span class="hljs-number">0</span> &amp;&amp; e.RowIndex == <span class="hljs-number">0</span>)
+    {
+        Rectangle currentCellRect = gcMultiRow.GetCellDisplayRectangle(e.RowIndex, e.CellIndex);
+
+        <span class="hljs-built_in">string</span> <span class="hljs-keyword">value</span> = (<span class="hljs-built_in">string</span>)e.FormattedValue;
+        <span class="hljs-built_in">bool</span> hasError = <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">value</span> != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">value</span>.Length &gt; <span class="hljs-number">5</span>)
+        {
+            <span class="hljs-keyword">this</span>.toolTip1.ToolTipIcon = ToolTipIcon.Error;
+            <span class="hljs-keyword">this</span>.toolTip1.ToolTipTitle = <span class="hljs-string">"検証エラー"</span>;
+            <span class="hljs-keyword">this</span>.toolTip1.IsBalloon = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">this</span>.toolTip1.SetToolTip(gcMultiRow.EditingControl, <span class="hljs-string">"dummy"</span>);
+            <span class="hljs-keyword">this</span>.toolTip1.Show(<span class="hljs-string">"入力された文字数が5文字を超えています。"</span>, gcMultiRow.EditingControl, <span class="hljs-number">0</span>, currentCellRect.Height);
+            hasError = <span class="hljs-literal">true</span>;
+            e.Cancel = <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-comment">// エラーがない場合、バルーンチップを消去する</span>
+        <span class="hljs-keyword">if</span> (hasError == <span class="hljs-literal">false</span>)
+        {
+            <span class="hljs-keyword">this</span>.toolTip1.Hide(<span class="hljs-keyword">this</span>);
+            <span class="hljs-keyword">this</span>.toolTip1.RemoveAll();
+        }
+    } 
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    GcMultiRow1.ShortcutKeyManager.Unregister(Keys.Enter)
+    GcMultiRow1.ShortcutKeyManager.Register(SelectionActions.MoveToNextCell, Keys.Enter)
+End Sub
+
+Private Sub GcMultiRow1_CellValidating(ByVal sender As System.Object, ByVal e As GrapeCity.Win.MultiRow.CellValidatingEventArgs) Handles GcMultiRow1.CellValidating
+    Dim gcMultiRow As GcMultiRow = DirectCast(sender, GcMultiRow)
+
+    If (e.CellIndex = 0) AndAlso (e.RowIndex = 0) Then
+        Dim currentCellRect As Rectangle = gcMultiRow.GetCellDisplayRectangle(e.RowIndex, e.CellIndex)
+        Dim value As String = TryCast(e.FormattedValue, String)
+        Dim hasError As Boolean = False
+
+        If (Not value Is Nothing) AndAlso (value.Length &gt; 5) Then
+            Me.ToolTip1.ToolTipIcon = ToolTipIcon.Error
+            Me.ToolTip1.ToolTipTitle = "検証エラー"
+            Me.ToolTip1.IsBalloon = True
+            Me.ToolTip1.SetToolTip(gcMultiRow.EditingControl, "dummy")
+            Me.ToolTip1.Show("入力された文字数が5文字を超えています。", gcMultiRow.EditingControl, 0, currentCellRect.Height)
+            hasError = True
+            e.Cancel = True
+        End If
+
+        ' エラーがない場合、バルーンチップを消去する
+        If (hasError = False) Then
+            Me.ToolTip1.Hide(Me)
+            Me.ToolTip1.RemoveAll()
+        End If
+    End If
+End Sub</code></pre></div><h2>値の変更</h2><p>ユーザーが入力した値をコードによって整形するには、タイミングに応じて次のコードを使用します。</p><table><thead><tr><th><p>編集済みのセルの値を書き換える場合</p></th><th><p>編集中のセルの値を書き換える</p></th></tr></thead><tbody><tr><td><p>GcMultiRow.SetValue メソッド</p><p>または</p><p>Cell.Value プロパティ</p></td><td><p>GcMultiRow.EditingControl.Text プロパティ</p><p>または</p><p>セル編集コントロール固有のメンバ</p></td></tr></tbody></table><p>セルの編集状態はGcMultiRow.IsEditingプロパティで確認できます。</p><h2>値の入力制限</h2><p>セル編集コントロールによって値の入力を制限できる場合があります。たとえば、TextBoxCellは最大入力文字数、NumericUpDownCellは数値のみ、MaskedTextBoxCellは整形された文字列といった制限を提供しています。</p><h2>値とデータソース</h2><p>入力された値がデータソースのデータ型に一致しない場合、GcMultiRow.DataErrorイベントが発生します。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0f3efc93-9866-452e-a9a6-3a1f0ecb6591" title="">ユーザー入力の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ab9b7b07-c4bf-4eff-a5d1-427115093507" title="">セルによる値の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d9af300a-bc41-4bfd-90ab-a506563789cf" title="">検証の実行</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80e0bfb1-74a7-47e9-9c4a-f0c7d4eea41d" title="">検証情報のカスタマイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=499e2e8c-530f-40ff-ac3d-699bd84478eb" title="">ユーザー定義のセルバリデータ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a2acbd38-76de-4afd-a7ca-eb03c99ffa6f" title="">ユーザー定義の検証アクション</a></p>

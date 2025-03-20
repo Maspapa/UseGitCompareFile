@@ -1,0 +1,94 @@
+<p>GcFontPickerCellのドロップダウンリストのカスタマイズ方法について、以下に解説します。</p>
+<h2 id="ドロップダウンリストのカスタマイズ">ドロップダウンリストのカスタマイズ</h2>
+<p>GcFontPickerCellのドロップダウンリストに表示される項目の内容および外観はカスタマイズすることが可能です。ドロップダウンリストをカスタマイズするには、次のプロパティを設定します。</p>
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/dropdownlist.png" alt="" /></p>
+<table>
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">ItemStyle</a></td>
+<td>ドロップダウンリストに含まれる項目のスタイルを指定する<a href="gcdocsite__documentlink?toc-item-id=a7497faa-8f72-4144-b075-358383751479">ItemStyle</a>オブジェクトを取得します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">ShowPreferredFonts</a></td>
+<td>お気に入りのフォントを表示するかどうかを示す値を取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">PreferredFonts</a></td>
+<td>お気に入りのフォントのコレクションを取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">ShowRecentlyUsedFonts</a></td>
+<td>最近使用したフォントを表示するかどうかを示す値を取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">RecentlyUsedFontsCount</a></td>
+<td>最近使用したフォントで表示できる数を取得または設定します。</td>
+</tr>
+</tbody>
+</table>
+<p>お気に入りのフォントに項目を追加するには、設計時にセルのスマートタグから「お気に入りのフォントの編集...」をクリックするか、プロパティウィンドウで<a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">PreferredFonts</a>プロパティの右側に表示されるボタンをクリックし、FontInfoコレクションエディタを開いて行います。</p>
+<p>以下に、お気に入りのフォントのカスタマイズ方法を示します。</p>
+<ol>
+<li>FontInfoコレクションエディタでフォントを選択して矢印ボタンをクリックして「お気に入りのフォント」に追加します。<br /><br /><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/preferredfontseditor1.png" alt="" /><br /><br /></li>
+<li>「お気に入りのフォント」リストボックスの右側にある編集ボタンをクリックして、該当フォントの説明を編集できます。説明はドロップダウンリストでフォントの右に表示されます。<br /><br /><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/preferredfontseditor2.png" alt="" /><br /><br /></li>
+<li>（OK）ボタンをクリックすると説明はそのフォントに設定されます。<br /><br /><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/preferredfontseditor3.png" alt="" /><br /><br /></li>
+<li>実行時にフォントと説明はこのように表示されます。<br /><br /><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/preferredfontseditor4.png" alt="" /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></li>
+</ol>
+<p>ドロップダウン</p>
+<p>の外観や動作をカスタマイズするには、<a href="gcdocsite__documentlink?toc-item-id=7ca3c632-84cd-4fe9-a0d5-adc8b13f635f">DropDownSettings</a>プロパティを使用します。DropDownSettingプロパティは<a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">FontPickerDropDownSettings</a>クラスによってGcFontPickerCellのドロップダウンウィンドウの外観や動作をカスタマイズします。<br /><br />ドロップダウンウィンドウのサイズは<a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">Size</a>プロパティで設定します。最大サイズは、<a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">MaximumSize</a>、最小サイズは<a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">MinimumSize</a>プロパティで指定することが可能です。ドロップダウンウィンドウの幅を最も長いフォント名に合わせて自動的に設定したい場合には<a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">AutoWidth</a>プロパティをTrueに設定します。<br /><br />デフォルトではドロップダウンウィンドウのリサイズが可能です。下部にサイズ変更用のリサイズグリップが表示されます。リサイズグリップを非表示にしてリサイズを許可しないようにするには、<a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">AllowResize</a>プロパティをFalseに設定します。<br /><br /><br /><br /></p>
+<table>
+<thead>
+<tr>
+<th>AllowResize = True</th>
+<th>AllowResize = False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/gccomboframe.allowresize_true.png" alt="" /></td>
+<td><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/gccomboframe.allowresize_false.png" alt="" /></td>
+</tr>
+</tbody>
+</table>
+<p>ドロップダウンウィンドウを表示する方向やアニメーション効果などの変更も可能です。これらを変更する場合には下記プロパティを設定します。</p>
+<table>
+<thead>
+<tr>
+<th>プロパティ名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">AutoDropDown</a></td>
+<td>フォーカスを取得した直後にドロップダウンウィンドウを表示するかどうかを取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">DropDownDirection</a></td>
+<td>ドロップダウンウィンドウを表示する方向を取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">OpeningAnimation</a></td>
+<td>ドロップダウンウィンドウが開くときに使用するアニメーション効果の種類を取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">ClosingAnimation</a></td>
+<td>ドロップダウンウィンドウが閉じるときに使用するアニメーション効果の種類を取得または設定します。</td>
+</tr>
+<tr>
+<td><a href="gcdocsite__documentlink?toc-item-id=d7b04fa1-64c7-428d-a9dc-f17b6108d7eb">ShowShadow</a></td>
+<td>ドロップダウンウィンドウの影を表示するかしないかを取得または設定します。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=4f7ffde0-e106-42ef-8c4d-7a775df6b468">GcFontPickerCell</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=b1a115a9-59d6-488b-8d39-e6a3aeb9826c">フォントの設定と取得</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c9314353-2b52-42ae-b139-363fee15392a">外観の設定</a></p>

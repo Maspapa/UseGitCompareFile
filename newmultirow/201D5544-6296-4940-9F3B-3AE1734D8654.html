@@ -1,0 +1,25 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_headercell_backcolor1.png" contenteditable="false"> <img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_headercell_backcolor2.png" contenteditable="false"><br></p><p>HeaderCellの背景色を変更するには、HeaderCell.Style.BackColorプロパティに任意の色を設定した後、次のいずれかを設定します。</p><ul><li><p>HeaderCell.FlatStyleプロパティをFlatまたはPopupに設定する。</p></li><li><p>HeaderCell.FlatStyleプロパティをStandardに設定し、HeaderCell.UseVisualStyleBackColorプロパティをFalseに設定する。</p></li></ul><p>ビジュアル スタイルが有効な環境では、HeaderCell.FlatStyleプロパティがSystemに設定されているか、HeaderCell.UseVisualStyleBackColorプロパティがTrueの場合にはHeaderCell.Style.BackColorプロパティに設定した背景色はボタンに適用されません。</p><h2>デザイナによる設定</h2><ol><li><p>背景色を変更するボタン型セルを選択する。（例: headerCell1）</p></li><li><p>プロパティウィンドウでHeaderCell.Style.BackColorプロパティを選択し、ドロップダウンウィンドウから任意の色を選択する。</p></li><li><p>プロパティウィンドウでHeaderCell.UseVisualStyleBackColorプロパティを選択し、Falseに設定する。</p></li><li><p>プロパティウィンドウでHeaderCell.FlatStyleプロパティを選択し、Flat、PopupまたはStandardに設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+HeaderCell headerCell11 = <span class="hljs-keyword">new</span> HeaderCell();
+
+headerCell11.Name = <span class="hljs-string">"headerCell11"</span>;
+headerCell11.Value = <span class="hljs-string">"HeaderCell"</span>;
+headerCell11.Style.BackColor = Color.FromArgb(<span class="hljs-number">192</span>, <span class="hljs-number">255</span>, <span class="hljs-number">192</span>);
+headerCell11.Style.Border = <span class="hljs-keyword">new</span> Border(LineStyle.Thin, Color.DarkGray);
+headerCell11.UseVisualStyleBackColor = <span class="hljs-literal">false</span>;
+headerCell11.FlatStyle = FlatStyle.Standard;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { headerCell11 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim HeaderCell11 As New HeaderCell()
+
+HeaderCell11.Name = "HeaderCell11"
+HeaderCell11.Value = "HeaderCell"
+HeaderCell11.Style.BackColor = Color.FromArgb(192, 255, 192)
+HeaderCell11.Style.Border = New Border(LineStyle.Thin, Color.DarkGray)
+HeaderCell11.UseVisualStyleBackColor = false
+HeaderCell11.FlatStyle = FlatStyle.Standard
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { HeaderCell11 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル (HeaderCell)</a></p>

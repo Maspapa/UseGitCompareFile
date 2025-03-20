@@ -1,0 +1,96 @@
+<p>名前付きセルスタイル（<a href="gcdocsite__documentlink?toc-item-id=2c0fef4d-47e2-4d24-9950-507504988b63" title="">NamedCellStyle</a>）を使用すると、任意の名前でスタイルを管理できます。スタイルをチーム開発で共有、再利用したり、スキンのように切り替えて使用する場合に便利なスタイルです。</p><p>MultiRowのデザイナでは、名前付きセルスタイルのために<a href="gcdocsite__documentlink?toc-item-id=b26512cc-0b28-4c99-b040-437484c9e914" title="">名前付きセルスタイル マネージャ ウィンドウ 12.0</a>を提供しています。</p><p>名前付きセルスタイルは、TemplateとGcMultiRowコントロールの任意の名前でスタイルを管理できます両方で使用できます。</p><h2>名前付きセルスタイルの登録</h2><p>テンプレートに名前付きセルスタイルを登録するには、<a href="gcdocsite__documentlink?toc-item-id=f938a664-1d95-40a0-9387-22d89e6de538" title="">Template.NamedCellStyles</a>プロパティを使用します。次のコードは、「寒色」という名前で背景色が青のセルスタイルを追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 背景色が青のセルスタイルを作成する</span>
+CellStyle blueCellStyle = <span class="hljs-keyword">new</span> CellStyle();
+blueCellStyle.BackColor = Color.Blue;
+
+Template template1 = Template.Default;
+<span class="hljs-comment">// セルスタイルを「寒色」という名前で登録する</span>
+template1.NamedCellStyles.Add(<span class="hljs-string">"寒色"</span>, blueCellStyle);
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Style = <span class="hljs-keyword">new</span> NamedCellStyle(<span class="hljs-string">"寒色"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 背景色が青のセルスタイルを作成する
+Dim blueCellStyle As New CellStyle()
+blueCellStyle.BackColor = Color.Blue
+
+Dim Template1 As Template = template.Default
+' セルスタイルを「寒色」という名前で登録する
+Template1.NamedCellStyles.Add("寒色", blueCellStyle)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.Rows(0).Cells(0).Style = New NamedCellStyle("寒色")</code></pre></div><p>テンプレートに登録した名前付きセルスタイルは、GcMultiRowコントロールにテンプレートを設定したときに自動的にGcMultiRowコントロールで有効になります。</p><p>GcMultiRowコントロールでは、テンプレートで設定した名前付きセルスタイルを変更できます。次のコードは、「寒色」という名前で登録した名前付きセルスタイルを、淡い色の新しいセルスタイルで置き換えます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+CellStyle blueCellStyle = <span class="hljs-keyword">new</span> CellStyle();
+blueCellStyle.BackColor = Color.Blue;
+
+Template template1 = Template.Default;
+template1.NamedCellStyles.Add(<span class="hljs-string">"寒色"</span>, blueCellStyle);
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Style = <span class="hljs-keyword">new</span> NamedCellStyle(<span class="hljs-string">"寒色"</span>);
+
+CellStyle lightblueCellStyle = <span class="hljs-keyword">new</span> CellStyle();
+lightblueCellStyle.BackColor = Color.LightBlue;
+
+gcMultiRow1.NamedCellStyles.Remove(<span class="hljs-string">"寒色"</span>);
+gcMultiRow1.NamedCellStyles.Add(<span class="hljs-string">"寒色"</span>, lightblueCellStyle);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim blueCellStyle As New CellStyle()
+blueCellStyle.BackColor = Color.Blue
+
+Dim Template1 As Template = Template.Default
+Template1.NamedCellStyles.Add("寒色", blueCellStyle)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.Rows(0).Cells(0).Style = New NamedCellStyle("寒色")
+
+Dim lightblueCellStyle As New CellStyle
+lightblueCellStyle.BackColor = Color.LightBlue
+
+GcMultiRow1.NamedCellStyles.Remove("寒色")
+GcMultiRow1.NamedCellStyles.Add("寒色", lightblueCellStyle)</code></pre></div><h2>名前付きセルスタイルの利用</h2><p>任意のセルに名前付きセルスタイルを適用するには、<a href="gcdocsite__documentlink?toc-item-id=fefd38d3-bb02-4527-8f68-071fd558d1e9" title="">Cell.Style</a>プロパティにNamedCellStyleオブジェクトを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+CellStyle blueCellStyle = <span class="hljs-keyword">new</span> CellStyle();
+blueCellStyle.BackColor = Color.Blue;
+
+Template template1 = Template.Default;
+template1.NamedCellStyles.Add(<span class="hljs-string">"寒色"</span>, blueCellStyle);
+<span class="hljs-comment">// template1.Row.Cells[0].Style = new NamedCellStyle("寒色");</span>
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Style = <span class="hljs-keyword">new</span> NamedCellStyle(<span class="hljs-string">"寒色"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim blueCellStyle As New CellStyle()
+blueCellStyle.BackColor = Color.Blue
+
+Dim Template1 As Template = template.Default
+Template1.NamedCellStyles.Add("寒色", blueCellStyle)
+' template.Row.Cells(0).Style = New NamedCellStyle("寒色")
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.Rows(0).Cells(0).Style = New NamedCellStyle("寒色")</code></pre></div><p>名前付きセルスタイルの登録と、セルへの名前付きセルスタイルの設定は前後しても問題ありません。次のコードは、セルへ名前付きセルスタイルを指定した後で名前付きセルスタイルを登録します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.Default;
+gcMultiRow1.Template = template1;
+
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Style = <span class="hljs-keyword">new</span> NamedCellStyle(<span class="hljs-string">"寒色"</span>);
+
+CellStyle blueCellStyle = <span class="hljs-keyword">new</span> CellStyle();
+blueCellStyle.BackColor = Color.Blue;
+gcMultiRow1.NamedCellStyles.Add(<span class="hljs-string">"寒色"</span>, blueCellStyle);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = template.Default
+GcMultiRow1.Template = Template1
+
+GcMultiRow1.Rows(0).Cells(0).Style = New NamedCellStyle("寒色")
+
+Dim blueCellStyle As New CellStyle()
+blueCellStyle.BackColor = Color.Blue
+GcMultiRow1.NamedCellStyles.Add("寒色", blueCellStyle)</code></pre></div><h2>既に登録されている名前付きセルスタイルの確認</h2><p>名前付きセルスタイルは、１つのテンプレートまたはコントロール内で一意です。既に使用されている名前付きセルスタイルを<a href="gcdocsite__documentlink?toc-item-id=f938a664-1d95-40a0-9387-22d89e6de538" title="">Template.NamedCellStyles</a>プロパティのコレクションに追加しようとすると、ArgumentExceptionが発生します。</p><p>名前付きセルスタイルが既に登録されているか確認するには、<a href="gcdocsite__documentlink?toc-item-id=7cfde0b4-588b-437e-8444-7bcffbfd75b0" title="">NamedCellStyleDictionary.ContainsKey</a>メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">if</span> (template1.NamedCellStyles.ContainsKey(<span class="hljs-string">"寒色"</span>))
+{
+    Console.WriteLine(<span class="hljs-string">"既に登録されています"</span>);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">If Template1.NamedCellStyles.ContainsKey("寒色") Then
+    Console.WriteLine("既に登録されています")
+End If</code></pre></div><h2>名前付きセルスタイルの削除</h2><p>名前付きセルスタイルを削除するには、<a href="gcdocsite__documentlink?toc-item-id=47b4d2a3-a450-4ef2-ac54-9722b796a2d8" title="">NamedCellStyleDictionary.Remove</a>メソッドを実行します。削除した名前付きセルスタイルを使用していたセルでは、既定のスタイルが使用されます。この動作を明示的に変更するには、結合セルスタイルを使用します。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=744d998f-bf25-4852-904f-8708d6786740" title="">セルの条件付きスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4f32e52a-46b9-48a0-a4cf-357408a49eb5" title="">セルスタイルの種類</a></p><p><a href="gcdocsite__documentlink?toc-item-id=32f40f84-484f-47a3-8239-84305b04ee70" title="">条件に応じたセルスタイルの切り替え</a></p><p><a href="gcdocsite__documentlink?toc-item-id=debc9bb0-7760-4c57-ad5c-f273cfca5002" title="">複数のセルスタイルの結合</a></p><p><a href="gcdocsite__documentlink?toc-item-id=27e7cfce-bf30-4f42-a775-265ca5c09707" title="">ユーザー定義の条件付きセルスタイル</a></p>

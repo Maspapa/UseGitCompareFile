@@ -1,0 +1,32 @@
+<p>既定では、半角文字に均等割付を使用するとスペース部分が広がる形になりますが、ITextAdjustmentProviderインターフェイスを使用すると半角文字をセル内に均等に表示できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/cellstyle_customtextjustify_01.png" contenteditable="false"><br></p><h2>均等割付のカスタマイズ</h2><p>半角文字をセル内に均等に表示するには、ITextAdjustmentProviderインターフェイスを実装するクラスを作成します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DistributeEveryChar</span> : <span class="hljs-title">ITextAdjustmentProvider</span>
+{
+    <span class="hljs-function">public IEnumerable&lt;string&gt; GetTextElements(string text)</span>
+    {
+        List&lt;<span class="hljs-built_in">string</span>&gt; textElements = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt;();
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; text.Length; i++)
+        {
+            textElements.Add(text[i].ToString());
+        }
+        <span class="hljs-keyword">return</span> textElements;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class DistributeEveryChar
+    Implements ITextAdjustmentProvider
+
+    Public Function GetTextElements(text As String) As System.Collections.Generic.IEnumerable(Of String) Implements ITextAdjustmentProvider.GetTextElements
+        Dim textElements As New List(Of String)()
+
+        For i As Integer = 0 To text.Length - 1
+            textElements.Add(text(i).ToString())
+        Next
+        Return textElements
+    End Function
+End Class</code></pre></div><h2>均等割付の設定</h2><p>均等割付のカスタマイズのために作成したITextAdjustmentProviderインターフェイスを実装したクラスは、<a href="gcdocsite__documentlink?toc-item-id=cba03fc2-ee6b-4c11-9849-6696dac2aeca" title="">CellStyle.TextAdjustmentProvider</a>プロパティに設定します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>この機能を有効にするには、次の設定が必要です。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=ea98cddc-eac7-4e29-b1cb-ab6709c9e7c8" title="">CellStyle.TextAdjustment</a>プロパティにDistribute、DistributeWithSpaceまたはJustifyを設定します。</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=1c5ce59b-63d8-4edc-93ce-5178f9732917" title="">CellStyle.UseCompatibleTextRendering</a>プロパティにTrueを設定します。</p></li></ul></li></ul></blockquote><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].Style.UseCompatibleTextRendering = MultiRowTriState.True;
+gcMultiRow1[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].Style.TextAdjustment = TextAdjustment.DistributeWithSpace;
+gcMultiRow1[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].Style.TextAdjustmentProvider = <span class="hljs-keyword">new</span> DistributeEveryChar();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1(0, 0).Style.UseCompatibleTextRendering = MultiRowTriState.True
+GcMultiRow1(0, 0).Style.TextAdjustment = TextAdjustment.DistributeWithSpace
+GcMultiRow1(0, 0).Style.TextAdjustmentProvider = New DistributeEveryChar()</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0659dda6-b828-4148-a42a-71244a85690c" title="">セルのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7bd4c3f5-3a4b-47d1-a04d-c6b0eb34b77e" title="">スタイルの適用ルール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1f3aedd3-7f2e-404f-9b1c-a035fb3a0028" title="">罫線</a></p><p><a href="gcdocsite__documentlink?toc-item-id=659c8f82-913c-4151-ac57-5489df055fff" title="">背景色と前景色</a></p><p><a href="gcdocsite__documentlink?toc-item-id=890081a2-3af9-4359-8697-d49b65dfe284" title="">背景パターン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2e54d2f0-6317-4fce-a74e-8b763f3f2f10" title="">背景グラデーション</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fb73f7b0-aae0-43fa-aacd-4a74f84fa16a" title="">タグ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7ccdf46e-326e-4f4f-a097-051ad2700b6e" title="">イメージ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a9f06eec-b225-4b07-826e-f14a1e77d6ca" title="">マージンとパディング</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7fcbd91a-83ac-4f84-b8dc-a9061553177d" title="">IMEモード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b113b6cb-598e-48a9-917e-8eec48db994b" title="">複数行とワードラップ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e32f062a-3075-439c-a2f2-3c7a07840510" title="">文字書式</a></p><p><a href="gcdocsite__documentlink?toc-item-id=122eb1b4-e5f2-48d3-ab7c-a0249190a034" title="">テキストのインデント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9b34fee2-3101-44f6-8e71-6cd80cca6a4d" title="">GDI+互換モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=048b62a5-4dee-44f2-85de-b20c61c8c644" title="">マウスホバーのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1e2c91d2-750e-44f1-bc8f-05d6c9729caf" title="">ユーザー定義のワードラップ</a></p>

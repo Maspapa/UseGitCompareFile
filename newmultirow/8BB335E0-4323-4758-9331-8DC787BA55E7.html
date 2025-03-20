@@ -1,0 +1,201 @@
+<p>GcDateTimeCellでは入力可能な範囲を指定したり、値の扱いを制御することができます。ここでは日付時刻コントロールが提供する入力機能について解説します。</p><h2>書式の設定</h2><p>GcDateTimeCellでは書式設定により、日付や時刻の入力および表示書式を自由に設定することができます。入力書式は、セルが入力フォーカスを受け取ったときの書式で、表示書式は入力フォーカスのないときの書式です。書式には和暦を使用することも可能です。</p><p>入力書式の設定は、<a href="gcdocsite__documentlink?toc-item-id=440e0161-07b6-4018-b351-e2ec0f335ae3" title="">Fields</a>プロパティによって行われ、フィールドとよばれる入力領域を構成する要素によって定義されます。また、表示書式は、<a href="gcdocsite__documentlink?toc-item-id=fdd65429-f1cc-412f-ad4d-acc196b9b69b" title="">DisplayFields</a>プロパティによって行われ、Fieldsプロパティと同様フィールドによって定義します。 FieldsプロパティおよびDisplayFieldsプロパティについては、「<a href="gcdocsite__documentlink?toc-item-id=7af683d1-49d4-4662-8d5c-ff95be53c699" title="">書式の設定</a>」で詳しく解説します。</p><h2>入力範囲の指定</h2><p>セルの<a href="gcdocsite__documentlink?toc-item-id=dff50321-3fcc-43a2-af9d-4541aff6d933" title="">MaxDate</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=3194ed61-471f-477f-915e-b7d546118727" title="">MinDate</a>プロパティを設定してセルに入力可能な日付範囲を指定することができます。</p><p>すべてのフィールドの値が入力されると検証が行われ、範囲外の日付の場合には<a href="gcdocsite__documentlink?toc-item-id=674e833d-30d9-4142-80d7-650b6a8a9446" title="">MaxMinBehavior</a>プロパティの設定によって、値が制御されます。MaxMinBehaviorプロパティに設定できる値は以下のとおりで、既定値は<a href="gcdocsite__documentlink?toc-item-id=8789b322-8db6-4cbe-8b6a-843b9c3f8500" title="">MaxMinBehavior.AdjustToMaxMin</a>です。</p><table><thead><tr><th><p>MaxMinBehaviorの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>AdjustToMaxMin</p></td><td><p>値を最小値か最大値の近い方に設定します。</p></td></tr><tr><td><p>Clear</p></td><td><p>値を削除してnull にします。</p></td></tr><tr><td><p>Restore</p></td><td><p>変更前の値に戻します。</p></td></tr><tr><td><p>CancelInput</p></td><td><p>最後の入力をキャンセルしてフォーカスを保持します。</p></td></tr><tr><td><p>Keep</p></td><td><p>エラーとなったText プロパティの値を保持します。</p></td></tr></tbody></table><p>MaxMinBehaviorプロパティを<a href="gcdocsite__documentlink?toc-item-id=8789b322-8db6-4cbe-8b6a-843b9c3f8500" title="">MaxMinBehavior.CancelInput</a>に設定した場合、範囲外の日付の最後の入力を行った時点でGcDateTimeEditingControl.InvalidInputイベントが発生します。</p><p>InvalidInputイベント側では入力された日付が範囲外であることを取得できるため、メッセージを出力するなどのカスタマイズが可能です。</p><p>以下のサンプルコードは、範囲外の日付が入力されたとき、メッセージボックスを表示する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+
+    <span class="hljs-comment">// 最大日付と最小日付を設定します。 </span>
+    gcDateTimeCell1.MaxDate = DateTime.Parse(<span class="hljs-string">"2100/12/31 23:59:59"</span>);
+    gcDateTimeCell1.MinDate = DateTime.Parse(<span class="hljs-string">"2000/1/1 0:00:00"</span>);
+
+    <span class="hljs-comment">// 範囲外の場合に値をどのように制御するかを設定します。 </span>
+    gcDateTimeCell1.MaxMinBehavior = GrapeCity.Win.Editors.MaxMinBehavior.CancelInput;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+    gcMultiRow1.EditingControlShowing += <span class="hljs-keyword">new</span> EventHandler&lt;EditingControlShowingEventArgs&gt;(gcMultiRow1_EditingControlShowing);
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> InputManCell.GcDateTimeEditingControl)
+    {
+        InputManCell.GcDateTimeEditingControl editor = (InputManCell.GcDateTimeEditingControl)e.Control;
+
+        editor.InvalidInput -= <span class="hljs-keyword">new</span> EventHandler(editor_InvalidInput);
+        editor.InvalidInput += <span class="hljs-keyword">new</span> EventHandler(editor_InvalidInput);
+    }
+}
+
+<span class="hljs-function">private void editor_InvalidInput(object sender, EventArgs e)</span>
+{
+    GrapeCity.Win.Editors.InvalidInputEventArgs invalidInputEventArgs = e <span class="hljs-keyword">as</span> GrapeCity.Win.Editors.InvalidInputEventArgs;
+    <span class="hljs-keyword">if</span> (invalidInputEventArgs == <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-comment">// 値が範囲外の場合には、メッセージを表示します。 </span>
+    <span class="hljs-keyword">if</span> (invalidInputEventArgs.ValueOutOfRange)
+    {
+        MessageBox.Show(<span class="hljs-string">"範囲外の値です。"</span>);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+
+    ' 最大日付と最小日付を設定します。 
+    GcDateTimeCell1.MaxDate = DateTime.Parse("2100/12/31 23:59:59")
+    GcDateTimeCell1.MinDate = DateTime.Parse("2000/1/1 0:00:00")
+
+    ' 範囲外の場合に値をどのように制御するかを設定します。 
+    GcDateTimeCell1.MaxMinBehavior = GrapeCity.Win.Editors.MaxMinBehavior.CancelInput
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    If (TypeOf (e.Control) Is InputManCell.GcDateTimeEditingControl) Then
+
+        Dim editor As InputManCell.GcDateTimeEditingControl = DirectCast(e.Control, InputManCell.GcDateTimeEditingControl)
+
+        RemoveHandler editor.InvalidInput, AddressOf editor_InvalidInput
+        AddHandler editor.InvalidInput, AddressOf editor_InvalidInput
+    End If
+End Sub
+
+Private Sub editor_InvalidInput(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Dim InvalidInputEventArgs As GrapeCity.Win.Editors.InvalidInputEventArgs = TryCast(e, GrapeCity.Win.Editors.InvalidInputEventArgs)
+    If InvalidInputEventArgs Is Nothing Then
+        Exit Sub
+    End If
+
+    ' 値が範囲外の場合には、メッセージを表示します。 
+    If InvalidInputEventArgs.ValueOutOfRange Then
+        MessageBox.Show("範囲外の値です。")
+    End If
+End Sub</code></pre></div><h2>値の取得と設定</h2><p><a href="gcdocsite__documentlink?toc-item-id=bf06962f-f1e4-4a56-86b0-d66989468cc4" title="">Value</a>プロパティを使えば、リテラル文字列とプロンプト文字列を除いたセル内の基となる値をDateTime型で取得または設定できます。</p><p>また、GcDateTimeEditingContro.Numberプロパティを使えば、リテラル文字列とプロンプト文字列を除いたセル内の日付を長整数型で取得または設定できます。たとえば、Text プロパティに「平成 27年10月1日」が設定されているときには、Numberプロパティの値は「20151001000000」となります。Numberプロパティが変更されると、その変更はValue プロパティにも適用されます。</p><p>クリップボードにリテラル文字を含まない値を渡すには、<a href="gcdocsite__documentlink?toc-item-id=cf92079d-cbe8-49b8-9250-4d6b4a9a6652" title="">ClipContent</a>プロパティとGcDateTimeEditingContro.SelectedTextプロパティを使用します。ClipContentプロパティで制御できるのは、SelectedTextプロパティの値のみなので、以下のプロパティの値をクリップボードに設定した場合は、ClipContentプロパティの設定は無効になります。なお、プロンプト文字列は、ClipContentプロパティの設定に関わらず常にクリップボードに渡されます。</p><p>次のサンプルコードは、ClipContentプロパティを使って、リテラル文字列を省いた文字列をクリップボードにコピーする方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+    <span class="hljs-comment">// セルに値を設定して、クリップボードにコピーします。 </span>
+    gcDateTimeCell1.Fields.Clear();
+    gcDateTimeCell1.Fields.AddRange(<span class="hljs-string">"ggg ee年 MM月 dd日 hh時 mm分 ss秒"</span>);
+    gcDateTimeCell1.ClipContent = GrapeCity.Win.Editors.ClipContent.ExcludeLiterals;
+    TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+
+    <span class="hljs-comment">// MultiRowのテンプレートを設定します。  </span>
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1, textBoxCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+
+    gcMultiRow1.EditingControlShowing += <span class="hljs-keyword">new</span> EventHandler&lt;EditingControlShowingEventArgs&gt;(gcMultiRow1_EditingControlShowing);
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> InputManCell.GcDateTimeEditingControl)
+    {
+        <span class="hljs-comment">// GcCharMaskCellの編集用コントロールが表示された場合にKeyDownイベントを設定します。  </span>
+        e.Control.KeyDown -= <span class="hljs-keyword">new</span> KeyEventHandler(Editor_KeyDown);
+        e.Control.KeyDown += <span class="hljs-keyword">new</span> KeyEventHandler(Editor_KeyDown);
+    }
+}
+
+<span class="hljs-function">private void Editor_KeyDown(object sender, KeyEventArgs e)</span>
+{
+    Cell cell = gcMultiRow1.CurrentCell;
+
+    <span class="hljs-keyword">if</span> (e.KeyCode == Keys.F8)
+    {
+        InputManCell.GcDateTimeEditingControl editor = (InputManCell.GcDateTimeEditingControl)sender;
+
+        <span class="hljs-comment">// Numberプロパティを使用して値を設定します。</span>
+        editor.Number = <span class="hljs-number">20091001000000</span>;
+
+        <span class="hljs-comment">// クリップボードにコピーします。</span>
+        editor.SelectionStart = <span class="hljs-number">0</span>;
+        editor.SelectionLength = editor.Text.Length;
+        Clipboard.SetDataObject(editor.SelectedText);
+
+        <span class="hljs-comment">// クリップボードのデータを取得して確認します。   </span>
+        IDataObject cbData = Clipboard.GetDataObject();
+        gcMultiRow1[cell.RowIndex, cell.CellIndex + <span class="hljs-number">1</span>].Value = cbData.GetData(DataFormats.Text).ToString();
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Dim GcDateTimeCell1 = New InputManCell.GcDateTimeCell()
+
+    ' セルに値を設定して、クリップボードにコピーします。 
+    GcDateTimeCell1.Fields.Clear()
+    GcDateTimeCell1.Fields.AddRange("ggg ee年 MM月 dd日 hh時 mm分 ss秒")
+    GcDateTimeCell1.ClipContent = GrapeCity.Win.Editors.ClipContent.ExcludeLiterals
+
+    Dim TextBoxCell1 As New TextBoxCell()
+
+    ' MultiRowのテンプレートを設定します。   
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1, TextBoxCell1})
+    GcMultiRow1.RowCount = 5
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    If TypeOf e.Control Is InputManCell.GcDateTimeEditingControl Then
+        ' GcCharMaskCellの編集用コントロールが表示された場合にKeyDownイベントを設定します。   
+        RemoveHandler e.Control.KeyDown, AddressOf Editor_KeyDown
+        AddHandler e.Control.KeyDown, AddressOf Editor_KeyDown
+    End If
+End Sub
+
+Private Sub Editor_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs)
+
+    Dim cell As Cell = GcMultiRow1.CurrentCell
+
+    If e.KeyCode = Keys.F8 Then
+        Dim editor As InputManCell.GcDateTimeEditingControl = DirectCast(sender, InputManCell.GcDateTimeEditingControl)
+
+        ' Numberプロパティを使用して値を設定します。
+        editor.Number = 20091001000000
+
+        ' クリップボードにコピーします。   
+        editor.SelectionStart = 0
+        editor.SelectionLength = editor.Text.Length
+        Clipboard.SetDataObject(editor.SelectedText)
+
+        ' クリップボードのデータを取得して確認します。   
+        Dim cbData As IDataObject = Clipboard.GetDataObject()
+        GcMultiRow1(cell.RowIndex, cell.CellIndex + 1).Value = cbData.GetData(DataFormats.Text).ToString()
+    End If
+End Sub</code></pre></div><h2>非表示フィールドのデフォルト値</h2><p>年月だけ、あるいば時刻部分のみ入力を許可しているなど、非表示に設定されたフィールドが存在する場合、そのデフォルト値には、<a href="gcdocsite__documentlink?toc-item-id=3e6a6012-3b6b-4f7b-9cec-0e4e1bdecad4" title="">RecommendedValue</a>プロパティの値が設定されます。非表示フィールドの値は通常、<a href="gcdocsite__documentlink?toc-item-id=bf06962f-f1e4-4a56-86b0-d66989468cc4" title="">Value</a>プロパティから取得しますが、Value プロパティがnull参照 (Visual BasicではNothing)の場合は、RecommendedValueプロパティに設定された値を非表示フィールドに設定します。</p><p>RecommendedValueプロパティの既定値はnull参照 (Visual BasicではNothing)です。この場合、デフォルト値にはアプリケーション実行後に値がクリアされた日付、時刻が設定されます。</p><p>以下のサンプルコードでは、年月だけの入力を許可してRecommendedValueプロパティにデフォルト値を設定しています。この場合、年月の入力が行われると、非表示になっている日と時分秒の部分には、RecommendedValueプロパティに設定された日と時分秒の値が設定されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+
+<span class="hljs-comment">// フィールドをクリアします。</span>
+gcDateTimeCell1.Fields.Clear();
+<span class="hljs-comment">// キーワードから書式を設定します。  </span>
+gcDateTimeCell1.Fields.AddRange(<span class="hljs-string">"yyyy/MM"</span>);
+<span class="hljs-comment">// RecommendedValueプロパティに非表示フィールドのデフォルト値を設定します。 </span>
+gcDateTimeCell1.RecommendedValue = <span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2000</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">12</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// Valueプロパティにnullを設定します。 </span>
+gcDateTimeCell1.Value = <span class="hljs-literal">null</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 = New InputManCell.GcDateTimeCell()
+' フィールドをクリアします。  
+GcDateTimeCell1.Fields.Clear()
+' キーワードから書式を設定します。  
+GcDateTimeCell1.Fields.AddRange("yyyy/MM")
+' RecommendedValueプロパティに非表示フィールドのデフォルト値を設定します。 
+GcDateTimeCell1.RecommendedValue = New DateTime(2000, 1, 1, 12, 0, 0)
+' ValueプロパティにNothingを設定します。 
+GcDateTimeCell1.Value = Nothing
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})
+GcMultiRow1.RowCount = 5</code></pre></div><h2>入力モード</h2><p><a href="gcdocsite__documentlink?toc-item-id=b2745fec-f857-4868-a7ec-7fc20531e940" title="">FieldsEditMode</a>プロパティを使用すると、GcDateTimeCellの各フィールドの入力モードを変更することができます。FieldsEditModeには次の３つの値を設定することができます。</p><table><thead><tr><th><p>FieldsEditModeの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>LeftSide</p></td><td><p>フィールドで値は左から右に入力されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/fieldseditmode_leftside.png" contenteditable="false"><br></p></td></tr><tr><td><p>RightSide</p></td><td><p>フィールドで値は右から左に入力されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/fieldseditmode_rightside.png" contenteditable="false"><br></p></td></tr><tr><td><p>Unfixed</p></td><td><p>フィールドで値は左から右に入力されます。</p><p>日付や時刻が1桁の値の場合は先頭に０を付加する必要はありません。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/fieldseditmode_unfixed.png" contenteditable="false"><br></p><p>(図) 月のフィールドに１を入力した場合、値は1月と認識されます。</p></td></tr></tbody></table><h2>改行コードの取り扱い</h2><p><a href="gcdocsite__documentlink?toc-item-id=ed72ba35-bd80-4205-bc3b-c391af152299" title="">AcceptsCrLf</a>プロパティを使用してクリップボードへ改行を含む文字列をコピー、または貼り付けた場合の改行コードの扱いを設定できます。AcceptsCrLfプロパティは、<a href="gcdocsite__documentlink?toc-item-id=b22d2b62-d37b-456c-a018-f94ad093f564" title="">CrLfMode</a> 列挙体を使用して次の値を設定できます。</p><table><thead><tr><th><p>AcceptsCrLfの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>NoControl</p></td><td><p>改行コードはそのままでコピー、貼り付けを行います。</p></td></tr><tr><td><p>Filter</p></td><td><p>全ての改行コードを削除しコピー、貼り付けを行います。</p></td></tr><tr><td><p>Cut</p></td><td><p>最初の改行コード以降の文字列を削除します。標準コントロールと同じ動作です。</p></td></tr></tbody></table><h2>イベントを使った文字列操作</h2><p><a href="gcdocsite__documentlink?toc-item-id=00b0249c-565d-4fcd-830b-e85f8a028634" title="">DefaultActiveField</a> プロパティを使用すると、セルがフォーカスを受け取ったときにカレットを配置するフィールドを指定できます。</p><p>現在カレットが置かれているフィールドは、GcDateTimeEditingControl.ActiveFieldプロパティで取得できます。</p><p>セルに文字列を入力するとGcDateTimeEditingControl.TextChangingイベントが、GcDateTimeEditingControl.TextChangedイベントの前（入力された文字列がText プロパティに渡される前）に発生します。そのため、このイベント内で入力文字列をチェックすれば、Textプロパティの値に影響を与えることなく、入力を制御できます。</p><h2>自動フォーカス移動</h2><p><a href="gcdocsite__documentlink?toc-item-id=1901a2de-5014-48b3-9be7-45fc9aa187b3" title="">ExitOnLastChar</a>プロパティをTrueに設定すると、入力された文字列が、 書式設定により定義されたフィールドすべてに満たされると、自動的に次のコントロールへフォーカスを移動できます。</p><h2>フィールド間の移動</h2><p>GcDateTimeCellの表示領域は、通常、リテラル文字列と入力フィールドの２種類に分かれています。フィールドについては「<a href="gcdocsite__documentlink?toc-item-id=7af683d1-49d4-4662-8d5c-ff95be53c699" title="">書式の設定</a>」を参照してください。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/datetime_literal.png" contenteditable="false"><br></p><p><a href="gcdocsite__documentlink?toc-item-id=36b624ca-e51a-47fb-b198-0993bc6f3e54" title="">TabAction</a>プロパティを<a href="gcdocsite__documentlink?toc-item-id=b469c2f9-91a0-4f2b-829e-8b3fc442f7e3" title="">TabAction.Control</a>に設定すると、［Tab］キーまたは［Shift］+［Tab］キーによるフォーカス移動は、セル間で行われます。<a href="gcdocsite__documentlink?toc-item-id=b469c2f9-91a0-4f2b-829e-8b3fc442f7e3" title="">TabAction.Field</a>に設定すると、フォーカス移動は入力フィールド間で行われます。また、GcDateTimeCellのナビゲーションや選択などの操作は、リテラル文字列と入力フィールドの位置関係による影響を受けます。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b80001db-fab9-48f7-baab-a639554c60a2" title="">GcDateTimeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7af683d1-49d4-4662-8d5c-ff95be53c699" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9d947385-bd2c-4754-beba-489cbdd8b536" title="">視覚的な補助</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a530eeec-b4e0-4bae-96bf-36a3c1226cd5" title="">サイドボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=636ed515-d9bd-4cd4-95e1-a248269ffe78" title="">ドロップダウンカレンダー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bba04be6-e380-412d-8f5d-f5fa1d59e4f0" title="">ドロップダウン日付時刻ピッカー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d2ac536f-45ed-4239-b020-0a46fa9baa14" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=346274df-ba85-4704-94de-81503622da40" title="">和暦表示の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=88836a36-6f2a-4e07-9825-e71e0993bf66" title="">データベース接続</a></p>

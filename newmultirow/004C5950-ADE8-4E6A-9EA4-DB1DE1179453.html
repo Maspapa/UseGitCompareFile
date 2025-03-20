@@ -1,0 +1,35 @@
+<p>イメージ型セル（ImageCell）の値が空のとき、つまりセルに画像が存在しない場合に代替イメージを表示するには、表示したい画像をImageCell.Style.NullValueプロパティ（<a href="gcdocsite__documentlink?toc-item-id=cf6b5099-2d7c-4917-8d83-2552bcd7199d" title="">CellStyle.NullValue</a>プロパティ）に設定します。</p><h2>デザイナによる設定</h2><ol><li><p>行（Row）にイメージ型セルを追加する。（例：imageCell1）</p></li><li><p>imageCell1を選択し、プロパティウィンドウでimageCell1.Style.NullValueプロパティに任意の画像を設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template = <span class="hljs-keyword">new</span> Template();
+ColumnHeaderSection columnHeaderSection1 = <span class="hljs-keyword">new</span> ColumnHeaderSection();
+ColumnHeaderCell columnHeaderCell1 = <span class="hljs-keyword">new</span> ColumnHeaderCell();
+
+ImageCell imageCell1 = <span class="hljs-keyword">new</span> ImageCell();
+imageCell1.Style.NullValue = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"PlaceHolder.png"</span>);
+template.Width = imageCell1.Size.Width;
+template.Row.Cells.Add(imageCell1);
+template.Row.Height = imageCell1.Size.Height;
+
+columnHeaderSection1.Cells.Add(columnHeaderCell1);
+columnHeaderSection1.Height = columnHeaderCell1.Size.Height;
+template.ColumnHeaders.Add(columnHeaderSection1);
+
+gcMultiRow1.Template = template;
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = New Template()
+Dim ColumnHeaderSection1 As ColumnHeaderSection = New ColumnHeaderSection()
+Dim ColumnHeaderCell1 As ColumnHeaderCell = New ColumnHeaderCell()
+
+Dim imageCell1 As ImageCell = New ImageCell()
+imageCell1.Style.NullValue = New Bitmap("PlaceHolder.png")
+Template1.Width = imageCell1.Size.Width
+Template1.Row.Cells.Add(imageCell1)
+Template1.Row.Height = imageCell1.Size.Height
+
+ColumnHeaderSection1.Cells.Add(ColumnHeaderCell1)
+ColumnHeaderSection1.Height = columnHeaderCell1.Size.Height
+Template1.ColumnHeaders.Add(ColumnHeaderSection1)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=efa0c972-f86c-4263-bed6-859e40f17527" title="">イメージ型セル（ImageCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a945b865-77fb-4422-972c-457a44230bdf" title="">画像の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=109ce07b-17d9-431a-9fa8-3728bb015b75" title="">クリックの処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cf5e867e-934f-4938-98ac-923c124a777a" title="">アニメーションの表示</a></p>

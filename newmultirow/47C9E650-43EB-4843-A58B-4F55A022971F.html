@@ -1,0 +1,127 @@
+<p>ここでは、<a href="gcdocsite__documentlink?toc-item-id=7b0450f5-a460-4453-94ae-628011b804c9" title="">Items</a>プロパティにコレクションを追加して項目を設定する方法について説明します。データソースを使用して項目を設定する方法については「<a href="gcdocsite__documentlink?toc-item-id=37f9c58d-f932-4331-a128-3152b63c31b7" title="">データソースに接続</a>」を参照してください。</p><h2>項目の設定</h2><p>セルの<a href="gcdocsite__documentlink?toc-item-id=7b0450f5-a460-4453-94ae-628011b804c9" title="">Items</a>プロパティを使って項目を追加するには、Itemsプロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=7cea2992-1bd0-448f-b270-ac8fc625a3f5" title="">ListItemCollection</a>コレクションに項目となるリストアイテム（<a href="gcdocsite__documentlink?toc-item-id=2f9292a1-5e58-4386-b874-241f139daa85" title="">ListItem</a>）のオブジェクトを追加します。</p><p>リストアイテムには、次の3つの要素を表示することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/08gccombobox/listitem.png" contenteditable="false"><br></p><h4>先頭カラムの画像</h4><p>セルの<a href="gcdocsite__documentlink?toc-item-id=cc4c6651-e604-405f-8e2a-b66071d77a1b" title="">ShowListBoxImage</a>プロパティをTrueに設定することで、項目の先頭カラムに画像を表示することができます。この画像は、ListItemクラスの<a href="gcdocsite__documentlink?toc-item-id=41d1695c-411e-44aa-861d-8bef7324fefe" title="">Image</a>プロパティをで設定します。 Imageプロパティには、表示する画像のインデックスを設定でき、このインデックスは、セルの<a href="gcdocsite__documentlink?toc-item-id=48de4b27-686f-4900-ad02-0c93a38fefc0" title="">ImageList</a>プロパティに設定した<a href="https://msdn.microsoft.com/ja-jp/library/System.Windows.Forms.ImageList.aspx" title="">ImageList</a>オブジェクトのImagesプロパティが参照する<a href="https://msdn.microsoft.com/ja-jp/library/system.windows.forms.imagelist.imagecollection.aspx" title="">ImageList.ImageCollection</a>のインデックスです。</p><p>画像の配置や幅はそれぞれ<a href="gcdocsite__documentlink?toc-item-id=442233f1-125a-4407-b2f8-cf5747998414" title="">ImageAlign</a>、<a href="gcdocsite__documentlink?toc-item-id=46c09d4e-cae5-4484-a5e2-22fc2d143cad" title="">ImageWidth</a>プロパティで設定します。</p><h4>テキスト</h4><p>先頭カラムに表示する文字列は、ListItemクラスの<a href="gcdocsite__documentlink?toc-item-id=3c251f69-da47-47a7-b4f2-655afa9a0fee" title="">Text</a>プロパティで設定します。単一カラムでGcComboBoxCellを使用するときは、Textプロパティに値を設定します。</p><h4>サブアイテム</h4><p>リストボックスでマルチカラム表示を行う場合は、ListItemクラスの<a href="gcdocsite__documentlink?toc-item-id=d1c9c2cb-964a-4fe5-b401-d0cdc804d4b4" title="">SubItems</a>プロパティを使用します。SubItemsプロパティは<a href="gcdocsite__documentlink?toc-item-id=9918a6bd-9b5c-4c5b-a326-c5b380a5364a" title="">SubItemCollection</a>クラスを参照し、サブアイテムを表す<a href="gcdocsite__documentlink?toc-item-id=a7244382-714b-4d32-9370-943ffeb410a2" title="">SubItem</a>オブジェクトのコレクションを保持します。</p><p>なお、ListItemクラスと、そのSubItemsプロパティに設定されたSubItemオブジェクトとの間には、以下のような関係があります。</p><ul><li><p>SubItemsプロパティにSubItemオブジェクトが設定されていないとき、セルに表示されるテキストには、ListItemクラスのText プロパティが使用されます。</p></li><li><p>SubItemsプロパティにSubItemオブジェクトが1つ以上設定されているとき、ListItemクラスのTextプロパティは<a href="gcdocsite__documentlink?toc-item-id=3ab37ca4-7032-4deb-890a-c4995e890149" title="">TextSubItemIndex</a>プロパティで指定されたインデックス（既定値は0）のSubItemオブジェクトの<a href="gcdocsite__documentlink?toc-item-id=0fc763a4-5ef7-4095-a5b6-aa1da5792650" title="">Value</a>プロパティと共有されます（一方を変更すると他方も変更されます）。</p></li></ul><h2>項目の追加</h2><h4>コードによる設定</h4><p>コードから項目を追加するには、ListItemCollectionクラスの<a href="gcdocsite__documentlink?toc-item-id=25af34fd-590e-4554-9bb6-ebee73d6ba7f" title="">Add</a>または、<a href="gcdocsite__documentlink?toc-item-id=b95e34b9-0ffd-4cd9-831d-e3f0df37331a" title="">AddRange</a>メソッドを使用します</p><p>次のサンプルコードでは、先頭カラムの文字列を指定してリスト項目を追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcComboBoxCell gcComboBoxCell1 = <span class="hljs-keyword">new</span> InputManCell.GcComboBoxCell();
+
+gcComboBoxCell1.Items.Add(<span class="hljs-string">"項目1"</span>);
+gcComboBoxCell1.Items.Add(<span class="hljs-string">"項目2"</span>);
+gcComboBoxCell1.Items.Add(<span class="hljs-string">"項目3"</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcComboBoxCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcComboBoxCell1 = New InputManCell.GcComboBoxCell()
+
+GcComboBoxCell1.Items.Add("項目1")
+GcComboBoxCell1.Items.Add("項目2")
+GcComboBoxCell1.Items.Add("項目3")
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcComboBoxCell1})</code></pre></div><p>次のサンプルコードは、ListItemオブジェクトを生成して項目を追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcComboBoxCell gcComboBoxCell1 = <span class="hljs-keyword">new</span> InputManCell.GcComboBoxCell();
+
+InputManCell.ListItem item1 = <span class="hljs-keyword">new</span> InputManCell.ListItem();
+item1.BackColor = Color.AliceBlue;
+item1.ForeColor = Color.Blue;
+item1.Text = <span class="hljs-string">"項目1"</span>;
+
+InputManCell.ListItem item2 = <span class="hljs-keyword">new</span> InputManCell.ListItem();
+item2.BackColor = Color.AliceBlue;
+item2.ForeColor = Color.Blue;
+item2.Text = <span class="hljs-string">"項目2"</span>;
+
+InputManCell.ListItem item3 = <span class="hljs-keyword">new</span> InputManCell.ListItem();
+item3.BackColor = Color.AliceBlue;
+item3.ForeColor = Color.Blue;
+item3.Text = <span class="hljs-string">"項目3"</span>;
+
+
+
+gcComboBoxCell1.Items.Add(item1);
+gcComboBoxCell1.Items.Add(item2);
+gcComboBoxCell1.Items.Add(item3);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcComboBoxCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcComboBoxCell1 = New InputManCell.GcComboBoxCell()
+
+Dim item1 As New InputManCell.ListItem()
+item1.BackColor = Color.AliceBlue
+item1.ForeColor = Color.Blue
+item1.Text = "項目1"
+
+Dim item2 As New InputManCell.ListItem()
+item2.BackColor = Color.AliceBlue
+item2.ForeColor = Color.Blue
+item2.Text = "項目2"
+
+Dim item3 As New InputManCell.ListItem()
+
+item3.BackColor = Color.AliceBlue
+item3.ForeColor = Color.Blue
+item3.Text = "項目3"
+
+GcComboBoxCell1.Items.Add(item1)
+GcComboBoxCell1.Items.Add(item2)
+GcComboBoxCell1.Items.Add(item3)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcComboBoxCell1})</code></pre></div><h4>デザイン画面での設定</h4><p>デザイン画面では項目の設定ができる「項目の編集」エディタから容易な設定が可能です。 このエディタは次のいずれかの方法で起動でき、リスト項目の追加や削除が行えます。</p><ul><li><p>セルのスマート タグから「項目の編集...」を選択</p></li><li><p>プロパティウィンドウのItemsプロパティをアクティブした時に表示される「…」ボタンを押下</p></li></ul><h2>サブアイテムの設定</h2><p>サブアイテムを設定するには、ListItemクラスの<a href="gcdocsite__documentlink?toc-item-id=d1c9c2cb-964a-4fe5-b401-d0cdc804d4b4" title="">SubItems</a>プロパティを使用します。1つのサブアイテムは、<a href="gcdocsite__documentlink?toc-item-id=a7244382-714b-4d32-9370-943ffeb410a2" title="">SubItem</a>オブジェクトで表され、SubItemsプロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=9918a6bd-9b5c-4c5b-a326-c5b380a5364a" title="">SubItemCollection</a>コレクションに保持されます。</p><p>サブアイテムに設定した項目は、<a href="gcdocsite__documentlink?toc-item-id=13b1bcb6-cdba-4126-9b6e-5bdad1899eb2" title="">ListColumns</a>プロパティで設定されたカラムの数だけ表示することができます。つまり、サブ項目を追加してもカラムが追加されていないと、リストボックスはマルチカラムで表示されません。カラムの追加については、「<a href="gcdocsite__documentlink?toc-item-id=b92f5c40-b0f9-4ffa-a5eb-9b27b1330baa" title="">カラムの設定</a>」を参照してください。</p><p>サブアイテムのテキストがカラムの幅に収まりきらないとき、省略文字を使って表すことができます。省略文字を表示する場合は、SubItemクラスの<a href="gcdocsite__documentlink?toc-item-id=98e41cc4-720a-406b-a658-d8d86c7bebd5" title="">Ellipsis</a>プロパティをTrueに設定します。</p><p>また、テキストは、カラムの幅に応じて文字を折り返して表示することもできます。</p><p>文字を折り返して表示するかどうかは、SubItemクラスの<a href="gcdocsite__documentlink?toc-item-id=10bf8dd7-3fae-4986-805c-18cd8bc0f781" title="">WordWrap</a>プロパティで設定します。</p><p>サブアイテムには、列単位でテキストもしくは画像を表示することができます。どちらを表示するかはカラムによって決まり、ListColumnクラスの<a href="gcdocsite__documentlink?toc-item-id=d8026b1b-1f28-45c3-bbd9-d50b051cea22" title="">DataDisplayType</a>で設定します。</p><p>サブアイテムに表示する内容は、SubItemクラスの<a href="gcdocsite__documentlink?toc-item-id=0fc763a4-5ef7-4095-a5b6-aa1da5792650" title="">Value</a> プロパティで設定します。ValueはObject型で、値にはテキストもしくは表示するイメージ画像を設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/08gccombobox/subitem.png" contenteditable="false"><br></p><p>次のサンプルコードは、上図のように2列のカラムを表示し、項目にそれぞれ画像とテキストを表示する例を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcComboBoxCell gcComboBoxCell1 = <span class="hljs-keyword">new</span> InputManCell.GcComboBoxCell();
+<span class="hljs-comment">// カラムを作成 </span>
+InputManCell.ListColumn listColumn1 = <span class="hljs-keyword">new</span> InputManCell.ListColumn(GrapeCity.Win.Editors.DataDisplayType.Image);
+listColumn1.Header.Text = <span class="hljs-string">"Image"</span>;
+
+InputManCell.ListColumn listColumn2 = <span class="hljs-keyword">new</span> InputManCell.ListColumn(GrapeCity.Win.Editors.DataDisplayType.Text);
+listColumn2.Header.Text = <span class="hljs-string">"Text"</span>;
+
+<span class="hljs-comment">// カラムをリストボックスに設定 </span>
+gcComboBoxCell1.ListColumns.AddRange(<span class="hljs-keyword">new</span> InputManCell.ListColumn[] { listColumn1, listColumn2 });
+
+<span class="hljs-comment">// サブアイテムを作成 </span>
+InputManCell.SubItem subItem1 = <span class="hljs-keyword">new</span> InputManCell.SubItem();
+subItem1.Value = System.Drawing.Image.FromFile(<span class="hljs-string">"C:\\MESCIUS.bmp"</span>);
+InputManCell.SubItem subItem2 = <span class="hljs-keyword">new</span> InputManCell.SubItem();
+subItem2.Value = <span class="hljs-string">"MESCIUS"</span>;
+InputManCell.SubItem subItem3 = <span class="hljs-keyword">new</span> InputManCell.SubItem();
+subItem3.Value = System.Drawing.Image.FromFile(<span class="hljs-string">"C:\\InputMan.bmp"</span>);
+InputManCell.SubItem subItem4 = <span class="hljs-keyword">new</span> InputManCell.SubItem();
+subItem4.Value = <span class="hljs-string">"InputMan"</span>;
+
+<span class="hljs-comment">// リストアイテムをセルに設定 </span>
+gcComboBoxCell1.Items.Add(<span class="hljs-keyword">new</span> InputManCell.ListItem(<span class="hljs-keyword">new</span> InputManCell.SubItem[] { subItem1, subItem2 }));
+gcComboBoxCell1.Items.Add(<span class="hljs-keyword">new</span> InputManCell.ListItem(<span class="hljs-keyword">new</span> InputManCell.SubItem[] { subItem3, subItem4 }));
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcComboBoxCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcComboBoxCell1 = New InputManCell.GcComboBoxCell()
+
+' カラムを作成 
+Dim ListColumn1 = New InputManCell.ListColumn(GrapeCity.Win.Editors.DataDisplayType.Image)
+ListColumn1.Header.Text = "Image"
+
+Dim ListColumn2 As New InputManCell.ListColumn(GrapeCity.Win.Editors.DataDisplayType.Text)
+ListColumn2.Header.Text = "Text"
+
+' カラムをリストボックスに設定 
+GcComboBoxCell1.ListColumns.AddRange(New InputManCell.ListColumn() {ListColumn1, ListColumn2})
+
+' サブアイテムを作成 
+Dim SubItem1 As New InputManCell.SubItem()
+SubItem1.Value = System.Drawing.Image.FromFile("C:\MESCIUS.bmp")
+Dim subItem2 As New InputManCell.SubItem()
+subItem2.Value = "MESCIUS"
+Dim subItem3 As New InputManCell.SubItem()
+subItem3.Value = System.Drawing.Image.FromFile("C:\\InputMan.bmp")
+Dim subItem4 As New InputManCell.SubItem()
+subItem4.Value = "InputMan"
+
+'  リストアイテムをセルに設定 
+GcComboBoxCell1.Items.Add(New InputManCell.ListItem(New InputManCell.SubItem() {SubItem1, subItem2}))
+GcComboBoxCell1.Items.Add(New InputManCell.ListItem(New InputManCell.SubItem() {subItem3, subItem4}))
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcComboBoxCell1})</code></pre></div><h4>サブアイテムの既定値</h4><p>カラムの既定値を設定できるデフォルトカラムと同様、サブアイテムもデフォルト値を設定することができます。すべてのカラムに共通な設定はデフォルトカラムで設定しておくことで、個々のサブアイテムへの設定が不要になり便利です。</p><p>サブアイテムの既定値は、<a href="gcdocsite__documentlink?toc-item-id=c1113939-8979-490d-a22c-fe09f5ab43cb" title="">DefaultListColumn</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=c14bb8a3-97ad-4164-a20b-8a03b6de7a47" title="">DefaultSubItem</a>プロパティで設定します。DefaultSubItemプロパティは、<a href="gcdocsite__documentlink?toc-item-id=e1c9dec9-8e4d-4c97-845e-98ca61bffee6" title="">DefaultSubItem</a> 型のオブジェクトで以下のプロパティを設定することができます。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=96a69235-f539-4831-9b03-39e69501d0fe" title="">ContentAlignment</a>（内容の整列位置を設定します。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=eb61dd89-1455-4c99-ae9c-096ec7824bed" title="">Ellipsis</a>（省略文字を表示するかどうか設定します。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=9b993ab4-5587-43fe-a102-21e5900a06b8" title="">Padding</a>（サブアイテムの境界線からコンテンツ表示領域までの距離を指定します。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=6af15d1a-51d9-4436-af67-a310819d8f74" title="">WordWrap</a>（テキストを折り返して表示するかどうか設定します。）</p></li></ul><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=03be278e-45d6-4e66-b049-a8e10aa1ad13" title="">GcComboBoxCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ceb460ee-57b3-4ea6-b8c9-f89bcaad9122" title="">項目の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=37f9c58d-f932-4331-a128-3152b63c31b7" title="">データソースに接続</a></p>

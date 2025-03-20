@@ -1,0 +1,101 @@
+<p>ComboBoxCellでComboBox.SelectedIndexChangedイベントと同様の処理を行うには、GcMultiRow.CellEditedFormattedValueChangedイベントによる実装と、ComboBoxEditingControl.SelectedIndexChangedイベントによる実装の２種類の方法があります。</p><p>通常はGcMultiRow.CellEditedFormattedValueChangedイベントによる実装が推奨されます。</p><h2>GcMultiRow.CellEditedFormattedValueChangedイベントによる実装</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellEditedFormattedValueChanged(object sender, GrapeCity.Win.MultiRow.CellEditedFormattedValueChangedEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+
+    <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> ComboBoxCell)
+    {
+        Console.WriteLine(<span class="hljs-string">"{0},{1}"</span>, e.Reason.ToString(), currentCell.EditedFormattedValue);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellEditedFormattedValueChanged(ByVal sender As System.Object, ByVal e As GrapeCity.Win.MultiRow.CellEditedFormattedValueChangedEventArgs) Handles GcMultiRow1.CellEditedFormattedValueChanged
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+
+    If TypeOf currentCell Is ComboBoxCell Then
+        Console.WriteLine("{0},{1}", e.Reason.ToString(), currentCell.EditedFormattedValue)
+    End If
+End Sub</code></pre></div><h2>ComboBoxEditingControl.SelectedIndexChangedイベントによる実装</h2><p>5.0Jと同じように、ComboBoxEditingControl.SelectedIndexChangedイベントを使う場合、セルの初期化時のイベント検出を避けるため、TextBoxEditingControlTextChangedイベントとは異なる実装方法を使用する必要があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">private</span> ComboBoxEditingControl _comboBoxEditingControl1 = <span class="hljs-literal">null</span>;
+
+<span class="hljs-function">private void Form1_Load(object sender, System.EventArgs e)</span>
+{
+    ComboBoxCell comboBoxCell1 = <span class="hljs-keyword">new</span> ComboBoxCell();
+    comboBoxCell1.Name = <span class="hljs-string">"comboBoxCell1"</span>;
+    comboBoxCell1.Items.AddRange(<span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"C"</span>);
+    LabelCell labelCell1 = <span class="hljs-keyword">new</span> LabelCell();
+    labelCell1.Name = <span class="hljs-string">"labelCell1"</span>;
+    LabelCell labelCell2 = <span class="hljs-keyword">new</span> LabelCell();
+    labelCell2.Name = <span class="hljs-string">"labelCell2"</span>;
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] {comboBoxCell1, labelCell1, labelCell2});
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, GrapeCity.Win.MultiRow.EditingControlShowingEventArgs e)</span>
+{
+    <span class="hljs-comment">// セル編集コントロールのイベントを追加する</span>
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> ComboBoxEditingControl)
+    {
+        <span class="hljs-keyword">this</span>._comboBoxEditingControl1 = e.Control <span class="hljs-keyword">as</span> ComboBoxEditingControl;
+        <span class="hljs-keyword">this</span>._comboBoxEditingControl1.SelectedIndexChanged += <span class="hljs-keyword">new</span> EventHandler(_comboBoxEditingControl1_SelectedIndexChanged);
+    }
+}
+
+<span class="hljs-comment">// セル編集コントロールのイベント(ComboBox.SelectedIndexChangedと同じ)</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> _comboBoxEditingControl1_SelectedIndexChanged(<span class="hljs-built_in">object</span> sender, EventArgs e)
+{
+    ComboBoxEditingControl comboBox = sender <span class="hljs-keyword">as</span> ComboBoxEditingControl;
+    comboBox.GcMultiRow.CurrentRow.Cells[<span class="hljs-string">"labelCell1"</span>].Value = comboBox.Items[comboBox.SelectedIndex].ToString();
+    comboBox.GcMultiRow.CurrentRow.Cells[<span class="hljs-string">"labelCell2"</span>].Value = comboBox.SelectedIndex;
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellEndEdit(object sender, GrapeCity.Win.MultiRow.CellEndEditEventArgs e)</span>
+{
+    <span class="hljs-comment">// セル編集コントロールのイベントを削除する</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._comboBoxEditingControl1 != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-keyword">this</span>._comboBoxEditingControl1.SelectedIndexChanged -= <span class="hljs-keyword">new</span> EventHandler(_comboBoxEditingControl1_SelectedIndexChanged);
+        <span class="hljs-keyword">this</span>._comboBoxEditingControl1 = <span class="hljs-literal">null</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private _comboBoxEditingControl1 As ComboBoxEditingControl = Nothing
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim ComboBoxCell1 As New ComboBoxCell()
+    ComboBoxCell1.Name = "ComboBoxCell1"
+    ComboBoxCell1.Items.AddRange("A", "B", "C")
+    Dim LabelCell1 As New LabelCell()
+    LabelCell1.Name = "LabelCell1"
+    Dim LabelCell2 As New LabelCell()
+    LabelCell2.Name = "LabelCell2"
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {ComboBoxCell1, LabelCell1, LabelCell2})
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(ByVal sender As System.Object, ByVal e As GrapeCity.Win.MultiRow.EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    ' セル編集コントロールのイベントを追加する
+    If TypeOf e.Control Is ComboBoxEditingControl Then
+        Me._comboBoxEditingControl1 = TryCast(e.Control, ComboBoxEditingControl)
+        AddHandler Me._comboBoxEditingControl1.SelectedIndexChanged, AddressOf Me._comboBoxEditingControl1_SelectedIndexChanged
+    End If
+End Sub
+
+' セル編集コントロールのイベント(ComboBox.SelectedIndexChangedと同じ)
+Private Sub _comboBoxEditingControl1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Dim comboBox As ComboBoxEditingControl = TryCast(sender, ComboBoxEditingControl)
+    comboBox.GcMultiRow.CurrentRow.Cells("LabelCell1").Value = comboBox.Items(comboBox.SelectedIndex).ToString()
+    comboBox.GcMultiRow.CurrentRow.Cells("LabelCell2").Value = comboBox.SelectedIndex
+End Sub
+
+Private Sub GcMultiRow1_CellEndEdit(ByVal sender As System.Object, ByVal e As GrapeCity.Win.MultiRow.CellEndEditEventArgs) Handles GcMultiRow1.CellEndEdit
+    ' セル編集コントロールのイベントを削除する
+    If Me._comboBoxEditingControl1 Is Nothing Then
+        RemoveHandler Me._comboBoxEditingControl1.SelectedIndexChanged, AddressOf Me._comboBoxEditingControl1_SelectedIndexChanged
+        Me._comboBoxEditingControl1 = Nothing
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b3db033b-8448-45cf-8763-aee7e36f797e" title="">コンボボックス型セル（ComboBoxCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8e8701f6-7f0d-48b0-bae5-d119b6ef78eb" title="">選択項目のインデックス取得</a></p>

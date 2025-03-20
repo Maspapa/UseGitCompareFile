@@ -1,0 +1,19 @@
+<p>LineNotifyを使用すると、検証エラーを下線で通知できます。この下線はセル単位で描画されるため、必ずしもセルの文字列に一致しません。下線の色は変更できます。</p><p>LineNotifyはGcMultiRow.ShowWaveLineInEditingStatusプロパティの影響を受けません。</p><h2>デザイナによる設定</h2><p>デザイナでセルの検証と共にLineNotifyを使用するには、次のように操作します。</p><ol><li><p>値を検証するセルを選択する。(例: textBoxCell1)</p></li><li><p>プロパティウィンドウでValidatorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidatorコレクションエディタで左上のコンボボックスから「RequiredFieldValidator」を選択し、［追加］をクリックする。</p></li><li><p>画面右のプロパティグリッドでActionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidateActionコレクションエディタでLineNotifyを追加する。</p></li><li><p>［OK］ボタンをクリックしてCellValidateActionコレクションエディタを閉じる。</p></li><li><p>［OK］ボタンをクリックしてCellValidatorコレクションエディタを閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>textBoxCell1を変更せずに次のセルに移動して検証エラーが表示されることを確認する。</p></li></ol><h2>コーディングによる設定</h2><p>次のコードは、文字列型セルの値が空白のとき検証エラーとして下線を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+RequiredFieldValidator requiredFieldValidator1 = <span class="hljs-keyword">new</span> RequiredFieldValidator();
+requiredFieldValidator1.Actions.Add(<span class="hljs-keyword">new</span> LineNotify());
+textBoxCell1.Validators.Add(requiredFieldValidator1);
+
+Cell[] cells = { textBoxCell1 };
+gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim TextBoxCell1 As New TextBoxCell()
+Dim RequiredFieldValidator1 As New RequiredFieldValidator()
+RequiredFieldValidator1.Actions.Add(New LineNotify())
+TextBoxCell1.Validators.Add(RequiredFieldValidator1)
+
+Dim cells As Cell() = {TextBoxCell1}
+GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=d92d06e8-ede7-4f1b-8070-44228f223ad0" title="">組み込みの検証アクション</a></p><p><a href="gcdocsite__documentlink?toc-item-id=afc60e76-a586-42e6-8eb0-106c53a305a6" title="">セルのスタイルによる通知（CellStyleNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2122b628-cbd5-48aa-b4f2-c9f18c75c50a" title="">エラーアイコンによる通知（IconNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b2c54841-df5b-4a46-b0e2-74cf29c2d8e9" title="">サウンドによる通知（SoundNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0511622d-3f3a-4580-87bb-94b2ef855c82" title="">バルーンチップによる通知（TipNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=07b9eee6-11f8-4a1e-af39-9e1a6ba6e027" title="">フォーカスの遷移（FocusProcess）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9da0a3d0-03d9-4899-841b-a53eb3da525e" title="">値の処理（ValueProcess）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3a71566a-6012-4e17-ae1c-8e6f68905cd4" title="">メッセージボックスによる通知（MessageBoxNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af222cd9-d952-4c8c-8e8d-f57db055dcbc" title="">3段階のアイコンによる通知（ThreeStateIconNotify）</a></p>

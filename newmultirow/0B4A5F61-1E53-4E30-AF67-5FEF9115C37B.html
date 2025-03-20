@@ -1,0 +1,73 @@
+<p>iCalendar（ics）ファイルで定義されたイベントをGcCalendarCellの祝日としてインポートすることができます。また、GcCalendarCellの祝日設定をiCalendar（ics）ファイルに保存して、他のアプリケーションで再利用することも可能です。</p><h2>iCalendarファイルについて</h2><p>GcCalendarCellは、RFC 2445規格に準じたiCalendarファイル（*.ics）のVEVENTコンポーネントのインポートとエクスポートをサポートしています。iCalendarおよびVEVENTの仕様については、<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/web.png" alt="Web サイト" contenteditable="false">「<a href="http://tools.ietf.org/html/rfc2445" title="">Internet Calendaring and Scheduling Core Object Specification (iCalendar)</a>」をご参照ください。</p><p>GcCalendarCellでサポートするVEVENTプロパティの一覧、およびGcCalendarCellの祝日設定との関係は次の表のとおりです。</p><table><thead><tr><th><p>VEVENT</p></th><th><p>Holiday</p></th><th><p>ForceHoliday／ForceWorkday</p></th><th><p>DayOfWeekHoliday</p></th><th><p>ForceDayOfWeekHoliday／ForceDayOfWeekWorkday</p></th></tr></thead><tbody><tr><td><p>Summary</p></td><td><p>Name</p></td><td><p>Name</p></td><td><p>Name</p></td><td><p>Name</p></td></tr><tr><td><p>DTStart.Month</p></td><td><p>StartMonth</p></td><td><p>×</p></td><td><p>×</p></td><td><p>×</p></td></tr><tr><td><p>DTStart.Day</p></td><td><p>StartDay</p></td><td><p>×</p></td><td><p>×</p></td><td><p>×</p></td></tr><tr><td><p>DTEnd.Month</p></td><td><p>EndMonth</p></td><td><p>×</p></td><td><p>×</p></td><td><p>×</p></td></tr><tr><td><p>DTEnd.Day</p></td><td><p>EndDay</p></td><td><p>×</p></td><td><p>×</p></td><td><p>×</p></td></tr><tr><td><p>DTStart</p></td><td><p>×</p></td><td><p>Start</p></td><td><p>×</p></td><td><p>×</p></td></tr><tr><td><p>DTEnd</p></td><td><p>×</p></td><td><p>End</p></td><td><p>×</p></td><td><p>×</p></td></tr><tr><td><p>DTStart.Year</p></td><td><p>×</p></td><td><p>×</p></td><td><p>×</p></td><td><p>Year</p></td></tr><tr><td><p>RRule.ByMonth</p></td><td><p>×</p></td><td><p>×</p></td><td><p>Month</p></td><td><p>Month</p></td></tr><tr><td><p>RRule.ByDay</p></td><td><p>×</p></td><td><p>×</p></td><td><p>DayOfWeek</p></td><td><p>DayOfWeek</p></td></tr><tr><td><p>RRule.ByDay</p></td><td><p>×</p></td><td><p>×</p></td><td><p>DayOfWeekInMonth</p></td><td><p>DayOfWeekInMonth</p></td></tr></tbody></table><blockquote type="warning"><p>!type=warning</p><ul><li><p>STATUSプロパティが"CANCELLED"のイベントはインポートされません。</p></li><li><p>インポートされるイベントがどのようなHolidayに変換されるかは、RRULEプロパティの値によって自動的に決定されます。例えば、"RRULE:FREQ=<strong>YEARLY</strong>;BYDAY=<strong>3MO</strong>;BYMONTH=<strong>9</strong>"は、<strong>毎年</strong>の<strong>9月</strong>の<strong>第3月曜日</strong>と認識されます。</p></li><li><p>DTStartとDTEndが時刻のない日付形式の場合、値はそのまま保持されます。（例："DTSTART;VALUE=DATE:20101223"）</p></li><li><p>DTStartとDTEndが終日を示す値ではなく、時刻をローカル時間で記述されている場合、値はそのまま保持されます。（例："DTSTART;TZID=JAPAN:19970714T133000"）</p></li><li><p>DTStartとDTEndが終日を示す値ではなく、時刻を協定世界時（UTC）で記述されている場合、値はローカル時間に変換し処理されます。（例："DTSTART:20101218T073000Z"→日本時間の2010/12/18 16:30:00）</p></li></ul></blockquote><h2>iCalendarファイルのインポート</h2><p>設計時に、iCalendarファイルのイベント情報をGcCalendarCellの祝日にインポートするには、以下の手順で行います。</p><ol><li><p>GcCalendarCellを選択し、プロパティウィンドウでHolidayStylesプロパティの［...］ボタンをクリックします。</p></li><li><p>表示された休日エディタで［開く...］ボタンをクリックします。</p></li><li><p>「ファイルを開く」ダイアログボックスが表示されるので、ファイルの種類を「iCalendar file(*.ics)」に変更して、インポートするicsファイルを選択し［開く］ボタンをクリックします。</p></li><li><p>「iCalendarファイルのインポート」ダイアログが表示されるので、インポートするイベントのチェックボックスにチェックを付けます。「終日の予定のみ」のチェックを外せば、時刻まで指定したイベントを表示することが可能です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/importicalendar3.png" contenteditable="false"><br></p></li><li><p>「詳細欄」と「休日のタイプ」の内容を確認してから［OK］ボタンをクリックします。</p></li><li><p>インポートされた休日の設定を変更する場合は、休日エディタの「休日の追加」タブで行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/importicalendar5.png" contenteditable="false"><br></p></li><li><p>休日エディタの「スタイル」一覧に追加された休日スタイルのチェックボックスをチェックします。</p></li><li><p>［OK］ボタンをクリックしてウィンドウを閉じます。</p></li></ol><blockquote type="warning"><p>!type=warning</p><ul><li><p>インポートを実行する前に、必ず変換先の設定（「休日のタイプ」および「詳細」）が正しいことをご確認ください。</p></li><li><p>該当イベントの元となるiCalendar情報は、ダイアログ下部の情報欄で確認できます。</p></li><li><p>iCalendarファイルで格納したイベント情報によって、自動的に変換先の休日タイプが設定されます。意図しない休日タイプが設定された場合は、「休日のタイプ」欄から変更できます。選択された「休日のタイプ」に該当のイベントを正しく変換できない場合（例えば、繰り返し条件のない臨時休業日を"DayOfWeekHoliday"に変換することはできません）、右側にエラーアイコンが表示されます。イベントの情報を確認して適切な休日タイプに変更してください。</p></li></ul></blockquote><p>実行時にiCalendarファイルから休日をインポートするには、<a href="gcdocsite__documentlink?toc-item-id=3e04e5f2-e96d-41d3-8cd7-4e292ec224e4" title="">LoadHolidayFromiCalendar</a>メソッドを使用します。次の例は、既存のiCalenderファイルからイベント情報をGcCalendarCellの休日に読み込み、表示する方法を示します。サンプルコードを実行するには、ディスクDの下に"Holiday.ics"というiCalendarファイルを配置しておく必要があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+
+    <span class="hljs-comment">// iCalendarファイルのパスを設定します。</span>
+    <span class="hljs-built_in">string</span> path = <span class="hljs-string">@"D:\Holiday.ics"</span>;
+
+    <span class="hljs-comment">// iCalendarファイルからすべてのイベントを取得し、GcCalendar1の休日に読み込みます。</span>
+    PlusPakCell.HolidayStyle holidayStyle = gcCalendarCell1.LoadHolidayFromiCalendar(path);
+
+    <span class="hljs-keyword">if</span> (holidayStyle == <span class="hljs-literal">null</span>)
+    {
+        MessageBox.Show(<span class="hljs-string">"休日スタイルを読み込めませんでした。"</span>);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    holidayStyle.SubStyle = <span class="hljs-keyword">new</span> PlusPakCell.SubStyle(Color.YellowGreen, Color.Red, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);
+    gcCalendarCell1.ActiveHolidayStyles = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { holidayStyle.Name };
+
+
+
+    System.Text.StringBuilder messageBoxCS = <span class="hljs-keyword">new</span> System.Text.StringBuilder();
+    <span class="hljs-keyword">foreach</span> (PlusPakCell.IHoliday holiday <span class="hljs-keyword">in</span> holidayStyle.Holidays)
+    {
+        messageBoxCS.AppendFormat(<span class="hljs-string">"Name = {0}"</span>, holiday.Name);
+        messageBoxCS.AppendLine();
+    }
+
+    <span class="hljs-comment">// 読み込んだ休日の名前を表示します。</span>
+    MessageBox.Show(messageBoxCS.ToString(), <span class="hljs-string">"All holidays"</span>);
+
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+
+
+    ' iCalendarファイルのパスを設定します。 
+    Dim path As String = "D:\Holiday.ics"
+
+    ' iCalendarファイルからすべてのイベントを取得し、GcCalendarCell1の休日に読み込みます。 
+    Dim holidayStyle As PlusPakCell.HolidayStyle = GcCalendarCell1.LoadHolidayFromiCalendar(path)
+
+    If holidayStyle Is Nothing Then
+        MessageBox.Show("休日スタイルを読み込めませんでした。")
+        Return
+    End If
+
+    holidayStyle.SubStyle = New PlusPakCell.SubStyle(Color.YellowGreen, Color.Red, True, False)
+    GcCalendarCell1.ActiveHolidayStyles = New String() {holidayStyle.Name}
+
+    Dim messageBoxVB As New System.Text.StringBuilder()
+
+    For Each holiday As PlusPakCell.IHoliday In holidayStyle.Holidays
+        messageBoxVB.AppendFormat("Name = {0}", holiday.Name)
+        messageBoxVB.AppendLine()
+    Next
+
+    ' 読み込んだ休日の名前を表示します。
+    MessageBox.Show(messageBoxVB.ToString(), "All holidays")
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+    GcMultiRow1.RowCount = 10
+End Sub</code></pre></div><h2>iCalendarファイルのエクスポート</h2><p>GcCalendarCellに設定されている休日をiCalendarファイルにエクスポートするには、以下の手順で行います。</p><ol><li><p>GcCalendarCellを選択し、プロパティウィンドウでHolidayStylesプロパティの［...］ボタンをクリックします。</p></li><li><p>休日エディタの［保存...］ボタンをクリックします。</p></li><li><p>「名前を付けて保存」ダイアログボックスが表示されるので、「ファイルの種類」から"iCalendar file(*.ics)"を選択して、保存するファイル名を入力し［保存］ボタンをクリックします。</p></li><li><p>以上の操作で、カレンダーに休日スタイルがエクスポートされます。</p></li></ol><p>実行時にiCalendarファイルに休日をエクスポートするには、<a href="gcdocsite__documentlink?toc-item-id=889aaeda-01ae-4b90-addb-9204fd74b03c" title="">SaveHolidayToiCalendar</a>メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">PlusPakCell.GcCalendarCell  cell  = (gcMultiRow1.Template.Row.Cells[<span class="hljs-string">"gcCalendarCell1"</span>] <span class="hljs-keyword">as</span> PlusPakCell.GcCalendarCell);
+cell.SaveHolidayToiCalendar(<span class="hljs-string">@"D:\Holidays.ics"</span>, <span class="hljs-string">"2015年臨時休業日"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim cell As PlusPakCell.GcCalendarCell = DirectCast(GcMultiRow1.Template.Row.Cells("GcCalendarCell1"), PlusPakCell.GcCalendarCell)
+cell.SaveHolidayToiCalendar("D:\Holidays.ics", "2015年臨時休業日")</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=5c66b65d-4c55-4789-8a07-8e32216ca253" title="">GcCalendarCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ec9a15e1-311b-4a1c-972d-2b1eabd65071" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=36f73f20-19a2-4571-9dcb-591e1ee1e837" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e70e569d-bed2-4b51-b0ec-b437f82912b3" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6a94c6aa-81e3-41bc-a45a-09aff2ba497d" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9f75582f-079b-4e5a-a0c8-8daf097f923f" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=93fe3668-cc67-4b54-b42a-6515be44c158" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=aec3550b-c240-4c73-ad30-2553bc0a2507" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af4ba527-0df7-42a3-b1f5-037ed5794607" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=17ac25c3-6e23-4b97-9e71-6f357056feae" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0a830c95-ffd4-47ae-8ac3-20385e029647" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcc64849-d39e-43d1-9a4b-ed57c6e6e911" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac39bee9-c89e-479f-9bfd-d16997abb999" title="">和暦表示の設定変更</a></p>

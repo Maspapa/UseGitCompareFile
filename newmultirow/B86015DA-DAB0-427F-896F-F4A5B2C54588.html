@@ -1,0 +1,30 @@
+<p>イメージ型セル（ImageCell）には、GIF形式のアニメーションを表示できます。GIF形式のアニメーションを有効にするには、<a href="gcdocsite__documentlink?toc-item-id=2c756697-e1d8-40ee-b7a1-704d06fa8803">ImageCell.SupportsAnimation</a>プロパティにTrueを設定します。</p>
+<h2 id="サンプルコード">サンプルコード</h2>
+<p>次のコードでは、イメージ型セルにGIF形式のアニメーションを表示します。</p>
+<pre><code class="language-csharp">using GrapeCity.Win.MultiRow;
+                                                                
+ImageCell imageCell1 = new ImageCell();
+// アニメーションを有効に設定
+imageCell1.SupportsAnimation = true;
+// アニメーションGIFファイルを設定
+imageCell1.Value = new Bitmap(@&quot;animation.gif&quot;);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(new Cell[] { imageCell1 });
+gcMultiRow1.RowCount = 3;
+</code></pre>
+<pre><code class="language-vbnet">Imports GrapeCity.Win.MultiRow
+                                        
+Dim ImageCell1 As New ImageCell()
+' アニメーションを有効に設定
+ImageCell1.SupportsAnimation = True
+' アニメーションGIFファイルを設定
+ImageCell1.Value = New Bitmap(&quot;animation.gif&quot;)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {ImageCell1})
+GcMultiRow1.RowCount = 3
+</code></pre>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=efa0c972-f86c-4263-bed6-859e40f17527">イメージ型セル（ImageCell）</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=a945b865-77fb-4422-972c-457a44230bdf">画像の表示</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=109ce07b-17d9-431a-9fa8-3728bb015b75">クリックの処理</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=68eb5d2b-b7e7-4318-b116-94efdc605679">値が空のときの代替イメージ</a></p>

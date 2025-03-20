@@ -1,0 +1,117 @@
+<p>GcMultiRowコントロールはコンテンツの拡大、縮小（ズーム）をサポートしています。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>スクロールバー、ツールチップはズームの対象外です。</p></li><li><p>有効な拡大率の範囲は、10％から400％までです。</p></li></ul></blockquote><h2>ズームの許可</h2><p><a href="gcdocsite__documentlink?toc-item-id=74e30b5c-a013-4ead-927b-e2fbbeebea4b" title="">GcMultiRow.AllowUserToZoom</a>プロパティがTrueに設定されている場合、ユーザーは[Ctrl]キーを押した状態でマウスホイールを前後に動かすことで、グリッドの内容をズームできます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.AllowUserToZoom = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.AllowUserToZoom = True</code></pre></div><p>ユーザーによるズームを禁止するには、<a href="gcdocsite__documentlink?toc-item-id=74e30b5c-a013-4ead-927b-e2fbbeebea4b" title="">GcMultiRow.AllowUserToZoom</a>プロパティにFalseを設定します。</p><h2>罫線のズーム</h2><p><a href="gcdocsite__documentlink?toc-item-id=eaab8547-9243-4024-8f5d-0bfeba22b430" title="">GcMultiRow.AllowBorderLineZoom</a>プロパティにTrueを設定するとセルの罫線をズームします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.AllowBorderLineZoom = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.AllowBorderLineZoom = True</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/grid_zoom_border.png" contenteditable="false"><br></p><p><br></p><p>罫線をズームした場合（左）とズームしない場合（右）</p><h2>拡大率の取得／設定</h2><p>開発者は<a href="gcdocsite__documentlink?toc-item-id=7a0de1f2-e5d2-4396-b63f-728b5a440d4b" title="">GcMultiRow.ZoomFactor</a>プロパティを使用して、グリッドの現在の拡大率を取得または設定できます。</p><p>次のコードは、GcMultiRowコントロールの拡大率を200％に設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.ZoomFactor = <span class="hljs-number">2.0f</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.ZoomFactor = 2.0F</code></pre></div><p>次のコードは、[Ctrl]+[↑]上矢印キーをズームイン、[Ctrl]+[↓]下矢印キーをズームアウトに割り当てます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+gcMultiRow1.ShortcutKeyManager.Register(<span class="hljs-keyword">new</span> ZoomInAction(), Keys.Control | Keys.Up);
+gcMultiRow1.ShortcutKeyManager.Register(<span class="hljs-keyword">new</span> ZoomOutAction(), Keys.Control | Keys.Down);
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ZoomInAction</span> : <span class="hljs-title">IAction</span>
+{
+    <span class="hljs-function">public bool CanExecute(GcMultiRow target)</span>
+    {
+        <span class="hljs-keyword">if</span> (target.AllowUserToZoom == <span class="hljs-literal">true</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> DisplayName
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.ToString(); }
+    }
+
+    <span class="hljs-function">public void Execute(GcMultiRow target)</span>
+    {
+        <span class="hljs-keyword">try</span>
+        {
+            target.ZoomFactor *= <span class="hljs-number">2</span>;
+        }
+        <span class="hljs-keyword">catch</span> (Exception)
+        {
+            <span class="hljs-keyword">throw</span>;
+        }
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ZoomOutAction</span> : <span class="hljs-title">IAction</span>
+{
+    <span class="hljs-function">public bool CanExecute(GcMultiRow target)</span>
+    {
+        <span class="hljs-keyword">if</span> (target.AllowUserToZoom == <span class="hljs-literal">true</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> DisplayName
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.ToString(); }
+    }
+
+    <span class="hljs-function">public void Execute(GcMultiRow target)</span>
+    {
+        <span class="hljs-keyword">try</span>
+        {
+            target.ZoomFactor /= <span class="hljs-number">2</span>;
+        }
+        <span class="hljs-keyword">catch</span> (Exception)
+        {
+            <span class="hljs-keyword">throw</span>;
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.ShortcutKeyManager.Register(New ZoomInAction(), Keys.Control Or Keys.Up)
+GcMultiRow1.ShortcutKeyManager.Register(New ZoomOutAction(), Keys.Control Or Keys.Down)
+
+Public Class ZoomInAction
+    Implements IAction
+
+    Public Function CanExecute(ByVal target As GcMultiRow) As Boolean _
+        Implements IAction.CanExecute
+        If target.AllowUserToZoom = True Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public ReadOnly Property DisplayName() As String _
+        Implements IAction.DisplayName
+        Get
+            Return Me.ToString()
+        End Get
+    End Property
+
+    Public Sub Execute(ByVal target As GcMultiRow) _
+        Implements IAction.Execute
+        Try
+            target.ZoomFactor *= 2
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+End Class
+
+Public Class ZoomOutAction
+    Implements IAction
+
+    Public Function CanExecute(ByVal target As GcMultiRow) As Boolean _
+        Implements IAction.CanExecute
+        If target.AllowUserToZoom = True Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public ReadOnly Property DisplayName() As String _
+        Implements IAction.DisplayName
+        Get
+            Return Me.ToString()
+        End Get
+    End Property
+
+    Public Sub Execute(ByVal target As GcMultiRow) _
+        Implements IAction.Execute
+        Try
+            target.ZoomFactor /= 2
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+End Class</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=87ec6429-c3b9-4564-923f-f7c943ce00b9" title="">グリッド</a></p><p><a href="gcdocsite__documentlink?toc-item-id=672f7dc1-1297-4293-87f6-f4d7ae30af83" title="">テンプレートの割り当てと参照</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1cd87acc-bf66-4bf7-bf75-b61800b830fb" title="">編集モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=05e1230b-6129-43d3-aa78-5b2cbf48ccba" title="">選択モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e56c66d1-0481-4f06-a48c-d3c4d03893ef" title="">表示モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3b578791-7908-4795-8e61-b9f1e7339d21" title="">文字列検索</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2647ada3-b90d-4823-adf7-4fa4ef083123" title="">スクロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e04576cc-5bac-410c-9335-0dda134c922f" title="">選択セルのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=77b3a184-61f9-4c3b-967b-dbb6f103acf0" title="">グリッドのスタイル設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=860edbe2-0af7-4e60-876e-89187c42d483" title="">ビジュアル スタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=09f1eccf-76eb-4979-ac29-c97731b2357d" title="">分割線とビューポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cbf794e7-3362-41e9-b625-bd3e8130611b" title="">コンテキスト メニュー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9cdbb6ad-e84e-441f-8f3f-ddd78af7b429" title="">ショートカット キー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4657f508-867c-455c-81b4-858e8f1d18d7" title="">リサイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e7471d46-a6b0-47fe-982d-8d4b7561d4e3" title="">リサイズ時のオフセット処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f3a0271e-fbeb-46ba-aa76-b99352d3e55c" title="">セルの移動方法の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1aac18ae-c27c-46f5-bfec-e5872e7d2d1b" title="">データ変更の監視</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1d1e19b2-4282-48a3-ad92-603f73b3cc38" title="">セルの自動マージ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=881b6d3e-e4d3-4271-b874-a972e9aef2c8" title="">新規行の上部表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=421066a5-9bfa-427f-a980-245ff290f1af" title="">列の展開／折り畳み</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0fb2df6a-d9df-47d2-8ae9-50185f2c488d" title="">セル幅の自動調整</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9d7078b7-c6b3-420b-a282-9d08e8135b48" title="">SPREADスタイルの適用</a></p><p><a href="gcdocsite__documentlink?toc-item-id=707e6129-7446-4ccf-9b4b-574225dc0b02" title="">既定の設定における留意点</a></p><p><a href="gcdocsite__documentlink?toc-item-id=78fbc71a-7acb-4af3-ae37-953454f8dece" title="">パフォーマンスを向上するためのヒント</a></p>

@@ -1,0 +1,47 @@
+<p>DateTimePickerCellでDateTimePicker.ValueChangedイベントと同様の処理を行うには、DateTimePickerEditingControl.ValueChangedイベントを使用します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> DateTimePickerCell() });
+    gcMultiRow1.EditingControlShowing += <span class="hljs-keyword">new</span> EventHandler&lt;EditingControlShowingEventArgs&gt;(gcMultiRow1_EditingControlShowing);
+
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> DateTimePickerEditingControl)
+    {
+        DateTimePickerEditingControl dateTimePickerEditingControl1 = e.Control <span class="hljs-keyword">as</span> DateTimePickerEditingControl;
+        dateTimePickerEditingControl1.ValueChanged -= <span class="hljs-keyword">new</span> EventHandler(dateTimePickerEditingControl1_ValueChanged);
+        dateTimePickerEditingControl1.ValueChanged += <span class="hljs-keyword">new</span> EventHandler(dateTimePickerEditingControl1_ValueChanged);
+    }
+}
+
+<span class="hljs-function">private void dateTimePickerEditingControl1_ValueChanged(object sender, EventArgs e)</span>
+{
+    DateTimePickerEditingControl dateTimePickerEditingControl1 = sender <span class="hljs-keyword">as</span> DateTimePickerEditingControl;
+    GcMultiRow gcMultiRow = dateTimePickerEditingControl1.GcMultiRow;
+
+    Console.WriteLine(gcMultiRow.CurrentCellPosition.ToString());
+    Console.WriteLine(dateTimePickerEditingControl1.Value.ToString());
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New DateTimePickerCell()})
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(ByVal sender As System.Object, ByVal e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    If TypeOf e.Control Is DateTimePickerEditingControl Then
+        Dim dateTimePickerEditingControl1 As DateTimePickerEditingControl = TryCast(e.Control, DateTimePickerEditingControl)
+        RemoveHandler dateTimePickerEditingControl1.ValueChanged, AddressOf Me.dateTimePickerEditingControl1_ValueChanged
+        AddHandler dateTimePickerEditingControl1.ValueChanged, AddressOf Me.dateTimePickerEditingControl1_ValueChanged
+    End If
+End Sub
+
+Private Sub dateTimePickerEditingControl1_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Dim dateTimePickerEditingControl1 As DateTimePickerEditingControl = TryCast(sender, DateTimePickerEditingControl)
+    Dim gcMultiRow As GcMultiRow = dateTimePickerEditingControl1.GcMultiRow
+
+    Console.WriteLine(gcMultiRow.CurrentCellPosition.ToString())
+    Console.WriteLine(dateTimePickerEditingControl1.Value.ToString())
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7e1bd51b-9e9b-44b5-a31f-56c5672e613c" title="">日付型セル（DateTimePickerCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=52a20b79-14bc-4ca2-81ba-909274f1161d" title="">和暦の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c3044fa7-ed3d-4061-a961-d25694697bfd" title="">初期値の自動確定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=485f0df2-9264-4b73-89fa-087fe4fa90d8" title="">書式設定済みの値の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3ed4de8-e23e-4631-b601-93ffc6f32a5c" title="">値がnullのときの代替文字列</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6a710a0-4045-48a1-aeba-c53dd9ad8f5a" title="">ドロップダウンボタンの非表示</a></p>

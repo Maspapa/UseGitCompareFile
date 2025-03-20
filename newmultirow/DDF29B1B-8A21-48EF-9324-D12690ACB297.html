@@ -1,0 +1,75 @@
+<p>GcMultiRowコントロールのヘッダは既定でビジュアル スタイルが有効です。ビジュアル スタイルの適用結果は、アプリケーションが実行されるOSの設定に依存します。</p><p>以下の情報は、HeaderCell、ColumnHeaderCell、RowHeaderCellおよびCornerHeaderCellで共通です。</p><h2>フラットスタイル</h2><p>HeaderCell.FlatStyleプロパティを設定すると、フラットスタイルを使用できます。マウスオーバー時の外観は<a href="gcdocsite__documentlink?toc-item-id=28eae7a6-3a3d-4cbe-bb98-ce84f006ca64" title="">HeaderCell.FlatAppearance</a>プロパティで設定します。</p><h2>Office スタイル</h2><p><a href="gcdocsite__documentlink?toc-item-id=482276aa-0e92-4101-976b-10bd82748275" title="">HeaderCell.Office2007Style</a>プロパティや<a href="gcdocsite__documentlink?toc-item-id=6c5fc8e8-f93d-4d49-a33f-68695746033f" title="">HeaderCell.Office2021Style</a>プロパティを設定すると、Officeライクなスタイルを使用できます。</p><table><thead><tr><th colspan="4"><p>Office スタイル</p></th></tr></thead><tbody><tr><td rowspan="2"><p>Office Style</p></td><td colspan="2"><p>外観</p></td><td rowspan="2"><p>罫線の色</p></td></tr><tr><td><p>通常</p></td><td><p>マウスホバー</p></td></tr><tr><td><p>Office2007.Silver</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2007_silver_normal.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2007_silver_mousehover.png" contenteditable="false"><br></p></td><td><p>Color.FromArgb(144, 145, 146)</p></td></tr><tr><td><p>Office2007.Blue</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2007_blue_normal.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2007_blue_mousehover.png" contenteditable="false"><br></p></td><td><p>Color.FromArgb(158, 182, 206)</p></td></tr><tr><td><p>Office2007.Black</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2007_black_normal.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2007_black_mousehover.png" contenteditable="false"><br></p></td><td><p>Color.FromArgb(182, 182, 182)</p></td></tr><tr><td><p>Office2021.DarkGray</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2021_darkgray_normal.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2021_darkgray_mousehover.png" contenteditable="false"><br></p></td><td><p>Color.FromArgb(144, 145, 146)</p></td></tr><tr><td><p>Office2021.Black</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2021_black_normal.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2021_black_mousehover.png" contenteditable="false"><br></p></td><td><p>Color.FromArgb(182, 182, 182)</p></td></tr><tr><td><p>Office2021.White</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2021_white_normal.png" contenteditable="false"><br></p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_office2021_white_mousehover.png" contenteditable="false"><br></p></td><td><p>Color.FromArgb(182, 182, 182)</p></td></tr></tbody></table><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.Default;
+Template template1 = gcMultiRow1.Template;
+<span class="hljs-keyword">foreach</span> (Cell cell <span class="hljs-keyword">in</span> template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells)
+{
+    <span class="hljs-keyword">if</span> (cell <span class="hljs-keyword">is</span> HeaderCell)
+    {
+        HeaderCell headerCell1 = cell <span class="hljs-keyword">as</span> HeaderCell;
+        headerCell1.Office2007Style = Office2007Style.Blue;
+        headerCell1.Style.Border = <span class="hljs-keyword">new</span> Border(LineStyle.Thin, Color.FromArgb(<span class="hljs-number">158</span>, <span class="hljs-number">182</span>, <span class="hljs-number">206</span>));
+    }
+}
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.Default
+Dim Template1 As Template = GcMultiRow1.Template
+For Each cell As Cell In Template1.ColumnHeaders(0).Cells
+    If TypeOf cell Is HeaderCell Then
+        Dim HeaderCell1 As HeaderCell = TryCast(cell, HeaderCell)
+        HeaderCell1.Office2007Style = Office2007Style.Blue
+        HeaderCell1.Style.Border = New Border(LineStyle.Thin, Color.FromArgb(158, 182, 206))
+    End If
+Next
+GcMultiRow1.Template = Template1</code></pre></div><h2>ヘッダの境界線</h2><p>HeaderCell.GutterStylesプロパティを設定すると、HeaderCellに境界線を示す溝を表示できます。境界線を示す溝は、上下左右のいずれか、またはすべてに表示できます。</p><p>ヘッダの境界線はビジュアルスタイルが有効の場合のみ表示されます。それ以外の場合では、セルの<a href="gcdocsite__documentlink?toc-item-id=1f3aedd3-7f2e-404f-9b1c-a035fb3a0028" title="">罫線</a>を使用して境界線を表示します。</p><h2>エフェクトの方向</h2><p>HeaderCell.HoverDirectionプロパティを設定すると、マウスポインタがHeaderCellの上に重なったときの強調エフェクトの表示箇所を指定できます。強調エフェクトは上下左右のいずれか、または非表示を選択できます。</p><h2>背景色の透過</h2><p>ヘッダ型セルは、背景色を透明に設定することでセクションの背景に設定している背景色をヘッダ上に表示できます。セクションの背景色にグラデーションなどを設定している場合はヘッダ型セルの背景色としてグラデーションがそのまま表示できます。</p><p>ヘッダ型セルの背景色を透過するには、次のプロパティ設定が必要です。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=9159bbc8-541f-4e22-9658-b9ff7f7b7ef3" title="">HeaderCell.FlatStyle</a>プロパティにFlatまたはPopupを設定する。</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=16f42b48-c9f2-440f-bbdc-3cdb7234a23c" title="">CellStyle.BackColor</a>プロパティにTransparentを設定する。</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=05d6dc38-79c7-408f-b2dc-a944b57736c9" title="">HeaderCell.UseRealTransparent</a>プロパティにTrueを設定する。</p></li></ul><p>次のコードでは、列ヘッダ型セルの背景色を透明にして、列ヘッダセクションの背景色に設定したグラデーションを列ヘッダ型セル上に表示します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_style_transparent.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// ヘッダセクションに設定するグラデーション</span>
+GradientEffect gradientEffect1 = <span class="hljs-keyword">new</span> GradientEffect();
+gradientEffect1.Colors = <span class="hljs-keyword">new</span> Color[] { Color.LightBlue, Color.LightYellow };
+gradientEffect1.Style = GradientStyle.Horizontal;
+gradientEffect1.Direction = GradientDirection.Side;
+
+<span class="hljs-comment">// テンプレートの設定</span>
+Template template = Template.CreateGridTemplate(<span class="hljs-number">3</span>);
+template.ColumnHeaders[<span class="hljs-number">0</span>].BackgroundGradientEffect = gradientEffect1;
+
+
+<span class="hljs-comment">// 列ヘッダ型セルの背景色を透明に設定</span>
+ColumnHeaderCell columnHeaderCell1 = <span class="hljs-keyword">new</span> ColumnHeaderCell();
+columnHeaderCell1.FlatStyle = FlatStyle.Flat;
+columnHeaderCell1.Style.BackColor = Color.Transparent;
+columnHeaderCell1.UseRealTransparent = <span class="hljs-literal">true</span>;
+
+columnHeaderCell1.Location = template.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Location;
+columnHeaderCell1.Size = template.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Size;
+
+template.ColumnHeaders[<span class="hljs-number">0</span>].Cells.RemoveAt(<span class="hljs-number">0</span>);
+template.ColumnHeaders[<span class="hljs-number">0</span>].Cells.Insert(<span class="hljs-number">0</span>, columnHeaderCell1);
+
+gcMultiRow1.Template = template;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+                                                                
+' ヘッダセクションに設定するグラデーション
+Dim GradientEffect1 As New GradientEffect()
+GradientEffect1.Colors = New Color() {Color.LightBlue, Color.LightYellow}
+GradientEffect1.Style = GradientStyle.Horizontal
+GradientEffect1.Direction = GradientDirection.Side
+
+' テンプレートの設定
+Dim Template1 As Template = Template.CreateGridTemplate(3)
+Template1.ColumnHeaders(0).BackgroundGradientEffect = GradientEffect1
+
+
+' 列ヘッダ型セルの背景色を透明に設定
+Dim ColumnHeaderCell1 As New ColumnHeaderCell()
+ColumnHeaderCell1.FlatStyle = FlatStyle.Flat
+ColumnHeaderCell1.Style.BackColor = Color.Transparent
+ColumnHeaderCell1.UseRealTransparent = True
+
+ColumnHeaderCell1.Location = Template1.ColumnHeaders(0).Cells(0).Location
+ColumnHeaderCell1.Size = Template1.ColumnHeaders(0).Cells(0).Size
+
+Template1.ColumnHeaders(0).Cells.RemoveAt(0)
+Template1.ColumnHeaders(0).Cells.Insert(0, ColumnHeaderCell1)
+
+GcMultiRow1.Template = Template1</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b6a8b45a-2db8-4ffc-8c99-d5b6c5824ddd" title="">ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b7382e19-e827-417e-9e88-6011b4836b2f" title="">ヘッダによるセル選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7ce7c90d-3e70-485d-82b9-55dd525c82b0" title="">ヘッダによる行と列のサイズ変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bb220af2-09dc-4d51-a882-9df03363c4af" title="">列ヘッダによる行のフィルタ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8e79ba17-0253-40a0-93d7-8f081ef9c676" title="">列ヘッダによる行の並び替え</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3d7bd8ef-a1b3-4b08-9b49-bf62fcb1770a" title="">行ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=361cf0ad-9fc0-484d-be14-c12c7c17add4" title="">ヘッダのハイライトスタイル</a></p>

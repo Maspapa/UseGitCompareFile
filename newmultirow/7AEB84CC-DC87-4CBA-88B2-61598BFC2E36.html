@@ -1,0 +1,68 @@
+<p>リストラベル型セル（ListLabelCell）のリスト項目の行頭文字を設定するには、<a href="gcdocsite__documentlink?toc-item-id=b99b0796-b41a-41bf-a6e3-22497bb8dff2" title="">ListLabelCell.BulletStyle</a>プロパティを使用します。ここでは行頭文字の設定方法を説明します。</p><h2>デザイナによる設定</h2><ol><li><p>行（Row）にリストラベル型セルを追加する。（例：listLabelCell1）</p></li><li><p>listLabelCell1を選択し、プロパティウィンドウでlistLabelCell1.BulletStyleプロパティに行頭文字を設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+ListLabelCell listLabelCell1 = <span class="hljs-keyword">new</span> ListLabelCell();
+listLabelCell1.Name = <span class="hljs-string">"listLabelCell1"</span>;
+listLabelCell1.Items.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"aaa"</span>, <span class="hljs-string">"bbb"</span>, <span class="hljs-string">"ccc"</span> });
+listLabelCell1.BulletStyle = BulletStyle.Numbered;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { listLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim ListLabelCell1 As New ListLabelCell()
+ListLabelCell1.Name = "ListLabelCell1"
+ListLabelCell1.Items.AddRange(New String() {"aaa", "bbb", "ccc"})
+ListLabelCell1.BulletStyle = BulletStyle.Numbered
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {ListLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>行頭文字に任意の文字を設定</h2><p>行頭文字に任意の文字を設定することができます。<a href="gcdocsite__documentlink?toc-item-id=b99b0796-b41a-41bf-a6e3-22497bb8dff2" title="">ListLabelCell.BulletStyle</a>プロパティにCustomTextBulletを設定して、<a href="gcdocsite__documentlink?toc-item-id=b6341eaf-25eb-4e94-bf5e-2f30cbf7e9b6" title="">ICustomTextBullet</a>インターフェイスを実装するクラスを作成し、<a href="gcdocsite__documentlink?toc-item-id=c6f02637-b2ae-4b22-8c12-46323e9d85cd" title="">CustomTextBullet</a>プロパティに設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">JapaneseBullet</span> : <span class="hljs-title">ICustomTextBullet</span>
+{
+    <span class="hljs-function">public string GetTextBullet(int index)</span>
+    {
+        <span class="hljs-keyword">if</span>(index == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"一"</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(index == <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"二"</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (index == <span class="hljs-number">2</span>)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"三"</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"他"</span>;
+        }
+    }
+}
+
+listLabelCell1.BulletStyle = BulletStyle.CustomTextBullet;
+listLabelCell1.CustomTextBullet = <span class="hljs-keyword">new</span> JapaneseBullet();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class JapaneseBullet
+    Implements ICustomTextBullet
+
+    Public Function GetTextBullet(ByVal index As Integer) As String Implements GrapeCity.Win.MultiRow.ICustomTextBullet.GetTextBullet
+        If index = 0 Then
+            Return "一"
+        ElseIf index = 1 Then
+            Return "二"
+        ElseIf index = 2 Then
+            Return "三"
+        Else
+            Return "他"
+        End If
+    End Function
+End Class
+
+listLabelCell1.BulletStyle = BulletStyle.CustomTextBullet
+listLabelCell1.CustomTextBullet = New JapaneseBullet</code></pre></div><h2>行頭文字に任意の画像を設定</h2><p>行頭文字に任意の画像を設定することができます。<a href="gcdocsite__documentlink?toc-item-id=b99b0796-b41a-41bf-a6e3-22497bb8dff2" title="">ListLabelCell.BulletStyle</a>プロパティにCustomImageを設定して、<a href="gcdocsite__documentlink?toc-item-id=c45e7f08-20d6-442d-9d73-cd10283b120f" title="">BulletImage</a>プロパティに画像型のデータを設定します</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+listLabelCell1.BulletStyle = BulletStyle.CustomImage;
+listLabelCell1.BulletImage = Image.FromFile(<span class="hljs-string">"test.png"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+ListLabelCell1.BulletStyle = BulletStyle.CustomImage
+ListLabelCell1.BulletImage = Image.FromFile("test.png")</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=2594e663-21f1-476f-99ef-a73e944cf5a4" title="">リストラベル型セル（ListLabelCell）</a></p>

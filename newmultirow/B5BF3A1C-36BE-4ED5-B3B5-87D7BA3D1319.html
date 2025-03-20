@@ -1,0 +1,15 @@
+<p>ボタン型セル（ButtonCell）に文字列を表示するには、ButtonCell.Valueプロパティ（<a href="gcdocsite__documentlink?toc-item-id=bf06962f-f1e4-4a56-86b0-d66989468cc4" title="">Cell.Value</a>プロパティ）に文字列型の値を設定します。</p><h2>デザイナによる設定</h2><ol><li><p>行（Row）にボタン型セルを追加する。（例：buttonCell1）</p></li><li><p>buttonCell1を選択し、プロパティウィンドウでbuttonCell1.Valueプロパティに任意の文字列を設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+ButtonCell buttonCell1 = <span class="hljs-keyword">new</span> ButtonCell();
+buttonCell1.Name = <span class="hljs-string">"buttonCell1"</span>;
+buttonCell1.Value = <span class="hljs-string">"Test"</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { buttonCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim ButtonCell1 As New ButtonCell()
+ButtonCell1.Name = "ButtonCell1"
+ButtonCell1.Value = "Test"
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { ButtonCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c4eb72ee-4c49-4000-9fdd-41ccb9a6a780" title="">ボタン型セル（ButtonCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=445014a1-b438-4b83-a46b-e38b1025fd6a" title="">クリックの処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=773a4c73-f292-4d3f-949f-dffeadce3696" title="">背景色の変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6717d4f4-793a-47e0-beb9-c756f514409d" title="">ボタンコマンドの使用</a></p><p><a href="gcdocsite__documentlink?toc-item-id=eb212579-0767-478b-abae-d31872f688c7" title="">アクセスキーの接頭文字</a></p>

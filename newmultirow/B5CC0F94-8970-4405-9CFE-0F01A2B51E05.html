@@ -1,0 +1,59 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_hidespinbutton.png" contenteditable="false"><br></p><p>数値型セル（NumericUpDownCell）でスピンボタンを非表示にするには、<a href="gcdocsite__documentlink?toc-item-id=bf598685-d7cc-4fa3-9483-6f6724750c6d" title="">NumericUpDownCell.ShowSpinButton</a>プロパティをNotShownに設定します。この設定は、セルが非編集時の場合のみに有効です。</p><p>セルの編集時にもスピンボタンを非表示にするには、<a href="gcdocsite__documentlink?toc-item-id=2524356a-ffeb-4ce7-b82d-199043c99456" title="">NumericUpDownCell.ShowSpinButtonInEditState</a>プロパティをFalseに設定する必要があります。ShowSpinButtonInEditStateプロパティは、ShowSpinButtonプロパティがNotShownに設定されている場合のみ有効です。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+    numericUpDownCell1.ShowSpinButton = CellButtonVisibility.NotShown;
+    numericUpDownCell1.ShowSpinButtonInEditState = <span class="hljs-literal">false</span>;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { numericUpDownCell1 });
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim NumericUpDownCell1 As New NumericUpDownCell()
+    NumericUpDownCell1.ShowSpinButton = CellButtonVisibility.NotShown
+    NumericUpDownCell1.ShowSpinButtonInEditState = False
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {NumericUpDownCell1})
+End Sub</code></pre></div><h2>ユーザー定義セルでの実現</h2><p>以下のように、NumericUpDownCellがセル編集コントロールを表示する際に、スピンボタンが表示されないように位置を調整したユーザー定義型セルでも実現できます。</p><h2>NumericCellクラスのコード</h2><p>次のコードは、NumericUpDownCellを継承するユーザー定義型セルNumericCellです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Drawing;
+<span class="hljs-keyword">using</span> System.Windows.Forms;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// スピンボタンを表示しない NumericUpDownCell</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NumericCell</span> : <span class="hljs-title">NumericUpDownCell</span>
+{
+    <span class="hljs-function">public NumericCell()</span>
+    {
+        <span class="hljs-keyword">this</span>.ShowSpinButton = CellButtonVisibility.NotShown;
+    }
+
+    <span class="hljs-function">protected override Rectangle GetEditingControlBounds(Rectangle cellBounds, int rowIndex)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Rectangle(cellBounds.Location, <span class="hljs-keyword">new</span> Size(cellBounds.Width + SystemInformation.VerticalScrollBarWidth, cellBounds.Height));
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports System.Drawing
+Imports System.Windows.Forms
+Imports GrapeCity.Win.MultiRow
+
+' スピンボタンを表示しない NumericUpDownCell
+Public Class NumericCell
+    Inherits NumericUpDownCell
+
+    Public Sub New()
+        Me.ShowSpinButton = CellButtonVisibility.NotShown
+    End Sub
+
+    Protected Overrides Function GetEditingControlBounds(ByVal cellBounds As System.Drawing.Rectangle, ByVal rowIndex As Integer) As System.Drawing.Rectangle
+        Return New Rectangle(cellBounds.Location, New Size(cellBounds.Width + SystemInformation.VerticalScrollBarWidth, cellBounds.Height))
+    End Function
+End Class</code></pre></div><h2>デザイナによる設定</h2><p>デザイナでNumericCellを使用するには、次のように操作します。</p><ol><li><p>上記のコードをNumericCell.vbまたはNumericCell.csとしてファイルに保存する。</p></li><li><p>ファイルをプロジェクトに追加する。</p></li><li><p>プロジェクトをビルドする。</p></li><li><p>テンプレートデザイナを開く。</p></li><li><p>ツールボックスから"NumericCell"を選択し、ドラッグしてデザイナに配置する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericCell numericCell1 = <span class="hljs-keyword">new</span> NumericCell();
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { numericCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim numericCell1 As New NumericCell()
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { numericCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7bc40421-e50f-4b59-9ec2-af44aadbf42f" title="">数値型セル（NumericUpDownCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3d312ee-c86f-4b9d-900e-b92dcac0ead5" title="">数値の桁区切り表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1527ec60-cbf7-44cc-939b-586e69b4880b" title="">マイナスの値の赤字表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9594d3a1-6530-4267-86c7-05426856460c" title="">小数点以下の桁数表示</a></p>

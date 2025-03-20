@@ -1,0 +1,116 @@
+<p>ColumnHeaderCellを使用すると、ヘッダのクリックまたはドロップダウンリストのコマンドを使用して行の並び替えを実行できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_sort_dropdown_01.png" alt="列ヘッダのドロップダウン" contenteditable="false"><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>仮想モードが有効のとき、並び替えは使用できません。</p></li><li><p>新規行は並べ替えの対象ではありません。</p></li></ul></blockquote><h2>列ヘッダのクリック</h2><p>列ヘッダのクリックでソートを実行する場合、ヘッダによるセルの選択操作の有効／無効によって操作が異なります。</p><h3>ヘッダによるセル選択が有効な場合</h3><p><a href="gcdocsite__documentlink?toc-item-id=36ae7a5b-f191-426b-826f-a552cfefb6b7" title="">ColumnHeaderCell.SortMode</a>プロパティにAutomaticを設定し、ColumnHeaderCell.SelectionModeプロパティ（<a href="gcdocsite__documentlink?toc-item-id=340c0a6d-2586-4dfd-911f-522d3844501b" title="">HeaderCell.SelectionMode</a>プロパティ）にContainedCells、IntersectedCellsまたはAllRowsのいずれかを設定すると、列ヘッダのソートインジケータをクリックしたときにソートが実行されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_sort_dropdown_02.png" contenteditable="false"><br></p><h3>ヘッダによるセル選択が無効な場合</h3><p><a href="gcdocsite__documentlink?toc-item-id=36ae7a5b-f191-426b-826f-a552cfefb6b7" title="">ColumnHeaderCell.SortMode</a>プロパティにAutomaticを設定し、ColumnHeaderCell.SelectionModeプロパティにNoneを設定すると、列ヘッダのどこをクリックしてもソートが実行されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_sort_dropdown_03.png" contenteditable="false"><br></p><p>次のサンプルコードでは、1列目は列ヘッダのどこをクリックしてもソートを行い、2列目は列ヘッダのソートインジケータをクリックしたときのみソートを行います。また、2列目の列ヘッダではソートインジケータ以外の部分をクリックすると列の選択を行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.CreateGridTemplate(<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// 列ヘッダのソートインジケータをクリックしたときにソートを実行する</span>
+ColumnHeaderCell columnHeaderCell1 = (ColumnHeaderCell)template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>];
+columnHeaderCell1.SelectionMode = MultiRowSelectionMode.ContainedCells;
+columnHeaderCell1.SortMode = SortMode.Automatic;
+
+<span class="hljs-comment">// 列ヘッダのどこをクリックしてもソートを実行する</span>
+ColumnHeaderCell columnHeaderCell2 = (ColumnHeaderCell)template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">1</span>];
+columnHeaderCell2.SelectionMode = MultiRowSelectionMode.None;
+columnHeaderCell2.SortMode = SortMode.Automatic;
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// サンプルデータの入力 </span>
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;
+gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+gcMultiRow1.SetValue(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
+gcMultiRow1.SetValue(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);
+gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+gcMultiRow1.SetValue(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>);
+gcMultiRow1.SetValue(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = Template.CreateGridTemplate(2)
+
+' 列ヘッダのソートインジケータをクリックしたときにソートを実行する
+Dim ColumnHeaderCell1 As ColumnHeaderCell = DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+ColumnHeaderCell1.SelectionMode = MultiRowSelectionMode.ContainedCells
+ColumnHeaderCell1.SortMode = SortMode.Automatic
+
+' 列ヘッダのどこをクリックしてもソートを実行する
+Dim ColumnHeaderCell2 As ColumnHeaderCell = DirectCast(Template1.ColumnHeaders(0).Cells(1), ColumnHeaderCell)
+ColumnHeaderCell2.SelectionMode = MultiRowSelectionMode.None
+ColumnHeaderCell2.SortMode = SortMode.Automatic
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.AllowUserToAddRows = False
+
+' サンプルデータの入力 
+GcMultiRow1.RowCount = 3
+GcMultiRow1.SetValue(0, 0, 1)
+GcMultiRow1.SetValue(1, 0, 3)
+GcMultiRow1.SetValue(2, 0, 2)
+GcMultiRow1.SetValue(0, 1, 1)
+GcMultiRow1.SetValue(1, 1, 3)
+GcMultiRow1.SetValue(2, 1, 2)</code></pre></div><p>ソートの状態は列ヘッダ上に「並べ替えグリフ」で表示されます。並べ替えグリフの状態は、<a href="gcdocsite__documentlink?toc-item-id=e7c910ab-3b00-45d6-b610-22b1f42f6c7e" title="">ColumnHeaderCell.SortGlyphDirection</a>プロパティで取得または設定できます。</p><p><a href="gcdocsite__documentlink?toc-item-id=36ae7a5b-f191-426b-826f-a552cfefb6b7" title="">ColumnHeaderCell.SortMode</a>プロパティをAutomaticに設定しているとき、ソートの方法は昇順または降順で固定です。任意のソートを使用するには、<a href="gcdocsite__documentlink?toc-item-id=36ae7a5b-f191-426b-826f-a552cfefb6b7" title="">ColumnHeaderCell.SortMode</a>プロパティをProgrammaticに設定し、<a href="gcdocsite__documentlink?toc-item-id=9cbd124c-88bb-4c4a-a666-9c21c9dc3ed1" title="">GcMultiRow.SortCompare</a>イベントを使用します。</p><h2>ドロップダウンリストの設定</h2><p>ドロップダウンリストによる並び替えを設定するには、<a href="gcdocsite__documentlink?toc-item-id=20fb6c37-3ff9-4bc9-a7e9-eb6daf0f533b" title="">ColumnHeaderCell.DropDownList</a>プロパティに <a href="gcdocsite__documentlink?toc-item-id=d9e9c06c-4b17-4447-94e9-e95826ff5856" title="">HeaderDropDownList</a>クラスのインスタンスを設定します。このとき、並び替えのコマンドを有効にするためにコンストラクタの第三引数にTrueを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.Default;
+
+ColumnHeaderCell columnHeaderCell1 = (ColumnHeaderCell)template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>];
+columnHeaderCell1.DropDownList = <span class="hljs-keyword">new</span> HeaderDropDownList(<span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>);
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// サンプルデータの入力</span>
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;
+gcMultiRow1.Rows[<span class="hljs-number">0</span>][<span class="hljs-string">"textBoxCell1"</span>].Value = <span class="hljs-number">2</span>;
+gcMultiRow1.Rows[<span class="hljs-number">1</span>][<span class="hljs-string">"textBoxCell1"</span>].Value = <span class="hljs-number">1</span>;
+gcMultiRow1.Rows[<span class="hljs-number">2</span>][<span class="hljs-string">"textBoxCell1"</span>].Value = <span class="hljs-number">3</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = Template.Default
+
+Dim ColumnHeaderCell1 As ColumnHeaderCell = DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+ColumnHeaderCell1.DropDownList = New HeaderDropDownList("textBoxCell1", False, True)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.AllowUserToAddRows = False
+
+' サンプルデータの入力
+GcMultiRow1.RowCount = 3
+GcMultiRow1.Rows(0)("textBoxCell1").Value = 2
+GcMultiRow1.Rows(1)("textBoxCell1").Value = 1
+GcMultiRow1.Rows(2)("textBoxCell1").Value = 3</code></pre></div><p>ソート対象とする行の範囲は<a href="gcdocsite__documentlink?toc-item-id=29c46b20-c23a-4f1f-9a1d-ecae588609e0" title="">HeaderDropDownList.StartRow</a>プロパティおよび<a href="gcdocsite__documentlink?toc-item-id=00cc3c0a-6ad7-4695-8fb6-e4c4ef4ddd6a" title="">HeaderDropDownList.EndRow</a>プロパティで設定します。</p><h2>ソートのインジケータ</h2><p>ソート時に列ヘッダ型セルに表示するインジケータに任意の画像を表示できます。インジケータの画像は次の3つの状態に対してそれぞれ設定できます。</p><ul><li><p>デフォルト（<a href="gcdocsite__documentlink?toc-item-id=86a4d332-790d-49a2-9256-d8a4ccb96e41" title="">ColumnHeaderCell.SortGlyphDefaultImage</a>プロパティ）</p></li><li><p>昇順（<a href="gcdocsite__documentlink?toc-item-id=4c2c5dd6-b111-4620-9e57-53373e0e152e" title="">ColumnHeaderCell.SortGlyphAscendingImage</a>プロパティ）</p></li><li><p>降順（<a href="gcdocsite__documentlink?toc-item-id=6cdfeafc-a13c-4639-92a9-9cdbfac7c1ac" title="">ColumnHeaderCell.SortGlyphDescendingImage</a>プロパティ）</p></li></ul><blockquote type="warning"><p>!type=warning</p><ul><li><p>ソートのインジケータはズームに対応していません。</p></li></ul></blockquote><p>次のコードは、ソートが実行されたときのインジケータの画像を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.Default;
+
+ColumnHeaderCell columnHeaderCell1 = (ColumnHeaderCell)template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>];
+columnHeaderCell1.SelectionMode = MultiRowSelectionMode.None;
+columnHeaderCell1.SortMode = SortMode.Automatic;
+columnHeaderCell1.Value = <span class="hljs-string">"(クリック)"</span>;
+columnHeaderCell1.SortGlyphDefaultImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">"test1.bmp"</span>);
+columnHeaderCell1.SortGlyphAscendingImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">"test2.bmp"</span>);
+columnHeaderCell1.SortGlyphDescendingImage = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">"test3.bmp"</span>);
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// サンプルデータの入力  </span>
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;
+gcMultiRow1.Rows[<span class="hljs-number">0</span>][<span class="hljs-string">"textBoxCell1"</span>].Value = <span class="hljs-number">2</span>;
+gcMultiRow1.Rows[<span class="hljs-number">1</span>][<span class="hljs-string">"textBoxCell1"</span>].Value = <span class="hljs-number">1</span>;
+gcMultiRow1.Rows[<span class="hljs-number">2</span>][<span class="hljs-string">"textBoxCell1"</span>].Value = <span class="hljs-number">3</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = Template.Default
+
+Dim ColumnHeaderCell1 As ColumnHeaderCell = DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+ColumnHeaderCell1.SelectionMode = MultiRowSelectionMode.None
+ColumnHeaderCell1.SortMode = SortMode.Automatic
+ColumnHeaderCell1.Value = "(クリック)"
+
+ColumnHeaderCell1.SortGlyphDefaultImage = New Bitmap("test1.bmp")
+ColumnHeaderCell1.SortGlyphAscendingImage = New Bitmap("test2.bmp")
+ColumnHeaderCell1.SortGlyphDescendingImage = New Bitmap("test3.bmp")
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.AllowUserToAddRows = False
+
+' サンプルデータの入力  
+GcMultiRow1.RowCount = 3
+GcMultiRow1.Rows(0)("textBoxCell1").Value = 2
+GcMultiRow1.Rows(1)("textBoxCell1").Value = 1
+GcMultiRow1.Rows(2)("textBoxCell1").Value = 3</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b6a8b45a-2db8-4ffc-8c99-d5b6c5824ddd" title="">ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b7382e19-e827-417e-9e88-6011b4836b2f" title="">ヘッダによるセル選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7ce7c90d-3e70-485d-82b9-55dd525c82b0" title="">ヘッダによる行と列のサイズ変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bb220af2-09dc-4d51-a882-9df03363c4af" title="">列ヘッダによる行のフィルタ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6173680d-08b4-4f11-a32b-b1f4a0ceca44" title="">ヘッダの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3d7bd8ef-a1b3-4b08-9b49-bf62fcb1770a" title="">行ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=361cf0ad-9fc0-484d-be14-c12c7c17add4" title="">ヘッダのハイライトスタイル</a></p>

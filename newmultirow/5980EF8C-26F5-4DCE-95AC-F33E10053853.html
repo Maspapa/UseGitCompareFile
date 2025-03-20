@@ -1,0 +1,173 @@
+<p>GcBarCodeCellのバーコードの設定方法について、以下に解説します。</p><h2>バーコードの種類の指定</h2><p>GcBarCodeCellを使用してバーコードの種類を指定するには、<a href="gcdocsite__documentlink?toc-item-id=8c3ffe7d-632a-4251-accb-ebf40ebb4f14" title="">Type</a>プロパティで表示するバーコードの種類を選択します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcBarCodeCell gcBarCodeCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;
+gcBarCodeCell1.Value = <span class="hljs-number">12345</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcBarCodeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcBarCodeCell1 As New PlusPakCell.GcBarCodeCell()
+' バーコードの種類を指定します。 
+GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13
+GcBarCodeCell1.Value = 12345
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcBarCodeCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p>バーコードの種類によっては、固有の値を設定することが可能です。バーコードの種類とGcBarCodeCellで固有値を設定するプロパティは下記の一覧のとおりです。</p><table><thead><tr><th><p>バーコードの種類</p></th><th><p>プロパティ名</p></th></tr></thead><tbody><tr><td><p>Aztec</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=842e2233-295f-4351-9ac3-689b2a3a1220" title="">Aztec</a>プロパティ</p></td></tr><tr><td rowspan="2"><p>CODE39</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=9b6f4083-e11d-4dc1-b339-6e46ac3232ad" title="">Code39</a>プロパティ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=0469425b-8ced-4632-96c9-b91b47605f72" title="">FixLength</a> プロパティ</p></td></tr><tr><td><p>CODE49</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=ab60726e-7a15-4c32-9884-463636630c5a" title="">Code49</a>プロパティ</p></td></tr><tr><td><p>Data Matrix</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=18eea815-ce15-4063-afde-95b1c7a695c5" title="">DataMatrix</a>プロパティ</p></td></tr><tr><td><p>GS1Composite</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=ebcd505a-3f67-401d-aa5d-6e85798a19cd" title="">GS1Composite</a>プロパティ</p></td></tr><tr><td rowspan="2"><p>ITF</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=19d9cd16-e256-4bf2-91fb-592e6fc6a9a5" title="">ITF</a>プロパティ</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=0469425b-8ced-4632-96c9-b91b47605f72" title="">FixLength</a>プロパティ</p></td></tr><tr><td><p>MicroPDF417</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=8d24533d-2992-4d0f-88c1-baaba4094755" title="">MicroPDF417</a>プロパティ</p></td></tr><tr><td><p>PDF417</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=3755c1fe-0b68-4c29-9e73-c56face43c99" title="">PDF417</a>プロパティ</p></td></tr><tr><td><p>POSTNET</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=0469425b-8ced-4632-96c9-b91b47605f72" title="">FixLength</a>プロパティ</p></td></tr><tr><td><p>QRコード</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=12562901-21a4-44f9-b95c-550091c67065" title="">QRCode</a>プロパティ</p></td></tr><tr><td><p>GS1 DataBar Expanded Stacked</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=af1f6bd8-ec64-4015-a5df-39fb82ae4cf8" title="">RSSExpandedStacked</a>プロパティ</p></td></tr><tr><td><p>UPC/A／UPC/E／UPC/Eアドオン</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=51a62cdb-2180-451f-8d77-ba909217ec66" title="">UPC</a>プロパティ</p></td></tr></tbody></table><h2>バーコードに値を設定</h2><p>バーコードを表示するにはValueプロパティにバーコード化する値を設定します。GcBarCodeCellは設定した値とバーコードの種類から、仕様に基づいてスタートキャラクタ、ストップキャラクタおよびチェックディジットを自動的に生成してバーコードを表示します。</p><p>チェックディジットを自動で設定しない場合には、<a href="gcdocsite__documentlink?toc-item-id=a4a3f797-43da-4d8a-807c-e2c0b3d92bbe" title="">CheckDigit</a>プロパティをFalseに設定します。スタートキャラクタ、ストップキャラクタについては必ず自動で設定されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell1 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。</span>
+gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+gcBarCodeCell1.Value = <span class="hljs-string">"494924012510"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim GcBarCodeCell1 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+' バーコードの種類を指定します。
+GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13
+' バーコードの値を設定します。 
+GcBarCodeCell1.Value = "494924012510"</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcbarcode/barcode1.png" contenteditable="false"><br></p><p>Valueプロパティではstring値で値を設定しますが、<a href="gcdocsite__documentlink?toc-item-id=23c9cf7e-dcf6-488f-8965-f9d9b8630b96" title="">ValueBinary</a>プロパティを利用すると、値をバイト配列で設定することが可能です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell1 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;
+
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+<span class="hljs-built_in">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">12</span>];
+b[<span class="hljs-number">0</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+b[<span class="hljs-number">1</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x39</span>;
+b[<span class="hljs-number">2</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+b[<span class="hljs-number">3</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x39</span>;
+b[<span class="hljs-number">4</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x32</span>;
+b[<span class="hljs-number">5</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+b[<span class="hljs-number">6</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x30</span>;
+b[<span class="hljs-number">7</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x31</span>;
+b[<span class="hljs-number">8</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x32</span>;
+b[<span class="hljs-number">9</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x35</span>;
+b[<span class="hljs-number">10</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x31</span>;
+b[<span class="hljs-number">11</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x30</span>;
+gcBarCodeCell1.ValueBinary = b;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim GcBarCodeCell1 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+' バーコードの種類を指定します。
+GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13
+
+' バーコードの値を設定します。 
+Dim b As Byte() = New Byte(11) {}
+b(0) = CByte(&amp;H34)
+b(1) = CByte(&amp;H39)
+b(2) = CByte(&amp;H34)
+b(3) = CByte(&amp;H39)
+b(4) = CByte(&amp;H32)
+b(5) = CByte(&amp;H34)
+b(6) = CByte(&amp;H30)
+b(7) = CByte(&amp;H31)
+b(8) = CByte(&amp;H32)
+b(9) = CByte(&amp;H35)
+b(10) = CByte(&amp;H31)
+b(11) = CByte(&amp;H30)
+GcBarCodeCell1.ValueBinary = b</code></pre></div><p>CODE128で値にFNC1などのファンクションキャラクタを設定する必要がある場合には、Valueプロパティの場合、Code128構造体の定数を利用します。GS1 DataBar Expanded／GS1 DataBar Expanded StackedにはRSSExpanded構造体の定数を利用します。なお、ValueBinaryプロパティの場合には&amp;Hf1～&amp;Hf4（0xF1～0xF4）のコードでファンクションキャラクタを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell1 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128;
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+gcBarCodeCell1.Value = <span class="hljs-string">"12"</span> + GrapeCity.Win.BarCode.Options.Code128.FUNC1 + <span class="hljs-string">"34"</span>;
+
+GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell2 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCodeCell2.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128;
+
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+<span class="hljs-built_in">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">5</span>];
+b[<span class="hljs-number">0</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x31</span>;
+b[<span class="hljs-number">1</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x32</span>;
+b[<span class="hljs-number">2</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0xF1</span>;  <span class="hljs-comment">// FNC1を指定</span>
+b[<span class="hljs-number">3</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x33</span>;
+b[<span class="hljs-number">4</span>] = (<span class="hljs-built_in">byte</span>)<span class="hljs-number">0x34</span>;
+gcBarCodeCell2.ValueBinary = b;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcBarCodeCell1, gcBarCodeCell2 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim GcBarCodeCell1 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+' バーコードの種類を指定します。 
+GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128
+' バーコードの値を設定します。  
+GcBarCodeCell1.Value = "12" + GrapeCity.Win.BarCode.Options.Code128.FUNC1 + "34"
+
+
+Dim GcBarCodeCell2 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+' バーコードの種類を指定します。 
+GcBarCodeCell2.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code128
+' バーコードの値を設定します。 
+Dim b As Byte() = New Byte(4) {}
+b(0) = CByte(&amp;H31)
+b(1) = CByte(&amp;H32)
+b(2) = CByte(&amp;HF1)  ' FNC1を指定
+b(3) = CByte(&amp;H33)
+b(4) = CByte(&amp;H34)
+GcBarCodeCell2.ValueBinary = b
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcBarCodeCell1, GcBarCodeCell2})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>バーコード値のテキスト表示</h2><p>バーコードイメージにはバーコード値がテキストで表示されます。バーコード値を非表示にする場合には<a href="gcdocsite__documentlink?toc-item-id=7733f4b3-422d-4347-b142-891d845d38d4" title="">Message</a>プロパティをFalseに設定します。また、バーコード値のテキスト表示の位置やフォントを変更することも可能です。位置の変更は<a href="gcdocsite__documentlink?toc-item-id=b11b1f52-b47d-445f-8089-a59da8568044" title="">MessagePos</a>プロパティ、フォントの変更は<a href="gcdocsite__documentlink?toc-item-id=d80576f5-c38d-4cb8-b969-438b6fa3da03" title="">Style.Font</a>プロパティで行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell1 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+
+<span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.ITF;
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+gcBarCodeCell1.Value = <span class="hljs-string">"1490123456789"</span>;
+<span class="hljs-comment">// バーコードのテキストの位置を右揃えに設定します。 </span>
+gcBarCodeCell1.MessagePos = GrapeCity.Win.BarCode.ValueType.MessagePos.Right;
+<span class="hljs-comment">// バーコードのテキストのフォントを設定します。 </span>
+gcBarCodeCell1.Style.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">8</span>, FontStyle.Italic);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcBarCodeCell1});
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim GcBarCodeCell1 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+
+' バーコードの種類を指定します。  
+GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.ITF
+' バーコードの値を設定します。  
+GcBarCodeCell1.Value = "1490123456789"
+' バーコードのテキストの位置を右揃えに設定します。  
+GcBarCodeCell1.MessagePos = GrapeCity.Win.BarCode.ValueType.MessagePos.Right
+' バーコードのテキストのフォントを設定します。  
+GcBarCodeCell1.Style.Font = New Font("Meiryo UI", 8, FontStyle.Italic)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcBarCodeCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcbarcode/message.png" contenteditable="false"><br></p><p>バーコード値で表示されるテキストはValueプロパティで指定した値です。スタートキャラクタ／ストップキャラクタを出力したり（CODE39のアスタリスク（*）など）アプリケーション識別子を括弧で括って出力したりすることはできません。これらの情報をテキストで出力したい場合には、<a href="gcdocsite__documentlink?toc-item-id=6b388541-5daf-44b8-ae62-fcdfef23cf08" title="">MessageVal</a>プロパティでテキストの情報を変更します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell1 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code39;
+<span class="hljs-comment">// バーコードの値を設定します。 </span>
+gcBarCodeCell1.Value = <span class="hljs-string">"1234567890"</span>;
+<span class="hljs-comment">// バーコードのテキスト値を設定します。 </span>
+gcBarCodeCell1.MessageVal = <span class="hljs-string">"*"</span> + gcBarCodeCell1.Value.ToString() + <span class="hljs-string">"*"</span>;
+
+GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell gcBarCodeCell2 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell();
+<span class="hljs-comment">// バーコードの種類を指定します。 </span>
+gcBarCodeCell2.Type = GrapeCity.Win.BarCode.ValueType.BarType.EAN128;
+<span class="hljs-comment">// バーコードの値を設定します。（括弧を除いた値） </span>
+gcBarCodeCell2.Value = <span class="hljs-string">"01149123456789013012101234"</span>;
+<span class="hljs-comment">// バーコードのテキスト値を設定します。 </span>
+gcBarCodeCell2.MessageVal = <span class="hljs-string">"(01)14912345678901(30)12(10)1234"</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcBarCodeCell1, gcBarCodeCell2 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim GcBarCodeCell1 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+' バーコードの種類を指定します。 
+GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.Code39
+' バーコードの値を設定します。 
+GcBarCodeCell1.Value = "1234567890"
+' バーコードのテキスト値を設定します。 
+GcBarCodeCell1.MessageVal = "*" + GcBarCodeCell1.Value.ToString() + "*"
+
+Dim GcBarCodeCell2 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+' バーコードの種類を指定します。 
+GcBarCodeCell2.Type = GrapeCity.Win.BarCode.ValueType.BarType.EAN128
+' バーコードの値を設定します。（括弧を除いた値） 
+GcBarCodeCell2.Value = "01149123456789013012101234"
+' バーコードのテキスト値を設定します。 
+GcBarCodeCell2.MessageVal = "(01)14912345678901(30)12(10)1234"
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcBarCodeCell1, GcBarCodeCell2})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcbarcode/messageval.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=69eeb65c-39b8-4712-81fb-70c5f78c41a0" title="">GcBarCodeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=21448e0d-5c0d-4a85-b328-54853013e6b3" title="">バーコードの出力</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5c78afef-1cb6-4cbe-8641-627139f5de36" title="">バーコードの構成</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c2475304-dee9-44c7-91b5-242a0f03678a" title="">対応しているバーコードの種類</a></p>

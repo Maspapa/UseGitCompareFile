@@ -1,0 +1,15 @@
+<p>新しく追加された行に自動的に既定値を入力すると、ユーザーの負担を軽減できます。GcMultiRowコントロールでは２つの方法で既定値を入力できます。</p><h2>テンプレートでの設定</h2><p>テンプレートで、<a href="gcdocsite__documentlink?toc-item-id=bf06962f-f1e4-4a56-86b0-d66989468cc4" title="">Cell.Value</a>プロパティに指定した値は、グリッドの新しい行の既定値として使用されます。</p><h2>データソースでの設定</h2><p>GcMultiRowコントロールにデータソースが接続されているとき、データソースの列に既定値（System.Data.DataColumn.DefaultValue）が指定されている場合、グリッドの新しい行の既定値として使用されます。この値は、<a href="gcdocsite__documentlink?toc-item-id=bf06962f-f1e4-4a56-86b0-d66989468cc4" title="">Cell.Value</a>プロパティの値よりも優先されます。</p><h2>DefaultValuesNeeded イベントでの設定</h2><p><a href="gcdocsite__documentlink?toc-item-id=c7752782-9a39-47dc-bbe5-e7efa7b8566e" title="">GcMultiRow.DefaultValuesNeeded</a>イベントを使用すると、グリッドの新しい行の既定値をコーディングで指定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_DefaultValuesNeeded(object sender, RowEventArgs e)</span>
+{
+    e.Row.Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-number">12345</span>;
+    e.Row.Cells[<span class="hljs-number">1</span>].Value = <span class="hljs-string">"ABC"</span>; 
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_DefaultValuesNeeded( _
+    ByVal sender As System.Object, _
+    ByVal e As RowEventArgs) _
+    Handles GcMultiRow1.DefaultValuesNeeded
+    e.Row.Cells(0).Value = 12345
+    e.Row.Cells(1).Value = "ABC"
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c96288bd-334e-4b75-8bfc-43dc6af17e13" title="">データの管理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a11001f1-e97b-4d87-98a5-66b8e222b3b1" title="">データの設定と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9375cf8f-f355-41a8-a024-581534a3946e" title="">データの連結モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2948cccd-4555-4304-b2de-0322638669c9" title="">データの並び替え</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c7f1257c-84eb-494a-ad04-3506e5b696a9" title="">クリップボードの操作</a></p>

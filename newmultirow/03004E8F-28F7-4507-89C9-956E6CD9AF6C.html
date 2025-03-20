@@ -1,0 +1,23 @@
+<p>現在の行が移動したとき、<a href="gcdocsite__documentlink?toc-item-id=2ac98570-4286-4e95-b84f-cba188607e6a" title="">GcMultiRow.RowEnter</a>イベントと、<a href="gcdocsite__documentlink?toc-item-id=32c259fb-7c60-452b-ba64-10a0769833c9" title="">GcMultiRow.RowLeave</a>イベントが発生します。GcMultiRow.RowEnterイベントは行が入力フォーカスを受け取って現在の行になったときに発生し、GcMultiRow.RowLeaveイベントは行が入力フォーカスを失って現在の行でなくなったときに発生します。</p><p>これらのイベントは、現在行のスタイルを変更する場合などに利用できます。</p><h2>サンプルコード</h2><p>次のコードは、GcMultiRow.RowEnterイベントとGcMultiRow.RowLeaveイベントを使用して、現在の行の背景色と文字色を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void gcMultiRow1_RowEnter(object sender, CellEventArgs e)</span>
+{
+    <span class="hljs-comment">// 新しい現在の行の背景色と文字色を変更します。</span>
+    gcMultiRow1.Rows[e.RowIndex].BackColor = Color.Azure;
+    gcMultiRow1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+}
+
+<span class="hljs-function">private void gcMultiRow1_RowLeave(object sender, CellEventArgs e)</span>
+{
+    <span class="hljs-comment">// 元の現在の行の背景色と文字色を元に戻します。</span>
+    gcMultiRow1.Rows[e.RowIndex].BackColor = Color.Empty;
+    gcMultiRow1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Empty;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub GcMultiRow1_RowEnter(ByVal sender As Object, ByVal e As GrapeCity.Win.MultiRow.CellEventArgs) Handles GcMultiRow1.RowEnter
+    ' 新しい現在の行の背景色と文字色を変更します。
+    GcMultiRow1.Rows(e.RowIndex).BackColor = Color.Azure
+    GcMultiRow1.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Red
+End Sub
+
+Private Sub GcMultiRow1_RowLeave(ByVal sender As Object, ByVal e As GrapeCity.Win.MultiRow.CellEventArgs) Handles GcMultiRow1.RowLeave
+    ' 元の現在の行の背景色と文字色を元に戻します。
+    GcMultiRow1.Rows(e.RowIndex).BackColor = Color.Empty
+    GcMultiRow1.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Empty
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=8f564520-e11d-4128-9226-657e7ea0460d" title="">便利なイベント</a></p>

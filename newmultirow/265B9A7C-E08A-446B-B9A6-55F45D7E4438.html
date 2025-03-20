@@ -1,0 +1,153 @@
+<p>GcFontPickerCellの外観のカスタマイズ方法について、以下に解説します。</p><h2>エディタのカスタマイズ</h2><p>エディタ部分を編集できるようにするには、<a href="gcdocsite__documentlink?toc-item-id=063d0ef5-2b50-4b76-a09d-f571529ddfc4" title="">DropDownStyle</a>プロパティをDropDownに設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcFontPickerCell gcFontPickerCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcFontPickerCell();
+gcFontPickerCell1.DropDownStyle = GrapeCity.Win.Pickers.DropDownStyle.DropDown;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcFontPickerCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcFontPickerCell1 = New PlusPakCell.GcFontPickerCell()
+GcFontPickerCell1.DropDownStyle = GrapeCity.Win.Pickers.DropDownStyle.DropDown
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcFontPickerCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p>DropDownスタイル</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/dropdownstyle_dropdown.png" contenteditable="false"><br></p><p>DropDownListスタイル</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/dropdownstyle_dropdownlist.png" contenteditable="false"><br></p><h2>サイドボタンのカスタマイズ</h2><h4>ドロップダウンボタンのカスタマイズ</h4><p>既定では、GcFontPickerCellのエディタの右側にフォント一覧を表示するサイドボタン（ドロップダウンボタン）があります。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/sidebuttoneditor1.png" contenteditable="false"><br></p><p>ドロップダウンボタンをカスタマイズするには、<a href="gcdocsite__documentlink?toc-item-id=ca09376d-472f-42f1-a399-5bc24dd576e2" title="">DropDownButton</a>クラスを使用します。設定できる主なプロパティは次のとおりです。これらの詳細については、<a href="gcdocsite__documentlink?toc-item-id=ca09376d-472f-42f1-a399-5bc24dd576e2" title="">DropDownButton</a>クラスを参照してください。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=8567ec9c-2bbd-4546-af01-5c8bd2125538" title="">BackColor</a></p></td><td><p>ボタンの背景色を取得または設定します。</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=070f05e5-7e7a-4abc-8397-e6c18f93c9ab" title="">ButtonWidth</a></p></td><td><p>ボタンの幅を取得または設定します。</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=7e340902-6533-4f18-8203-3ca039e182af" title="">FlatAppearance</a></p></td><td><p>セルのFlatStyleがFlatの時、ボタンの境界線の外観と色を取得します。</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=a3fed5f2-9a3a-41df-bfea-0b3129698cd1" title="">Position</a></p></td><td><p>サイドボタンの位置を取得または設定します。</p></td></tr><tr><td><p><a href="gcdocsite__documentlink?toc-item-id=25126864-030f-4b42-a962-78e53640ba81" title="">Visible</a></p></td><td><p>サイドボタンの表示設定を取得または設定します。</p></td></tr></tbody></table><h4>サイドボタンへのスピン動作の割り当て</h4><p>サイドボタンでは、<a href="gcdocsite__documentlink?toc-item-id=ac5c7428-7cbc-4965-b3ed-fe946787e8d9" title="">Behavior</a>プロパティを使用して、ボタンにスピン動作を割り当てることができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/sidebuttoneditor2.png" contenteditable="false"><br></p><p>スピン動作を割り当てたサイドボタンによって、GcFontPickerCellのフォント一覧の項目を切り替えることができます。</p><table><thead><tr><th><p>Behaviorの値</p></th><th><p>説明</p></th><th><p>Intervalプロパティの初期値</p></th><th><p>Textプロパティの初期値</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>スピン動作を割り当てません。</p></td><td><p>0</p></td><td><p>なし</p></td></tr><tr><td><p>SpinUp</p></td><td><p>スピンアップ（値を増加）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>"+"</p></td></tr><tr><td><p>SpinDown</p></td><td><p>スピンダウン（値を減少）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>"-"</p></td></tr></tbody></table><p>次のコードは、GcFontPickerCellにスピン動作を割り当てたサイドボタンを追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+        
+<span class="hljs-comment">// サイドボタンを定義  </span>
+<span class="hljs-keyword">private</span> PlusPakCell.SideButton downSideButton = <span class="hljs-keyword">new</span> PlusPakCell.SideButton();
+<span class="hljs-keyword">private</span> PlusPakCell.SideButton upSideButton = <span class="hljs-keyword">new</span> PlusPakCell.SideButton();
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcFontPickerCell gcFontPickerCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcFontPickerCell();
+
+    <span class="hljs-comment">// サイドボタンに下矢印ボタンの動作を設定   </span>
+    downSideButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinDown;
+    <span class="hljs-comment">// サイドボタンにテキストを設定   </span>
+    downSideButton.Text = <span class="hljs-string">"↓"</span>;
+    <span class="hljs-comment">// サイドボタンをセル内の左側に配置   </span>
+    downSideButton.Position = LeftRightAlignment.Left;
+    <span class="hljs-comment">// GcFontPickerCell にサイドボタンを設定   </span>
+    gcFontPickerCell1.SideButtons.Add(downSideButton);
+    <span class="hljs-comment">// サイドボタンに上矢印ボタンの動作を設定   </span>
+    upSideButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinUp;
+    <span class="hljs-comment">// サイドボタンにテキストを設定   </span>
+    upSideButton.Text = <span class="hljs-string">"↑"</span>;
+    <span class="hljs-comment">// サイドボタンをセル内の右側に配置</span>
+    upSideButton.Position = LeftRightAlignment.Right;
+    <span class="hljs-comment">// GcFontPickerCell にサイドボタンを設定   </span>
+    gcFontPickerCell1.SideButtons.Add(upSideButton);
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcFontPickerCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+' サイドボタンを定義  
+Private DownSideButton As New PlusPakCell.SideButton()
+Private UpSideButton As New PlusPakCell.SideButton()
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcFontPickerCell1 As New PlusPakCell.GcFontPickerCell()
+
+    ' サイドボタンに下矢印ボタンの動作を設定  
+    DownSideButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinDown
+    ' サイドボタンにテキストを設定  
+    DownSideButton.Text = "↓"
+    ' サイドボタンをセル内の左側に配置  
+    DownSideButton.Position = LeftRightAlignment.Left
+    ' GcFontPickerCell にサイドボタンを設定  
+    GcFontPickerCell1.SideButtons.Add(DownSideButton)
+
+    ' サイドボタンに上矢印ボタンの動作を設定  
+    UpSideButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinUp
+    ' サイドボタンにテキストを設定  
+    UpSideButton.Text = "↑"
+    ' サイドボタンをセル内の右側に配置  
+    UpSideButton.Position = LeftRightAlignment.Right
+    ' GcFontPickerCell にサイドボタンを設定  
+    GcFontPickerCell1.SideButtons.Add(UpSideButton)
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcFontPickerCell1})
+    GcMultiRow1.RowCount = 10
+End Sub</code></pre></div><h4>シンボルボタンへのスピン動作の割り当て</h4><p>シンボルボタンでは、<a href="gcdocsite__documentlink?toc-item-id=52121331-42db-4d4c-9a8b-40d3c5423e8e" title="">Behavior</a>プロパティを使用して、ボタンにスピン動作を割り当てることができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/sidebuttoneditor3.png" contenteditable="false"><br></p><p>スピン動作を割り当てたシンボルボタンによって、GcFontPickerCellのフォント一覧の項目を切り替えることができます。</p><table><thead><tr><th><p>Behaviorの値</p></th><th><p>説明</p></th><th><p>Intervalプロパティの初期値</p></th><th><p>Symbolプロパティの初期値</p></th><th><p>SymbolDirectionプロパティの初期値</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>スピン動作を割り当てません。</p></td><td><p>0</p></td><td><p>None</p></td><td><p>Left</p></td></tr><tr><td><p>SpinUp</p></td><td><p>スピンアップ（値を増加）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>Arrow</p></td><td><p>Up</p></td></tr><tr><td><p>SpinDown</p></td><td><p>スピンダウン（値を減少）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>Arrow</p></td><td><p>Down</p></td></tr></tbody></table><p>次のコードは、GcFontPickerCellにスピン動作を割り当てたシンボルボタンを追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-comment">// シンボルボタンを定義 </span>
+<span class="hljs-keyword">private</span> PlusPakCell.SymbolButton downSymbolButton = <span class="hljs-keyword">new</span> PlusPakCell.SymbolButton();
+<span class="hljs-keyword">private</span> PlusPakCell.SymbolButton upSymbolButton = <span class="hljs-keyword">new</span> PlusPakCell.SymbolButton();
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcFontPickerCell gcFontPickerCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcFontPickerCell();
+
+    <span class="hljs-comment">// シンボルボタンに下矢印ボタンの動作を設定 </span>
+    downSymbolButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinDown;
+    <span class="hljs-comment">// シンボルボタンにイメージを設定 </span>
+    downSymbolButton.Symbol = GrapeCity.Win.Common.Symbols.DoubleArrow;
+    <span class="hljs-comment">// シンボルボタンのイメージの方向を設定 </span>
+    downSymbolButton.SymbolDirection = GrapeCity.Win.Common.SymbolDirection.Down;
+    <span class="hljs-comment">// シンボルボタンをセル内の左側に配置 </span>
+    downSymbolButton.Position = LeftRightAlignment.Left;
+    <span class="hljs-comment">// GcFontPickerCell にシンボルボタンを設定 </span>
+    gcFontPickerCell1.SideButtons.Add(downSymbolButton);
+
+    <span class="hljs-comment">// シンボルボタンに上矢印ボタンの動作を設定 </span>
+    upSymbolButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinUp;
+    <span class="hljs-comment">// シンボルボタンにイメージを設定 </span>
+    upSymbolButton.Symbol = GrapeCity.Win.Common.Symbols.DoubleArrow;
+    <span class="hljs-comment">// シンボルボタンのイメージの方向を設定 </span>
+    upSymbolButton.SymbolDirection = GrapeCity.Win.Common.SymbolDirection.Up;
+    <span class="hljs-comment">// シンボルボタンをセル内の右側に配置 </span>
+    upSymbolButton.Position = LeftRightAlignment.Right;
+    <span class="hljs-comment">// GcFontPickerCell にシンボルボタンを設定 </span>
+    gcFontPickerCell1.SideButtons.Add(upSymbolButton);
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcFontPickerCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+' サイドボタンを定義   
+Private DownSymbolButton As New PlusPakCell.SymbolButton()
+Private UpSymbolButton As New PlusPakCell.SymbolButton()
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcFontPickerCell1 As New PlusPakCell.GcFontPickerCell()
+
+    ' シンボルボタンに下矢印ボタンの動作を設定  
+    DownSymbolButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinDown
+    ' シンボルボタンにイメージを設定  
+    DownSymbolButton.Symbol = GrapeCity.Win.Common.Symbols.DoubleArrow
+    ' シンボルボタンのイメージの方向を設定  
+    DownSymbolButton.SymbolDirection = GrapeCity.Win.Common.SymbolDirection.Down
+    ' シンボルボタンをセル内の左側に配置  
+    DownSymbolButton.Position = LeftRightAlignment.Left
+    ' GcFontPickerCell にシンボルボタンを設定  
+    GcFontPickerCell1.SideButtons.Add(DownSymbolButton)
+
+    ' シンボルボタンに上矢印ボタンの動作を設定  
+    UpSymbolButton.Behavior = GrapeCity.Win.Common.SideButtonBehavior.SpinUp
+    ' シンボルボタンにイメージを設定  
+    UpSymbolButton.Symbol = GrapeCity.Win.Common.Symbols.DoubleArrow
+    ' シンボルボタンのイメージの方向を設定  
+    UpSymbolButton.SymbolDirection = GrapeCity.Win.Common.SymbolDirection.Up
+    ' シンボルボタンをセル内の右側に配置  
+    UpSymbolButton.Position = LeftRightAlignment.Right
+    ' GcFontPickerCell にシンボルボタンを設定  
+    GcFontPickerCell1.SideButtons.Add(UpSymbolButton)
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcFontPickerCell1})
+    GcMultiRow1.RowCount = 10
+
+End Sub</code></pre></div><h3>サイドボタンが属する親コントロールの取得</h3><p>各サイドボタンは、<a href="gcdocsite__documentlink?toc-item-id=79f48ec6-aac6-4500-8479-6c9b04bad22b" title="">Parent</a>プロパティによりそのサイドボタンが属する親コントロールとなるセルを取得できます。</p><p>以下のサンプルコードでは、サイドボタンから親コントロールのセルを取得します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+Cell cell = (gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> PlusPakCell.GcFontPickerCell).SideButtons[<span class="hljs-number">0</span>].Parent;
+Console.WriteLine(cell.Name);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim cell As Cell = DirectCast(GcMultiRow1.Rows(0).Cells(0), PlusPakCell.GcFontPickerCell).SideButtons(0).Parent
+Console.WriteLine(cell.Name)</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4f7ffde0-e106-42ef-8c4d-7a775df6b468" title="">GcFontPickerCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b1a115a9-59d6-488b-8d39-e6a3aeb9826c" title="">フォントの設定と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c2db2c6d-1177-48cd-94aa-801e3cdfc690" title="">ドロップダウンウィンドウの設定</a></p>

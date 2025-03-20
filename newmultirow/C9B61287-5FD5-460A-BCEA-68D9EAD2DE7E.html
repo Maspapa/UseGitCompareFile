@@ -1,0 +1,115 @@
+<p>ここでは、タッチデバイスで操作しやすいようにInputManCellとPlusPakCellのサイドボタンやシンボルボタンにスピン機能を割り当て、タッチ操作に最適化したスピン機能を実装する方法について解説します。</p><p>以下では、InputManCellについて解説しますが、PlusPakCellも基本的には同じ機能を提供します。</p><blockquote type="warning"><p>!type=warning</p><p>この機能はタッチ操作だけでなく、マウスやキーボードによる操作でも利用できます。</p></blockquote><h2>セルのスピン機能</h2><p>一部のInputManCellとPlusPakCellで使用可能なスピン機能は、サイドボタンに<a href="gcdocsite__documentlink?toc-item-id=464b6fcd-78a3-4e4a-b4f7-bd226c58778b" title="">SpinButton</a>（スピンボタン）を追加することで実現可能ですが、スピンボタンはマウスによる操作を前提としたボタンの大きさや配置となっており、タッチ操作には適していません。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_spinbutton.png" contenteditable="false"><br></p><p>（図）スピンボタン</p><p>InputManCellとPlusPakCellでは、<a href="gcdocsite__documentlink?toc-item-id=bfcad2b7-744a-4806-8acb-c318b1372987" title="">SideButton</a>（サイドボタン）や<a href="gcdocsite__documentlink?toc-item-id=abff72a6-6957-47c3-9c97-6f625b15ef8a" title="">SymbolButton</a>（シンボルボタン）を使用して、タッチ操作しやすいボタンをカスタマイズする機能を提供します。サイドボタンやシンボルボタンを使用すると、タッチしやすいボタンの大きさを提供でき、またボタンを水平に隣接したり、セルの両端に配置することも可能です。</p><p>これらのボタンにスピン機能を設定する手順は以下のとおりです。</p><ol><li><p>セルにサイドボタンあるいはシンボルボタンを2つ追加します。</p></li><li><p>各ボタンにスピン機能を割り当てます。一つのボタンにはスピンアップ機能を、もう一つにはスピンダウン機能を設定します。</p></li><li><p>必要に応じて、<a href="gcdocsite__documentlink?toc-item-id=f434cb81-bcea-4efd-8d81-ad79cc74d8e2" title="">Position</a>プロパティによりボタンの配置を設定します。</p></li><li><p>必要に応じて、ボタンに表示するテキストやシンボル、あるいは画像などを設定します。</p></li></ol><p>各ボタンの詳細な設定については、次項以降を参照してください。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_sidebutton.png" contenteditable="false"><br></p><p>（図）スピン機能を割り当てたサイドボタンの例</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_symbolbutton.png" contenteditable="false"><br></p><p>（図）スピン機能を割り当てたシンボルボタンの例</p><p>各セルのスピン機能やサイドボタンの詳細については、それぞれ下記のページを参照してください。</p><ul><li><p><strong>InputManCell</strong></p><ul><li><p>GcMaskCell－<a href="gcdocsite__documentlink?toc-item-id=2134d50c-5198-4636-b305-eaba634ff74f" title="">サイドボタンを設定する</a></p></li><li><p>GcDateTimeCell－<a href="gcdocsite__documentlink?toc-item-id=a530eeec-b4e0-4bae-96bf-36a3c1226cd5" title="">サイドボタンを設定する</a></p></li><li><p>GcTimeSpanCell－<a href="gcdocsite__documentlink?toc-item-id=085cb1c9-2071-4b16-973f-74668b001eda" title="">サイドボタンを設定する</a></p></li><li><p>GcNumberCell－<a href="gcdocsite__documentlink?toc-item-id=5e35d806-caa0-417a-9746-00bf47e958f3" title="">サイドボタンを設定する</a></p></li><li><p>GcComboBoxCell－<a href="gcdocsite__documentlink?toc-item-id=633e3e14-ab58-40e4-8322-a86c6ad2898c" title="">サイドボタンを設定する</a></p></li></ul></li><li><p><strong>PlusPakCell</strong></p><ul><li><p>GcFontPickerCell－<a href="gcdocsite__documentlink?toc-item-id=c9314353-2b52-42ae-b139-363fee15392a" title="">セルのカスタマイズ</a></p></li></ul></li></ul><h2>サイドボタンの利用</h2><p>ボタンに「＋」「－」といった任意のテキストや画像を設定したい場合は、<a href="gcdocsite__documentlink?toc-item-id=bfcad2b7-744a-4806-8acb-c318b1372987" title="">SideButton</a>（サイドボタン）を使用します。サイドボタンにスピン機能を割り当てるには、<a href="gcdocsite__documentlink?toc-item-id=3cc56dc6-b981-4d61-b598-6af44aff908f" title="">Behavior</a>プロパティを使用します。また、Behaviorプロパティに設定した値により、<a href="gcdocsite__documentlink?toc-item-id=5d9d1561-a44b-4c57-8bad-13de72d5272a" title="">Interval</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=0b5e7009-836e-4633-b89b-44274e1c76c4" title="">Text</a>プロパティの初期値が自動的に変更されます。</p><p>Behaviorプロパティに設定可能な値は以下の通りです。</p><table><thead><tr><th><p>Behaviorの値</p></th><th><p>説明</p></th><th><p>Intervalプロパティの初期値</p></th><th><p>Textプロパティの初期値</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>スピン動作を割り当てません。</p></td><td><p>0</p></td><td><p>なし</p></td></tr><tr><td><p>SpinUp</p></td><td><p>スピンアップ（値を増加）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>"+"</p></td></tr><tr><td><p>SpinDown</p></td><td><p>スピンダウン（値を減少）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>"-"</p></td></tr></tbody></table><p>以下のサンプルコードは、GcNumberCellにスピン機能を割り当てたサイドボタンを追加する例です。セルの左端にスピンダウン機能を持つボタン、右端にスピンアップ機能を持つボタンを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    InputManCell.GcNumberCell gcNumberCell1 = <span class="hljs-keyword">new</span> InputManCell.GcNumberCell();
+    gcNumberCell1.Name = <span class="hljs-string">"gcNumberCell1"</span>;
+    gcNumberCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">120</span>, <span class="hljs-number">20</span>);
+
+    <span class="hljs-comment">// セルのサイドボタンをクリアします。</span>
+    gcNumberCell1.SideButtons.Clear();
+
+    <span class="hljs-comment">// スピンダウン機能を持つサイドボタンを設定します。 </span>
+    InputManCell.SideButton DownButton = <span class="hljs-keyword">new</span> InputManCell.SideButton();
+    DownButton.Behavior =  GrapeCity.Win.Editors.SideButtonBehavior.SpinDown;
+    DownButton.Position =  LeftRightAlignment.Left;
+
+    <span class="hljs-comment">// セルにサイドボタンを追加します。 </span>
+    gcNumberCell1.SideButtons.Add(DownButton);
+
+    <span class="hljs-comment">// スピンアップ機能を持つサイドボタンを設定します。 </span>
+    InputManCell.SideButton UpButton = <span class="hljs-keyword">new</span> InputManCell.SideButton();
+    UpButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinUp;
+
+    <span class="hljs-comment">// セルにサイドボタンを追加します。 </span>
+    gcNumberCell1.SideButtons.Add(UpButton);
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcNumberCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcNumberCell1 = New InputManCell.GcNumberCell()
+    GcNumberCell1.Name = "GcNumberCell1"
+    GcNumberCell1.Size = New Size(120, 20)
+
+    ' セルのサイドボタンをクリアします。 
+    GcNumberCell1.SideButtons.Clear()
+
+    ' スピンダウン機能を持つサイドボタンを設定します。  
+    Dim DownButton = New InputManCell.SideButton()
+    DownButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinDown
+    DownButton.Position = LeftRightAlignment.Left
+
+    ' セルにサイドボタンを追加します。  
+    GcNumberCell1.SideButtons.Add(DownButton)
+
+    ' スピンアップ機能を持つサイドボタンを設定します。  
+    Dim UpButton = New InputManCell.SideButton()
+    UpButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinUp
+
+    ' セルにサイドボタンを追加します。  
+    GcNumberCell1.SideButtons.Add(UpButton)
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcNumberCell1})
+    GcMultiRow1.RowCount = 5
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_behavior_sidebutton.png" contenteditable="false"><br></p><p>（図）上記サンプルコードの実行結果</p><h2>スピンボタンをシンボルボタンへ置き換え</h2><p>ボタンに提供されたイメージを設定したい場合は、<a href="gcdocsite__documentlink?toc-item-id=abff72a6-6957-47c3-9c97-6f625b15ef8a" title="">SymbolButton</a>（シンボルボタン）を使用します。シンボルボタンにスピン機能を割り当てるには、<a href="gcdocsite__documentlink?toc-item-id=eac818c4-7374-4918-955f-8181dbe00b1e" title="">Behavior</a>プロパティを使用します。また、Behaviorプロパティに設定した値により、<a href="gcdocsite__documentlink?toc-item-id=8bd09a3b-b361-4bea-8a9f-53526f9081ac" title="">Interval</a>プロパティ、<a href="gcdocsite__documentlink?toc-item-id=88ac9a40-bd01-49bd-a344-555cfc7c8d36" title="">Symbol</a>プロパティおよび<a href="gcdocsite__documentlink?toc-item-id=fd81fa3d-cbfd-4751-8b70-e2d2ffc55957" title="">SymbolDirection</a>プロパティの初期値が自動的に変更されます。</p><p>Behaviorプロパティに設定可能な値は以下の通りです。</p><table><thead><tr><th><p>Behaviorの値</p></th><th><p>説明</p></th><th><p>Intervalプロパティの初期値</p></th><th><p>Symbolプロパティの初期値</p></th><th><p>SymbolDirectionプロパティの初期値</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>スピン動作を割り当てません。</p></td><td><p>0</p></td><td><p>None</p></td><td><p>Left</p></td></tr><tr><td><p>SpinUp</p></td><td><p>スピンアップ（値を増加）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>Arrow</p></td><td><p>Up</p></td></tr><tr><td><p>SpinDown</p></td><td><p>スピンダウン（値を減少）の動作を割り当てます。</p></td><td><p>60</p></td><td><p>Arrow</p></td><td><p>Down</p></td></tr></tbody></table><p>以下のサンプルコードは、日付コントロールにスピン機能を割り当てたシンボルボタンで実装する例です。コントロールの左端にスピンダウン機能を持つボタン、右端にスピンアップ機能を持つボタンを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+    gcDateTimeCell1.Name = <span class="hljs-string">"gcDateTimeCell1"</span>;
+    gcDateTimeCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">120</span>, <span class="hljs-number">20</span>);
+
+    <span class="hljs-comment">// セルのサイドボタンをクリアします。</span>
+    gcDateTimeCell1.SideButtons.Clear();
+
+    <span class="hljs-comment">// スピンダウン機能を持つシンボルボタンを設定します。 </span>
+    InputManCell.SymbolButton DownButton =  <span class="hljs-keyword">new</span> InputManCell.SymbolButton();
+    DownButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinDown;
+    DownButton.Position = LeftRightAlignment.Left;
+
+    <span class="hljs-comment">// セルにシンボルボタンを追加します。 </span>
+    gcDateTimeCell1.SideButtons.Add(DownButton);
+
+    <span class="hljs-comment">// スピンアップ機能を持つシンボルボタンを設定します。 </span>
+    InputManCell.SymbolButton UpButton = <span class="hljs-keyword">new</span> InputManCell.SymbolButton();
+    UpButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinUp;
+
+    <span class="hljs-comment">// セルにシンボルボタンを追加します。 </span>
+    gcDateTimeCell1.SideButtons.Add(UpButton);
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcDateTimeCell1 = New InputManCell.GcDateTimeCell()
+    GcDateTimeCell1.Name = "GcDateTimeCell1"
+    GcDateTimeCell1.Size = New Size(120, 20)
+
+    ' セルのサイドボタンをクリアします。 
+    GcDateTimeCell1.SideButtons.Clear()
+
+    ' スピンダウン機能を持つシンボルボタンを設定します。 
+    Dim DownButton As New InputManCell.SymbolButton()
+    DownButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinDown
+    DownButton.Position = LeftRightAlignment.Left
+
+    ' セルにシンボルボタンを追加します。 
+    GcDateTimeCell1.SideButtons.Add(DownButton)
+
+    ' スピンアップ機能を持つシンボルボタンを設定します。 
+    Dim UpButton As New InputManCell.SymbolButton()
+    UpButton.Behavior = GrapeCity.Win.Editors.SideButtonBehavior.SpinUp
+
+    ' セルにシンボルボタンを追加します。 
+    GcDateTimeCell1.SideButtons.Add(UpButton)
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})
+    GcMultiRow1.RowCount = 5
+End Sub</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_behavior_symbolbutton.png" contenteditable="false"><br></p><p>（図）上記サンプルコードの実行結果</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6f14841d-d18f-4c9f-bb6e-b121383ff61a" title="">マルチタッチ機能</a></p><p><a href="gcdocsite__documentlink?toc-item-id=66e3a3e4-25fc-493b-b2bc-f6f950b2a74d" title="">ズーム</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bc53c7fe-0015-4be3-a32b-d6bf8adfdf0d" title="">スクロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f75a40ca-03e1-4f54-b8cc-3c9191aa7cba" title="">セルの選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d92b0422-8a99-4b70-9b34-411b25b6e201" title="">行の移動</a></p><p><a href="gcdocsite__documentlink?toc-item-id=db31ae9a-3199-441b-b84e-92537fb04ffb" title="">列幅のリサイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=56f3c9bd-ad53-4b5a-8888-11d7580b14e9" title="">ボタンのレイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=91965262-c7b9-415a-99a9-dd837895b4a5" title="">タッチツールバー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=40c6cfe4-2a32-4b0d-b324-190baada4fd5" title="">タッチキーボード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac79921a-f292-49ed-be13-6bfd59d1bb01" title="">編集時のセルのグリッパー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3f726fb0-d13e-424b-90ad-3947a359d128" title="">編集時のタッチツールバー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b6d3776b-2453-44a0-ac03-05890abaf11e" title="">ドロップダウンオブジェクトの拡大表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b546d7e2-e4ad-4d9d-9625-c8f998aaf6a2" title="">コンテキストメニューの拡大表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fc2933e8-158d-4b3e-b953-501c933fbdc8" title="">カレンダーのタッチ操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=477582c4-a172-42f1-ab73-fe746a45f14e" title="">入力デバイスの取得</a></p>

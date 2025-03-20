@@ -1,0 +1,33 @@
+<p>コーディングでテンプレートにセルを追加するにはTemplate.Row.Addメソッドを使用します。</p><p>次のコードはテンプレートの列ヘッダにColumnHeaderCell、行にTextBoxCellを追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+Template template1 = <span class="hljs-keyword">new</span> Template();
+ColumnHeaderSection columnHeaderSection1 = <span class="hljs-keyword">new</span> ColumnHeaderSection();
+ColumnHeaderCell columnHeaderCell1 = <span class="hljs-keyword">new</span> ColumnHeaderCell();
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+template1.Width = textBoxCell1.Size.Width;
+template1.Row.Cells.Add(textBoxCell1);
+template1.Row.Height = textBoxCell1.Size.Height;
+
+columnHeaderSection1.Cells.Add(columnHeaderCell1);
+columnHeaderSection1.Height = columnHeaderCell1.Size.Height;
+template1.ColumnHeaders.Add(columnHeaderSection1);
+
+gcMultiRow1.Template = template1; 
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = New Template()
+Dim ColumnHeaderSection1 As ColumnHeaderSection = New ColumnHeaderSection()
+Dim ColumnHeaderCell1 As ColumnHeaderCell = New ColumnHeaderCell()
+
+Dim TextBoxCell1 As TextBoxCell = New TextBoxCell()
+Template1.Width = TextBoxCell1.Size.Width
+Template1.Row.Cells.Add(TextBoxCell1)
+Template.Row.Height = TextBoxCell1.Size.Height
+
+ColumnHeaderSection1.Cells.Add(ColumnHeaderCell1)
+ColumnHeaderSection1.Height = ColumnHeaderCell1.Size.Height
+Template1.ColumnHeaders.Add(ColumnHeaderSection1)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=12dbf56f-5a46-4435-8891-3b3abe3e9eb3" title="">テンプレート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=23b0e751-a9db-4407-b8ec-e6a020a9d410" title="">列ヘッダの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1686a0cb-83e4-4c55-b171-a7b2da7870e5" title="">列フッタの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a96686ee-8850-4079-9aea-28c1c7192224" title="">テンプレートの幅と高さ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3653f914-c6d7-4724-875a-4239a90fcafc" title="">列モード テンプレート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cfefbed2-05ac-4449-8f34-2fa1938ca676" title="">セルのプロパティ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0932011c-fd41-4ba0-bbe2-5ef736213100" title="">大文字／小文字の区別なくセル名を認識</a></p>

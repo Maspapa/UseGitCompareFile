@@ -1,0 +1,82 @@
+<h2><span class="SectionHeadingText">エディタ画面</span></h2><p>付箋型セルは実行時にセルをクリックするとエディタ画面を表示します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_stickycell_setinfo_01.png" contenteditable="false"><br></p><p>このエディタ画面では、次の項目を設定できます。</p><ul><li><p>色</p><p>グリッド上に表示される付箋型セルの背景色を設定します。</p><p><br></p></li><li><p>期日</p><p>期日を設定します。</p><p><br></p></li><li><p>期日の使用</p><p>チェックをオンにすると、期日にあわせて付箋型セルの背景色が自動で変更されます。</p><p>チェックをオフにすると、「付箋の色」の設定色が常に付箋型セルの背景色として表示されます。</p><p><br></p></li><li><p>テキスト</p><p>メモ情報となるテキストを設定します。</p><p><br></p></li></ul><p>エディタ画面で設定できる情報は、コードで設定することもできます。</p><p>次のコードでは、1行1列目の付箋型セルに付箋情報を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> StickyCell() });
+
+StickyCell stickyCell1 = gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> StickyCell;
+<span class="hljs-comment">// 付箋の色を設定する。</span>
+stickyCell1.MarkColor = Color.Green;
+<span class="hljs-comment">// 期日を設定する。</span>
+stickyCell1.TargetDate = <span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2015</span>, <span class="hljs-number">6</span>, <span class="hljs-number">30</span>);
+<span class="hljs-comment">// 期日を使用する。</span>
+stickyCell1.UseTargetDate = <span class="hljs-literal">true</span>;
+<span class="hljs-comment">// テキスト情報を設定する。</span>
+stickyCell1.Value = <span class="hljs-string">"メモ情報"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New StickyCell()})
+
+Dim StickyCell1 As StickyCell = DirectCast(GcMultiRow1.Rows(0).Cells(0), StickyCell)
+' 付箋の色を設定する。
+StickyCell1.MarkColor = Color.Green
+' 期日を設定する。
+StickyCell1.TargetDate = New DateTime(2015, 6, 30)
+' 期日を使用する。
+StickyCell1.UseTargetDate = True
+' テキスト情報を設定する。
+StickyCell1.Value = "メモ情報"</code></pre></div><h2>色の追加と削除</h2><p>エディタ画面で選択できる「付箋の色」は<a href="gcdocsite__documentlink?toc-item-id=7dc52194-aab4-4d52-a758-90e65725cdfb" title="">CandidateColors</a>プロパティで変更できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_stickycell_setinfo_02.png" contenteditable="false"><br></p><h3>デザイナによる設定</h3><p>デザイナでは、Colorコレクションエディタで既存の色の変更および追加と削除ができます。</p><p>次の操作では、色の追加を行います。</p><ol><li><p>行（Row）に付箋型セルを追加する。（例：stickyCell1）</p></li><li><p>プロパティウィンドウで、stickyCell1のCandidateColorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたColorコレクションエディタで「追加」ボタンをクリックする。</p></li><li><p>メンバーに色が追加されるので、右側のプロパティグリッドでValueプロパティを選択して色を設定する。</p></li><li><p>［OK］ボタンをクリックしてColorコレクションエディタを閉じる。</p></li></ol><h3>コーディングによる設定</h3><p>次のコードは、CandidateColorsプロパティに赤、黄、緑の3色を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+StickyCell stickyCell1 = <span class="hljs-keyword">new</span> StickyCell();
+stickyCell1.CandidateColors = <span class="hljs-keyword">new</span> Color[] { Color.Red, Color.Yellow, Color.Green };
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { stickyCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim StickyCell1 As New StickyCell()
+StickyCell1.CandidateColors = New Color() {Color.Red, Color.Yellow, Color.Green}
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {StickyCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>エディタ画面の表示位置</h2><p><a href="gcdocsite__documentlink?toc-item-id=2a4df330-a4b6-406d-b26f-6517bdb6a3dd" title="">PopupPosition</a>プロパティを使用すると、エディタ画面の表示位置を指定できます。</p><table><thead><tr><th><p>PopupPositionの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>NotSet</p></td><td><p>表示されるウィンドウのStartPositionプロパティに値が適用されます。</p></td></tr><tr><td><p>CenterScreen</p></td><td><p>画面の中央にウィンドウを表示します。</p></td></tr><tr><td><p>CenterParentForm</p></td><td><p>アクティブなMultiRowコントロールが配置されている親フォームの中央にウィンドウを表示します。</p></td></tr><tr><td><p>CenterMultiRow</p></td><td><p>アクティブなMultiRowコントロールの中央にウィンドウを表示します。</p></td></tr><tr><td><p>WindowsDefaultLocation</p></td><td><p>Windowsによって自動的に決定された位置にウィンドウを表示します。</p></td></tr><tr><td><p>Manual</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=9e2c9edf-1ecf-4c0b-8b1d-898779280b8c" title="">PopupLocation</a>プロパティで指定した位置にウィンドウを表示します。</p></td></tr><tr><td><p>AroundCell</p></td><td><p>アクティブセルの周辺にウィンドウを表示します。基本的にはウィンドウはアクティブセルの右下に表示しますが、表示領域がない場合は別の位置に表示します。</p></td></tr></tbody></table><p>次のコードではアクティブなセルの周辺にエディタ画面を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> StickyCell() });
+
+StickyCell stickyCell1 = gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> StickyCell;
+stickyCell1.PopupPosition = DialogPopupPosition.AroundCell;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New StickyCell()})
+
+Dim StickyCell1 As StickyCell = DirectCast(GcMultiRow1.Rows(0).Cells(0), StickyCell)
+StickyCell1.PopupPosition = DialogPopupPosition.AroundCell</code></pre></div><p>エディタ画面を指定した位置に表示するには、PopupPositionプロパティにManualを設定して、表示位置の座標をPopupLocationプロパティで指定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> StickyCell() });
+
+StickyCell stickyCell1 = gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> StickyCell;
+stickyCell1.PopupPosition = DialogPopupPosition.Manual;
+stickyCell1.PopupLocation = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New StickyCell()})
+
+Dim StickyCell1 As StickyCell = DirectCast(GcMultiRow1.Rows(0).Cells(0), StickyCell)
+StickyCell1.PopupPosition = DialogPopupPosition.Manual
+StickyCell1.PopupLocation = New Point(200, 200)</code></pre></div><h2>エディタ画面の表示抑止</h2><p>付箋型セルでは、<a href="gcdocsite__documentlink?toc-item-id=a17a960c-1e38-4237-8c3f-9daa95a0e244" title="">AllowPopup</a>プロパティを使用してエディタ画面を表示するかどうかを設定できます。AllowPopupプロパティにFalseを設定すると、付箋型セルをクリックしてもエディタ画面を表示しません。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+StickyCell stickyCell1 = <span class="hljs-keyword">new</span> StickyCell();
+stickyCell1.AllowPopup = <span class="hljs-literal">false</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { stickyCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim StickyCell1 As New StickyCell()
+StickyCell1.AllowPopup = False
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {StickyCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>付箋の印刷</h2><p>付箋型セルの背景色は印刷結果として出力するかどうかを設定できます。<a href="gcdocsite__documentlink?toc-item-id=cad85c63-02ae-4a02-a24e-adce958ad64b" title="">MarkColorPrintable</a>プロパティにFalseを設定した場合には付箋の色は印刷されません。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+StickyCell stickyCell1 = <span class="hljs-keyword">new</span> StickyCell();
+stickyCell1.MarkColorPrintable = <span class="hljs-literal">false</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { stickyCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim StickyCell1 As New StickyCell()
+StickyCell1..MarkColorPrintable = False
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {StickyCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=19e0b2ca-c71a-448c-abbe-bced23c79d50" title="">付箋型セル (StickyCell)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=087d419c-f487-4b9b-99dc-214e1eeebb5b" title="">リマインダー機能</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f1f101f6-501e-4164-a135-13f84461f91a" title="">エディタ画面のカスタマイズ</a></p>

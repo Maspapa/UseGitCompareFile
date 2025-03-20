@@ -1,0 +1,24 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_buttoncell_backcolor1.png" contenteditable="false"> <img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_buttoncell_backcolor2.png" contenteditable="false"><br></p><p>ButtonCellの背景色を変更するには、ButtonCell.Style.BackColorプロパティに任意の色を設定した後、次のいずれかを設定します。</p><ul><li><p>ButtonCell.FlatStyleプロパティをFlatまたはPopupに設定する。</p></li><li><p>ButtonCell.FlatStyleプロパティをStandardに設定し、ButtonCell.UseVisualStyleBackColorプロパティをFalseに設定する。</p></li></ul><p>ビジュアル スタイルが有効な環境では、ButtonCell.FlatStyleプロパティがSystemに設定されているか、ButtonCell.UseVisualStyleBackColorプロパティがTrueの場合にはButtonCell.Style.BackColorプロパティに設定した背景色はボタンに適用されません。適用先はボタンの背景のみとなります。次の図はButtonCell.Style.Paddingプロパティを変更してボタンの背景をわかりやすく表示した例です（参考：<a href="gcdocsite__documentlink?toc-item-id=A9F06EEC-B225-4B07-826E-F14A1E77D6CA" title="">マージンとパディング</a>）。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_buttoncell_backcolor3.png" contenteditable="false"><br></p><h2>デザイナによる設定</h2><ol><li><p>背景色を変更するボタン型セルを選択する。（例: buttonCell1）</p></li><li><p>プロパティウィンドウでButtonCell.Style.BackColorプロパティを選択し、ドロップダウンウィンドウから任意の色を選択する。</p></li><li><p>プロパティウィンドウでButtonCell.UseVisualStyleBackColorプロパティを選択し、Falseに設定する。</p></li><li><p>プロパティウィンドウでButtonCell.FlatStyleプロパティを選択し、Flat、PopupまたはStandardに設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template = <span class="hljs-keyword">new</span> Template();
+ButtonCell buttonCell1 = <span class="hljs-keyword">new</span> ButtonCell();
+
+buttonCell1.Name = <span class="hljs-string">"buttonCell1"</span>;
+buttonCell1.Value = <span class="hljs-string">"Button"</span>;
+buttonCell1.Style.BackColor = Color.FromArgb(<span class="hljs-number">255</span>, <span class="hljs-number">192</span>, <span class="hljs-number">192</span>);
+buttonCell1.UseVisualStyleBackColor = <span class="hljs-literal">false</span>;
+buttonCell1.FlatStyle = FlatStyle.Standard;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { buttonCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim ButtonCell1 As New ButtonCell()
+
+ButtonCell1.Name = "ButtonCell1"
+ButtonCell1.Value = "Button"
+ButtonCell1.Style.BackColor = Color.FromArgb(255, 192, 192)
+ButtonCell1.UseVisualStyleBackColor = False
+ButtonCell1.FlatStyle = FlatStyle.Standard
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { ButtonCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c4eb72ee-4c49-4000-9fdd-41ccb9a6a780" title="">ボタン型セル（ButtonCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac50876a-c423-4d0c-97ff-c6ced07fb482" title="">文字列の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=445014a1-b438-4b83-a46b-e38b1025fd6a" title="">クリックの処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6717d4f4-793a-47e0-beb9-c756f514409d" title="">ボタンコマンドの使用</a></p><p><a href="gcdocsite__documentlink?toc-item-id=eb212579-0767-478b-abae-d31872f688c7" title="">アクセスキーの接頭文字</a></p>

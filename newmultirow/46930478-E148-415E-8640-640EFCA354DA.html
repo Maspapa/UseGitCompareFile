@@ -1,0 +1,24 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=25d6288b-b69a-4969-a9d9-d468a6f9cf68" title="">GcMultiRow.CellEditedFormattedValueChanged</a>イベントは、セルの編集中に値が更新されたことを検出することができます。</p><p>CellEditedFormattedValueChangedイベントを使用することで、特定のセル型で値が更新された場合にだけ処理を行うことが可能です。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellEditedFormattedValueChanged(object sender, CellEditedFormattedValueChangedEventArgs e)</span>
+{
+    Cell currentCell = gcMultiRow1.Rows[e.RowIndex].Cells[e.CellIndex];
+
+    <span class="hljs-keyword">if</span> (e.Scope == CellScope.Row)
+    {
+        <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> TextBoxCell)
+        {
+            Console.WriteLine(<span class="hljs-string">"RowIndex:{0}, CellIndex:{1}, EditedFormattedValue: {2}"</span>, e.RowIndex, e.CellIndex, currentCell.EditedFormattedValue);
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellEditedFormattedValueChanged(ByVal sender As Object, ByVal e As GrapeCity.Win.MultiRow.CellEditedFormattedValueChangedEventArgs) Handles GcMultiRow1.CellEditedFormattedValueChanged
+    Dim currntcell As Cell = GcMultiRow1.Rows(e.RowIndex).Cells(e.CellIndex)
+
+    If e.Scope = CellScope.Row Then
+        If TypeOf currntcell Is TextBoxCell Then
+            Console.WriteLine("RowIndex:{0}, CellIndex:{1}, EditedFormattedValue: {2}", e.RowIndex, e.CellIndex, currntcell.EditedFormattedValue)
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=8f564520-e11d-4128-9226-657e7ea0460d" title="">便利なイベント</a></p>

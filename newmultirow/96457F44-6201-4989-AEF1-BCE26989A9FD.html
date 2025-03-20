@@ -1,0 +1,17 @@
+<p>MultiRow を利用した.NET Framework プロジェクトをアップグレードアシスタントで移行する場合は、以下の手順で実施します。</p><p>次は、「<a href="gcdocsite__documentlink?toc-item-id=e912667e-aa2b-4535-865e-dbd53a8d82ef" title="">.NET Framework プロジェクトの.NET への移行</a>」トピックの「手順 1：移行を実施する」-「.NET Upgrade Assistant 拡張機能による移行の実施」の手順についてを説明します。</p><h3>手順 1：.NET Upgrade Assistant を実行する</h3><p><a href="https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-install#install-the-visual-studio-extension" title="">.NET Upgrade Assistant 拡張機能のインストール</a>後、ソリューション エクスプローラー からアップグレードを実行し、.NET に移行します。詳細については、<a href="https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview#upgrade-with-the-visual-studio-extension" title="">Visual Studio 拡張機能を使用したアップグレード</a>をご参考ください。</p><ol><li><p>Visual Studio 2022 でソリューションを開きます。</p></li><li><p>［ソリューションエクスプローラー］から移行したいプロジェクトを右クリックします。</p></li><li><p>[Upgrade]を選択します。</p></li><li><p>アップグレードの方法や移行する.NET のバージョン確認の選択画面が表示されます。任意に選択の後、アップグレードを実行します。</p></li><li><p>アップグレードが完了すると、プロジェクトファイルが以下のように変更されます。</p><div data-language="コードのコピー" class="toastui-editor-ww-code-block-highlighting"><pre class="language-コードのコピー"><code data-language="コードのコピー" class="language-コードのコピー">&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+    &lt;PropertyGroup&gt;
+        &lt;TargetFramework&gt;net8.0-windows&lt;/TargetFramework&gt;
+        &lt;OutputType&gt;WinExe&lt;/OutputType&gt;
+        &lt;GenerateAssemblyInfo&gt;false&lt;/GenerateAssemblyInfo&gt;
+        &lt;UseWindowsForms&gt;true&lt;/UseWindowsForms&gt;
+        &lt;ImportWindowsDesktopTargets&gt;true&lt;/ImportWindowsDesktopTargets&gt;
+    &lt;/PropertyGroup&gt;
+    &lt;ItemGroup&gt;
+        &lt;EmbeddedResource Include="Properties\licenses.licx" /&gt;
+    &lt;/ItemGroup&gt;
+    &lt;ItemGroup&gt;
+        &lt;PackageReference Include="Microsoft.CSharp" Version="4.7.0" /&gt;
+        &lt;PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" /&gt;
+        &lt;PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" /&gt;
+    &lt;/ItemGroup&gt;
+&lt;/Project&gt;</code></pre></div></li></ol>

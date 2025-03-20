@@ -1,0 +1,65 @@
+<p>ユーザー定義のセルバリデータを作成するには、<a href="gcdocsite__documentlink?toc-item-id=0e9f130c-4edb-4763-b295-3599a062604d" title="">CellValidator</a>クラスを継承します。</p><h2>最大文字数による検証</h2><p>次のコードは、セルの値の最大文字数を検証するセルバリデータです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MaxLengthValidator</span> : <span class="hljs-title">CellValidator</span>
+{
+    <span class="hljs-function">protected override bool Validate(ValidateContext context)</span>
+    {
+        <span class="hljs-keyword">if</span> (context.EditedFormattedValue != <span class="hljs-literal">null</span>)
+        {
+            <span class="hljs-keyword">if</span> (context.EditedFormattedValue.ToString().Length &gt; <span class="hljs-keyword">this</span>.MaxLength)
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> MaxLength { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-function">public override CellValidator Clone()</span>
+    {
+        MaxLengthValidator validator = <span class="hljs-keyword">base</span>.Clone() <span class="hljs-keyword">as</span> MaxLengthValidator;
+        validator.MaxLength = <span class="hljs-keyword">this</span>.MaxLength;
+        <span class="hljs-keyword">return</span> validator;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class MaxLengthValidator
+    Inherits CellValidator
+
+    Protected Overrides Function Validate(ByVal context As GrapeCity.Win.MultiRow.ValidateContext) As Boolean
+        If context.EditedFormattedValue IsNot Nothing Then
+            If context.EditedFormattedValue.ToString().Length &gt; Me.MaxLength Then
+                Return False
+            End If
+        End If
+        Return True
+    End Function
+
+    Public MaxLength As Integer
+
+    Public Overrides Function Clone() As GrapeCity.Win.MultiRow.CellValidator
+        Dim validator As MaxLengthValidator = TryCast(MyBase.Clone(), MaxLengthValidator)
+        validator.MaxLength = Me.MaxLength
+        Return validator
+    End Function
+
+End Class</code></pre></div><p>次のコードは、ユーザー定義のMaxLengthValidatorの使用例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+
+MaxLengthValidator maxLengthValidator1 = <span class="hljs-keyword">new</span> MaxLengthValidator();
+maxLengthValidator1.MaxLength = <span class="hljs-number">2</span>;
+maxLengthValidator1.Actions.Add(<span class="hljs-keyword">new</span> LineNotify());
+textBoxCell1.Validators.Add(maxLengthValidator1);
+
+Cell[] cells = { textBoxCell1 };
+gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim TextBoxCell1 As New TextBoxCell
+
+Dim MaxLengthValidator1 As New MaxLengthValidator()
+MaxLengthValidator1.MaxLength = 2
+MaxLengthValidator1.Actions.Add(New LineNotify())
+TextBoxCell1.Validators.Add(MaxLengthValidator1)
+
+Dim cells As Cell() = {TextBoxCell1}
+GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+GcMultiRow1.RowCount = 10</code></pre></div><h2>デザイナとユーザー定義のセルバリデータ</h2><p>デザイナのCellValidatorコレクションエディタを使用してユーザー定義のセルバリデータを追加できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/validation_userdefinedvalidator_01.png" contenteditable="false"><br></p><p>上記のMaxLengthValidatorを追加するには、次の手順を実行します。</p><ol><li><p>ユーザー定義のセルバリデータMaxLengthValidatorを作成し、プロジェクトに追加する。</p></li><li><p>プロジェクトをビルドする。</p></li><li><p>値を検証するセルを選択する。(例: textBoxCell1)</p></li><li><p>プロパティウィンドウでValidatorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidatorコレクションエディタで左上のコンボボックスからMaxLengthValidatorを選択し、追加をクリックする。</p></li><li><p>画面右のプロパティグリッドでMaxLengthプロパティを選択し、「5」を入力する。</p></li><li><p>画面右のプロパティグリッドでActionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidateActionコレクションエディタでLineNotifyを追加する。</p></li><li><p>［OK］ボタンをクリックしてCellValidateActionコレクションエディタを閉じる。</p></li><li><p>［OK］ボタンをクリックしてCellValidatorコレクションエディタを閉じる。</p></li></ol><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0f3efc93-9866-452e-a9a6-3a1f0ecb6591" title="">ユーザー入力の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0e497c36-9fdf-421d-936a-bd7205764e8a" title="">コントロールのイベントによる検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ab9b7b07-c4bf-4eff-a5d1-427115093507" title="">セルによる値の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d9af300a-bc41-4bfd-90ab-a506563789cf" title="">検証の実行</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80e0bfb1-74a7-47e9-9c4a-f0c7d4eea41d" title="">検証情報のカスタマイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a2acbd38-76de-4afd-a7ca-eb03c99ffa6f" title="">ユーザー定義の検証アクション</a></p>

@@ -1,0 +1,78 @@
+<p>GcMultiRowコントロールでは、セル内のコンテンツに合わせてセルの幅を調整できます。</p><h2>セルのコンテンツによる自動調整</h2><p><a href="gcdocsite__documentlink?toc-item-id=3771e659-761a-4c8e-9da8-81766ec3357c" title="">GcMultiRow.HorizontalAutoSizeMode</a>プロパティを使用すると、列ヘッダセクション、列フッタセクションまたは行に配置されたセルのコンテンツに合わせてセルの幅を自動調整できます。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>GcMultiRow.HorizontalAutoSizeModeプロパティにNone以外が設定されている場合、ヘッダ右端のダブルクリックによる列幅の自動調整は動作しません。</p></li><li><p>GcMultiRow.HorizontalAutoSizeModeプロパティにNone以外が設定された状態で<a href="gcdocsite__documentlink?toc-item-id=70855a92-0afe-456c-b735-39e969d291e0" title="">Cell.PerformHorizontalAutoFit</a>メソッドまたは<a href="gcdocsite__documentlink?toc-item-id=5e4b709a-e5ac-4635-885f-c852f50eb78d" title="">Cell.HorizontalResize</a>メソッドを実行すると、System.InvalidOperationException例外が発生します。</p></li></ul></blockquote><p>次のコードは、列ヘッダセクションに配置されたセルのコンテンツに合わせてセルの幅を自動調整します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+textBoxCell1.Name = <span class="hljs-string">"textBoxCell1"</span>;
+TextBoxCell textBoxCell2 = <span class="hljs-keyword">new</span> TextBoxCell();
+textBoxCell2.Name = <span class="hljs-string">"textBoxCell2"</span>;
+
+Template template1 = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { textBoxCell1, textBoxCell2 });
+template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-string">"columnHeaderCell1"</span>].Value = <span class="hljs-string">"Column1"</span>;
+template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-string">"columnHeaderCell2"</span>].Value = <span class="hljs-string">"列ヘッダ型セル２"</span>;
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;
+gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-string">"ABC"</span>);
+gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-string">"textBoxCell2"</span>, <span class="hljs-string">"MultiRow for Windows Forms 12.0J"</span>);
+
+gcMultiRow1.HorizontalAutoSizeMode = HorizontalAutoSizeMode.CellsInColumnHeader;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim TextBoxCell1 As New TextBoxCell()
+TextBoxCell1.Name = "TextBoxCell1"
+Dim TextBoxCell2 As New TextBoxCell()
+TextBoxCell2.Name = "TextBoxCell2"
+
+Dim Template1 As Template = Template.CreateGridTemplate(New Cell() {TextBoxCell1, TextBoxCell2})
+Template1.ColumnHeaders(0).Cells("columnHeaderCell1").Value = "Column1"
+Template1.ColumnHeaders(0).Cells("columnHeaderCell2").Value = "列ヘッダ型セル２"
+GcMultiRow1.Template = Template1
+GcMultiRow1.RowCount = 3
+
+GcMultiRow1.SetValue(0, "TextBoxCell1", "ABC")
+GcMultiRow1.SetValue(0, "TextBoxCell2", "MultiRow for Windows Forms 12.0J")
+
+GcMultiRow1.HorizontalAutoSizeMode = HorizontalAutoSizeMode.CellsInColumnHeader</code></pre></div><h2>同時に複数列の列幅の自動調整</h2><p>複数列を選択した状態でヘッダの右端をダブルクリックすると、それぞれのセルのコンテンツに合わせてセルの幅の自動調整ができます。この動作を実現するために必要な設定は特にありません。</p><p>なお、<a href="gcdocsite__documentlink?toc-item-id=0e8beb27-1be8-4267-9f52-034ae438ff2a" title="">Template.LayoutMode</a>プロパティにLeftToRightを設定して列モードを使用している場合、行の幅が自動調整されるため、見た目上の動作はTemplate.LayoutModeプロパティにTopToBottomを設定した場合と同じになります。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/overview/culumnautfit.png" contenteditable="false"><br></p><h2>自動調整の無効</h2><p><a href="gcdocsite__documentlink?toc-item-id=a75bdb01-1c31-4cde-b912-be688bd5779a" title="">AllowUserToAutoFitColumns</a>プロパティをFalseに設定すると、ヘッダの右端をダブルクリックしたときに列幅を自動調整する動作を無効にできます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.AllowUserToAutoFitColumns = <span class="hljs-literal">false</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.AllowUserToAutoFitColumns = False</code></pre></div><h2>自動調整幅のカスタマイズ</h2><p><a href="gcdocsite__documentlink?toc-item-id=f7848965-bde2-471d-a587-fb785b6c7b20" title="">GcMultiRow.CellAutoFitPreferredSizeNeeded</a>イベントを使用して、ヘッダの右端をダブルクリックした時に自動調整されるセル幅をカスタマイズできます。</p><p>次のコードは、ヘッダの右端をダブルクリックした時に列幅を100に自動調整します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+    textBoxCell1.Name = <span class="hljs-string">"textBoxCell1"</span>;
+
+    Template template1 = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { textBoxCell1 });
+
+    gcMultiRow1.Template = template1;
+    gcMultiRow1.RowCount = <span class="hljs-number">3</span>;
+    gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-string">"ABC"</span>);
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellAutoFitPreferredSizeNeeded(object sender, CellAutoFitPreferredSizeNeededEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Scope == CellScope.Row)
+    {
+        TextBoxCell textBoxCell = gcMultiRow1[e.SectionIndex, e.CellIndex] <span class="hljs-keyword">as</span> TextBoxCell;
+
+        <span class="hljs-keyword">if</span> (textBoxCell != <span class="hljs-literal">null</span> &amp;&amp; e.Direction == Orientation.Horizontal)
+        {
+            e.PreferredSize = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">100</span>, e.PreferredSize.Height);
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Dim TextBoxCell1 As New TextBoxCell()
+    TextBoxCell1.Name = "TextBoxCell1"
+
+    Dim Template1 As Template = Template.CreateGridTemplate(New Cell() {TextBoxCell1})
+
+    GcMultiRow1.Template = Template1
+    GcMultiRow1.RowCount = 3
+    GcMultiRow1.SetValue(0, "TextBoxCell1", "ABC")
+End Sub
+
+Private Sub GcMultiRow1_CellAutoFitPreferredSizeNeeded(sender As Object, e As CellAutoFitPreferredSizeNeededEventArgs) Handles GcMultiRow1.CellAutoFitPreferredSizeNeeded
+    If e.Scope = CellScope.Row Then
+        Dim TextBoxCell1 = DirectCast(GcMultiRow1.Rows(e.SectionIndex).Cells(e.CellIndex), TextBoxCell)
+        If TextBoxCell1 IsNot Nothing AndAlso e.Direction = Orientation.Horizontal Then
+            e.PreferredSize = New Size(100, e.PreferredSize.Height)
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=87ec6429-c3b9-4564-923f-f7c943ce00b9" title="">グリッド</a></p><p><a href="gcdocsite__documentlink?toc-item-id=672f7dc1-1297-4293-87f6-f4d7ae30af83" title="">テンプレートの割り当てと参照</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1cd87acc-bf66-4bf7-bf75-b61800b830fb" title="">編集モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=05e1230b-6129-43d3-aa78-5b2cbf48ccba" title="">選択モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e56c66d1-0481-4f06-a48c-d3c4d03893ef" title="">表示モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3b578791-7908-4795-8e61-b9f1e7339d21" title="">文字列検索</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2647ada3-b90d-4823-adf7-4fa4ef083123" title="">スクロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e04576cc-5bac-410c-9335-0dda134c922f" title="">選択セルのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=77b3a184-61f9-4c3b-967b-dbb6f103acf0" title="">グリッドのスタイル設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=860edbe2-0af7-4e60-876e-89187c42d483" title="">ビジュアル スタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d83eab82-185e-49f9-88b0-0fd8379d92b6" title="">ズーム</a></p><p><a href="gcdocsite__documentlink?toc-item-id=09f1eccf-76eb-4979-ac29-c97731b2357d" title="">分割線とビューポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cbf794e7-3362-41e9-b625-bd3e8130611b" title="">コンテキスト メニュー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9cdbb6ad-e84e-441f-8f3f-ddd78af7b429" title="">ショートカット キー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4657f508-867c-455c-81b4-858e8f1d18d7" title="">リサイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e7471d46-a6b0-47fe-982d-8d4b7561d4e3" title="">リサイズ時のオフセット処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f3a0271e-fbeb-46ba-aa76-b99352d3e55c" title="">セルの移動方法の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1aac18ae-c27c-46f5-bfec-e5872e7d2d1b" title="">データ変更の監視</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1d1e19b2-4282-48a3-ad92-603f73b3cc38" title="">セルの自動マージ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=881b6d3e-e4d3-4271-b874-a972e9aef2c8" title="">新規行の上部表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=421066a5-9bfa-427f-a980-245ff290f1af" title="">列の展開／折り畳み</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9d7078b7-c6b3-420b-a282-9d08e8135b48" title="">SPREADスタイルの適用</a></p><p><a href="gcdocsite__documentlink?toc-item-id=707e6129-7446-4ccf-9b4b-574225dc0b02" title="">既定の設定における留意点</a></p><p><a href="gcdocsite__documentlink?toc-item-id=78fbc71a-7acb-4af3-ae37-953454f8dece" title="">パフォーマンスを向上するためのヒント</a></p>

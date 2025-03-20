@@ -1,0 +1,92 @@
+<p>DateTimePickerCellの値がnull（Visual BasicではNothing）のときに代替文字列を表示するには、セルの継承またはオーナー描画を行います。</p><h2>DateTimePickerCellを継承してユーザー定義型セルを作成する場合</h2><p>次のコードはDateTimePickerCellを継承するユーザー定義セルMyDateTimePickerCellです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Drawing;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyDateTimePickerCell</span> : <span class="hljs-title">DateTimePickerCell</span>
+{
+
+    <span class="hljs-function">protected override void OnPaint(CellPaintingEventArgs e)</span>
+    {
+         <span class="hljs-keyword">base</span>.OnPaint(e);
+        <span class="hljs-keyword">if</span> (e.Value != <span class="hljs-literal">null</span>)
+        {
+            <span class="hljs-built_in">string</span> placeHolder = <span class="hljs-string">"(なし)"</span>;
+            Color brushColor = e.Selected ? e.CellStyle.SelectionForeColor : e.CellStyle.ForeColor;
+            <span class="hljs-keyword">if</span> (e.Enabled == <span class="hljs-literal">false</span>)
+                brushColor = e.CellStyle.DisabledForeColor;
+
+            <span class="hljs-keyword">using</span> (Brush brush = <span class="hljs-keyword">new</span> SolidBrush(brushColor))
+            {
+                SizeF contentSize = e.Graphics.MeasureString(placeHolder, e.CellStyle.Font);
+                 <span class="hljs-built_in">float</span> y = e.CellBounds.Y + ((e.CellBounds.Height - contentSize.ToSize().Height) / <span class="hljs-number">2</span>);
+                 e.Graphics.DrawString(placeHolder, e.CellStyle.Font, brush, e.CellBounds.X, y);
+            }
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports System.Windows.Forms
+Imports GrapeCity.Win.MultiRow
+
+Public Class MyDateTimePickerCell
+     Inherits DateTimePickerCell
+
+    Protected Overrides Sub OnPaint(ByVal e As CellPaintingEventArgs)
+         MyBase.OnPaint(e)
+        If e.Value Is Nothing Then
+            Dim placeHolder As String = "(なし)"
+            e.PaintBackground(e.ClipBounds)
+            Dim brushColor As Color = IIf(e.Selected, e.CellStyle.SelectionForeColor, e.CellStyle.ForeColor)
+            If e.Enabled = False Then brushColor = e.CellStyle.DisabledForeColor
+            Using brush As New SolidBrush(brushColor)
+                Dim contentSize As SizeF = e.Graphics.MeasureString(placeHolder, e.CellStyle.Font)
+                Dim y As Double = e.CellBounds.Y + ((e.CellBounds.Height - contentSize.Height) / 2)
+                e.Graphics.DrawString(placeHolder, e.CellStyle.Font, brush, e.ClipBounds.X, y)
+            End Using
+         End If
+    End Sub
+
+End Class</code></pre></div><p>デザイナでこのセルを使用するには、次のように操作します。</p><ol><li><p>上記のコードをMyDateTimePickerCell.vbまたはMyDateTimePickerCell.csとしてファイルに保存する。</p></li><li><p>ファイルをプロジェクトに追加する。</p></li><li><p>プロジェクトをビルドする。</p></li><li><p>テンプレートデザイナを開く。</p></li><li><p>ツールボックスから"MyDateTimePickerCell"を選択し、ドラッグしてデザイナに配置する。</p></li></ol><h2>DateTimePickerCellを継承してユーザー定義型セルを作成する場合</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellPainting(object sender, GrapeCity.Win.MultiRow.CellPaintingEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    <span class="hljs-keyword">if</span> (gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex] <span class="hljs-keyword">is</span> DateTimePickerCell)
+    {
+        <span class="hljs-keyword">if</span> (e.Value == <span class="hljs-literal">null</span>)
+        {
+            <span class="hljs-built_in">string</span> placeHolder = <span class="hljs-string">"(なし)"</span>;
+            e.PaintBackground(e.ClipBounds);
+            Color brushColor = e.Selected ? e.CellStyle.SelectionForeColor : e.CellStyle.ForeColor;
+            <span class="hljs-keyword">using</span> (Brush brush = <span class="hljs-keyword">new</span> SolidBrush(brushColor))
+            {
+                SizeF contentSize = e.Graphics.MeasureString(placeHolder, e.CellStyle.Font);
+                 <span class="hljs-built_in">float</span> y = e.CellBounds.Y + ((e.CellBounds.Height - contentSize.ToSize().Height) / <span class="hljs-number">2</span>);
+                 e.Graphics.DrawString(placeHolder, e.CellStyle.Font, brush, e.CellBounds.X, y);
+            }
+            e.PaintErrorIcon(e.ClipBounds);
+            e.PaintWaveLine(e.ClipBounds);
+             e.PaintBorder(e.ClipBounds);
+
+            e.Handled = <span class="hljs-literal">true</span>;
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellPainting(ByVal sender As System.Object, ByVal e As CellPaintingEventArgs) Handles GcMultiRow1.CellPainting
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    If TypeOf gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex) Is DateTimePickerCell Then
+        If e.Value Is Nothing Then
+            Dim placeHolder As String = "(なし)"
+            e.PaintBackground(e.ClipBounds)
+            Dim brushColor As Color = IIf(e.Selected, e.CellStyle.SelectionForeColor, e.CellStyle.ForeColor)
+            Using brush As New SolidBrush(brushColor)
+                Dim contentSize As SizeF = e.Graphics.MeasureString(placeHolder, e.CellStyle.Font)
+                Dim y As Double = e.CellBounds.Y + ((e.CellBounds.Height - contentSize.Height) / 2)
+                e.Graphics.DrawString(placeHolder, e.CellStyle.Font, brush, e.ClipBounds.X, y)
+            End Using
+             e.PaintErrorIcon(e.ClipBounds)
+            e.PaintWaveLine(e.ClipBounds)
+            e.PaintBorder(e.ClipBounds)
+
+            e.Handled = True
+         End If
+    End If
+End Sub</code></pre></div><p>GcMultiRowコントロールでオーナー描画する場合はセルのドロップダウンボタンを予め描画することができないため、独自に描画処理を追加する必要があります。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7e1bd51b-9e9b-44b5-a31f-56c5672e613c" title="">日付型セル（DateTimePickerCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=52a20b79-14bc-4ca2-81ba-909274f1161d" title="">和暦の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c3044fa7-ed3d-4061-a961-d25694697bfd" title="">初期値の自動確定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=485f0df2-9264-4b73-89fa-087fe4fa90d8" title="">書式設定済みの値の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcd4c78d-1a80-4229-b1e9-57c31031cea4" title="">ValueChangedイベントの使用方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6a710a0-4045-48a1-aeba-c53dd9ad8f5a" title="">ドロップダウンボタンの非表示</a></p>

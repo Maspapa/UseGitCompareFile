@@ -1,0 +1,25 @@
+<p>シェイプ型セル（ShapeCell）の図形を設定するには、<a href="gcdocsite__documentlink?toc-item-id=c3f50531-c125-4af6-9027-5b501af5cd58" title="">ShapeCell.Renderer</a>プロパティを使用します。ここでは図形の設定方法を説明します。</p><h2>デザイナによる設定</h2><ol><li><p>図形を設定するシェイプ型セルを選択する。（例：shapeCell1）</p></li><li><p>プロパティウィンドウでRendererプロパティを選択し、ドロップダウンリストからPentagonを選択する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_shapecell_setshape.png" contenteditable="false"><br></p></li><li><p>Rendererプロパティの左の「+」をクリックしてRendererクラスを展開する。</p></li><li><p>Rendererクラスの次のプロパティを変更する。</p><ul><li><p>ArrowLengthプロパティに30を設定する。</p></li><li><p>DirectionプロパティにTopを設定する。</p></li><li><p>LineWidthプロパティに3を設定する</p></li></ul></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+PentagonShapeRenderer pentagonShapeRenderer1 = <span class="hljs-keyword">new</span> PentagonShapeRenderer();
+pentagonShapeRenderer1.ArrowLength = <span class="hljs-number">30</span>;
+pentagonShapeRenderer1.Direction = ShapeDirection.Top;
+pentagonShapeRenderer1.LineWidth = <span class="hljs-number">3</span>;
+
+ShapeCell shapeCell1 = <span class="hljs-keyword">new</span> ShapeCell();
+shapeCell1.Name = <span class="hljs-string">"shapeCell1"</span>;
+shapeCell1.Renderer = pentagonShapeRenderer1;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { shapeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim PentagonShapeRenderer1 = New PentagonShapeRenderer()
+PentagonShapeRenderer1.ArrowLength = 30
+PentagonShapeRenderer1.Direction = ShapeDirection.Top
+PentagonShapeRenderer1.LineWidth = 3
+
+Dim ShapeCell1 = New ShapeCell()
+ShapeCell1.Name = "ShapeCell1"
+ShapeCell1.Renderer = PentagonShapeRenderer1
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {ShapeCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=71b8cb00-4956-493a-9b61-38f35f20447e" title="">シェイプ型セル（ShapeCell）</a></p>

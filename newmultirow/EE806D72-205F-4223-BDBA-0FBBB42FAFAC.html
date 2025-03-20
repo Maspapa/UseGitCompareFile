@@ -1,0 +1,17 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_decimalplaces.png" contenteditable="false"><br></p><p>数値型セル（NumericUpDownCell）の値に小数点以下の桁数を表示する方法はSystem.Windows.Forms.NumericUpDownコントロールと同じです。<a href="gcdocsite__documentlink?toc-item-id=089d36d5-dabc-4bd8-bfaf-5f7f77796a3b" title="">NumericUpDownCell.DecimalPlaces</a>プロパティに表示する小数点以下の桁数を設定します。</p><h2>デザイナによる設定</h2><ol><li><p>行（Row）に数値型セルを追加する。（例：numericUpDownCell1）</p></li><li><p>numericUpDownCell1を選択し、プロパティウィンドウでnumericUpDownCell1.DecimalPlacesプロパティを3に設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell1.Name = <span class="hljs-string">"numericUpDownCell1"</span>;
+numericUpDownCell1.DecimalPlaces = <span class="hljs-number">3</span>;
+numericUpDownCell1.Value = <span class="hljs-number">10.23</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { numericUpDownCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+NumericUpDownCell1.Name = "NumericUpDownCell1"
+NumericUpDownCell1.DecimalPlaces = 3
+NumericUpDownCell1.Value = 10.23
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {NumericUpDownCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7bc40421-e50f-4b59-9ec2-af44aadbf42f" title="">数値型セル（NumericUpDownCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b3b972ce-35ec-4560-9dea-35f794db8ae8" title="">スピンボタンの非表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3d312ee-c86f-4b9d-900e-b92dcac0ead5" title="">数値の桁区切り表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1527ec60-cbf7-44cc-939b-586e69b4880b" title="">マイナスの値の赤字表示</a></p>

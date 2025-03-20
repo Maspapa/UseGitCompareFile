@@ -1,0 +1,30 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=a6e51b3c-d43c-48a2-9be3-c2ea9af895d7" title="">Cell.Validate</a>メソッドを使用するとセルの値を検証することができます。Cell.Validatorsに設定しているセルバリデータが１つでも検証エラーの場合、Cell.ValidateメソッドはFalseを返します。また、Cell.Validateメソッドの引数（doAction）にTrueを設定するとCell.Validateメソッド実行時にCell.ValidatorsのActionが実行されます。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>Cell.Validateメソッドを実行してもGcMultiRow.CellValidatingイベント、およびGcMultiRow.CellValidatedイベントは発生しません。</p></li></ul></blockquote><h2>すべてのセルの検証</h2><p>次のコードは、Cell.Validateメソッドを使用して、すべてのセルを検証します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">foreach</span> (Row r <span class="hljs-keyword">in</span> gcMultiRow1.Rows)
+{
+    <span class="hljs-keyword">foreach</span> (Cell c <span class="hljs-keyword">in</span> r.Cells)
+    {
+        c.Validate(<span class="hljs-literal">true</span>);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+For Each r As Row In GcMultiRow1.Rows
+    For Each c As Cell In r.Cells
+        c.Validate(True)
+    Next
+Next</code></pre></div><h2>編集中の値の検証</h2><p><a href="gcdocsite__documentlink?toc-item-id=25d6288b-b69a-4969-a9d9-d468a6f9cf68" title="">GcMultiRow.CellEditedFormattedValueChanged</a>イベントでCell.Validateメソッドの引数にTrueを設定して実行すると、編集中の値を検証することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellEditedFormattedValueChanged(object sender, CellEditedFormattedValueChangedEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+
+    currentCell.Validate(<span class="hljs-literal">true</span>);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellEditedFormattedValueChanged(sender As Object, e As CellEditedFormattedValueChangedEventArgs) Handles GcMultiRow1.CellEditedFormattedValueChanged
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+
+    currentCell.Validate(True)
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0f3efc93-9866-452e-a9a6-3a1f0ecb6591" title="">ユーザー入力の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0e497c36-9fdf-421d-936a-bd7205764e8a" title="">コントロールのイベントによる検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ab9b7b07-c4bf-4eff-a5d1-427115093507" title="">セルによる値の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=80e0bfb1-74a7-47e9-9c4a-f0c7d4eea41d" title="">検証情報のカスタマイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=499e2e8c-530f-40ff-ac3d-699bd84478eb" title="">ユーザー定義のセルバリデータ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a2acbd38-76de-4afd-a7ca-eb03c99ffa6f" title="">ユーザー定義の検証アクション</a></p>

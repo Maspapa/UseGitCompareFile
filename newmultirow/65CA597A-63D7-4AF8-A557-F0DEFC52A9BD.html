@@ -1,0 +1,91 @@
+<p>GcProgressBarCellにおけるテキストの設定と活用について解説します。</p><h2>書式の設定</h2><p>GcProgressBarCellに表示するテキストは、<a href="gcdocsite__documentlink?toc-item-id=8a2b7d90-57ce-45d7-ac15-daee7efea571" title="">DisplayTextFormat</a>プロパティを使って指定します。このプロパティに、キーワードとリテラル文字を設定することで容易にテキストの書式を作成できます。テキストのフォントは、Fontプロパティを使用して設定します。セルにテキストを表示しない場合は、<a href="gcdocsite__documentlink?toc-item-id=8a2b7d90-57ce-45d7-ac15-daee7efea571" title="">DisplayTextFormat</a>プロパティを空にします。</p><p>テキストの書式は、「<strong>値のタイプ</strong>」と「<strong>値の書式</strong>」二つの部分から構成されます。設計時にテキストの書式を設定するには、プロパティウィンドウから　<a href="gcdocsite__documentlink?toc-item-id=8a2b7d90-57ce-45d7-ac15-daee7efea571" title="">DisplayTextFormat</a>プロパティを選択して、「テキストの表示設定」ダイアログを開いて行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcprogressbar/textformatdialog.png" contenteditable="false"><br></p><p><a href="gcdocsite__documentlink?toc-item-id=8a2b7d90-57ce-45d7-ac15-daee7efea571" title="">DisplayTextFormat</a>プロパティのデフォルト値は"[p]%|#0"です。コードで設定するときは、下記のように定義します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.MultiRow.PlusPak.GcProgressBarCell gcProgressBarCell1 = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.PlusPak.GcProgressBarCell();
+gcProgressBarCell1.DisplayTextFormat = <span class="hljs-string">"値のタイプ|値の書式"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim GcProgressBarCell1 = New GrapeCity.Win.MultiRow.PlusPak.GcProgressBarCell()
+GcProgressBarCell1.DisplayTextFormat = "値のタイプ|値の書式"</code></pre></div><h4>「値のタイプ」に使用できるキーワード</h4><p>「値のタイプ」に指定できるキーワードは下記のとおりです。これらのキーワードのほかに、任意のリテラル文字と組み合わせて表示するテキストの書式を設定できます。</p><table><thead><tr><th><p>キーワード</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>[v]</p></td><td><p>セルの現在値（Valueプロパティの値）</p></td></tr><tr><td><p>[p]</p></td><td><p>全体の進行範囲に対する完成の度合い（Valueプロパティの値に基づいたパーセンテージ）</p></td></tr><tr><td><p>[s]</p></td><td><p>全体の進行範囲（Maximum-Minimumの値）</p></td></tr><tr><td><p>[m]</p></td><td><p>セルの最小値（Minimumプロパティ）</p></td></tr><tr><td><p>[M]</p></td><td><p>セルの最大値（Maximumプロパティ）</p></td></tr><tr><td><p>[^v]</p></td><td><p>タスク完了までの残り値（Maximum-Valueの値）</p></td></tr><tr><td><p>[^p]</p></td><td><p>全体の進行範囲に対する未完成の度合い（完了までの残り値に基づいたパーセンテージ）</p></td></tr></tbody></table><h4>「値の書式」に使用できるキーワード</h4><p>「値の書式」では、「値のタイプ」で設定する値の書式を指定します。書式に指定できるキーワードは下記のとおりです。それ以外の文字は使用できません。</p><table><thead><tr><th><p>キーワード</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>#</p></td><td><p>数値の桁を指定します。値が0の場合は何も表示されません。</p></td></tr><tr><td><p>0</p></td><td><p>数値の桁を指定します。値が0の場合は0を表示します。</p></td></tr><tr><td><p>.（ピリオド）</p></td><td><p>小数点の表示位置を指定します。</p></td></tr><tr><td><p>,（コンマ）</p></td><td><p>桁区切り記号の表示位置を指定します。</p></td></tr></tbody></table><h4>キーワードの活用例</h4><p>以下に、<a href="gcdocsite__documentlink?toc-item-id=8a2b7d90-57ce-45d7-ac15-daee7efea571" title="">DisplayTextFormat</a>プロパティのキーワードを活用した、いくつかの用例を示します。</p><p><strong>用例１</strong></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcProgressBar1.Minimum = <span class="hljs-number">0</span>;
+gcProgressBar1.Maximum = <span class="hljs-number">1234</span>;
+gcProgressBar1.Value = <span class="hljs-number">456</span>;
+gcProgressBar1.DisplayTextFormat = <span class="hljs-string">"[s]件のうち[v]件のデータを更新しました|#0"</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcProgressBarCell1 = New PlusPakCell.GcProgressBarCell()
+GcProgressBarCell1.Minimum = 0
+GcProgressBarCell1.Maximum = 1234
+GcProgressBarCell1.Value = 456
+GcProgressBarCell1.DisplayTextFormat = "[s]件のうち[v]件のデータを更新しました|#0"
+
+GcProgressBarCell1.Size = New Size(250, 21)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcProgressBarCell1})
+GcMultiRow1.RowCount = 3</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcprogressbar/usecase1.png" contenteditable="false"><br></p><p><strong>用例２</strong></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcProgressBarCell gcProgressBarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcProgressBarCell();
+gcProgressBarCell1.FlatStyle = FlatStyle.Flat;
+gcProgressBarCell1.ProgressBarStyle = PlusPakCell.ProgressStyle.Continuous;
+gcProgressBarCell1.Minimum = <span class="hljs-number">0</span>;
+gcProgressBarCell1.Maximum = <span class="hljs-number">12</span>;
+gcProgressBarCell1.Value = <span class="hljs-number">8.6</span>;
+gcProgressBarCell1.DisplayTextFormat = <span class="hljs-string">"空き領域 [^v] GB/ [M] GB（[p]%使用済み）|#0.0"</span>;
+
+gcProgressBarCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">250</span>, <span class="hljs-number">21</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcProgressBarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcProgressBarCell1 = New PlusPakCell.GcProgressBarCell()
+
+GcProgressBarCell1.FlatStyle = FlatStyle.Flat
+GcProgressBarCell1.ProgressBarStyle = PlusPakCell.ProgressStyle.Continuous
+GcProgressBarCell1.Minimum = 0
+GcProgressBarCell1.Maximum = 12
+GcProgressBarCell1.Value = 8.6
+GcProgressBarCell1.DisplayTextFormat = "空き領域 [^v] GB/ [M] GB（[p]%使用済み）|#0.0"
+
+GcProgressBarCell1.Size = New Size(250, 21)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcProgressBarCell1})
+GcMultiRow1.RowCount = 3</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcprogressbar/usecase2.png" contenteditable="false"><br></p><h2>テキストの配置</h2><p><a href="gcdocsite__documentlink?toc-item-id=beec93b5-d772-4afe-a027-cc7292f523ec" title="">CellStyle.TextAlign</a>プロパティで、テキストの水平方向と垂直方向の配置を設定できます。それぞれの値に対応する位置は次のとおりです。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcprogressbar/textalign.png" contenteditable="false"><br></p><p>次のサンプルコードは、テキストをコントロールの左中央に配置します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcProgressBarCell gcProgressBarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcProgressBarCell();
+<span class="hljs-comment">// テキストを垂直方向の中央、左揃えに配置します。</span>
+gcProgressBarCell1.Style.TextAlign = MultiRowContentAlignment.MiddleLeft;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcProgressBarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcProgressBarCell1 = New PlusPakCell.GcProgressBarCell()
+' テキストを垂直方向の中央、左揃えに配置します。
+GcProgressBarCell1.Style.TextAlign = MultiRowContentAlignment.MiddleLeft
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcProgressBarCell1})
+GcMultiRow1.RowCount = 3</code></pre></div><h2>テキストの向き</h2><p><a href="gcdocsite__documentlink?toc-item-id=5390195d-f3ac-4da0-8fda-e79b5a6aebc6" title="">TextOrientation</a>プロパティを使用して、テキストの向きを設定できます。文字の縦表示は、<a href="gcdocsite__documentlink?toc-item-id=5390195d-f3ac-4da0-8fda-e79b5a6aebc6" title="">TextOrientation</a>プロパティを<strong>Downward</strong>か、または<strong>Upward</strong>に設定します。漢字やひらがななどの日本語だけを縦に表示する場合は、<strong>VerticalFarEast</strong>や<strong>HorizontalRotatedFarEast</strong>を使用します。</p><p>次のサンプルコードは、セルを縦に表示し、日本語も縦方向に表示する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcProgressBarCell gcProgressBarCell1  = <span class="hljs-keyword">new</span> PlusPakCell.GcProgressBarCell();
+<span class="hljs-comment">// GcProgressBarCell を縦方向に配置します。 </span>
+gcProgressBarCell1.Orientation = Orientation.Vertical;
+<span class="hljs-comment">// 日本語文字を縦方向に表示します。 </span>
+gcProgressBarCell1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast;
+<span class="hljs-comment">// GcProgressBarCell の書式を設定します。</span>
+gcProgressBarCell1.DisplayTextFormat = <span class="hljs-string">"[p]%完成しました|#0"</span>;
+gcProgressBarCell1.Value = <span class="hljs-number">80</span>;
+gcProgressBarCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">21</span>, <span class="hljs-number">200</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] {gcProgressBarCell1});
+gcMultiRow1.RowCount = <span class="hljs-number">3</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcProgressBarCell1 = New PlusPakCell.GcProgressBarCell()
+' GcProgressBarCell を縦方向に配置します。 
+GcProgressBarCell1.Orientation = Orientation.Vertical
+' 日本語文字を縦方向に表示します。 
+GcProgressBarCell1.TextOrientation = GrapeCity.Win.Common.TextOrientation.VerticalFarEast
+' GcProgressBarCell の書式を設定します。
+GcProgressBarCell1.DisplayTextFormat = "[p]%完成しました|#0"
+GcProgressBarCell1.Value = 80
+GcProgressBarCell1.Size = New Size(21, 200)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcProgressBarCell1})
+GcMultiRow1.RowCount = 3</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcprogressbar/textorientation.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=baffc55f-be3b-4399-a936-bcf1053e4941" title="">GcProgressBarCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5a534f75-5e08-409f-9714-ddbf0375a8cf" title="">進行状況の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=40d10b7d-a9fc-4f14-a959-d960291edd43" title="">バーの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8a7faa4d-49bf-4e1d-85fa-ed8781adff25" title="">バーの外観のカスタマイズ</a></p>

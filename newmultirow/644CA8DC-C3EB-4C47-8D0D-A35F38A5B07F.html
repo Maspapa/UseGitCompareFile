@@ -1,0 +1,19 @@
+<p>InputManCellの名前空間GrapeCity.Win.MultiRow.InputManとInputManの名前空間GrapeCity.Win.EditorsおよびGrapeCity.Win.Editors.Fieldsを共に省略すると、ビルド時に「あいまいな参照」エラーが発生することがあります。これは、InputManCellがパフォーマンスを最適化するためにInputManと同名のクラスのサブセットを提供していることが原因です。</p><p>例：</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow.InputMan;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Editors;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Editors.Fields;
+
+DateAlternateText a; <span class="hljs-comment">// あいまいな参照エラー</span></code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow.InputMan
+Imports GrapeCity.Win.Editors
+Imports GrapeCity.Win.Editors.Fields
+
+Dim a As DateAlternateText ' あいまいな参照エラー</code></pre></div><p>「あいまいな参照」エラーを避けるために、次のようなコーディング方法をおすすめします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Editors;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Editors.Fields;
+
+InputManCell.DateAlternateText a; <span class="hljs-comment">// InputManCell の参照</span>
+DateAlternateText b; <span class="hljs-comment">// InputMan の参照</span></code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+Imports GrapeCity.Win.Editors
+Imports GrapeCity.Win.Editors.Fields
+
+Dim a As InputManCell.DateAlternateText ' InputManCell の参照
+Dim b As DateAlternateText ' InputMan の参照</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=71edf1f4-ff7c-4615-b910-c00736a3b592" title="">InputManCellの使い方</a></p>

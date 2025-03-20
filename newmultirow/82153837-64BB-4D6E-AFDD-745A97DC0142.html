@@ -1,0 +1,58 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=6f8830f9-c164-49de-809e-6fd70706f7e0" title="">ComponentActions.SelectNextControl</a>プロパティを実行すると、TabIndexに従ってフォーカスをフォーム内の次のコントロールに移動します。フォーカスを移動するかどうかは、現在のセルが最終行の最終セルかどうかで判定を行います。</p><h2>サンプルコード</h2><p>次のコードは、最終行の最後のセルの場合には次のコントロールにフォーカスを移動し、それ以外の場合には次のセルに移動するためのアクションを作成します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomMoveToNextContorol</span> : <span class="hljs-title">IAction</span>
+{
+    <span class="hljs-function">public bool CanExecute(GcMultiRow target)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> DisplayName
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.ToString(); }
+    }
+
+    <span class="hljs-function">public void Execute(GcMultiRow target)</span>
+    {
+        Boolean isLastRow = (target.CurrentCellPosition.RowIndex == target.RowCount - <span class="hljs-number">1</span>);
+        Boolean isLastCell = (target.CurrentCellPosition.CellIndex == target.Template.Row.Cells.Count - <span class="hljs-number">2</span>);
+
+        <span class="hljs-keyword">if</span> (!(isLastRow &amp; isLastCell))
+        {
+            <span class="hljs-comment">// 最後のセル以外のセルでは次のセルへ移動します。</span>
+            SelectionActions.MoveToNextCell.Execute(target);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-comment">// 最後のセルでは次のコントロールへ移動します。</span>
+            ComponentActions.SelectNextControl.Execute(target);
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class CustomMoveToNextContorol
+    Implements IAction
+
+    Public Function CanExecute(ByVal target As GcMultiRow) As Boolean Implements IAction.CanExecute
+        Return True
+    End Function
+
+    Public ReadOnly Property DisplayName() As String Implements IAction.DisplayName
+        Get
+            Return Me.ToString()
+        End Get
+    End Property
+
+    Public Sub Execute(ByVal target As GcMultiRow) Implements IAction.Execute
+        Dim isLastRow As Boolean = (target.CurrentCellPosition.RowIndex = target.RowCount - 1)
+        Dim isLastCell As Boolean = (target.CurrentCellPosition.CellIndex = target.Rows(0).Cells.Count - 2)
+        If Not (isLastRow And isLastCell) Then
+            ' 最後のセル以外のセルでは次のセルへ移動します。
+            SelectionActions.MoveToNextCell.Execute(target)
+        Else
+            ' 最後のセルでは次のコントロールへ移動します。
+            ComponentActions.SelectNextControl.Execute(target)
+        End If
+    End Sub
+End Class</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6c33e2eb-8db5-46d3-9ca5-86dc57689993" title="">ユーザー定義のショートカットキー</a></p>

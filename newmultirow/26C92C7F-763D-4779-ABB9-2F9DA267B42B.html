@@ -1,0 +1,186 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_summarycell_statementofaccount.png" contenteditable="false"><br></p><p>サマリ型セル（SummaryCell）で預金通帳のように入金と出金の履歴に基づく残高を計算するには、<a href="gcdocsite__documentlink?toc-item-id=13b0bd21-79db-4631-b8a7-7ef6ec5a9af4" title="">ICalculation</a>インタフェースを実装する独自の計算オブジェクトを作成する必要があります。</p><h2>CustomCalculationクラスのコード</h2><p>次のコードは、直前の行の残高と入金された値と出金された値の合計を返します。直前の行がない場合（つまり最初の行の場合）は残高を0で処理します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomCalculation</span> : <span class="hljs-title">ICalculation</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _balanceCellName;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _creditsCellName;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _chargesCellName;
+
+    <span class="hljs-function">public object Calculate(CalculationContext context)</span>
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span>.IsNullOrEmpty(<span class="hljs-keyword">this</span>._creditsCellName)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span>.IsNullOrEmpty(<span class="hljs-keyword">this</span>._chargesCellName)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">if</span> (context.Scope == CellScope.Row)
+        {
+            <span class="hljs-built_in">decimal</span> balance = <span class="hljs-number">0</span>;
+            <span class="hljs-built_in">decimal</span> credits = <span class="hljs-number">0</span>;
+            <span class="hljs-built_in">decimal</span> charges = <span class="hljs-number">0</span>;
+
+            <span class="hljs-keyword">if</span> (context.SectionIndex != <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-built_in">object</span> balanceCellValue = context.GcMultiRow.GetValue(context.SectionIndex - <span class="hljs-number">1</span>, <span class="hljs-keyword">this</span>._balanceCellName);
+                balance = (<span class="hljs-built_in">decimal</span>)balanceCellValue;
+            }
+
+            <span class="hljs-built_in">object</span> creditsCellValue = context.GcMultiRow.GetValue(context.SectionIndex, <span class="hljs-keyword">this</span>._creditsCellName);
+            <span class="hljs-keyword">if</span> (creditsCellValue != <span class="hljs-literal">null</span>)
+            {
+                credits = (<span class="hljs-built_in">decimal</span>)creditsCellValue;
+            }
+
+            <span class="hljs-built_in">object</span> chargesCellValue = context.GcMultiRow.GetValue(context.SectionIndex, <span class="hljs-keyword">this</span>._chargesCellName);
+            <span class="hljs-keyword">if</span> (chargesCellValue != <span class="hljs-literal">null</span>)
+            {
+                charges = (<span class="hljs-built_in">decimal</span>)chargesCellValue;
+            }
+
+            <span class="hljs-keyword">return</span> balance + charges - credits;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+
+    <span class="hljs-comment">// 残高のセルを指定する</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> BalanceCellName
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> _balanceCellName; }
+        <span class="hljs-keyword">set</span> { _balanceCellName = <span class="hljs-keyword">value</span>; }
+    }
+
+    <span class="hljs-comment">// 出金のセルを指定する</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> CreditsCellName
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> _creditsCellName; }
+        <span class="hljs-keyword">set</span> { _creditsCellName = <span class="hljs-keyword">value</span>; }
+    }
+
+    <span class="hljs-comment">// 入金のセルを指定する</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> ChargesCellName
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> _chargesCellName; }
+        <span class="hljs-keyword">set</span> { _chargesCellName = <span class="hljs-keyword">value</span>; }
+    }
+
+    <span class="hljs-function">public object Clone()</span>
+    {
+        CustomCalculation _customCalculation = <span class="hljs-keyword">new</span> CustomCalculation();
+        _customCalculation.BalanceCellName = <span class="hljs-keyword">this</span>.BalanceCellName;
+        _customCalculation.CreditsCellName = <span class="hljs-keyword">this</span>.CreditsCellName;
+        _customCalculation.ChargesCellName = <span class="hljs-keyword">this</span>.ChargesCellName;
+        <span class="hljs-keyword">return</span> _customCalculation;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class CustomCalculation
+    Implements ICalculation
+
+    Private _balanceCellName As String
+    Private _creditsCellName As String
+    Private _chargesCellName As String
+
+    Public Function Calculate(ByVal context As GrapeCity.Win.MultiRow.CalculationContext) As Object Implements GrapeCity.Win.MultiRow.ICalculation.Calculate
+        If String.IsNullOrEmpty(Me._creditsCellName) Then Return 0
+        If String.IsNullOrEmpty(Me._chargesCellName) Then Return 0
+
+        If context.Scope = CellScope.Row Then
+            Dim balance As Decimal = 0
+            Dim credits As Decimal = 0
+            Dim charges As Decimal = 0
+
+            If Not context.SectionIndex = 0 Then
+                Dim balanceCellValue As Object = context.GcMultiRow.GetValue(context.SectionIndex - 1, Me._balanceCellName)
+                balance = DirectCast(balanceCellValue, Decimal)
+            End If
+
+            Dim creditseCellValue As Object = context.GcMultiRow.GetValue(context.SectionIndex, Me._creditsCellName)
+            If creditseCellValue IsNot Nothing Then
+                credits = DirectCast(creditseCellValue, Decimal)
+            End If
+
+            Dim chargesCellValue As Object = context.GcMultiRow.GetValue(context.SectionIndex, Me._chargesCellName)
+            If chargesCellValue IsNot Nothing Then
+                charges = DirectCast(chargesCellValue, Decimal)
+            End If
+
+            Return balance + charges - credits
+        End If
+
+        Return Nothing
+    End Function
+
+    ' 残高のセルを指定する
+    Public Property BalanceCellName() As String
+        Get
+            Return _balanceCellName
+        End Get
+        Set(ByVal value As String)
+            _balanceCellName = value
+        End Set
+    End Property
+
+    ' 出金のセルを指定する
+    Public Property CreditsCellName() As String
+        Get
+            Return _creditsCellName
+        End Get
+        Set(ByVal value As String)
+            _creditsCellName = value
+        End Set
+    End Property
+
+    ' 入金のセルを指定する
+    Public Property ChargesCellName() As String
+        Get
+            Return _chargesCellName
+        End Get
+        Set(ByVal value As String)
+            _chargesCellName = value
+        End Set
+    End Property
+
+    Public Function Clone() As Object Implements System.ICloneable.Clone
+        Dim _customCalculation As New CustomCalculation()
+        _customCalculation.BalanceCellName = Me.BalanceCellName
+        _customCalculation.CreditsCellName = Me.CreditsCellName
+        _customCalculation.ChargesCellName = Me.ChargesCellName
+        Return _customCalculation
+    End Function
+End Class</code></pre></div><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericUpDownCell charges = <span class="hljs-keyword">new</span> NumericUpDownCell();
+charges.Name = <span class="hljs-string">"入金"</span>;
+NumericUpDownCell credits = <span class="hljs-keyword">new</span> NumericUpDownCell();
+credits.Name = <span class="hljs-string">"出金"</span>;
+SummaryCell balance = <span class="hljs-keyword">new</span> SummaryCell();
+balance.Name = <span class="hljs-string">"残高"</span>;
+CustomCalculation custom = <span class="hljs-keyword">new</span> CustomCalculation();
+custom.BalanceCellName = <span class="hljs-string">"残高"</span>;
+custom.ChargesCellName = <span class="hljs-string">"入金"</span>;
+custom.CreditsCellName = <span class="hljs-string">"出金"</span>;
+balance.Calculation = custom;
+balance.Style.TextAlign = MultiRowContentAlignment.MiddleRight;
+
+Template template1 = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { charges, credits, balance });
+template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-string">"入金"</span>;
+template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">1</span>].Value = <span class="hljs-string">"出金"</span>;
+template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">2</span>].Value = <span class="hljs-string">"残高"</span>;
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim charges As New NumericUpDownCell()
+charges.Name = "入金"
+Dim credits As New NumericUpDownCell()
+credits.Name = "出金"
+Dim balance As New SummaryCell()
+balance.Name = "残高"
+Dim custom As New CustomCalculation()
+custom.BalanceCellName = "残高"
+custom.ChargesCellName = "入金"
+custom.CreditsCellName = "出金"
+balance.Calculation = custom
+balance.Style.TextAlign = MultiRowContentAlignment.MiddleRight
+
+Dim Template1 = Template.CreateGridTemplate(New Cell() {charges, credits, balance})
+Template1.ColumnHeaders(0).Cells(0).Value = "入金"
+Template1.ColumnHeaders(0).Cells(1).Value = "出金"
+Template1.ColumnHeaders(0).Cells(2).Value = "残高"
+GcMultiRow1.Template = Template1</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4544130d-c322-4a8e-b314-7a8523ab4c89" title="">サマリ型セル (SummaryCell)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2d9e4d2f-20b1-43ff-b327-0762d80075bc" title="">列の合計をフッタに表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=90af16df-b408-4ef6-b00a-0a9f2cb7c0f2" title="">データエラー時のエラーアイコン表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=334b6be9-ca5e-4f18-965d-ce35728811df" title="">非表示行を合計値から除外</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5d99f298-d2bb-4fe2-ae43-a250f662042d" title="">値の端数処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=62e55c75-4b79-4fb6-8663-dcb584bb55de" title="">条件付き集計の定義</a></p>

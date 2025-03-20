@@ -1,0 +1,174 @@
+<p>「<a href="gcdocsite__documentlink?toc-item-id=ce3d4763-5c4a-490f-b7f2-87c4918483ed" title="">デザイナを使用したアプリケーション作成（グリッド表示）</a>」と同じデータを使用して、単票形式のレイアウト画面を持つアプリケーションを作成します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_runtime.png" contenteditable="false"><br></p><h2>テンプレートの作成</h2><p>ここでは、プロジェクトのフォームにGcMultiRowコントロールを配置し、テンプレートを作成します。</p><p>GcMultiRowコントロールがツールボックスに登録されていない場合は「<a href="gcdocsite__documentlink?toc-item-id=47eaa599-8c22-4bda-9f56-f1fca0d0c516" title="">GcMultiRowコントロールを使用したアプリケーションの作成</a>」を参照してください。</p><ol><li><p>Visual Studioを起動して、新規にWindows フォーム アプリケーション プロジェクトを作成する。</p></li><li><p>プロパティ ウィンドウでForm1のSizeプロパティに(690, 370)を設定する。</p></li><li><p>ツールボックスから「Panel」を選択し、フォームにドラッグ＆ドロップする。</p></li><li><p>配置したPanelコントロール（例：Panel1）を選択し、プロパティ ウィンドウで 次の設定をする。</p><ul><li><p>Anchorプロパティ : Top, Bottom, Left, Right</p></li><li><p>Locationプロパティ : (12, 12)</p></li><li><p>Sizeプロパティ : (650, 280)</p></li></ul></li><li><p>ツールボックスから「Button」を選択し、フォームの下部にドラッグ＆ドロップする。Buttonコントロールは全部で４つ配置する。</p></li><li><p>プロパティ ウィンドウでButtonコントロールのAnchorプロパティとTextプロパティに、次の値を設定する。</p><table><thead><tr><th><p>Buttonコントロール</p></th><th><p>Anchorプロパティ</p></th><th><p>Textプロパティ</p></th></tr></thead><tbody><tr><td><p>Button1</p></td><td><p>Bottom, Left</p></td><td><p>最初</p></td></tr><tr><td><p>Button2</p></td><td><p>Bottom, Left</p></td><td><p>前</p></td></tr><tr><td><p>Button3</p></td><td><p>Bottom, Left</p></td><td><p>次</p></td></tr><tr><td><p>Button4</p></td><td><p>Bottom, Left</p></td><td><p>最後</p></td></tr></tbody></table></li><li><p>ツールボックスから「GcMultiRow」を選択し、Panel1にドラッグ＆ドロップする。</p></li><li><p>配置したGcMultiRowコントロール（例：GcMultiRow1）を選択し、スマートタグの「親コンテナにドッキングする」を選択する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singletemplateview_templatecreate_01.png" contenteditable="false"><br></p></li><li><p>配置したGcMultiRowコントロールを選択し、スマートタグの「新しいテンプレートの追加」を選択する。</p></li><li><p>ウィザードが表示されるので、［次へ］をクリックする。</p></li><li><p>「テンプレートの種類を選択」では、「空白のテンプレートを作成する」を選択する。</p></li><li><p>ウィザードの［完了］をクリックして、ウィザードを終了する。</p></li><li><p>配置したGcMultiRowコントロールを選択し、スマートタグの「テンプレートの編集」を選択し、テンプレートが表示されることを確認する。</p></li></ol><p>以上で、テンプレートの設定ができました。</p><p>次のステップでは画面のレイアウトを作成します。</p><h2>デザイナによるセルの配置</h2><p>ウィザードで作成したテンプレートは空白のテンプレートなので、１つずつセルを配置します。</p><ol><li><p>ColumnHeaderSection1の任意の位置でマウスを右クリックし、コンテキスト メニューから［削除］を選択する。</p></li><li><p>Row を選択し、プロパティ ウィンドウで 次の設定をする。</p><ul><li><p>BackColorプロパティ : Silver</p></li><li><p>Heightプロパティ : 250</p></li><li><p>Widthプロパティ : 650</p></li></ul></li><li><p>ツールボックスからテンプレートにRowHeaderCellを追加し、各プロパティに次の値を設定する。</p><table><thead><tr><th><p>Nameプロパティ</p></th><th><p>Locationプロパティ</p></th><th><p>Sizeプロパティ</p></th><th><p>Textプロパティ</p></th></tr></thead><tbody><tr><td><p>RowHeaderCell1</p></td><td><p>8, 8</p></td><td><p>90, 25</p></td><td><p>社員コード:</p></td></tr><tr><td><p>RowHeaderCell2</p></td><td><p>8, 33</p></td><td><p>90, 25</p></td><td><p>氏名:</p></td></tr><tr><td><p>RowHeaderCell3</p></td><td><p>238, 33</p></td><td><p>90, 25</p></td><td><p>フリガナ:</p></td></tr><tr><td><p>RowHeaderCell4</p></td><td><p>8, 58</p></td><td><p>90, 25</p></td><td><p>在籍支社:</p></td></tr><tr><td><p>RowHeaderCell5</p></td><td><p>238, 58</p></td><td><p>90, 25</p></td><td><p>部署:</p></td></tr><tr><td><p>RowHeaderCell6</p></td><td><p>8, 83</p></td><td><p>90, 25</p></td><td><p>入社日:</p></td></tr><tr><td><p>RowHeaderCell7</p></td><td><p>238, 83</p></td><td><p>90, 25</p></td><td><p>生年月日:</p></td></tr><tr><td><p>RowHeaderCell8</p></td><td><p>8, 108</p></td><td><p>90, 75</p></td><td><p>住所:</p></td></tr><tr><td><p>RowHeaderCell9</p></td><td><p>98, 108</p></td><td><p>78, 25</p></td><td><p>住所１:</p></td></tr><tr><td><p>RowHeaderCell10</p></td><td><p>98, 133</p></td><td><p>78, 25</p></td><td><p>住所２:</p></td></tr><tr><td><p>RowHeaderCell11</p></td><td><p>98, 158</p></td><td><p>78, 25</p></td><td><p>電話番号:</p></td></tr><tr><td><p>RowHeaderCell12</p></td><td><p>296, 158</p></td><td><p>78, 25</p></td><td><p>内線:</p></td></tr><tr><td><p>RowHeaderCell13</p></td><td><p>8, 183</p></td><td><p>90, 60</p></td><td><p>注意事項:</p></td></tr><tr><td><p>RowHeaderCell14</p></td><td><p>468, 8</p></td><td><p>175, 25</p></td><td><p>写真:</p></td></tr></tbody></table></li><li><p>ドラッグ＆ドロップでセルをすべて選択する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_addcell_01.png" contenteditable="false"><br></p></li><li><p>プロパティ ウィンドウで 次の設定をする。</p><ul><li><p>FlatStyleプロパティ : Flat</p></li><li><p>ResizeModeプロパティ : None</p></li><li><p>SelectionModeプロパティ : None</p></li><li><p>ShowIndicatorプロパティ : False</p></li></ul></li><li><p>プロパティ ウィンドウのドロップダウンリストから［Template1］を選択し、次の設定をする。</p><ul><li><p>RowsDefaultHeaderCellStyle.Font.Name : メイリオ</p></li><li><p>RowsDefaultHeaderCellStyle.TextAlign : MiddleCenter</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_addcell_02.png" contenteditable="false"><br></p></li><li><p>ツールボックスからテンプレートにTextBoxCellを追加し、各プロパティに次の値を設定する。</p><table><thead><tr><th><p>Nameプロパティ</p></th><th><p>Locationプロパティ</p></th><th><p>Sizeプロパティ</p></th></tr></thead><tbody><tr><td><p>TextBoxCell1</p></td><td><p>98, 8</p></td><td><p>370, 25</p></td></tr><tr><td><p>TextBoxCell2</p></td><td><p>98, 33</p></td><td><p>140, 25</p></td></tr><tr><td><p>TextBoxCell3</p></td><td><p>328, 33</p></td><td><p>140, 25</p></td></tr><tr><td><p>TextBoxCell4</p></td><td><p>98, 58</p></td><td><p>140, 25</p></td></tr><tr><td><p>TextBoxCell5</p></td><td><p>328, 58</p></td><td><p>140, 25</p></td></tr><tr><td><p>TextBoxCell6</p></td><td><p>176, 108</p></td><td><p>292, 25</p></td></tr><tr><td><p>TextBoxCell7</p></td><td><p>176, 133</p></td><td><p>292, 25</p></td></tr><tr><td><p>TextBoxCell8</p></td><td><p>176, 158</p></td><td><p>120, 25</p></td></tr><tr><td><p>TextBoxCell9</p></td><td><p>374, 158</p></td><td><p>94, 25</p></td></tr><tr><td><p>TextBoxCell10</p></td><td><p>98, 183</p></td><td><p>370, 60</p></td></tr></tbody></table></li><li><p>[Ctrl] キーを押した状態でTextBoxCellをクリックしてすべて選択し、プロパティ ウィンドウで 次の設定をする。</p><ul><li><p>Style.BackColorプロパティ : White</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_addcell_03.png" contenteditable="false"><br></p></li><li><p>ツールボックスからテンプレートにDateTimePickerCellを追加し、各プロパティに次の値を設定する。</p><table><thead><tr><th><p>Nameプロパティ</p></th><th><p>Locationプロパティ</p></th><th><p>Sizeプロパティ</p></th></tr></thead><tbody><tr><td><p>DateTimePickerCell1</p></td><td><p>98, 83</p></td><td><p>140, 25</p></td></tr><tr><td><p>DateTimePickerCell2</p></td><td><p>328, 83</p></td><td><p>140, 25</p></td></tr></tbody></table></li><li><p>[Ctrl] キーを押した状態でDateTimePickerCellをクリックしてすべて選択し、プロパティ ウィンドウで 次の設定をする。</p><ul><li><p>ShowDropDownButtonプロパティ : NotShown</p></li><li><p>Style.BackColorプロパティ : White</p></li></ul></li><li><p>ツールボックスからテンプレートにImageCellを追加し、各プロパティに次の値を設定する。</p><table><thead><tr><th><p>Nameプロパティ</p></th><th><p>ImageLayoutプロパティ</p></th><th><p>Locationプロパティ</p></th><th><p>Sizeプロパティ</p></th><th><p>Style.BackColorプロパティ</p></th></tr></thead><tbody><tr><td><p>ImageCell1</p></td><td><p>Stretch</p></td><td><p>468, 33</p></td><td><p>175, 185</p></td><td><p>Control</p></td></tr></tbody></table></li><li><p>ツールボックスからテンプレートにLabelCellを追加し、各プロパティに次の値を設定する。</p><table><thead><tr><th><p>Nameプロパティ</p></th><th><p>Locationプロパティ</p></th><th><p>Sizeプロパティ</p></th><th><p>Style.BackColorプロパティ</p></th></tr></thead><tbody><tr><td><p>LabelCell1</p></td><td><p>468, 218</p></td><td><p>175, 25</p></td><td><p>Control</p></td></tr></tbody></table><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_addcell_04.png" contenteditable="false"><br></p><p><br></p><p>以上で、テンプレートにセルの配置ができました。</p></li></ol><h2>セルの罫線の設定</h2><p>テンプレートに配置したセルの罫線を設定します。</p><ol><li><p>RowHeaderCell1を右クリックし、コンテキスト メニューから［罫線］を選択する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_01.png" contenteditable="false"><br></p></li><li><p>「罫線」ダイアログの［種類］を「角丸罫線」に設定する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_02.png" contenteditable="false"><br></p></li><li><p>各項目に次の値を設定する。</p><ul><li><p>スタイル : Double</p></li><li><p>色 : Silver</p></li><li><p>丸み : 0.40</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_03.png" contenteditable="false"><br></p></li><li><p>罫線ボタンを使用して左辺、上辺および左上の罫線を設定する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_04.png" contenteditable="false"><br></p></li><li><p>［スタイル］をThinに変更して、右辺および下辺の罫線を設定する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_05.png" contenteditable="false"><br></p></li><li><p>［OK］ボタンをクリックして「罫線」ダイアログを閉じと、左上が角丸罫線に設定される。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_06.png" contenteditable="false"><br></p></li><li><p>同じように他のセルの罫線の設定を行う。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_cellborder_07.png" contenteditable="false"><br></p></li></ol><p>以上で、セルの罫線の設定ができました。</p><h2>データベースの接続</h2><p>次に、データベースの接続設定を行います。データソースの追加方法の詳細については、「<a href="gcdocsite__documentlink?toc-item-id=ce3d4763-5c4a-490f-b7f2-87c4918483ed" title="">デザイナを使用したアプリケーション作成（グリッド表示）</a>」を参照してください。</p><ol><li><p>Visual Studioの「データソース」ウィンドウに「社員」が追加されたら、行に配置している各セルのDataFieldプロパティに次の値を設定する。</p><table><thead><tr><th><p>セル名</p></th><th><p>DataFieldプロパティの設定値</p></th></tr></thead><tbody><tr><td><p>textBoxCell1</p></td><td><p>社員コード</p></td></tr><tr><td><p>textBoxCell2</p></td><td><p>氏名</p></td></tr><tr><td><p>textBoxCell3</p></td><td><p>フリガナ</p></td></tr><tr><td><p>textBoxCell4</p></td><td><p>在籍支社</p></td></tr><tr><td><p>textBoxCell5</p></td><td><p>部署</p></td></tr><tr><td><p>dateTimePickerCell1</p></td><td><p>入社日</p></td></tr><tr><td><p>dateTimePickerCell2</p></td><td><p>生年月日</p></td></tr><tr><td><p>textBoxCell6</p></td><td><p>住所１</p></td></tr><tr><td><p>textBoxCell7</p></td><td><p>住所２</p></td></tr><tr><td><p>textBoxCell8</p></td><td><p>電話番号</p></td></tr><tr><td><p>textBoxCell9</p></td><td><p>内線</p></td></tr><tr><td><p>imageCell1</p></td><td><p>写真</p></td></tr></tbody></table></li><li><p>Visual Studioの［データ］－［データソースの表示］メニューをクリックする。</p></li><li><p>「データソース」ウィンドウのツリーから「SampleDataSet」の下にある「社員」テーブルを選択し、GcMultiRowコントロールの領域にドラッグ＆ドロップする。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_databaseconnect_01.png" contenteditable="false"><br></p></li><li><p>プロジェクトを実行すると、データソースの値がグリッドに読み込まれる。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_databaseconnect_02.png" contenteditable="false"><br></p></li></ol><h2>単票形式の設定</h2><p>ここでは、GcMultiRowコントロールのズームやサイズが変更されたときにGcMultiRowコントロールのサイズを変更するとこで単票形式の表示を実現しています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    社員TableAdapter.Fill(sampleDataSet.社員);
+
+    gcMultiRow1.Template = <span class="hljs-keyword">new</span> Template1();
+    gcMultiRow1.MultiSelect = <span class="hljs-literal">false</span>;
+    gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+    gcMultiRow1.ScrollBars = ScrollBars.None;
+    gcMultiRow1.DataSource = 社員BindingSource;
+    UpDataGcMultiRowBounds();
+}
+
+<span class="hljs-function">private void UpDataGcMultiRowBounds()</span>
+{
+    <span class="hljs-keyword">if</span> (gcMultiRow1.Template == <span class="hljs-literal">null</span> || gcMultiRow1.Rows.Count &lt; <span class="hljs-number">1</span>)
+    {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-comment">// MultiRowのサイズを設定</span>
+    <span class="hljs-built_in">int</span> mrWidth = gcMultiRow1.SectionWidth;
+    <span class="hljs-built_in">int</span> mrHeight = gcMultiRow1.Rows[<span class="hljs-number">0</span>].Height;
+
+    <span class="hljs-comment">// ズーム</span>
+    mrWidth = (<span class="hljs-built_in">int</span>)Math.Ceiling(mrWidth * gcMultiRow1.ZoomFactor);
+    mrHeight = (<span class="hljs-built_in">int</span>)Math.Ceiling(mrHeight * gcMultiRow1.ZoomFactor);
+
+    <span class="hljs-comment">// ボーダーサイズ</span>
+    mrWidth += <span class="hljs-number">4</span>;
+    mrHeight += <span class="hljs-number">4</span>;
+
+    <span class="hljs-comment">// パネルサイズに合わせる</span>
+    <span class="hljs-keyword">if</span> (mrWidth &gt; panel1.Width)
+    {
+        mrWidth = panel1.Width;
+    }
+    <span class="hljs-keyword">if</span> (mrHeight &gt; panel1.Height)
+    {
+        mrHeight = panel1.Height;
+    }
+    gcMultiRow1.Size = <span class="hljs-keyword">new</span> Size(mrWidth, mrHeight);
+
+    <span class="hljs-comment">// 配置位置</span>
+    <span class="hljs-built_in">int</span> x = (panel1.Width - mrWidth) / <span class="hljs-number">3</span>;
+    <span class="hljs-built_in">int</span> y = (panel1.Height - mrHeight) / <span class="hljs-number">2</span>;
+
+    <span class="hljs-comment">// 位置の調整</span>
+    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>)
+    {
+        x = <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">if</span> (y &lt; <span class="hljs-number">0</span>)
+    {
+        y = <span class="hljs-number">0</span>;
+    }
+    gcMultiRow1.Location = <span class="hljs-keyword">new</span> Point(x, y);
+}
+
+<span class="hljs-function">private void gcMultiRow1_ZoomFactorChanged(object sender, EventArgs e)</span>
+{
+    UpDataGcMultiRowBounds();
+
+}
+
+<span class="hljs-function">private void gcMultiRow1_Resize(object sender, EventArgs e)</span>
+{
+    UpDataGcMultiRowBounds();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    社員TableAdapter.Fill(SampleDataSet.社員)
+
+    GcMultiRow1.MultiSelect = False
+    GcMultiRow1.AllowUserToAddRows = False
+    GcMultiRow1.ScrollBars = ScrollBars.None
+    GcMultiRow1.DataSource = 社員BindingSource
+    UpDataGcMultiRowBounds()
+End Sub
+
+Private Sub UpDataGcMultiRowBounds()
+    If GcMultiRow1.Template Is Nothing OrElse GcMultiRow1.Rows.Count &lt; 1 Then
+        Return
+    End If
+
+    ' MultiRowのサイズを設定
+    Dim mrWidth As Integer = GcMultiRow1.SectionWidth
+    Dim mrHeight As Integer = GcMultiRow1.Rows(0).Height
+
+    ' ズーム
+    mrWidth = CType(Math.Ceiling(mrWidth * GcMultiRow1.ZoomFactor), Integer)
+    mrHeight = CType(Math.Ceiling(mrHeight * GcMultiRow1.ZoomFactor), Integer)
+
+    ' ボーダーサイズ
+    mrWidth += 4
+    mrHeight += 4
+
+    ' パネルサイズに合わせる
+    If mrWidth &gt; Me.panel1.Width Then
+        mrWidth = Me.panel1.Width
+    End If
+    If mrHeight &gt; Me.panel1.Height Then
+        mrHeight = Me.panel1.Height
+    End If
+    GcMultiRow1.Size = New Size(mrWidth, mrHeight)
+
+    ' 配置位置
+    Dim x As Integer = (Me.panel1.Width - mrWidth) / 2
+    Dim y As Integer = (Me.panel1.Height - mrHeight) / 2
+
+    ' 位置の調整
+    If x &lt; 0 Then
+        x = 0
+    End If
+    If y &lt; 0 Then
+        y = 0
+    End If
+    GcMultiRow1.Location = New Point(x, y)
+End Sub
+
+Private Sub gcMultiRow1_ZoomFactorChanged(ByVal sender As Object, ByVal e As EventArgs) Handles GcMultiRow1.ZoomFactorChanged
+    Me.UpDataGcMultiRowBounds()
+End Sub
+
+Private Sub GcMultiRow1_Resize(sender As System.Object, e As System.EventArgs) Handles GcMultiRow1.Resize
+    Me.UpDataGcMultiRowBounds()
+End Sub</code></pre></div><p>また、次のコードでは、ButtonのClickイベントで<a href="gcdocsite__documentlink?toc-item-id=26ece3e3-0f6f-406b-bcc6-07e056a472b5" title="">ScrollActions</a>クラスを設定して表示データの切り替えを行います。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+        <span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+        {
+            button1.Click += <span class="hljs-keyword">new</span> EventHandler(button1_Click);
+            button2.Click += <span class="hljs-keyword">new</span> EventHandler(button2_Click);
+            button3.Click += <span class="hljs-keyword">new</span> EventHandler(button3_Click);
+            button4.Click += <span class="hljs-keyword">new</span> EventHandler(button4_Click);
+        }
+
+        <span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+        {
+            <span class="hljs-comment">// 最初のページに移動</span>
+            ScrollActions.VerticalScrollToFirstPage.Execute(gcMultiRow1);
+        }
+
+        <span class="hljs-function">private void button2_Click(object sender, EventArgs e)</span>
+        {
+            <span class="hljs-comment">// １つ前のページに移動</span>
+            ScrollActions.ScrollUp.Execute(gcMultiRow1);
+        }
+
+        <span class="hljs-function">private void button3_Click(object sender, EventArgs e)</span>
+        {
+            <span class="hljs-comment">// １つ後ろのページに移動</span>
+            ScrollActions.ScrollDown.Execute(gcMultiRow1);
+        }
+
+        <span class="hljs-function">private void button4_Click(object sender, EventArgs e)</span>
+        {
+            <span class="hljs-comment">// 最後のページに移動</span>
+            ScrollActions.VerticalScrollToLastPage.Execute(gcMultiRow1);
+        }</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        ' 最初のページに移動
+        ScrollActions.VerticalScrollToFirstPage.Execute(GcMultiRow1)
+    End Sub
+
+    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+        ' １つ前のページに移動
+        ScrollActions.ScrollUp.Execute(GcMultiRow1)
+    End Sub
+
+    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+        ' １つ後ろのページに移動
+        ScrollActions.ScrollDown.Execute(GcMultiRow1)
+    End Sub
+
+    Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
+        ' 最後のページに移動
+        ScrollActions.VerticalScrollToLastPage.Execute(GcMultiRow1)
+    End Sub</code></pre></div><p>プロジェクトを実行すると、単票形式でレイアウトが表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/quickstart_singlerow_runtime.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7cc5432a-cdaa-4c6a-8fd0-1331467c77da" title="">クイックスタート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=62edcba0-4016-4967-bedc-32b79a144ffd" title="">プロジェクトにコンポーネントとテンプレートを追加する方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=47eaa599-8c22-4bda-9f56-f1fca0d0c516" title="">GcMultiRowコントロールを使用したアプリケーションの作成</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ce3d4763-5c4a-490f-b7f2-87c4918483ed" title="">デザイナを使用したアプリケーションの作成（グリッド表示）</a></p>

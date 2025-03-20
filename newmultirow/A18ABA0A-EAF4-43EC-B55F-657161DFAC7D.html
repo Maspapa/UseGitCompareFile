@@ -1,0 +1,15 @@
+<p>PlusPakCell の名前空間 GrapeCity.Win.MultiRow.PlusPak と PlusPak の名前空間を共に省略すると、ビルド時に「あいまいな参照」エラーが発生することがあります。これは、PlusPakCell がパフォーマンスを最適化するために PlusPak と同名のクラスのサブセットを提供していることが原因です。</p><p>例：</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow.PlusPak;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+Weekdays a; <span class="hljs-comment">// あいまいな参照エラー</span></code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow.PlusPak
+Imports GrapeCity.Win.Calendar
+
+Dim a As Weekdays ' あいまいな参照エラー</code></pre></div><p>「あいまいな参照」エラーを避けるために、次のようなコーディング方法をおすすめします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+<span class="hljs-keyword">using</span> GrapeCity.Win.Calendar;
+
+PlusPakCell.Weekdays a; <span class="hljs-comment">// PlusPakCell の参照</span>
+Weekdays b; <span class="hljs-comment">// PlusPak の参照</span></code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+Imports GrapeCity.Win.Calendar
+
+Dim a As PlusPakCell.Weekdays ' PlusPakCell の参照
+Dim b As Weekdays ' PlusPak の参照</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=f3782c2d-37c3-407d-9aaf-2a64d3af122f" title="">PlusPakCellの使い方</a></p>

@@ -1,0 +1,51 @@
+<p>GcPostalCellの基本的な使い方について解説します。</p><h2>JPAddress for .NETの準備</h2><p>GcPostalCellの機能は、「JPAddress for .NET（以下、JPAddress）」を利用して実現されており、検索機能を利用するためにはJPAddressのインストールが必要です。</p><p>詳細については「<a href="gcdocsite__documentlink?toc-item-id=6af858bd-15e0-47b1-b02a-c011f1b81386" title="">JPAddress for .NETとの連携</a>」を参照してください。</p><h2>書式の設定</h2><p>GcPostalCellの入力フィールドには次の4つのフィールドが設定されており、これらのフィールドオブジェクトを使って書式が設定されています。なお、これらの入力フィールドはFieldsプロパティから参照されています。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=1d299fee-83ca-4c91-9446-81d96f3d883b" title="">ZipCodePrefix</a>（接頭語のフィールド）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=08855be0-ef34-41b1-9c99-4a9987ae762e" title="">ZipCode3Digits</a>（郵便番号上位 3桁フィールド）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=1308b6a4-fd27-4c4b-84b3-2ae5a3090ccf" title="">ZipCodeSeparator</a>（区切りフィールド）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=177ece4b-1885-4c24-97c1-3bc33f23f1f4" title="">NumberDecimalPartField</a>（郵便番号下位 4桁フィールド）</p></li></ul><blockquote type="warning"><p>!type=warning</p><p>GcPostalCellでは、これらのフィールドを追加したり削除したりすることはできません。接頭語やリテラルを非表示にしたい場合には、各フィールドのTextプロパティを削除します。</p></blockquote><p>また、<a href="gcdocsite__documentlink?toc-item-id=560cb701-15c4-48cd-8e2c-894f3708fdff" title="">ZipCodeCharType</a> プロパティで全角／半角を設定します。</p><table><thead><tr><th><p>プロパティ値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>HalfWidthDigit</p></td><td><p>郵便番号を半角で入力／表示します。</p></td></tr><tr><td><p>FullWidthDigit</p></td><td><p>郵便番号を全角で入力／表示します。</p></td></tr></tbody></table><h2>検索の対象と出力用セル</h2><p>GcPostalCellは入力された郵便番号から住所などの検索を行い、検索結果を指定したセルに出力します。<a href="gcdocsite__documentlink?toc-item-id=ab873b4f-b942-45f5-8751-7b9452badf82" title="">QueryMode</a>プロパティで住所の郵便番号と大口事業所の個別郵便番号、もしくはその両方を対象として検索を行うかどうかを設定できます。</p><table><thead><tr><th><p>プロパティ値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>GeneralZipCode</p></td><td><p>住所の郵便番号を対象に検索を行います。</p></td></tr><tr><td><p>CompanyZipCode</p></td><td><p>大口事業所の個別郵便番号を対象に検索を行います。</p></td></tr><tr><td><p>Both</p></td><td><p>住所の郵便番号と大口事業所の個別郵便番号の両方を対象に検索を行います。</p></td></tr></tbody></table><p>検索結果を出力するセルは、セルのインデックスまたは名前を使用して、以下のプロパティで設定します。</p><h4>セルのインデックスを使用して、検索結果を出力するセルを設定する場合</h4><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=1e74b7db-77e2-4769-b016-dd6511915659" title="">AddressKanaOutputCellIndex</a>（検索結果の「住所（フリガナ）」を出力するセルのインデックスを取得または設定します。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=f82fb462-270d-45f2-aeff-2a06e4a7e2aa" title="">AddressOutputCellIndex</a>（検索結果の「住所」を出力するセルのインデックスを取得または設定します。）</p></li></ul><h4>セルのインデックスを使用して、検索結果を出力するセルを設定する場合</h4><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=461496bc-1208-4669-9b0e-4002666cbc8c" title="">AddressKanaOutputCellName</a>（検索結果の「住所（フリガナ）」を出力するセルの名前を取得または設定します。）</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=50f6dc9d-29ef-4ad9-a875-f6c498893907" title="">AddressOutputCellName</a>（検索結果の「住所」を出力するセルの名前を取得または設定します。）</p></li></ul><p>次のサンプルコードは、TextBoxCellに住所の郵便番号の結果を出力します。郵便番号は全角で表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+textBoxCell1.Name = <span class="hljs-string">"textBoxCell1"</span>;
+
+TextBoxCell textBoxCell2 = <span class="hljs-keyword">new</span> TextBoxCell();
+textBoxCell2.Name = <span class="hljs-string">"textBoxCell2"</span>;
+
+InputManCell.GcPostalCell gcPostalCell1 = <span class="hljs-keyword">new</span> InputManCell.GcPostalCell();
+gcPostalCell1.Name = <span class="hljs-string">"gcPostalCell1"</span>;
+
+<span class="hljs-comment">// 住所と住所のカナを出力するセルを指定します。 </span>
+gcPostalCell1.AddressKanaOutputCellName = <span class="hljs-string">"textBoxCell1"</span>;
+gcPostalCell1.AddressOutputCellName = <span class="hljs-string">"textBoxCell2"</span>;
+
+<span class="hljs-comment">// 検索対象の郵便番号の検索範囲を指定します。 </span>
+gcPostalCell1.QueryMode = GrapeCity.Win.Editors.ZipCodeQueryMode.GeneralZipCode;
+<span class="hljs-comment">// 郵便番号を全角で表示します。 </span>
+gcPostalCell1.ZipCodeCharType = GrapeCity.Win.Editors.ZipCodeCharType.FullWidthDigit;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcPostalCell1, textBoxCell1, textBoxCell2 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+<span class="hljs-comment">// 検索対象に住所の郵便番号を指定します。 </span>
+gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1310045</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim TextBoxCell1 = New TextBoxCell()
+TextBoxCell1.Name = "TextBoxCell1"
+
+Dim TextBoxCell2 = New TextBoxCell()
+TextBoxCell2.Name = "TextBoxCell2"
+
+Dim gcPostalCell1 = New InputManCell.GcPostalCell()
+GcPostalCell1.Name = "GcPostalCell1"
+
+' 住所と住所のカナを出力するセルを指定します。  
+GcPostalCell1.AddressKanaOutputCellName = "TextBoxCell1"
+GcPostalCell1.AddressOutputCellName = "TextBoxCell2"
+
+' 検索対象の郵便番号の検索範囲を指定します。  
+GcPostalCell1.QueryMode = GrapeCity.Win.Editors.ZipCodeQueryMode.GeneralZipCode
+' 郵便番号を全角で表示します。  
+GcPostalCell1.ZipCodeCharType = GrapeCity.Win.Editors.ZipCodeCharType.FullWidthDigit
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcPostalCell1, TextBoxCell1, TextBoxCell2})
+GcMultiRow1.RowCount = 10
+
+' 検索対象に住所の郵便番号を指定します。  
+GcMultiRow1.SetValue(0, 0, 1310045)</code></pre></div><h2>検索結果のカスタマイズ</h2><p>郵便番号から検索される住所などの情報は、次の2つのプロパティによって結果をカスタマイズできます。</p><h4><a href="gcdocsite__documentlink?toc-item-id=b0493d9c-ec37-4be3-bd00-50fe4e077ccd" title="">SplitAreaDetails</a> プロパティ</h4><p>同じ郵便番号に複数の丁目が含まれているときにそれぞれを分割するかどうかを取得または設定します。</p><p>郵便番号によっては、ひとつの郵便番号に複数の丁目が含まれている場合があります。こういった場合に、それぞれを分割して別々のレコードとするか、複数の丁目がまとまったままのひとつのレコードとするかを設定します。</p><p>たとえば、〒105-0022は「東京都港区海岸（１、２丁目）」と登録されています。これを</p><ul><li><p>東京都港区海岸１丁目</p></li><li><p>東京都港区海岸２丁目</p></li></ul><p>と別々のレコードとして扱うか</p><ul><li><p>東京都港区海岸（１、２丁目）</p></li></ul><p>とひとつのレコードとして扱うかを指定します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>SplitAreaDetails プロパティをTrue に設定してそれぞれを別々のレコードとして扱った場合、分割した最初のレコードが検索結果として返されます。</p></li></ul></blockquote><p><a href="gcdocsite__documentlink?toc-item-id=2cb84a95-2b0e-4032-8400-6bcdd701824b" title="">GenerateCompanyAddressKana</a> プロパティ</p><p>大口事業所の検索結果に住所のカナを含めるかどうかを取得または設定します。</p><p>大口事業所の個別郵便番号の検索結果にのみ有効です。住所の郵便番号の場合には住所のカナは必ず含まれます。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=8217ad1f-dc40-4cf6-9406-f6ab777f26bc" title="">GcPostalCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=27373429-3572-4ac5-a526-472e86b63823" title="">オートコンプリート</a></p>

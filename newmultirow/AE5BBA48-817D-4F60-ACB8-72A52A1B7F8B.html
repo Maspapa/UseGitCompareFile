@@ -1,0 +1,67 @@
+<p>開発者はテンプレートの幅と高さの既定値を設定できます。実行時には、テンプレートの幅と高さを元にグリッドが作成されます。</p><h2>テンプレートの幅</h2><p>テンプレートの幅はTemplate.Widthプロパティで設定します。この幅の情報は、行、列ヘッダおよび列フッタで共通の幅として使用されます。</p><p>次のコードはテンプレートの幅を800ピクセルに設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 既定のテンプレートを割り当てる</span>
+Template template1 = Template.Default;
+template1.Width = <span class="hljs-number">800</span>;
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 既定のテンプレートを割り当てる
+Dim Template1 As Template = Template.Default
+Template1.Width = 800
+GcMultiRow1.Template = Template1</code></pre></div><p>既存のテンプレートの幅を変更するには、GcMultiRow.Templateプロパティの値をTemplateクラスのオブジェクトに割り当て、差し戻します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 既定のテンプレートを割り当てる</span>
+gcMultiRow1.Template = Template.Default;
+Template template1 = gcMultiRow1.Template;
+<span class="hljs-comment">// テンプレートの幅を変更する</span>
+template1.Width = <span class="hljs-number">800</span>;
+gcMultiRow1.Template = template1;
+
+<span class="hljs-comment">// 次のコードは無効です。</span>
+<span class="hljs-comment">// gcMultiRow1.Template.Width = 800;</span></code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 既定のテンプレートを割り当てる
+GcMultiRow1.Template = Template.Default
+Dim Template1 As Template = GcMultiRow1.Template
+' テンプレートの幅を変更する
+Template1.Width = 800
+GcMultiRow1.Template = Template1
+
+' 次のコードは無効です。
+' GcMultiRow1.Template.Width = 800</code></pre></div><h2>テンプレートの高さ</h2><p>テンプレートでは、行、列ヘッダおよび列フッタに対してそれぞれ高さを設定できます。</p><p>次のコードは、行、列ヘッダおよび列フッタの高さを変更し、背景色を変更してそれぞれの領域を明示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = <span class="hljs-keyword">new</span> Template();
+template1.Row.Height = <span class="hljs-number">20</span>;
+template1.Row.BackColor = Color.LightBlue;
+template1.Row.Border = <span class="hljs-keyword">new</span> Border(LineStyle.Thin, Color.Black);
+
+ColumnHeaderSection columnHeaderSection1 = <span class="hljs-keyword">new</span> ColumnHeaderSection();
+columnHeaderSection1.Height = <span class="hljs-number">20</span>;
+columnHeaderSection1.BackColor = Color.Azure;
+template1.ColumnHeaders.Add(columnHeaderSection1);
+
+ColumnFooterSection columnFooterSection1 = <span class="hljs-keyword">new</span> ColumnFooterSection();
+columnFooterSection1.Height = <span class="hljs-number">20</span>;
+columnFooterSection1.BackColor = Color.LightCoral;
+template1.ColumnFooters.Add(columnFooterSection1);
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.RowCount = <span class="hljs-number">100</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = New Template()
+Template1.Row.Height = 20
+Template1.Row.BackColor = Color.LightBlue
+Template1.Row.Border = New Border(LineStyle.Thin, Color.Black)
+
+Dim ColumnHeaderSection1 As ColumnHeaderSection = New ColumnHeaderSection()
+ColumnHeaderSection1.Height = 20
+ColumnHeaderSection1.BackColor = Color.Azure
+Template1.ColumnHeaders.Add(ColumnHeaderSection1)
+
+Dim ColumnFooterSection1 As ColumnFooterSection = New ColumnFooterSection()
+ColumnFooterSection1.Height = 20
+ColumnFooterSection1.BackColor = Color.LightCoral
+Template1.ColumnFooters.Add(ColumnFooterSection1)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.RowCount = 100</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=12dbf56f-5a46-4435-8891-3b3abe3e9eb3" title="">テンプレート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f2f425aa-557a-4890-a00b-e9d4a2737f6b" title="">セルの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=23b0e751-a9db-4407-b8ec-e6a020a9d410" title="">列ヘッダの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1686a0cb-83e4-4c55-b171-a7b2da7870e5" title="">列フッタの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3653f914-c6d7-4724-875a-4239a90fcafc" title="">列モード テンプレート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cfefbed2-05ac-4449-8f34-2fa1938ca676" title="">セルのプロパティ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0932011c-fd41-4ba0-bbe2-5ef736213100" title="">大文字／小文字の区別なくセル名を認識</a></p>

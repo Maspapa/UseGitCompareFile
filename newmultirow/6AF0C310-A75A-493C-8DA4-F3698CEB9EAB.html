@@ -1,0 +1,180 @@
+<p>GcCalendarCellで、日付の選択モードを設定する方法と選択された日付を取得する方法について、以下の項目に分けて解説します。</p><p>選択日とフォーカス枠のスタイル設定については、「<a href="gcdocsite__documentlink?toc-item-id=6a94c6aa-81e3-41bc-a45a-09aff2ba497d" title="">スタイルの設定</a>」を参照してください。</p><h2>選択モードの指定</h2><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/08_01.png" contenteditable="false"><br></p><p>GcCalendarCellではGcCalendarEditingControl.SelectionModeプロパティを使用して、日付の選択モードを指定できます。日付の選択方法には、1つの日付だけを選択する単一選択と、複数の日付を選択する複数選択の2種類があります。</p><p>また、下記に示した選択可能な日付の種類は、<a href="gcdocsite__documentlink?toc-item-id=73d1c2ac-88db-434a-b095-662a8f26b280" title="">AllowSelection</a>プロパティで設定します。</p><ul><li><p>任意の日付（AllowSellection.AnyDay）</p></li><li><p>営業日（AllowSellection.Workday）</p></li><li><p>休日と休業日（AllowSellection.Holiday）</p></li></ul><h2>日付の選択</h2><h3>マウス・キーボードによる日付の選択</h3><p>日付選択の操作は、目的の日付をマウスでクリックするか、または矢印キーでフォーカス枠を移動し、［Space］キーを押して行います。また、SelectionModeプロパティを"MultiRich"に設定した場合は、Outlookカレンダーと同等の日付選択機能が有効になり、CtrlキーやShiftキーを使った日付選択ができます。</p><p>なお、複数選択の場合はGcCalendarEditingControl.MaxSelectionCountプロパティを使用して、選択できる最大日数を設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+    gcCalendarCell1.AllowSelection = GrapeCity.Win.Calendar.AllowSelection.Workday;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+    gcMultiRow1.EditingControlShowing += gcMultiRow1_EditingControlShowing;
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    PlusPakCell.GcCalendarEditingControl gcCalendarEditor = (e.Control <span class="hljs-keyword">as</span> PlusPakCell.GcCalendarEditingControl);
+
+    <span class="hljs-keyword">if</span> (gcCalendarEditor != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-comment">// 複数の日付を選択できるように設定します。</span>
+        gcCalendarEditor.SelectionMode = GrapeCity.Win.Calendar.SelectionMode.MultiSimple;
+        <span class="hljs-comment">// 選択できる最大日数を設定します。</span>
+        gcCalendarEditor.MaxSelectionCount = <span class="hljs-number">5</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+    GcCalendarCell1.AllowSelection = GrapeCity.Win.Calendar.AllowSelection.Workday
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    Dim gcCalendarEditor As PlusPakCell.GcCalendarEditingControl = TryCast(e.Control, PlusPakCell.GcCalendarEditingControl)
+    If gcCalendarEditor IsNot Nothing Then
+        ' 複数の日付を選択できるように設定します。
+        gcCalendarEditor.SelectionMode = GrapeCity.Win.Calendar.SelectionMode.MultiSimple
+        ' 選択できる最大日数を設定します。
+        gcCalendarEditor.MaxSelectionCount = 5
+    End If
+End Sub</code></pre></div><h3>コードによる日付の選択</h3><p>日付はコードで選択することも可能です。この場合、GcCalendarEditingControl.Selectionsプロパティが参照するSelectionCollectionコレクションの次のメソッドのいずれかを使用します。</p><ul><li><p>Add</p></li><li><p>AddRange</p></li><li><p>Insert</p></li></ul><p>また、選択した日付を解除するときは、次のいずれかのメソッドを使用します。</p><ul><li><p>Clear</p></li><li><p>Remove</p></li><li><p>RemoveAt</p></li></ul><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+    gcCalendarCell1.AllowSelection = GrapeCity.Win.Calendar.AllowSelection.Workday;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+    gcMultiRow1.EditingControlShowing += gcMultiRow1_EditingControlShowing;
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    PlusPakCell.GcCalendarEditingControl gcCalendarEditor = (e.Control <span class="hljs-keyword">as</span> PlusPakCell.GcCalendarEditingControl);
+
+    <span class="hljs-keyword">if</span> (gcCalendarEditor != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-comment">// 複数の日付を選択できるように設定します。</span>
+        gcCalendarEditor.SelectionMode = GrapeCity.Win.Calendar.SelectionMode.MultiSimple;
+        <span class="hljs-comment">// 日付を選択します。</span>
+        gcCalendarEditor.Selections.Add( DateTime.Today.AddDays(<span class="hljs-number">2</span>));
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+    GcCalendarCell1.AllowSelection = GrapeCity.Win.Calendar.AllowSelection.Workday
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    Dim gcCalendarEditor As PlusPakCell.GcCalendarEditingControl = TryCast(e.Control, PlusPakCell.GcCalendarEditingControl)
+    If gcCalendarEditor IsNot Nothing Then
+        ' 複数の日付を選択できるように設定します。
+        gcCalendarEditor.SelectionMode = GrapeCity.Win.Calendar.SelectionMode.MultiSimple
+        ' 日付を選択します。
+        gcCalendarEditor.Selections.Add( DateTime.Today.AddDays(2))
+    End If
+End Sub</code></pre></div><h2>日付の取得</h2><h4>選択された日付の取得</h4><p>選択された日付は、選択モードの違いによって2つのプロパティを使い分けて取得します。GcCalendarEditingControl.SelectedDateプロパティは、単一選択された日付の取得に使用し、GcCalendarEditingControl.Selectionsプロパティは、複数選択された日付の取得に使用します。</p><p>複数選択された日付は、Selectionsプロパティが参照するSelectionCollectionコレクションに格納されます。コレクションの要素である日付にアクセスするには、SelectionCollectionコレクションのItemプロパティまたはインデクサを使用します。</p><h4>クリックイベントによる日付の取得</h4><p>カレンダー上の日付をクリック、もしくはダブルクリックした際に発生するGcCalendarEditingControl.ClickDateイベントやGcCalendarEditingControl.DoubleClickDateイベントの引数からクリック操作によって選択された日付の取得が可能です。各イベントのClickDateEventArgs引数にあるDateプロパティから日付を参照することができます。</p><h4>座標による日付の取得</h4><p>GcCalendarEditingControl.MouseMoveイベント内で取得したカレンダー上の座標から、日付を取得することが可能です。この場合は、GcCalendarEditingControl.DateFromPointメソッドを使用します。また、その曜日もGcCalendarEditingControl.DayOfWeekFromPointメソッドで取得できます。</p><h4>表示されている日付の取得</h4><p>GcCalendarEditingControl.GetDatesInViewメソッドは、現在表示されているカレンダーのすべての日付を取得するときに使用します。また取得する日付の種類は、PickDays引数で指定可能です。</p><h4>フォーカスを持つ日付の取得</h4><p>フォーカスを持っている日付は、GcCalendarEditingControl.FocusDateプロパティで取得および設定が可能です。</p><p>次のコードでは、<a href="gcdocsite__documentlink?toc-item-id=ac2b0a2f-3e5e-419f-a5f6-5a91683f33d8" title="">GcMultiRow.EditingControlShowing</a>イベントを使用して上記のそれぞれの方法で日付を取得します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+    gcCalendarCell1.AllowSelection = GrapeCity.Win.Calendar.AllowSelection.Workday;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+    gcMultiRow1.EditingControlShowing += gcMultiRow1_EditingControlShowing;
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    PlusPakCell.GcCalendarEditingControl gcCalendarEditor = (e.Control <span class="hljs-keyword">as</span> PlusPakCell.GcCalendarEditingControl);
+
+    <span class="hljs-keyword">if</span> (gcCalendarEditor != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-comment">// 表示されている日付を取得します。</span>
+        DateTime[] _date = gcCalendarEditor.GetDatesInView();
+        Console.WriteLine(<span class="hljs-string">"表示されている最初の日付:{0}"</span>, _date[<span class="hljs-number">0</span>]);
+
+        <span class="hljs-comment">// フォーカスを持つ日付を取得します。</span>
+        Console.WriteLine(<span class="hljs-string">"フォーカスを持つ日付の日付:{0}"</span>, gcCalendarEditor.FocusDate);
+
+
+        <span class="hljs-comment">// イベントの設定をします。</span>
+        gcCalendarEditor.ClickDate -= gcCalendarEditor_ClickDate;
+        gcCalendarEditor.ClickDate += gcCalendarEditor_ClickDate;
+
+        gcCalendarEditor.MouseMove -= gcCalendarEditor_MouseMove;
+        gcCalendarEditor.MouseMove += gcCalendarEditor_MouseMove;
+    }
+}
+
+<span class="hljs-function">private void gcCalendarEditor_ClickDate(object sender, GrapeCity.Win.Calendar.ClickDateEventArgs e)</span>
+{
+    <span class="hljs-comment">// クリックによる日付を取得します。</span>
+    Console.WriteLine(<span class="hljs-string">"クリックした日付:{0}"</span>, e.Date);
+}
+
+<span class="hljs-function">private void gcCalendarEditor_MouseMove(object sender, MouseEventArgs e)</span>
+{
+    PlusPakCell.GcCalendarEditingControl gcCalendarEditor = (PlusPakCell.GcCalendarEditingControl)sender;
+
+    <span class="hljs-comment">// 座標による日付を取得します。</span>
+    Console.WriteLine(<span class="hljs-string">"マウス座標の日付:{0} 曜日:{1}"</span>, 
+        gcCalendarEditor.DateFromPoint(e.X, e.Y), gcCalendarEditor.DayOfWeekFromPoint(e.X, e.Y));
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+    GcCalendarCell1.AllowSelection = GrapeCity.Win.Calendar.AllowSelection.Workday
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    Dim gcCalendarEditor As PlusPakCell.GcCalendarEditingControl = TryCast(e.Control, PlusPakCell.GcCalendarEditingControl)
+    If gcCalendarEditor IsNot Nothing Then
+        ' 表示されている日付を取得します。
+        Dim _date As DateTime() = gcCalendarEditor.GetDatesInView()
+        Console.WriteLine("表示されている最初の日付:{0}", _date(0))
+
+        ' フォーカスを持つ日付を取得します。
+        Console.WriteLine("フォーカスを持つ日付の日付:{0}", gcCalendarEditor.FocusDate)
+
+        ' イベントの設定をします。
+        RemoveHandler gcCalendarEditor.ClickDate, AddressOf gcCalendarEditor_ClickDate
+        AddHandler gcCalendarEditor.ClickDate, AddressOf gcCalendarEditor_ClickDate
+
+        RemoveHandler gcCalendarEditor.MouseMove, AddressOf gcCalendarEditor_MouseMove
+        AddHandler gcCalendarEditor.MouseMove, AddressOf gcCalendarEditor_MouseMove
+    End If
+End Sub
+
+Private Sub gcCalendarEditor_ClickDate(sender As Object, e As GrapeCity.Win.Calendar.ClickDateEventArgs)
+    ' クリックによる日付を取得します。
+    Console.WriteLine("クリックした日付:{0}", e.Date)
+End Sub
+
+Private Sub gcCalendarEditor_MouseMove(sender As Object, e As MouseEventArgs)
+    Dim gcCalendarEditor As PlusPakCell.GcCalendarEditingControl = DirectCast(sender, PlusPakCell.GcCalendarEditingControl)
+
+    ' 座標による日付を取得します。
+    Console.WriteLine("マウス座標の日付:{0} 曜日:{1}", _
+        gcCalendarEditor.DateFromPoint(e.X, e.Y), gcCalendarEditor.DayOfWeekFromPoint(e.X, e.Y))
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=5c66b65d-4c55-4789-8a07-8e32216ca253" title="">GcCalendarCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ec9a15e1-311b-4a1c-972d-2b1eabd65071" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=36f73f20-19a2-4571-9dcb-591e1ee1e837" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e70e569d-bed2-4b51-b0ec-b437f82912b3" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6a94c6aa-81e3-41bc-a45a-09aff2ba497d" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9f75582f-079b-4e5a-a0c8-8daf097f923f" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=93fe3668-cc67-4b54-b42a-6515be44c158" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af4ba527-0df7-42a3-b1f5-037ed5794607" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=17ac25c3-6e23-4b97-9e71-6f357056feae" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5fb8054d-bcf8-40e9-834c-3de9507cb4d5" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0a830c95-ffd4-47ae-8ac3-20385e029647" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcc64849-d39e-43d1-9a4b-ed57c6e6e911" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac39bee9-c89e-479f-9bfd-d16997abb999" title="">和暦表示の設定変更</a></p>

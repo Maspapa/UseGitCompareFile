@@ -1,0 +1,54 @@
+<p>GcFontPickerCellのフォントの設定と取得方法について、以下に解説します。</p><h2>エディタの入力</h2><p>GcFontPickerCellのエディタに直接、フォントの名前を入力することができます。入力された内容が既知のフォント名に一致する場合、セルが自動的に有効な値に変換します。そして、<a href="gcdocsite__documentlink?toc-item-id=c12f925e-4bfd-4349-96c1-0b4507cd49a6" title="">AutoCompleteMode</a>プロパティを利用して入力動作を補助することが可能です。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>GcFontPickerCellのエディタに値を入力するには<a href="gcdocsite__documentlink?toc-item-id=063d0ef5-2b50-4b76-a09d-f571529ddfc4" title="">DropDownStyle</a>プロパティにDropDownを設定する必要があります。</p></li></ul></blockquote><table><thead><tr><th><p>AutoCompleteModeの値</p></th><th><p>説明</p></th><th><p>例</p></th></tr></thead><tbody><tr><td><p>None</p></td><td><p>入力中に内容を自動的に補完しません。入力した内容が有効なフォントの名前の場合、フォーカスがセルから離れたとき、Valueプロパティの値として確定されます。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/autocompletemode_none.png" contenteditable="false"><br></p></td></tr><tr><td><p>Suggest</p></td><td><p>入力中の内容がフォント一覧の項目に前方一致する場合、ドロップダウンリストを開き該当のフォント項目を選択します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/autocompletemode_suggest.png" contenteditable="false"><br></p></td></tr><tr><td><p>Append</p></td><td><p>入力中の内容がフォント一覧の項目に前方一致する場合、該当のフォント項目をエディタに未確定の候補として表示します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/autocompletemode_append.png" contenteditable="false"><br></p></td></tr><tr><td><p>SuggestAppend</p></td><td><p>入力中の内容がフォント一覧の項目に前方一致する場合、ドロップダウンリストを開き該当のフォント項目を選択し、なおかつエディタに未確定の候補として表示します。</p></td><td><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/autocompletemode_suggestappend.png" contenteditable="false"><br></p></td></tr></tbody></table><p>入力されたフォントの名前が有効でない場合は、Valueプロパティはクリアされます。</p><h2>ドロップダウンリストから選択</h2><p>セルのドロップダウンボタンからリストを表示し、フォント一覧から選択することができます。リストには、お気に入りのフォント、最近使用したフォントを表示または非表示するようにカスタマイズすることが可能です。</p><p>ドロップダウンリストのカスタマイズについては、「<a href="gcdocsite__documentlink?toc-item-id=c9314353-2b52-42ae-b139-363fee15392a" title="">セルのカスタマイズ</a>」をご参照ください。</p><h2>フォントのフィルタリング</h2><p><a href="gcdocsite__documentlink?toc-item-id=671bdc89-232c-40db-b248-153be29bedb6" title="">ItemFilter</a>プロパティを使用して、GcFontPickerCellで表示するフォントの対象を絞ることができます。フィルタリングの方法には、文字セット（<a href="gcdocsite__documentlink?toc-item-id=47d005c7-41b2-42c3-9625-73fe140670b0" title="">CharSets</a>プロパティ）による方法と、フォントタイプ（<a href="gcdocsite__documentlink?toc-item-id=245e7ecd-464c-4f9d-96b1-49e68c16aa5e" title="">FontTypes</a>プロパティ）による方法があります。二つの方法を同時に使用してフィルタリングすることも可能です。</p><p>文字セットによる方法では、FontCharSet列挙体で定義されているさまざまな文字セット（日本語、中国語、韓国語、西ヨーロッパなど）を選択してフィルタリングすることができます。フォントタイプによる方法では、FilterFontTypes列挙体で定義されているフォントの種類（通常フォント、記号フォント、TrueTypeフォント、OpenTypeフォントなど）を選択してフィルタリングすることができます。いずれの方法でも、複数の選択が可能です。</p><p><a href="gcdocsite__documentlink?toc-item-id=671bdc89-232c-40db-b248-153be29bedb6" title="">ItemFilter</a>を設定するには、プロパティウィンドウで<a href="gcdocsite__documentlink?toc-item-id=671bdc89-232c-40db-b248-153be29bedb6" title="">ItemFilter</a>プロパティを展開してサブプロパティの<a href="gcdocsite__documentlink?toc-item-id=47d005c7-41b2-42c3-9625-73fe140670b0" title="">CharSets</a>と<a href="gcdocsite__documentlink?toc-item-id=245e7ecd-464c-4f9d-96b1-49e68c16aa5e" title="">FontTypes</a>を設定します。</p><h4>文字セットでフィルタリングの例</h4><ol><li><p>プロパティウィンドウで、<a href="gcdocsite__documentlink?toc-item-id=671bdc89-232c-40db-b248-153be29bedb6" title="">ItemFilter</a>.<a href="gcdocsite__documentlink?toc-item-id=47d005c7-41b2-42c3-9625-73fe140670b0" title="">CharSets</a>プロパティを選択してコントロールに表示したい文字セット（日本語）を選択します。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/itemfilter_charsets1.png" contenteditable="false"><br></p></li><li><p>実行時に、日本語フォントだけがドロップダウンリストに表示されます。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/itemfilter_charsets2.png" contenteditable="false"><br></p></li></ol><h4>フォントタイプでフィルタリングの例</h4><ol><li><p>プロパティウィンドウで、<a href="gcdocsite__documentlink?toc-item-id=671bdc89-232c-40db-b248-153be29bedb6" title="">ItemFilter</a>.<a href="gcdocsite__documentlink?toc-item-id=245e7ecd-464c-4f9d-96b1-49e68c16aa5e" title="">FontTypes</a>プロパティを選択してセルに表示したいフォントの種類（記号フォント）を選択します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/itemfilter_fonttypes1.png" contenteditable="false"><br></p></li><li><p>実行時に、シンボルフォントだけがドロップダウンリストに表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gcfontpicker/itemfilter_fonttypes2.png" contenteditable="false"><br></p></li></ol><h2>選択したフォントの取得</h2><p>セルで選択されたフォントを取得するには、GcFontPickerEditingControl.SelectedFontInfoプロパティを使用します。Valueプロパティを使用します。<a href="gcdocsite__documentlink?toc-item-id=2e28f949-d96d-415e-82f8-e3de9d7bc50c" title="">GcMultiRow.CellValueChanged</a>イベントを使用すると、選択されたフォントが変わったときの値を取得することができます。</p><p>次のコードは、GcFontPickerCellで選択したフォントをRichTextBoxで選択されている文字に設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form7_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcFontPickerCell gcFontPickerCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcFontPickerCell();
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcFontPickerCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+    gcMultiRow1.EditingControlShowing += <span class="hljs-keyword">new</span> EventHandler&lt;EditingControlShowingEventArgs&gt;(gcMultiRow1_EditingControlShowing);
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    PlusPakCell.GcFontPickerEditingControl editor  = (e.Control <span class="hljs-keyword">as</span>  PlusPakCell.GcFontPickerEditingControl);
+
+    <span class="hljs-keyword">if</span> (editor != <span class="hljs-literal">null</span>)
+    {
+        editor.SelectedFontChanged -= <span class="hljs-keyword">new</span> EventHandler(editor_SelectedFontChanged);
+        editor.SelectedFontChanged += <span class="hljs-keyword">new</span> EventHandler(editor_SelectedFontChanged);
+    }
+}
+
+<span class="hljs-function">private void editor_SelectedFontChanged(object sender, EventArgs e)</span>
+{
+    GrapeCity.Win.Pickers.GcFontPicker gcFontPickerCell  = (sender <span class="hljs-keyword">as</span> GrapeCity.Win.Pickers.GcFontPicker);
+
+    <span class="hljs-comment">// gcFontPickerCellで選んだフォントをRichTextBoxの選択された文字に設定する（12ポイントサイズ） </span>
+    richTextBox1.SelectionFont = gcFontPickerCell.SelectedFontInfo.ToFont(<span class="hljs-number">12</span>);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcFontPickerCell1 As New PlusPakCell.GcFontPickerCell()
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcFontPickerCell1})
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(ByVal sender As Object, ByVal e As GrapeCity.Win.MultiRow.EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    Dim GcFontPickerCell As PlusPakCell.GcFontPickerEditingControl = TryCast(e.Control, PlusPakCell.GcFontPickerEditingControl)
+    If GcFontPickerCell IsNot Nothing Then
+        RemoveHandler GcFontPickerCell.FontChanged, AddressOf Me.Editor_FontChanged
+        AddHandler GcFontPickerCell.FontChanged, AddressOf Me.Editor_FontChanged
+    End If
+End Sub
+
+Private Sub Editor_FontChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GcFontPicker1.FontChanged
+    Dim GcFontPickerCell As GrapeCity.Win.Pickers.GcFontPicker = DirectCast(sender, GrapeCity.Win.Pickers.GcFontPicker)
+
+    ' GcFontPickerCellで選んだフォントをRichTextBoxの選択された文字に設定する（12ポイントサイズ） 
+    RichTextBox1.SelectionFont = GcFontPickerCell.SelectedFontInfo.ToFont(12)
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4f7ffde0-e106-42ef-8c4d-7a775df6b468" title="">GcFontPickerCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c9314353-2b52-42ae-b139-363fee15392a" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c2db2c6d-1177-48cd-94aa-801e3cdfc690" title="">ドロップダウンウィンドウの設定</a></p>

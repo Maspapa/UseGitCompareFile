@@ -1,0 +1,60 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_datetimepickercell_hidedropdownbutton.png" contenteditable="false"><br></p><p>日付型セル（DateTimePickerCell）でドロップダウンボタンを非表示にするには、DateTimePickerCell.ShowDropDownButtonプロパティをNotShownに設定し、DateTimePickerCell.ShowUpDownプロパティをTrueに変更します。この結果、セルの編集時にはドロップダウンボタンに代わりにスピンボタンが表示されるため、スピンボタンが表示されないようにShowSpinButtonInEditStateプロパティをFalseに設定します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    DateTimePickerCell dateTimePickerCell1 = <span class="hljs-keyword">new</span> DateTimePickerCell();
+    dateTimePickerCell1.ShowDropDownButton = CellButtonVisibility.NotShown;
+    dateTimePickerCell1.ShowUpDown = <span class="hljs-literal">true</span>;
+    dateTimePickerCell1.ShowSpinButtonInEditState = <span class="hljs-literal">false</span>;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { dateTimePickerCell1 });
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim DateTimePickerCell1 As New DateTimePickerCell()
+    DateTimePickerCell1.ShowDropDownButton = CellButtonVisibility.NotShown
+    DateTimePickerCell1.ShowUpDown = True
+    DateTimePickerCell1.ShowSpinButtonInEditState = False
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {DateTimePickerCell1})
+End Sub</code></pre></div><h2>ユーザー定義セルでの実現</h2><p>以下のように、DateTimePickerCellがセル編集コントロールを表示する際に、スピンボタンが表示されないように位置を調整したユーザー定義型セルでも実現できます。</p><h2>DateCellクラスのコード</h2><p>次のコードは、DateTimePickerCellを継承するユーザー定義型セルDateCellです。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Drawing;
+<span class="hljs-keyword">using</span> System.Windows.Forms;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DateCell</span> : <span class="hljs-title">DateTimePickerCell</span>
+{
+    <span class="hljs-function">public DateCell()</span>
+    {
+        <span class="hljs-keyword">this</span>.ShowDropDownButton = CellButtonVisibility.NotShown;
+        <span class="hljs-keyword">this</span>.ShowUpDown = <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-function">protected override Rectangle GetEditingControlBounds(Rectangle cellBounds, int rowIndex)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Rectangle(cellBounds.Location, <span class="hljs-keyword">new</span> Size(cellBounds.Width + SystemInformation.VerticalScrollBarWidth, cellBounds.Height));
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class DateCell
+    Inherits DateTimePickerCell
+
+    Public Sub New()
+        Me.ShowDropDownButton = CellButtonVisibility.NotShown
+        Me.ShowUpDown = True
+    End Sub
+
+    Protected Overrides Function GetEditingControlBounds(ByVal cellBounds As Rectangle, ByVal rowIndex As Integer) As Rectangle
+        Return New Rectangle(cellBounds.Location, New Size(cellBounds.Width + SystemInformation.VerticalScrollBarWidth, cellBounds.Height))
+    End Function
+
+End Class</code></pre></div><h2>デザイナによる設定</h2><p>デザイナでDateCellを使用するには、次のように操作します。</p><ol><li><p>上記のコードをDateCell.vbまたはDateCell.csとしてファイルに保存する。</p></li><li><p>ファイルをプロジェクトに追加する。</p></li><li><p>プロジェクトをビルドする。</p></li><li><p>テンプレートデザイナを開く。</p></li><li><p>ツールボックスから"DateCell"を選択し、ドラッグしてデザイナに配置する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+DateCell dateCell1 = <span class="hljs-keyword">new</span> DateCell();
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { dateCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim dateCell1 As New DateCell()
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { dateCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7e1bd51b-9e9b-44b5-a31f-56c5672e613c" title="">日付型セル（DateTimePickerCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=52a20b79-14bc-4ca2-81ba-909274f1161d" title="">和暦の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c3044fa7-ed3d-4061-a961-d25694697bfd" title="">初期値の自動確定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=485f0df2-9264-4b73-89fa-087fe4fa90d8" title="">書式設定済みの値の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcd4c78d-1a80-4229-b1e9-57c31031cea4" title="">ValueChangedイベントの使用方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3ed4de8-e23e-4631-b601-93ffc6f32a5c" title="">値がnullのときの代替文字列</a></p>

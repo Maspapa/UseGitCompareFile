@@ -1,0 +1,34 @@
+<p>ラベル型セル（LabelCell）のユーザーによるクリックを処理するには、<a href="gcdocsite__documentlink?toc-item-id=a59fc2ac-3093-446c-98fe-5b601036b877" title="">GcMultiRow.CellContentClick</a>イベントを使用します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellContentClick(object sender, CellEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+    
+    <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> LabelCell)
+    {
+        <span class="hljs-keyword">if</span> (e.CellName == <span class="hljs-string">"セル名"</span>)
+        {
+            <span class="hljs-keyword">if</span> (currentCell.Enabled == <span class="hljs-literal">true</span>)
+            {
+                <span class="hljs-comment">// ここに処理を記述してください。</span>
+            }
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellContentClick(ByVal sender As System.Object, _
+    ByVal e As GrapeCity.Win.MultiRow.CellEventArgs) _
+    Handles GcMultiRow1.CellContentClick
+    
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+    
+    If TypeOf currentCell Is LabelCell Then
+        If e.CellName = "セル名" Then
+            If currentCell.Enabled = True Then
+                ' ここに処理を記述してください。
+            End If
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=132a7aa2-a81f-4736-8414-3b54657deea7" title="">ラベル型セル（LabelCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=38fe5288-272d-4c50-b953-048aa1ec840e" title="">文字列の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=29716542-2d32-49f0-aa69-197a395f76d0" title="">アクセスキーの接頭文字</a></p>

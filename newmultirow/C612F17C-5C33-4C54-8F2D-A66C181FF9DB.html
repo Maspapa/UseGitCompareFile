@@ -1,0 +1,39 @@
+<p>ポップアップ型セル（PopupCell）は、ポップアップボタンのクリックで任意のフォームを表示できます。</p><h2>デザイナによる設定</h2><ol><li><p>プロジェクトにフォームを追加する。（例：Form2）</p></li><li><p>行（Row）にポップアップ型セルを追加する。（例：popupCell1）</p></li><li><p>プロジェクトをビルドする。</p></li><li><p>popupCell1を選択し、プロパティウィンドウでpopupCell1.Popupプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示された「ポップアップ」画面で「フォーム」のツリーを展開し、「Form2」を選択する。</p></li><li><p>［OK］ボタンをクリックして画面を閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>popupCell1のボタンをクリックし、Form2がポップアップウィンドウとして表示されることを確認する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+PopupCell popupCell1 = <span class="hljs-keyword">new</span> PopupCell();
+popupCell1.Popup = <span class="hljs-keyword">new</span> Form2();
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { popupCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim PopupCell1 As New PopupCell()
+PopupCell1.Popup = New Form2
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {PopupCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>ポップアップウィンドウの表示位置</h2><p><a href="gcdocsite__documentlink?toc-item-id=abe90e30-5168-443e-bc09-9840d24716df" title="">PopupPosition</a>プロパティを使用すると、ポップアップウィンドウとして表示するフォームの表示位置を指定できます。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>表示位置を指定できるのは、ポップアップウィンドウにフォームを設定している場合のみです。ColorDialogなどのWindowsフォームコンポーネントをポップアップウィンドウに使用する場合は表示位置を指定できません。</p></li></ul></blockquote><table><thead><tr><th><p>PopupPositionの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>NotSet</p></td><td><p>表示されるウィンドウのStartPositionプロパティに値が適用されます。</p></td></tr><tr><td><p>CenterScreen</p></td><td><p>画面の中央にウィンドウを表示します。</p></td></tr><tr><td><p>CenterParentForm</p></td><td><p>アクティブなMultiRowコントロールが配置されている親フォームの中央にウィンドウを表示します。</p></td></tr><tr><td><p>CenterMultiRow</p></td><td><p>アクティブなMultiRowコントロールの中央にウィンドウを表示します。</p></td></tr><tr><td><p>WindowsDefaultLocation</p></td><td><p>Windowsによって自動的に決定された位置にウィンドウを表示します。</p></td></tr><tr><td><p>Manual</p></td><td><p><a href="gcdocsite__documentlink?toc-item-id=61c7f637-df67-42bc-ad8a-c1048f68ddd8" title="">PopupLocation</a>プロパティで指定した位置にウィンドウを表示します。</p></td></tr><tr><td><p>AroundCell</p></td><td><p>アクティブセルの周辺にウィンドウを表示します。基本的にはウィンドウはアクティブセルの右下に表示しますが、表示領域がない場合は別の位置に表示します。</p></td></tr></tbody></table><p>次のコードではアクティブなセルの周辺にエディタ画面を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> PopupCell() });
+
+PopupCell popupCell1 = gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> PopupCell;
+popupCell1.Popup = <span class="hljs-keyword">new</span> Form2();
+popupCell1.PopupPosition = DialogPopupPosition.AroundCell;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New PopupCell()})
+
+Dim PopupCell1 As PopupCell = DirectCast(GcMultiRow1.Rows(0).Cells(0), PopupCell)
+PopupCell1.Popup = New Form2()
+PopupCell1.PopupPosition = DialogPopupPosition.AroundCell</code></pre></div><p>エディタ画面を指定した位置に表示するには、PopupPositionプロパティにManualを設定して、表示位置の座標をPopupLocationプロパティで指定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> PopupCell() });
+
+PopupCell popupCell1 = gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> PopupCell;
+popupCell1.Popup = <span class="hljs-keyword">new</span> Form2();
+popupCell1.PopupPosition = DialogPopupPosition.Manual;
+popupCell1.PopupLocation = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New PopupCell()})
+
+Dim PopupCell1 As PopupCell = DirectCast(GcMultiRow1.Rows(0).Cells(0), PopupCell)
+PopupCell1.Popup = New Form2()
+PopupCell1.PopupPosition = DialogPopupPosition.Manual
+PopupCell1.PopupLocation = New Point(200, 200)</code></pre></div><h2>関連トピック</h2><h4>ShapeCell</h4><p><a href="gcdocsite__documentlink?toc-item-id=71b8cb00-4956-493a-9b61-38f35f20447e" title="">シェイプ型セル（ShapeCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=eb7962c0-ba92-4567-9aca-c6c74f78a9ed" title="">シェイプの設定</a></p>

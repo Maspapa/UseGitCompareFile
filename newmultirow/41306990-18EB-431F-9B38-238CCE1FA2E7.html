@@ -1,0 +1,43 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_negativevalueforecolor.png" contenteditable="false"><br></p><p>マイナスの値（負数）を赤字で表示するには、条件付きセルスタイルを使用します。</p><h2>デザイナによる設定</h2><ol><li><p>マイナスの値（負数）を赤字で表示する数値型セルを選択する（例：numericUpDownCell1）</p></li><li><p>プロパティウィンドウでStyleプロパティを選択し、ドロップダウンリストからCombined Styleを選択する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_negativevalueforecolor_styleproperty.png" contenteditable="false"><br></p></li><li><p>Styleプロパティの左の「＋」をクリックしてCombinedStyleクラスのメンバを展開し、Itemsプロパティのコレクションの［...］ボタンをクリックする。</p></li><li><p>表示されたCombinedCellStyleエディタでCellStyleを追加し、CellStyleプロパティで次の設定を行う。</p><ul><li><p>ForeColorプロパティをBlackに設定する。</p></li><li><p>TextAlignプロパティをTopRightに設定する。</p></li></ul></li><li><p>続いてConditionalCellStyleを追加し、ConditionalCellStyleプロパティのItemsプロパティで次の設定を行う。</p><ol><li><p>Itemsプロパティのコレクションの［...］ボタンをクリックする。</p></li><li><p>表示された「条件付き書式ルールエディタ」で「より小さい」を追加する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_negativevalueforecolor_ruleeditor1.png" contenteditable="false"><br></p></li><li><p>条件のセル値でNumberを選択する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_negativevalueforecolor_ruleeditor2.png" contenteditable="false"><br></p></li><li><p>セルスタイルの種類のプロパティでCellStyleを選択した状態のまま、ForeColorプロパティをRedに設定する。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_negativevalueforecolor_ruleeditor3.png" contenteditable="false"><br></p></li></ol></li><li><p>OKボタンをクリックして変更を確定する。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>-1、0、1を入力したときの表示の変化を確認する。（セル選択時の文字色は変更していないため、他のセルに移動して結果を確認します）</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell1.Name = <span class="hljs-string">"numericUpDownCell1"</span>;
+numericUpDownCell1.Value = <span class="hljs-number">0</span>;
+
+CellStyle baseStyle = <span class="hljs-keyword">new</span> CellStyle();
+baseStyle.ForeColor = Color.Black;
+baseStyle.TextAlign = MultiRowContentAlignment.TopRight;
+
+CellStyle negativeValueColor = <span class="hljs-keyword">new</span> CellStyle();
+negativeValueColor.ForeColor = Color.Red;
+ConditionalCellStyle conditionalCellStyle1 = <span class="hljs-keyword">new</span> ConditionalCellStyle();
+conditionalCellStyle1.Items.Add(negativeValueColor, ConditionalCellStyleOperator.LessThan, <span class="hljs-number">0</span>);
+
+CombinedCellStyle combinedCellStyle1 = <span class="hljs-keyword">new</span> CombinedCellStyle();
+combinedCellStyle1.Items.Add(baseStyle);
+combinedCellStyle1.Items.Add(conditionalCellStyle1);
+
+numericUpDownCell1.Style = combinedCellStyle1;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { numericUpDownCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+NumericUpDownCell1.Name = "NumericUpDownCell1"
+NumericUpDownCell1.Value = 0
+
+Dim baseStyle As New CellStyle()
+baseStyle.ForeColor = Color.Black
+baseStyle.TextAlign = MultiRowContentAlignment.TopRight
+
+Dim negativeValueColor As New CellStyle()
+negativeValueColor.ForeColor = Color.Red
+Dim conditionalCellStyle1 As New ConditionalCellStyle()
+conditionalCellStyle1.Items.Add(negativeValueColor, ConditionalCellStyleOperator.LessThan, 0)
+
+Dim combinedCellStyle1 As New CombinedCellStyle()
+combinedCellStyle1.Items.Add(baseStyle)
+combinedCellStyle1.Items.Add(conditionalCellStyle1)
+
+NumericUpDownCell1.Style = combinedCellStyle1
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {NumericUpDownCell1})</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7bc40421-e50f-4b59-9ec2-af44aadbf42f" title="">数値型セル（NumericUpDownCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b3b972ce-35ec-4560-9dea-35f794db8ae8" title="">スピンボタンの非表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3d312ee-c86f-4b9d-900e-b92dcac0ead5" title="">数値の桁区切り表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9594d3a1-6530-4267-86c7-05426856460c" title="">小数点以下の桁数表示</a></p>

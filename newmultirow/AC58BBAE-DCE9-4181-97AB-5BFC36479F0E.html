@@ -1,0 +1,168 @@
+<p>GcNumberCellでは、入力可能な範囲を指定したりマイナス値を制御することができます。ここではGcNumberCellが提供する入力機能について解説します。</p><h2>書式の設定</h2><p>GcNumberCellでは書式設定により、数値の入力および表示書式を自由に設定することができます。入力書式は、セルが入力フォーカスを受け取ったときの書式で、表示書式は入力フォーカスのないときの書式です。</p><p>入力書式の設定は、<a href="gcdocsite__documentlink?toc-item-id=59ee44d4-d1df-4b91-bd80-ce221347deac" title="">Fields</a>プロパティによって行われ、フィールドとよばれる入力領域を構成する要素によって定義されます。また、表示書式は、<a href="gcdocsite__documentlink?toc-item-id=bc6819b1-d373-44d3-b17b-86e86cf776af" title="">DisplayFields</a>プロパティによって行われ、Fieldsプロパティと同様フィールドによって定義します。FieldsプロパティおよびDisplayFieldsプロパティについては、「<a href="gcdocsite__documentlink?toc-item-id=7028825f-0cf6-4118-b0f9-ef931199983c" title="">書式の設定</a>」で詳しく解説します。</p><h2>入力範囲の指定</h2><p>セルの<a href="gcdocsite__documentlink?toc-item-id=10032147-227d-420e-82dd-db6ec0dcec23" title="">MaxValue</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=6663fdf9-1243-446d-965a-5ad3a7df5962" title="">MinValue</a>プロパティを設定してセルに入力可能な範囲を指定します。</p><p>これらのプロパティを使用する場合、検証は入力中のリアルタイムに行われます。全てのフィールドの値が入力されると検証が行われ、範囲外の値の場合には<a href="gcdocsite__documentlink?toc-item-id=db7890ea-9370-409d-850a-343005147525" title="">MaxMinBehavior</a>プロパティの設定によって値が制御されます。MaxMinBehaviorプロパティに設定できる値は以下のとおりで、既定値は<a href="gcdocsite__documentlink?toc-item-id=8789b322-8db6-4cbe-8b6a-843b9c3f8500" title="">MaxMinBehavior.AdjustToMaxMin</a>です。</p><table><thead><tr><th><p>MaxMinBehaviorの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>AdjustToMaxMin</p></td><td><p>値を最小値か最大値の近い方に設定します。</p></td></tr><tr><td><p>Clear</p></td><td><p>値を削除してnullにします。</p></td></tr><tr><td><p>Restore</p></td><td><p>変更前の値に戻します。</p></td></tr><tr><td><p>CancelInput</p></td><td><p>最後の入力をキャンセルしてフォーカスを保持します。</p></td></tr><tr><td><p>Keep</p></td><td><p>エラーとなったTextプロパティの値を保持します。</p></td></tr></tbody></table><p>MaxMinBehaviorプロパティを<a href="gcdocsite__documentlink?toc-item-id=8789b322-8db6-4cbe-8b6a-843b9c3f8500" title="">MaxMinBehavior.CancelInput</a>に設定した場合、範囲外の最後の入力を行った時点でGcNumberEditingControl.InvalidInputイベントが発生します。InvalidInputイベント側では入力された値が範囲外であることを取得できるため、メッセージを出力するなどのカスタマイズが可能です。</p><p>以下のサンプルコードは、範囲外の値が入力されたとき、メッセージボックスを表示する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    InputManCell.GcNumberCell gcNumberCell1 = <span class="hljs-keyword">new</span> InputManCell.GcNumberCell();
+
+    <span class="hljs-comment">// 最大値と最小値を設定します。 </span>
+    gcNumberCell1.MaxValue = <span class="hljs-number">100</span>;
+    gcNumberCell1.MinValue = <span class="hljs-number">0</span>;
+
+    <span class="hljs-comment">// 範囲外の場合に値をどのように制御するかを設定します。 </span>
+    gcNumberCell1.MaxMinBehavior = GrapeCity.Win.Editors.MaxMinBehavior.CancelInput;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcNumberCell1 });
+    gcMultiRow1.EditingControlShowing += <span class="hljs-keyword">new</span> EventHandler&lt;EditingControlShowingEventArgs&gt;(gcMultiRow1_EditingControlShowing);
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> InputManCell.GcNumberEditingControl)
+    {
+        InputManCell.GcNumberEditingControl editor = (InputManCell.GcNumberEditingControl)e.Control;
+
+        editor.InvalidInput -= <span class="hljs-keyword">new</span> EventHandler(editor_InvalidInput);
+        editor.InvalidInput += <span class="hljs-keyword">new</span> EventHandler(editor_InvalidInput);
+    }
+}
+
+<span class="hljs-function">private void editor_InvalidInput(object sender, EventArgs e)</span>
+{
+    GrapeCity.Win.Editors.InvalidInputEventArgs invalidInputEventArgs = e <span class="hljs-keyword">as</span> GrapeCity.Win.Editors.InvalidInputEventArgs;
+
+    <span class="hljs-keyword">if</span> (invalidInputEventArgs == <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-comment">// 値が範囲外の場合には、メッセージを表示します。   </span>
+    <span class="hljs-keyword">if</span> (invalidInputEventArgs.ValueOutOfRange)
+    {
+        MessageBox.Show(<span class="hljs-string">"範囲外の値です。"</span>);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Dim GcNumberCell1 As New InputManCell.GcNumberCell()
+
+    ' 最大値と最小値を設定します。  
+    GcNumberCell1.MaxValue = 100
+    GcNumberCell1.MinValue = 0
+
+    ' 範囲外の場合に値をどのように制御するかを設定します。  
+    GcNumberCell1.MaxMinBehavior = GrapeCity.Win.Editors.MaxMinBehavior.CancelInput
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcNumberCell1})
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    If (TypeOf (e.Control) Is InputManCell.GcNumberEditingControl) Then
+
+        Dim editor As InputManCell.GcNumberEditingControl = DirectCast(e.Control, InputManCell.GcNumberEditingControl)
+
+        RemoveHandler editor.InvalidInput, AddressOf editor_InvalidInput
+        AddHandler editor.InvalidInput, AddressOf editor_InvalidInput
+    End If
+End Sub
+
+Private Sub editor_InvalidInput(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Dim InvalidInputEventArgs As GrapeCity.Win.Editors.InvalidInputEventArgs = TryCast(e, GrapeCity.Win.Editors.InvalidInputEventArgs)
+    If InvalidInputEventArgs Is Nothing Then
+        Exit Sub
+    End If
+
+    ' 値が範囲外の場合には、メッセージを表示します。   
+    If InvalidInputEventArgs.ValueOutOfRange Then
+        MessageBox.Show("範囲外の値です。")
+    End If
+End Sub</code></pre></div><p>GcNumberCellの場合、GcDateTimeCellやGcTimeSpanCellと異なり『入力の途中かどうか』の判断が難しいケースがあります。</p><p>例えば、入力範囲を50から100に設定した場合、「6」が入力された時点では「60」と入力する途中の段階であるのか、「6」で確定なのかを判断することができません。こういったケースではセルの値を確定するタイミングで検証を行い、範囲外のまま値を確定しようとしている場合、ArgumentOutOfRangeExceptionが発生します。この例外によるメッセージボックスの表示を抑制するには、<a href="gcdocsite__documentlink?toc-item-id=ad02445c-8d7b-4a33-83e4-bb090e273215" title="">GcMultiRow.DataError</a>イベント を使用します。</p><h2>値の端数処理</h2><p><a href="gcdocsite__documentlink?toc-item-id=e83a97ef-bbbc-461b-9fc6-eb071c3c07d7" title="">RoundPattern</a>プロパティを使用すると、設定した書式に対して端数処理の詳細な設定ができます。RoundPatternプロパティに設定できる値は次の通りで、既定値は四捨五入（<a href="gcdocsite__documentlink?toc-item-id=63cbc1c3-d13d-482e-a3a3-295de6c94e2c" title="">RoundPattern.MidpointRoundAwayFromZero</a>）です。</p><table><thead><tr><th><p>プロパティ値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>Ceiling</p></td><td><p>切り上げ(大きいほうの近似値への丸め)</p></td></tr><tr><td><p>Floor</p></td><td><p>切り捨て(小さいほうの近似値への丸め)</p></td></tr><tr><td><p>MidpointRoundAwayFromZero</p></td><td><p>四捨五入</p></td></tr><tr><td><p>MidpointRoundToEven</p></td><td><p>近似値への丸め（偶数丸め、銀行丸め）</p></td></tr><tr><td><p>RoundDown</p></td><td><p>切り捨て</p></td></tr><tr><td><p>RoundUp</p></td><td><p>切り上げ</p></td></tr></tbody></table><h2>マイナス値の設定と色</h2><p>セルの入力をプラスの値かマイナスの値のいずれかのみを許可したい場合、<a href="gcdocsite__documentlink?toc-item-id=38b8714b-e44d-468c-bbd1-24b46edc6053" title="">ValueSign</a>プロパティを設定します。</p><table><thead><tr><th><p>プロパティ値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>NoControl</p></td><td><p>数値の符号が設定されていません。正数、負数両方の入力を許可します。</p></td></tr><tr><td><p>Positive</p></td><td><p>正数の入力のみを許可します。</p></td></tr><tr><td><p>Negative</p></td><td><p>負数の入力のみを許可します。</p></td></tr></tbody></table><p>マイナス値が入力されたとき、<a href="gcdocsite__documentlink?toc-item-id=7028825F-0CF6-4118-B0F9-EF931199983C" title="">書式の設定</a>で表示する文字列を指定することが可能ですが、<a href="gcdocsite__documentlink?toc-item-id=3477bf01-6581-4613-8863-9e34ded530b3" title="">NegativeColor</a>プロパティを使用すれば、マイナス値が入力された場合の文字色を設定することができます。また、<a href="gcdocsite__documentlink?toc-item-id=63da2bb3-6a49-4ea3-9bcf-c7a3da673eae" title="">UseNegativeColor</a>プロパティで、指定した色を適用するかどうかを設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/06gcnumber/gcnumber_negativecolor.png" contenteditable="false"><br></p><p>(図) マイナス値の書式と色を設定したGcNumberCell</p><h2>マイナスキーの動作</h2><p>マイナスキーは値をプラスとマイナスを切り替えるスイッチ機能を行います。(１回目のマイナスキー押下で値がマイナスに変化、２回目押下でプラスに変化) この動作は、GcNumberCellに以下のショートカット機能が設定されていることで実現されています。</p><ul><li><p>キー：OemMinusに対してショートカット動作のSwitchSign</p></li><li><p>キー：Subtractに対してショートカット動作のSwitchSign</p></li></ul><p>この動作を、マイナスキーが押下された場合には値をマイナスに変更するだけの動作とさせることもできます。(１回目のマイナスキー押下で値がマイナスに変化、２回目押下でもマイナスのまま。プラスにしたい場合はプラスキーを押下する)</p><p>既定の動作から新しい動作に変更するためには、上記で挙げたふたつのショートカット機能を削除します。</p><h2>値の取得と設定</h2><p>Valueプロパティを使えば、リテラル文字列を除いたセル内の数値をDecimal型で取得または設定できます。</p><p>クリップボードにリテラル文字を含まない値を渡すには、<a href="gcdocsite__documentlink?toc-item-id=cf92079d-cbe8-49b8-9250-4d6b4a9a6652" title="">ClipContent</a>プロパティとGcNumberEditingControl.SelectedTextプロパティを使用します。ClipContentプロパティで制御できるのは、SelectedTextプロパティの値のみなので、以下のプロパティの値をクリップボードに設定した場合は、ClipContentプロパティの設定は無効になります。</p><p>次のサンプルコードは、ClipContentプロパティを使って、リテラル文字列を省いた文字列をクリップボードにコピーする方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    InputManCell.GcNumberCell gcNumberCell1 = <span class="hljs-keyword">new</span> InputManCell.GcNumberCell();
+    <span class="hljs-comment">// セルに値を設定します。    </span>
+    gcNumberCell1.Fields.SignPrefix.PositivePattern = <span class="hljs-string">"\\"</span>;
+    gcNumberCell1.Fields.SignPrefix.NegativePattern = <span class="hljs-string">"\\-"</span>;
+    gcNumberCell1.Value = <span class="hljs-number">10000</span>;
+    gcNumberCell1.ClipContent = GrapeCity.Win.Editors.ClipContent.ExcludeLiterals;
+    TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+
+    <span class="hljs-comment">// MultiRowのテンプレートを設定します。     </span>
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcNumberCell1, textBoxCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> InputManCell.GcNumberEditingControl)
+    {
+        <span class="hljs-comment">// GcNumberCellの編集用コントロールが表示された場合にKeyDownイベントを設定します。     </span>
+        e.Control.KeyDown -= <span class="hljs-keyword">new</span> KeyEventHandler(Editor_KeyDown);
+        e.Control.KeyDown += <span class="hljs-keyword">new</span> KeyEventHandler(Editor_KeyDown);
+    }
+}
+
+<span class="hljs-function">private void Editor_KeyDown(object sender, KeyEventArgs e)</span>
+{
+    Cell cell = gcMultiRow1.CurrentCell;
+
+    <span class="hljs-keyword">if</span> (e.KeyCode == Keys.F5)
+    {
+        InputManCell.GcNumberEditingControl editor = (InputManCell.GcNumberEditingControl)sender;
+
+        <span class="hljs-comment">// クリップボードにコピーします。   </span>
+        editor.SelectionStart = <span class="hljs-number">0</span>;
+        editor.SelectionLength = editor.Text.Length;
+        Clipboard.SetDataObject(editor.SelectedText);
+
+        <span class="hljs-comment">// クリップボードのデータを取得して確認します。      </span>
+        IDataObject cbData = Clipboard.GetDataObject();
+        gcMultiRow1[cell.RowIndex, cell.CellIndex + <span class="hljs-number">1</span>].Value = cbData.GetData(DataFormats.Text).ToString();
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcNumberCell1 = New InputManCell.GcNumberCell()
+
+    ' セルに値を設定します。  
+    GcNumberCell1.Fields.SignPrefix.PositivePattern = "\"
+    GcNumberCell1.Fields.SignPrefix.NegativePattern = "\-"
+    GcNumberCell1.Value = 10000
+    GcNumberCell1.ClipContent = GrapeCity.Win.Editors.ClipContent.ExcludeLiterals
+
+    Dim TextBoxCell1 As New TextBoxCell()
+
+    ' MultiRowのテンプレートを設定します。      
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcNumberCell1, TextBoxCell1})
+    GcMultiRow1.RowCount = 5
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(ByVal sender As Object, ByVal e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    If TypeOf e.Control Is InputManCell.GcNumberEditingControl Then
+        ' GcNumberCellの編集用コントロールが表示された場合にKeyDownイベントを設定します。  
+        RemoveHandler e.Control.KeyDown, AddressOf Editor_KeyDown
+        AddHandler e.Control.KeyDown, AddressOf Editor_KeyDown
+    End If
+End Sub
+
+Private Sub Editor_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+
+    Dim cell As Cell = GcMultiRow1.CurrentCell
+
+    If e.KeyCode = Keys.F5 Then
+        Dim editor As InputManCell.GcNumberEditingControl = DirectCast(sender, InputManCell.GcNumberEditingControl)
+
+        ' クリップボードにコピーします。      
+        editor.SelectionStart = 0
+        editor.SelectionLength = editor.Text.Length
+        Clipboard.SetDataObject(editor.SelectedText)
+
+        ' クリップボードのデータを取得して確認します。      
+        Dim cbData As IDataObject = Clipboard.GetDataObject()
+        GcMultiRow1(cell.RowIndex, cell.CellIndex + 1).Value = cbData.GetData(DataFormats.Text).ToString()
+    End If
+End Sub</code></pre></div><h2>ゼロとNull値</h2><p>GcNumberCellで、ゼロを削除し値をNullとすることができるかどうかは、<a href="gcdocsite__documentlink?toc-item-id=49cb3f74-b68a-4793-a595-e86212014a7d" title="">AllowDeleteToNull</a>プロパティで設定します。</p><p><a href="gcdocsite__documentlink?toc-item-id=49cb3f74-b68a-4793-a595-e86212014a7d" title="">AllowDeleteToNull</a>プロパティをTrueに設定することで、入力された「0」をDeleteキーやBackSpaceキーで削除し、そのValueプロパティをNullにすることができます。</p><h2>小数点を含む値の制御</h2><p>入力書式の設定で小数の入力を許可しない場合、小数点が含まれた数値がクリップボードから貼り付けられたときの入力値を<a href="gcdocsite__documentlink?toc-item-id=8e3f8820-2874-455a-91f5-0ec9d06ea741" title="">AcceptsDecimal</a>プロパティを使用して制御することができます。既定値は<a href="gcdocsite__documentlink?toc-item-id=8485dfcc-e38e-468f-a1eb-c4c1ac2b23d8" title="">DecimalMode.Cut</a>です。</p><table><thead><tr><th><p>AcceptsDecimalの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>Cut</p></td><td><p>小数点以下が切り捨てられます。「123.45」という数値が「123」として入力されます。</p></td></tr><tr><td><p>Filter</p></td><td><p>小数点が削除されます。「123.45」という数値が「12345」として入力されます。</p></td></tr></tbody></table><h2>改行コードの取り扱い</h2><p><a href="gcdocsite__documentlink?toc-item-id=ed72ba35-bd80-4205-bc3b-c391af152299" title="">AcceptsCrLf</a>プロパティを使用してクリップボードへ改行を含む文字列をコピー、または貼り付けた場合の改行コードの扱いを設定できます。AcceptsCrLfプロパティは、<a href="gcdocsite__documentlink?toc-item-id=b22d2b62-d37b-456c-a018-f94ad093f564" title="">CrLfMode</a> 列挙体を使用して次の値を設定できます。</p><table><thead><tr><th><p>AcceptsCrLfの値</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>NoControl</p></td><td><p>改行コードはそのままでコピー、貼り付けを行います。従来のInputManの数値コントロールと同じ動作です。</p></td></tr><tr><td><p>Filter</p></td><td><p>全ての改行コードを削除しコピー、貼り付けを行います。</p></td></tr><tr><td><p>Cut</p></td><td><p>最初の改行コード以降の文字列を削除します。標準コントロールと同じ動作です。</p></td></tr></tbody></table><h2>イベントを使った文字列操作</h2><p>現在カレットが置かれているフィールドは、GcNumberEditingControl.ActiveFieldプロパティで取得できます。</p><p>セルに文字列を入力するとGcNumberEditingControl.TextChangingイベントが、GcNumberEditingControl.TextChangedイベントの前（入力された文字列がTextプロパティに渡される前）に発生します。そのため、このイベント内で入力文字列をチェックすれば、Textプロパティの値に影響を与えることなく、入力を制御できます。</p><h2>自動フォーカス移動</h2><p><a href="gcdocsite__documentlink?toc-item-id=1901a2de-5014-48b3-9be7-45fc9aa187b3" title="">ExitOnLastChar</a>プロパティをTrueに設定すると、入力された文字列が、 書式設定により定義された最大桁数に達すると、自動的に次のコントロールへフォーカスを移動できます。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=d4ea9511-22bf-4df0-8ebf-c6d2440ae435" title="">GcNumberCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7028825f-0cf6-4118-b0f9-ef931199983c" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=45dd46dc-e6b4-4ae3-90ac-f6dbfc54ff51" title="">視覚的な補助</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5e35d806-caa0-417a-9746-00bf47e958f3" title="">サイドボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9edbdea7-65d0-4829-b99c-80221fb5c417" title="">ドロップダウン電卓</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6abfa636-c9a3-4c88-bc6d-d378cd310c3b" title="">計算ウィンドウ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c38aee8e-eb2b-4e03-b3e3-2650da732021" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=85a4a7b9-7e99-489e-9c73-6ba47dfcccff" title="">データベース接続</a></p>

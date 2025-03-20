@@ -1,0 +1,46 @@
+<p>GcProgressBarCellの進捗状況の設定方法について、以下に解説します。</p><h2>進行範囲の指定</h2><p>タスクの進行状況を表す値の範囲を指定するには、GcProgressBarCellの<a href="gcdocsite__documentlink?toc-item-id=d8e54a5d-062d-4541-865b-03ee648d7e5d" title="">Maximum</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=ea53946a-5742-4101-8627-bb308d011f7b" title="">Minimum</a>プロパティを使用します。通常、<a href="gcdocsite__documentlink?toc-item-id=ea53946a-5742-4101-8627-bb308d011f7b" title="">Minimum</a>プロパティは0に設定され、<a href="gcdocsite__documentlink?toc-item-id=d8e54a5d-062d-4541-865b-03ee648d7e5d" title="">Maximum</a>プロパティはタスクの完了を示す値に設定します。</p><h2>進行状況の変更</h2><p>タスクの進行状況を表すには、Valueプロパティを使用します。GcProgressBarCellはValueプロパティの値を基にコントロールを塗りつぶします。</p><p>進行状況の値を変更するには、<a href="gcdocsite__documentlink?toc-item-id=31dd89db-5d24-45d6-93a1-7ac5a03fc546" title="">Step</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=06c45694-720a-429b-876e-879627a61881" title="">PerformStep</a>メソッドを組み合わせて使用する方法もあります。毎回特定の量だけ増やすには、<a href="gcdocsite__documentlink?toc-item-id=31dd89db-5d24-45d6-93a1-7ac5a03fc546" title="">Step</a>プロパティに増加分を設定し、<a href="gcdocsite__documentlink?toc-item-id=06c45694-720a-429b-876e-879627a61881" title="">PerformStep</a>メソッドを呼び出すことで進行を表します。</p><p>また、特定の値だけ増加させるには、<a href="gcdocsite__documentlink?toc-item-id=7abb951f-2253-4ad0-894c-c45cf7963cb8" title="">Increment</a>メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcProgressBarCell gcProgressBarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcProgressBarCell();
+    <span class="hljs-comment">// 増加する量を設定します。</span>
+    gcProgressBarCell1.Step = <span class="hljs-number">5</span>;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcProgressBarCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+}
+
+<span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// 現在の位置をStepプロパティの量だけ進めます。 </span>
+    (gcMultiRow1[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> PlusPakCell.GcProgressBarCell).PerformStep();
+}
+
+<span class="hljs-function">private void button2_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// 現在の位置を指定の量（10）だけ進めます。</span>
+    (gcMultiRow1[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> PlusPakCell.GcProgressBarCell).Increment(<span class="hljs-number">15</span>);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcProgressBarCell1 As New PlusPakCell.GcProgressBarCell()
+    ' 増加する量を設定します。
+    GcProgressBarCell1.Step = 5
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcProgressBarCell1})
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    ' 現在の位置をStepプロパティの量だけ進めます。 
+    DirectCast(GcMultiRow1(0, 0), PlusPakCell.GcProgressBarCell).PerformStep()
+
+End Sub
+
+Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    ' 現在の位置を指定の量（10）だけ進めます。
+    DirectCast(GcMultiRow1(0, 0), PlusPakCell.GcProgressBarCell).Increment(15)
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=baffc55f-be3b-4399-a936-bcf1053e4941" title="">GcProgressBarCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=40d10b7d-a9fc-4f14-a959-d960291edd43" title="">バーの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8a7faa4d-49bf-4e1d-85fa-ed8781adff25" title="">バーの外観のカスタマイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2fb5ade1-a90b-4137-96d6-f22c98a918c1" title="">テキストの設定</a></p>

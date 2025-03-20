@@ -1,0 +1,153 @@
+<p>GcLabelCellはラベルの表示効果に関するスタイルを設定できます。</p><h2>文字の立体表示</h2><p>文字を立体的に表示するには<a href="gcdocsite__documentlink?toc-item-id=ee919ea2-f9b6-482b-90be-3d3632ff3a60" title="">CellStyle.TextEffect</a>プロパティを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcLabelCell gcLabelCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcLabelCell();
+gcLabelCell1.Name = <span class="hljs-string">"gcLabelCell1"</span>;
+
+<span class="hljs-comment">// 文字を強い浮き出しの立体表示にします。 </span>
+gcLabelCell1.Style.TextEffect = GrapeCity.Win.MultiRow.TextEffect.Raised;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcLabelCell1 = New PlusPakCell.GcLabelCell()
+GcLabelCell1.Name = "GcLabelCell1"
+
+' 文字を強い浮き出しの立体表示にします。
+GcLabelCell1.Style.TextEffect = GrapeCity.Win.MultiRow.TextEffect.Raised
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gclabel/texteffect.png" contenteditable="false"><br></p><h2>アーチ文字</h2><p><a href="gcdocsite__documentlink?toc-item-id=632dbe13-6f80-4bf7-8019-6f59b03bb06f" title="">TextArcMode</a>プロパティで、アーチ型に表示できます。アーチ型には<strong>ArchUp</strong>（上向き）、<strong>ArchDown</strong>（下向き）、<strong>Circle</strong>（円）があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcLabelCell gcLabelCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcLabelCell();
+gcLabelCell1.Name = <span class="hljs-string">"gcLabelCell1"</span>;
+
+gcLabelCell1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcLabelCell1 = New PlusPakCell.GcLabelCell()
+GcLabelCell1.Name = "GcLabelCell1"
+
+GcLabelCell1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gclabel/arch.png" contenteditable="false"><br></p><h2>画像の表示</h2><p>GcLabelCellは<a href="gcdocsite__documentlink?toc-item-id=3ee19d56-ae0d-4c9e-82d6-c8b022ee985b" title="">CellStyle.Image</a>プロパティで画像を表示できます。画像の配置は<a href="gcdocsite__documentlink?toc-item-id=654f0312-8cd8-4f5a-953c-83b2451a4e3e" title="">ImageAlign</a>プロパティを使用します。</p><p>また、<a href="gcdocsite__documentlink?toc-item-id=632dbe13-6f80-4bf7-8019-6f59b03bb06f" title="">TextArcMode</a>プロパティと組み合わせて使用することもできます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcLabelCell gcLabelCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcLabelCell();
+gcLabelCell1.Name = <span class="hljs-string">"gcLabelCell1"</span>;
+
+gcLabelCell1.Style.Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"c:\icon.png"</span>);
+gcLabelCell1.ImageAlign = GrapeCity.Win.Common.ImageAlign.Bottom;
+
+gcLabelCell1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcLabelCell1 = New PlusPakCell.GcLabelCell()
+GcLabelCell1.Name = "GcLabelCell1"
+
+GcLabelCell1.Style.Image = New Bitmap("c:\icon.png")
+GcLabelCell1.ImageAlign = GrapeCity.Win.Common.ImageAlign.Bottom
+
+GcLabelCell1.TextArcMode = GrapeCity.Win.Buttons.TextArcMode.ArchUp
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gclabel/image.png" contenteditable="false"><br></p><h2>テキストの中抜き効果</h2><p><a href="gcdocsite__documentlink?toc-item-id=2b588eac-37cc-4bbc-b74e-381daf88d5a4" title="">OutlineEffect</a>クラスを使用すると、テキストの中抜き効果を表示できます。中抜きの効果では、テキストの塗りつぶし色および境界線の色と種類を設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcLabelCell gcLabelCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcLabelCell();
+gcLabelCell1.Name = <span class="hljs-string">"gcLabelCell1"</span>;
+
+PlusPakCell.OutlineEffect outlineEffect1 = <span class="hljs-keyword">new</span> PlusPakCell.OutlineEffect();
+outlineEffect1.FillColor = Color.Yellow;
+outlineEffect1.LineColor = Color.Red;
+outlineEffect1.LineStyle = GrapeCity.Win.Buttons.OutlineStyle.Single;
+
+gcLabelCell1.OutlineEffect = outlineEffect1;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcLabelCell1 = New PlusPakCell.GcLabelCell()
+GcLabelCell1.Name = "GcLabelCell1"
+
+Dim OutlineEffect1 As New PlusPakCell.OutlineEffect()
+OutlineEffect1.FillColor = Color.Yellow
+OutlineEffect1.LineColor = Color.Red
+OutlineEffect1.LineStyle = GrapeCity.Win.Buttons.OutlineStyle.Single
+
+GcLabelCell1.OutlineEffect = OutlineEffect1
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gclabel/outline.png" contenteditable="false"><br></p><h2>テキストの影付き効果</h2><p><a href="gcdocsite__documentlink?toc-item-id=73256195-f8a8-4fca-bbb5-338e941239fd" title="">ShadowEffect</a>クラスを使用すると、テキストの影付き効果を表示できます。影付き効果では、影の色と深さを設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcLabelCell gcLabelCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcLabelCell();
+gcLabelCell1.Name = <span class="hljs-string">"gcLabelCell1"</span>;
+
+PlusPakCell.ShadowEffect shadowEffect1 = <span class="hljs-keyword">new</span> PlusPakCell.ShadowEffect();
+shadowEffect1.Color = Color.Silver;
+shadowEffect1.Thickness = <span class="hljs-number">2</span>;
+
+gcLabelCell1.ShadowEffect = shadowEffect1;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcLabelCell1 = New PlusPakCell.GcLabelCell()
+GcLabelCell1.Name = "GcLabelCell1"
+
+Dim ShadowEffect1 As New PlusPakCell.ShadowEffect()
+ShadowEffect1.Color = Color.Silver
+ShadowEffect1.Thickness = 2
+
+GcLabelCell1.ShadowEffect = ShadowEffect1
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gclabel/shadoweffect.png" contenteditable="false"><br></p><h2>テキストの下線／取り消し線／枠線</h2><p><a href="gcdocsite__documentlink?toc-item-id=fb4b1058-e7bb-4fc7-b7de-3f0c9c6d1328" title="">TextDecorations</a>クラスを使用すると、テキストに下線／取り消し線／枠線を表示できます。それぞれの線には、線の色と種類を設定することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcLabelCell gcLabelCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcLabelCell();
+gcLabelCell1.Name = <span class="hljs-string">"gcLabelCell1"</span>;
+
+PlusPakCell.TextDecorations textDecorations1 = <span class="hljs-keyword">new</span> PlusPakCell.TextDecorations();
+textDecorations1.StrikethroughColor = Color.Black;
+textDecorations1.StrikethroughStyle = GrapeCity.Win.Buttons.TextLineStyle.Double;
+textDecorations1.TextBorderColor = Color.Black;
+textDecorations1.TextBorderStyle = GrapeCity.Win.Buttons.TextBorderStyle.DashDot;
+textDecorations1.TextBorderWidth = <span class="hljs-number">5</span>;
+textDecorations1.UnderlineColor = Color.Black;
+textDecorations1.UnderlineStyle = GrapeCity.Win.Buttons.TextLineStyle.Waved;
+
+gcLabelCell1.TextDecorations = textDecorations1;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcLabelCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcLabelCell1 = New PlusPakCell.GcLabelCell()
+GcLabelCell1.Name = "GcLabelCell1"
+
+Dim TextDecorations1 As New PlusPakCell.TextDecorations()
+TextDecorations1.StrikethroughColor = Color.Black
+TextDecorations1.StrikethroughStyle = GrapeCity.Win.Buttons.TextLineStyle.Double
+TextDecorations1.TextBorderColor = Color.Black
+TextDecorations1.TextBorderStyle = GrapeCity.Win.Buttons.TextBorderStyle.DashDot
+TextDecorations1.TextBorderWidth = 5
+TextDecorations1.UnderlineColor = Color.Black
+TextDecorations1.UnderlineStyle = GrapeCity.Win.Buttons.TextLineStyle.Waved
+
+GcLabelCell1.TextDecorations = TextDecorations1
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcLabelCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gclabel/textdecorations.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6d89a337-a4ea-4bab-b86d-b9e074da5f23" title="">GcLabelCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3845eb2b-8360-4eba-9a5b-4c005ac29381" title="">文字の表示幅の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=96645464-73b3-4c9c-8436-15295debf0e0" title="">縦表示文字の設定</a></p>

@@ -1,0 +1,43 @@
+<p>ここでは、キーワードによる書式設定について説明します。</p><h2>概要</h2><p>GcTimeSpanCellでは、専用のキーワードを設定することで書式を設定することができます。 フィールドオブジェクトによる書式設定のように柔軟なスタイル設定が不要な場合、入力および表示書式についてそれぞれ1度のメソッド実行だけで定義できるため、簡単な実装が可能です。</p><blockquote type="warning"><p>!type=warning</p><p>キーワードによる書式設定は、InputMan for .NET 4.0J Windows Forms Edition のタイムスパンコントロールで利用されていた方法と同様の方法です。</p></blockquote><h2>設定方法</h2><h4>コードによる設定</h4><p>入力書式を設定するには、<a href="gcdocsite__documentlink?toc-item-id=1df72dc1-e822-4971-99e3-93459f103002" title="">Fields</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=929df165-b914-4d07-8f71-96f2df5cc02e" title="">TimeSpanFieldCollection</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=3a0b50a7-0e03-4424-91de-a6e8ae960121" title="">AddRange</a>メソッドに、入力書式用のキーワードを使用した文字列を設定します。</p><p>表示書式を設定するには、<a href="gcdocsite__documentlink?toc-item-id=818cc753-49bb-4b03-839a-ed7335b26a36" title="">DisplayFields</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=2bfb28aa-fc86-4d85-84c4-d7b6d792b363" title="">TimeSpanDisplayFieldCollection</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=9a1668c4-5431-4c62-8860-7b8e340bd2f5" title="">AddRange</a>メソッドに、表示書式用のキーワードを使用した文字列を設定します。</p><p>キーワードは文字列として次の順番で定義します。</p><div data-language="auto" class="toastui-editor-ww-code-block-highlighting"><pre><code>Pattern, Decimal Places, Decimal Point, Positive Prefix, Positive Suffix, Negative Prefix, Negative Suffix</code></pre></div><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcTimeSpanCell gcTimeSpanCell1 = <span class="hljs-keyword">new</span> InputManCell.GcTimeSpanCell();
+
+<span class="hljs-comment">// フィールドをクリアします。</span>
+gcTimeSpanCell1.Fields.Clear();
+gcTimeSpanCell1.DisplayFields.Clear();
+
+<span class="hljs-comment">// キーワードから書式を設定します。</span>
+gcTimeSpanCell1.Fields.AddRange(<span class="hljs-string">"hh時間mm分ss秒,0,.,,,-,"</span>);
+gcTimeSpanCell1.DisplayFields.AddRange(<span class="hljs-string">"hh時間mm分ss秒,0,.,,,-,"</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcTimeSpanCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcTimeSpanCell1 As New InputManCell.GcTimeSpanCell()
+
+' フィールドをクリアします。
+GcTimeSpanCell1.Fields.Clear()
+GcTimeSpanCell1.DisplayFields.Clear()
+
+' キーワードから書式を設定します。 
+GcTimeSpanCell1.Fields.AddRange("hh時間mm分ss秒,0,.,,,-,")
+GcTimeSpanCell1.DisplayFields.AddRange("hh時間mm分ss秒,0,.,,,-,")
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcTimeSpanCell1})</code></pre></div><p>なお、AddRangeメソッドにより書式を設定する場合でも、自動的にフィールドオブジェクトに変換されているため、設定後に特定のフィールドスタイルを変更することが可能です。</p><p>次のサンプルコードは、キーワードにより設定したタイムスパン書式で特定のフィールドのスタイルを設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 入力書式フィールドのスタイルを設定します。</span>
+gcTimeSpanCell1.Fields[<span class="hljs-number">0</span>].BackColor = Color.Bisque;
+gcTimeSpanCell1.Fields[<span class="hljs-number">1</span>].ForeColor = Color.DarkGray;
+gcTimeSpanCell1.Fields[<span class="hljs-number">2</span>].Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">12</span>);
+
+<span class="hljs-comment">// 表示書式フィールドのスタイルを設定します。</span>
+gcTimeSpanCell1.DisplayFields[<span class="hljs-number">0</span>].Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"ＭＳ ゴシック"</span>, <span class="hljs-number">15</span>);
+gcTimeSpanCell1.DisplayFields[<span class="hljs-number">1</span>].BackColor = Color.Yellow;
+gcTimeSpanCell1.DisplayFields[<span class="hljs-number">2</span>].ForeColor = Color.Gray;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 入力書式フィールドのスタイルを設定します。
+GcTimeSpanCell1.Fields(0).BackColor = Color.Bisque
+GcTimeSpanCell1.Fields(1).ForeColor = Color.DarkGray
+GcTimeSpanCell1.Fields(2).Font = New Font("Meiryo UI", 12)
+
+' 表示書式フィールドのスタイルを設定します。
+GcTimeSpanCell1.DisplayFields(0).Font = New Font("ＭＳ ゴシック", 15)
+GcTimeSpanCell1.DisplayFields(1).BackColor = Color.Yellow
+GcTimeSpanCell1.DisplayFields(2).ForeColor = Color.Gray</code></pre></div><h4>デザイン画面での設定</h4><p>デザイン画面では「入力書式の設定」「表示書式の設定」エディタを使用して容易な設定が可能です。これらのエディタは次のいずれかの方法で起動でき、 タイムスパンのキーワードを設定することで書式を作成します。</p><p>入力書式</p><ul><li><p>セルのスマート タグから「入力書式の設定...」を選択</p></li></ul><p>表示書式</p><ul><li><p>セルのスマート タグから「表示書式の設定...」を選択</p></li></ul><p>個々のフィールドのプロパティは設定できませんが、「時間」「分」「秒」などのリテラル文字を使用した書式が予めビルトイン書式として用意されているため、これらのリストから書式を選択するだけで簡単に書式を定義することが可能です。</p><h2>入力書式のキーワード</h2><p>入力書式として使用可能なキーワードは以下のとおりです。</p><table><thead><tr><th><p>キーワード</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>dd</p></td><td><p>先頭に0を付けて日を入力</p></td></tr><tr><td><p>hh</p></td><td><p>先頭に0を付けて時を入力</p></td></tr><tr><td><p>mm</p></td><td><p>先頭に0を付けて分を入力</p></td></tr><tr><td><p>ss</p></td><td><p>先頭に0を付けて秒を入力</p></td></tr></tbody></table><h2>表示書式のキーワード</h2><p>表示書式として使用可能なキーワードは以下のとおりです。</p><table><thead><tr><th><p>キーワード</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>d</p></td><td><p>日を表示（先頭に0を付けない）</p></td></tr><tr><td><p>dd</p></td><td><p>日を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>h</p></td><td><p>時を表示（先頭に0を付けない）</p></td></tr><tr><td><p>hh</p></td><td><p>時を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>m</p></td><td><p>分を表示（先頭に0を付けない）</p></td></tr><tr><td><p>mm</p></td><td><p>分を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>s</p></td><td><p>秒を表示（先頭に0を付けない）</p></td></tr><tr><td><p>ss</p></td><td><p>行を２桁で表示（先頭に0を付ける）</p></td></tr></tbody></table><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=a021d9a7-ce9b-4f9b-99fe-d3ff9a6ffbaf" title="">GcTimeSpanCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2aade240-7603-4378-a651-b8bc39134c4c" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6cd34816-d653-4c7d-bd6b-440e5731330d" title="">フィールドオブジェクトによる書式設定</a></p>

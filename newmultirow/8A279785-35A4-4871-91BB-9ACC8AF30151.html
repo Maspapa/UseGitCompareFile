@@ -1,0 +1,23 @@
+<p>PairCharValidatorを使用すると、セルの値に含まれる対になる文字が一致しているかどうかを検証できます。たとえば、括弧の閉じ忘れを検証できます。</p><h2>デザイナによる設定</h2><p>デザイナで対になる文字を検証を設定するには、次のように操作します。この例では、括弧の不一致がある場合に検証エラーを表示します。</p><ol><li><p>値を検証するセルを選択する。(例: textBoxCell1)</p></li><li><p>プロパティウィンドウでValidatorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidatorコレクションエディタで左上のコンボボックスから「PairCharValidator」を選択し、［追加］をクリックする。</p></li><li><p>[メンバ]リストでPairCharValidatorが選択されていることを確認する。</p></li><li><p>画面右のプロパティグリッドでPairCharsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたPairCharコレクションエディタでPairCharを追加する。</p></li><li><p>追加したPairCharのLeftプロパティに「(」、Rightプロパティに「)」を設定する。</p></li><li><p>［OK］ボタンをクリックしてPairCharコレクションエディタを閉じる。</p></li><li><p>画面右のプロパティグリッドでActionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidateActionコレクションエディタでLineNotifyを追加する。</p></li><li><p>［OK］ボタンをクリックしてCellValidateActionコレクションエディタを閉じる。</p></li><li><p>［OK］ボタンをクリックしてCellValidatorコレクションエディタを閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>textBoxCell1に「((1+2)*3」を入力し、検証エラーになることを確認する。</p></li></ol><h2>コーディングによる設定</h2><p>次のコードは、セルに入力された文字列で、全角の鍵括弧の対が一致していない場合に検証エラーを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+PairCharValidator pairCharValidator = <span class="hljs-keyword">new</span> PairCharValidator();
+PairChar pairChar1 = <span class="hljs-keyword">new</span> PairChar(<span class="hljs-string">'「'</span>, <span class="hljs-string">'」'</span>);
+pairCharValidator.PairChars.Add(pairChar1);
+pairCharValidator.Actions.Add(<span class="hljs-keyword">new</span> LineNotify());
+textBoxCell1.Validators.Add(pairCharValidator);
+
+Cell[] cells = { textBoxCell1 };
+gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim TextBoxCell1 As New TextBoxCell()
+Dim PairCharValidator1 As New PairCharValidator()
+Dim parChar1 As New PairChar("「", "」")
+PairCharValidator1.PairChars.Add(parChar1)
+PairCharValidator1.Actions.Add(New LineNotify())
+TextBoxCell1.Validators.Add(PairCharValidator1)
+
+Dim cells As Cell() = {TextBoxCell1}
+GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6fe09a91-f3b9-4a7d-94f4-6cbb7ad812b4" title="">組み込みのセルバリデータ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e0b9198f-61a4-4745-824b-8d670699f6fb" title="">範囲の検証（RangeValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7f725f3c-12f5-4066-a959-4adbe9c54f17" title="">必須リストの検証（IncludeListValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=604bcc1b-e817-4a3f-a3b4-811a8f3a72dd" title="">型の検証（RequiredTypeValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7375a31d-584e-405a-ba5c-0b956889af4a" title="">必須入力の検証（RequiredFieldValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af47d5a9-b5c2-4661-8820-ec3913164897" title="">除外リストの検証（ExcludeListValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a175ce0e-9b31-4031-95de-62a02b6aeaf2" title="">セルの比較による検証 (CompareCellValidator)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=da267556-3edb-4463-ba2c-556a5504bbb4" title="">値の比較による検証（CompareValueValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2d9ca60a-70e8-40cc-aded-d87c303663c9" title="">サロゲート文字の検証（SurrogateCharValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2c885eaa-9c02-44fe-befa-6bc0672d3d33" title="">正規表現による検証（RegularExpressionValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=20914c6d-509c-40e0-a597-9b727ffd3b26" title="">文字列の比較による検証（CompareStringValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4585221a-8a6d-4e92-a0d8-def591c7745b" title="">文字列の長さの検証（TextLengthValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8b80cc82-4814-4dc2-83bb-0504ee4f1a44" title="">エンコード形式の検証（EncodingValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8acc8368-e274-4aaa-9dd3-58656ce93d78" title="">書式の検証（CharFormatValidator）</a></p>

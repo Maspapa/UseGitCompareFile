@@ -1,0 +1,50 @@
+<p>TextBoxCellでTextBox.KeyDownイベントと同様の処理を行うには、TextBoxEditingControl.KeyDownイベントを使用します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    gcMultiRow1.Template = Template.Default;
+    gcMultiRow1.EditingControlShowing += <span class="hljs-keyword">new</span> EventHandler&lt;EditingControlShowingEventArgs&gt;(gcMultiRow1_EditingControlShowing);
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+     TextBoxEditingControl textBox = e.Control <span class="hljs-keyword">as</span> TextBoxEditingControl;
+    <span class="hljs-keyword">if</span> (textBox != <span class="hljs-literal">null</span>)
+    {
+        textBox.KeyDown -= <span class="hljs-keyword">new</span> KeyEventHandler(textBox_KeyDown);
+        textBox.KeyDown += <span class="hljs-keyword">new</span> KeyEventHandler(textBox_KeyDown);
+    }
+}
+
+<span class="hljs-function">private void textBox_KeyDown(object sender, KeyEventArgs e)</span>
+{
+    Console.WriteLine(e.KeyCode);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    GcMultiRow1.Template = Template.Default
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(ByVal sender _
+    As System.Object, ByVal e As EditingControlShowingEventArgs) _
+    Handles GcMultiRow1.EditingControlShowing
+
+    Dim textBox As TextBoxEditingControl = TryCast(e.Control, TextBoxEditingControl)
+    If textBox IsNot Nothing Then
+        RemoveHandler textBox.KeyDown, AddressOf Me.textBoxEditingControl_KeyDown
+        AddHandler textBox.KeyDown, AddressOf Me.textBoxEditingControl_KeyDown
+    End If
+End Sub
+
+Private Sub textBoxEditingControl_KeyDown(ByVal sender As System.Object, _
+    ByVal e As KeyEventArgs)
+    Console.WriteLine(e.KeyCode)
+End Sub</code></pre></div><p>セル編集コントロールのイベントで現在のセルを判別するには、IEditingControl.GcMultiRowプロパティを使用してセル編集コントロールをホストするGcMultiRowを取得します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-function">private void textBox_KeyDown(object sender, KeyEventArgs e)</span>
+{
+    TextBoxEditingControl textBox1 = sender <span class="hljs-keyword">as</span> TextBoxEditingControl;
+    Console.WriteLine(textBox1.GcMultiRow.CurrentCellPosition.ToString());
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Private Sub textBoxEditingControl_KeyDown(ByVal sender As System.Object, _
+    ByVal e As KeyEventArgs)
+    Dim textBox1 As TextBoxEditingControl = TryCast(sender, TextBoxEditingControl)
+    Console.WriteLine(textBox1.GcMultiRow.CurrentCellPosition.ToString())
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=1b6c7280-45b3-4c45-a239-a64c1bdd0242" title="">文字列型セル（TextBoxCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=67a9ebdf-4cb6-43b9-8add-4f648899ddcb" title="">改行の入力</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f8aafa29-710b-43fd-8254-5f1eb57f648a" title="">垂直スクロール バーの表示</a></p>

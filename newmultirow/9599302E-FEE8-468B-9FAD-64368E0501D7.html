@@ -1,0 +1,89 @@
+<p>ドロップダウンカレンダーのレイアウトについて解説します。</p><h2>カレンダーの構成要素</h2><p>ドロップダウンカレンダーは、下図の要素から構成されています。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/calendar_erea.png" contenteditable="false"><br></p><h2>基本的な設定</h2><p>カレンダーの最初の列に表示する曜日は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">FirstDayOfWeek</a>プロパティで設定します。通常のカレンダーでは、日曜日または月曜日が最初の列に表示されます。なお、デフォルトでは、週の開始曜日はシステムから取得されます。</p><p>カレンダーに表示する日付の最小値と最大値は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">MinDate</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">MaxDate</a>プロパティで設定します。この最小値と最大値を超える日付には、フォーカスを移動することはできません。</p><p><a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">CalendarDimensions</a>プロパティは、ドロップダウンカレンダーに表示する月数を設定します。１から12までの数の月を１つのドロップダウンカレンダーに表示できます。行と列の月数を掛け合わせた数が12を超えることはできません。12を超えた場合は、エラーが発生します。</p><p>12か月分のカレンダーを表示している場合に、左上に配置する最初の月は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">FirstMonthInView</a>プロパティで設定します。FirstMonthInViewプロパティを<a href="gcdocsite__documentlink?toc-item-id=bff2531d-53f6-4e32-9787-2ea5120c7e60" title="">Months.Default</a>以外に設定すると、指定した月が左上に表示されます。 ナビゲータのスキップボタンをクリックするか、またはマウスでドラッグすると、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ScrollRate</a>プロパティの設定にかかわらず、常に１回の操作につき１年分のカレンダーがスクロールされます。コントロール内に表示される最初の月はどんな場合にも変更されません。</p><p>次のサンプルコードは、横に２か月分のカレンダーを表示し、サイズを自動調節する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+gcDateTimeCell1.Name = <span class="hljs-string">"gcDateTimeCell1"</span>;
+gcDateTimeCell1.DropDownCalendar.CalendarDimensions = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+GcDateTimeCell1.Name = "GcDateTimeCell1"
+GcDateTimeCell1.DropDownCalendar.CalendarDimensions = New Size(2, 1)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>マージンの設定</h2><p>ドロップダウンカレンダーでは、３種類のマージンを設定できます。</p><ol><li><p>表示領域のマージン</p></li><li><p>日付領域のマージン （YearMonthカレンダーの場合は月表示領域）</p></li><li><p>月と月の間隔 （YearMonthカレンダーの場合は年と年の間）</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/calendarmargins.png" contenteditable="false"><br></p><p><a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">CalendarMargins</a>プロパティは、構成要素を表示する領域とコントロールの境界枠との間の上下左右のマージンを設定します。</p><p><a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">InnerMargins</a>プロパティは、表示領域の境界と日付領域（（YearMonthカレンダーの場合は月表示領域））の間（左右と下）、およびヘッダと曜日タイトルの間（上）のマージンを設定します。</p><p><a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">InnerSpace</a>プロパティは、ドロップダウンカレンダーに複数の月を表示する場合に、月と月の間（（YearMonthカレンダーの場合は年と年の間））の垂直および水平の間隔を設定します。</p><p>次のサンプルコードは、縦横それぞれ２か月分のカレンダーを表示し、表示領域と日付領域の各マージン、および月と月の間隔を設定する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+gcDateTimeCell1.Name = <span class="hljs-string">"gcDateTimeCell1"</span>;
+
+<span class="hljs-comment">// 縦横２か月分、合計４か月のカレンダーを表示します。 </span>
+gcDateTimeCell1.DropDownCalendar.CalendarDimensions = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>);
+<span class="hljs-comment">// 表示領域のマージンを設定します。 </span>
+gcDateTimeCell1.DropDownCalendar.CalendarMargins = <span class="hljs-keyword">new</span> Padding(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>);
+<span class="hljs-comment">// 日付領域のマージンを設定します。 </span>
+gcDateTimeCell1.DropDownCalendar.InnerMargins = <span class="hljs-keyword">new</span> Padding(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>);
+<span class="hljs-comment">// 月と月の間隔（縦方向と横方向）を設定します。 </span>
+gcDateTimeCell1.DropDownCalendar.InnerSpace = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+GcDateTimeCell1.Name = "GcDateTimeCell1"
+
+' 縦横２か月分、合計４か月のカレンダーを表示します。 
+GcDateTimeCell1.DropDownCalendar.CalendarDimensions = New Size(2, 2)
+' 表示領域のマージンを設定します。  
+GcDateTimeCell1.DropDownCalendar.CalendarMargins = New Padding(3, 3, 3, 3)
+' 日付領域のマージンを設定します。  
+GcDateTimeCell1.DropDownCalendar.InnerMargins = New Padding(3, 3, 3, 3)
+' 月と月の間隔（縦方向と横方向）を設定します。  
+GcDateTimeCell1.DropDownCalendar.InnerSpace = New Size(2, 2)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>ヘッダ</h2><p>カレンダーの対象年月を表示するヘッダ部では、次の項目を設定できます。</p><ol><li><p>表示と非表示（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ShowHeader</a>プロパティ）</p></li><li><p>年月の表示書式（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">HeaderFormat</a>プロパティ）</p></li><li><p>ヘッダの高さ（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">HeaderHeight</a>プロパティ）</p></li></ol><p>ヘッダの描画スタイルを設定するには、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">HeaderStyle</a>プロパティを使用します。詳細は「<a href="gcdocsite__documentlink?toc-item-id=4C5FEE2D-64BE-437D-BC4F-18A2917D7F6B" title="">スタイルの設定</a>－描画スタイル」を、ヘッダの表示書式については「<a href="gcdocsite__documentlink?toc-item-id=4394a7f2-0d1c-4787-bfc9-217dd21811e2" title="">ヘッダの書式設定</a>」を参照してください。</p><p>次のサンプルコードは、月-日カレンダーのヘッダを設定する方法を示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+gcDateTimeCell1.Name = <span class="hljs-string">"gcDateTimeCell1"</span>;
+
+<span class="hljs-comment">// ヘッダを表示します。 </span>
+gcDateTimeCell1.DropDownCalendar.ShowHeader = <span class="hljs-literal">true</span>;
+<span class="hljs-comment">// ヘッダの高さを23ピクセルに設定します。 </span>
+gcDateTimeCell1.DropDownCalendar.HeaderHeight = <span class="hljs-number">23</span>;
+<span class="hljs-comment">// 年月を和暦で表示します。 </span>
+gcDateTimeCell1.DropDownCalendar.HeaderFormat = <span class="hljs-string">"ggg e年 M月"</span>;
+<span class="hljs-comment">// ヘッダのスタイルを設定します。 </span>
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.BackColor = Color.Thistle;
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.ForeColor = Color.Blue;
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"ＭＳ ゴシック"</span>, <span class="hljs-number">9</span>);
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.TextEffect = GrapeCity.Win.Editors.TextEffect.RaisedLite;
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.Bevel = <span class="hljs-keyword">new</span> GrapeCity.Win.Editors.Bevel(Color.Purple, <span class="hljs-number">2</span>, <span class="hljs-number">35</span>, <span class="hljs-number">-35</span>);
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.BorderColor = Color.Purple;
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.BorderStyle = BorderStyle.FixedSingle;
+gcDateTimeCell1.DropDownCalendar.HeaderStyle.ContentAlignment = ContentAlignment.MiddleCenter;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+GcDateTimeCell1.Name = "GcDateTimeCell1"
+
+' ヘッダを表示します。 
+GcDateTimeCell1.DropDownCalendar.ShowHeader = True
+' ヘッダの高さを23ピクセルに設定します。 
+GcDateTimeCell1.DropDownCalendar.HeaderHeight = 23
+' 年月を和暦で表示します。 
+GcDateTimeCell1.DropDownCalendar.HeaderFormat = "ggg e年 M月"
+' ヘッダのスタイルを設定します。 
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.BackColor = Color.Thistle
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.ForeColor = Color.Blue
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.Font = New Font("ＭＳ ゴシック", 9)
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.TextEffect = GrapeCity.Win.Editors.TextEffect.RaisedLite
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.Bevel = New GrapeCity.Win.Editors.Bevel(Color.Purple, 2, 35, -35)
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.BorderColor = Color.Purple
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.BorderStyle = BorderStyle.FixedSingle
+GcDateTimeCell1.DropDownCalendar.HeaderStyle.ContentAlignment = ContentAlignment.MiddleCenter
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>ナビゲータ</h2><p>カレンダー上で年月を移動するために用意されているナビゲータでは、次の項目を設定できます。</p><ol><li><p>ナビゲータの種類（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ShowNavigator</a>プロパティ）</p></li><li><p>ナビゲータの表示位置（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">NavigatorOrientation</a>プロパティ）</p></li></ol><h2>隣接日</h2><p>対象年月の前後のスペースについて、次の項目を設定できます。</p><ul><li><p>隣接日の表示と非表示（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ShowTrailing</a>プロパティ）</p></li><li><p>空白行の表示と非表示（<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">EmptyRows</a>プロパティ）</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/showtrailing.png" contenteditable="false"><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/emptyrows.png" contenteditable="false"><br></p><p>隣接日の表示スタイルは、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">TrailingStyle</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=38466229-9ce8-4ca6-8b8e-eb4df5acc5ad" title="">SubStyle</a>オブジェクトで設定することができます。詳細は「<a href="gcdocsite__documentlink?toc-item-id=4c5fee2d-64be-437d-bc4f-18a2917d7f6b" title="">スタイルの設定</a>－日付スタイル」を参照してください。</p><h2>今日の日付</h2><p>カレンダーの下側の領域に今日の日付を表示することができます。表示した今日の日付をマウスでクリックすることで今日の日付を選択することができます。今日の日付を表示する場合は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ShowToday</a>プロパティをTrueに設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/calendar_todaymark.png" contenteditable="false"><br></p><p>今日領域の表示スタイルは、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">LegendStyle</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=25d24b17-7419-4a0d-8573-0ecde939b971" title="">Style</a>オブジェクトで設定することができます。詳細は「<a href="gcdocsite__documentlink?toc-item-id=4C5FEE2D-64BE-437D-BC4F-18A2917D7F6B" title="">スタイルの設定</a>－描画スタイル」を参照してください。</p><p>また、今日領域および日付領域の今日を示す画像は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">TodayImage</a>プロパティで設定することができます。</p><h2>週番号</h2><p>カレンダーの各月の左側に、通年で第何週に相当するか（週番号）を示すことができます。週番号を表示する場合は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ShowWeekNumber</a>プロパティをTrueに設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/weeknumber.png" contenteditable="false"><br></p><p>週番号領域の表示スタイルは、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">WeekNumberStyle</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=25d24b17-7419-4a0d-8573-0ecde939b971" title="">Style</a>オブジェクトで設定することができます。詳細は「<a href="gcdocsite__documentlink?toc-item-id=4c5fee2d-64be-437d-bc4f-18a2917d7f6b" title="">スタイルの設定</a>－描画スタイル」を参照してください。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b80001db-fab9-48f7-baab-a639554c60a2" title="">GcDateTimeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=636ed515-d9bd-4cd4-95e1-a248269ffe78" title="">ドロップダウンカレンダー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4c5fee2d-64be-437d-bc4f-18a2917d7f6b" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7e8d1ddd-87e5-4962-b603-454317a10781" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=979bc13b-9d8a-4852-adba-df726a52f186" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=023bbf34-13c0-4d73-a5b1-2fa5ca38e1b2" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4394a7f2-0d1c-4787-bfc9-217dd21811e2" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=076366ab-8236-4f4e-954b-9ee586810bce" title="">祝日定義ファイル</a></p>

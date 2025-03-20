@@ -1,0 +1,44 @@
+<p>GcDateTimeCellには、日付や時刻を選択するピッカーをドロップダウン表示することが可能です。この章では、ドロップダウン日付時刻ピッカーについて説明します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/dropdownpicker.png" contenteditable="false"><br></p><h2>概要</h2><p>GcDateTimeCellの<a href="gcdocsite__documentlink?toc-item-id=56521e17-4d8f-4623-ba64-c74be67587b9" title="">DropDown</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=fffb88b9-a03e-4327-a6e3-9b282ac4ec38" title="">DateTimeDropDown</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=dc74a1d2-db4f-4489-a6f5-109fe555d45e" title="">DropDownType</a>プロパティを<a href="gcdocsite__documentlink?toc-item-id=767c940e-dd0c-44f1-a0a0-ab34d2e836ad" title="">DateDropDownType.Picker</a>に設定すると、ドロップダウンボタンの押下により日付や時刻を選択できるピッカーが表示されます。</p><p>日付時刻ピッカーでは、値を変更したい年、月、日などの各領域をスクロールすることで、値を変更し〈OK〉ボタンの押下で値が確定しドロップダウン部分が閉じられます。 値選択のスクロールは、マウスホイールまたはタッチによるスワイプ操作の両方が可能です。 また、入力領域は日付部分と時刻部分に分けられ、「日付」あるいは「時刻」タブを選択することで切り替えられます。</p><p>下図は、"2015/05/01 00:00:00"と入力されていた値を"2015/06/15 10:30:00"に変更する例です。「日付」タブの月領域を「06」、日領域を「15」に変更し、 「時刻」タブに切り替えて時領域を「10」、分領域を「30」に変更後、〈OK〉ボタンを押下します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/picker_input.png" contenteditable="false"><br></p><h2>スタイルの設定</h2><p>日付時刻ピッカーの表示内容やスタイルを変更するには、GcDateTimeCellの<a href="gcdocsite__documentlink?toc-item-id=4f5161d5-f147-4de5-b31b-99279dcd88cf" title="">DropDownPicker</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=d7e64858-b17a-4f60-9b7b-15cf352c5421" title="">DateTimeDropDownPicker</a>オブジェクトを使用します。</p><p>日付時刻ピッカー全体のフォントや背景色、文字色のほか、以下の特定の領域のスタイルを設定することが可能です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/picker_style.png" contenteditable="false"><br></p><h4>ヘッダ領域</h4><p>日付時刻ピッカーに表示する内容を年月日の日付部分、時分秒の時刻部分に限定するか、あるいは両方表示するかは、<a href="gcdocsite__documentlink?toc-item-id=620125f3-3836-4081-b2e3-5697b21089e9" title="">ShowPickers</a>プロパティを使用します。 既定値は両方（<a href="gcdocsite__documentlink?toc-item-id=f0ee080c-1e9d-4a6d-beae-f9421da4edc0" title="">PickerDisplayOptions.Both</a>）です。 両方が設定されている場合、「日付」あるいは「時刻」タブを保持するヘッダ領域が表示され、タブの切り替えによって入力領域を変更します。 ヘッダ領域では、以下の設定が可能です。</p><ul><li><p>「日付」タブに表示するテキスト（<a href="gcdocsite__documentlink?toc-item-id=521b8d85-abcf-4462-9d20-aa6d98cc1dd9" title="">DateTabText</a>プロパティ）</p></li><li><p>「時刻」タブに表示するテキスト（<a href="gcdocsite__documentlink?toc-item-id=ee0a60a5-89dd-4047-8172-f75f4395d0bc" title="">TimeTabText</a>プロパティ）</p></li><li><p>タブテキストの文字色（<a href="gcdocsite__documentlink?toc-item-id=c95eb59a-4156-4791-b347-86bfdf18823c" title="">TabForeColor</a>プロパティ）</p></li><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=180f28ea-a418-4631-b411-80a4e3f9d4ab" title="">HeaderBackColor</a>プロパティ）</p></li></ul><p>なお、ヘッダ領域の背景色は、非アクティブタブを含むヘッダ領域に適用されます。アクティブタブはピッカー本体の背景色が適用されます。</p><h4>選択領域</h4><p>選択領域に表示されている値が、OKボタン押下時にコントロールに適用されます。この領域は以下の設定が可能です。</p><ul><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=eb1790d9-2f70-4a3f-91b9-8dbfe6fb1804" title="">SelectedBackColor</a>プロパティ）</p></li><li><p>境界線色（<a href="gcdocsite__documentlink?toc-item-id=0a0f4988-d20a-4238-9be8-ff9ef2d828c2" title="">SelectedBorderColor</a>プロパティ）</p></li><li><p>文字色（<a href="gcdocsite__documentlink?toc-item-id=bb9c8892-88ef-41ee-9c27-613f2495a1c0" title="">SelectedForeColor</a>プロパティ）</p></li><li><p>背景色の適用方法（<a href="gcdocsite__documentlink?toc-item-id=3581519c-3666-44cb-818d-97abd480b2db" title="">SelectionRenderMode</a>プロパティ）</p></li></ul><p>SelectionRenderModeプロパティは、背景を塗りつぶしや境界線色の表示方法を設定できます。</p><h4>ボタン</h4><p>OKボタンの押下で値をコントロールに設定します。ボタンには以下の設定が可能です。</p><ul><li><p>ボタンスタイル（<a href="gcdocsite__documentlink?toc-item-id=28d5c956-727d-4bfc-afa7-fbdb16fa2ebe" title="">FlatStyle</a>プロパティ）</p></li><li><p>背景色（<a href="gcdocsite__documentlink?toc-item-id=4d9dd5b5-7158-4ebd-83ad-613a795db8b9" title="">ButtonBackColor</a>プロパティ）</p></li><li><p>文字色（<a href="gcdocsite__documentlink?toc-item-id=387f0eed-06c5-46dd-a1c6-c4a83371fb1e" title="">ButtonForeColor</a>プロパティ）</p></li></ul><p>ボタンの背景色の設定は、FlatStyleプロパティがFlatまたはPopupのときに有効になります。</p><p>次のサンプルコードは、日付時刻ピッカーのスタイルを設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+
+<span class="hljs-comment">// ドロップダウンオブジェクトに日付時刻ピッカーを指定します。</span>
+gcDateTimeCell1.DropDown.DropDownType = GrapeCity.Win.Editors.DateDropDownType.Picker;
+
+<span class="hljs-comment">// ピッカーの背景色を設定します。</span>
+gcDateTimeCell1.DropDownPicker.BackColor = Color.Beige;
+
+<span class="hljs-comment">// 選択領域を設定します。</span>
+gcDateTimeCell1.DropDownPicker.SelectedBackColor = Color.Pink;
+gcDateTimeCell1.DropDownPicker.SelectedForeColor = Color.Navy;
+gcDateTimeCell1.DropDownPicker.SelectionRenderMode = GrapeCity.Win.Editors.SelectionRenderMode.Fill;
+
+<span class="hljs-comment">// ヘッダ部を設定します。</span>
+gcDateTimeCell1.DropDownPicker.HeaderBackColor = Color.White;
+gcDateTimeCell1.DropDownPicker.DateTabText = <span class="hljs-string">"Date"</span>;
+gcDateTimeCell1.DropDownPicker.TimeTabText = <span class="hljs-string">"Time"</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+
+' ドロップダウンオブジェクトに日付時刻ピッカーを指定します。
+GcDateTimeCell1.DropDown.DropDownType = GrapeCity.Win.Editors.DateDropDownType.Picker
+
+' ピッカーの背景色を設定します。
+GcDateTimeCell1.DropDownPicker.BackColor = Color.Beige
+
+' 選択領域を設定します。
+GcDateTimeCell1.DropDownPicker.SelectedBackColor = Color.Pink
+GcDateTimeCell1.DropDownPicker.SelectedForeColor = Color.Navy
+GcDateTimeCell1.DropDownPicker.SelectionRenderMode = GrapeCity.Win.Editors.SelectionRenderMode.Fill
+
+' ヘッダ部を設定します。
+GcDateTimeCell1.DropDownPicker.HeaderBackColor = Color.White
+GcDateTimeCell1.DropDownPicker.DateTabText = "Date"
+GcDateTimeCell1.DropDownPicker.TimeTabText = "Time"
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b80001db-fab9-48f7-baab-a639554c60a2" title="">GcDateTimeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6564107e-1f0b-4a35-bd8e-059b15c79f37" title="">入力の制御</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7af683d1-49d4-4662-8d5c-ff95be53c699" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9d947385-bd2c-4754-beba-489cbdd8b536" title="">視覚的な補助</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a530eeec-b4e0-4bae-96bf-36a3c1226cd5" title="">サイドボタンの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=636ed515-d9bd-4cd4-95e1-a248269ffe78" title="">ドロップダウンカレンダー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d2ac536f-45ed-4239-b020-0a46fa9baa14" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=346274df-ba85-4704-94de-81503622da40" title="">和暦表示の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=88836a36-6f2a-4e07-9825-e71e0993bf66" title="">データベース接続</a></p>

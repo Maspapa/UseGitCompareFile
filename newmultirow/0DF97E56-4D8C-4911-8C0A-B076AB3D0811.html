@@ -1,0 +1,17 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_numericupdowncell_thousandsseparator.png" contenteditable="false"><br></p><p>数値型セル（NumericUpDownCell）の値を桁区切り表示する方法はSystem.Windows.Forms.NumericUpDownコントロールと同じです。<a href="gcdocsite__documentlink?toc-item-id=3700bc23-def7-4aae-86d7-db1d65b9d328" title="">NumericUpDownCell.ThousandsSeparator</a>プロパティをTrueに設定すると、現在のオペレーティングシステムのカルチャにしたがって適切な桁区切り記号で数値が桁区切りで表示されます。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>NumericUpDownCell.Style.Formatプロパティは使用できません。</p></li></ul></blockquote><h2>デザイナによる設定</h2><ol><li><p>行（Row）に数値型セルを追加する。（例：numericUpDownCell1）</p></li><li><p>numericUpDownCell1を選択し、プロパティウィンドウでnumericUpDownCell1.ThousandsSeparatorプロパティをTrueに設定する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell1.Name = <span class="hljs-string">"numericUpDownCell1"</span>;
+numericUpDownCell1.ThousandsSeparator = <span class="hljs-literal">true</span>;
+numericUpDownCell1.Value = <span class="hljs-number">100000</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { numericUpDownCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+NumericUpDownCell1.Name = "NumericUpDownCell1"
+NumericUpDownCell1.ThousandsSeparator = True
+NumericUpDownCell1.Value = 100000
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { NumericUpDownCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7bc40421-e50f-4b59-9ec2-af44aadbf42f" title="">数値型セル（NumericUpDownCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b3b972ce-35ec-4560-9dea-35f794db8ae8" title="">スピンボタンの非表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1527ec60-cbf7-44cc-939b-586e69b4880b" title="">マイナスの値の赤字表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9594d3a1-6530-4267-86c7-05426856460c" title="">小数点以下の桁数表示</a></p>

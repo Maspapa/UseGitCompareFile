@@ -1,0 +1,208 @@
+<p>サマリ型セルでは、条件に一致するセルだけを対象にして集計することができます。</p><p>集計条件に設定できる項目は次のものです。</p><ul><li><p>集計対象行の範囲（開始行／終了行）</p></li><li><p>指定したセルの値</p></li></ul><blockquote type="warning"><p>!type=warning</p><ul><li><p>条件付き集計の定義は、次の条件をすべて満たす場合に使用できます。</p><ul><li><p>サマリ型セルが列フッタセクションに配置されている。</p></li><li><p>CalculationプロパティにMathStatisticsが設定されている。</p></li></ul></li></ul></blockquote><h2>集計対象行の指定</h2><p>集計対象行の範囲は、MathStatistics.<a href="gcdocsite__documentlink?toc-item-id=f780cdf6-f624-4eec-ad76-f78040c9e2fb" title="">StartRowIndex</a>プロパティおよびMathStatistics.<a href="gcdocsite__documentlink?toc-item-id=987a5959-20f2-46f7-aa66-40c6468935d5" title="">EndRowIndex</a>プロパティを使用して設定します。</p><p>StartRowIndexプロパティとEndRowIndexプロパティは、グリッドの上から何行目または下から何行目かを指定できます。</p><p>上から何行目かを指定する場合は、RowIndexの値を使用します。また、下から何行目かを指定する場合は、最下行を-1、下から２行目を-2・・・と負数をインデックスの値として使用します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_summarycell_conditionalsum_01.png" contenteditable="false"><br></p><p>次の一覧は、StartRowIndexプロパティとEndRowIndexプロパティを設定したときの対象範囲の例です。</p><table><thead><tr><th><p>StartRowIndexプロパティの値</p></th><th><p>EndRowIndexプロパティの値</p></th><th><p>集計対象行の範囲</p></th></tr></thead><tbody><tr><td><p>0</p></td><td><p>9</p></td><td><p>最上行から10行目までの範囲</p></td></tr><tr><td><p>7</p></td><td><p>-1</p></td><td><p>8行目から最下行までの範囲</p></td></tr><tr><td><p>-1</p></td><td><p>-10</p></td><td><p>最下行から10行目までの範囲</p></td></tr><tr><td><p>-6</p></td><td><p>0</p></td><td><p>下部の5行を除いた範囲</p></td></tr></tbody></table><p>次のコードでは、上部の5行目から10行目までのNumericUpDownCell1の値の合計値を取得するサマリ型セルの設定です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+SummaryCell summaryCell1 = <span class="hljs-keyword">new</span> SummaryCell();
+
+MathStatistics statis = <span class="hljs-keyword">new</span> MathStatistics();
+statis.StatisticsType = StatisticsType.Sum;
+
+statis.StartRowIndex = <span class="hljs-number">4</span>;
+statis.EndRowIndex = <span class="hljs-number">9</span>;
+
+statis.CellName = <span class="hljs-string">"numericUpDownCell1"</span>;
+
+summaryCell1.Calculation = statis;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim SummaryCell1 As New SummaryCell()
+
+Dim statis As New MathStatistics()
+statis.StatisticsType = StatisticsType.Sum
+
+statis.StartRowIndex = 4
+statis.EndRowIndex = 9
+
+statis.CellName = "numericUpDownCell1"
+
+SummaryCell1.Calculation = statis</code></pre></div><h2>集計条件の設定</h2><p>集計条件は複数の任意のセルに対して設定できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_summarycell_conditionalsum_02.png" contenteditable="false"><br></p><p>例えば上記のデータに対して、次の条件をすべて満たすデータを取得できます。</p><ul><li><p><strong>ケース1</strong>：次の条件をすべて満たすデータの売上げの合計値</p><ul><li><p>年齢が30歳以上</p></li><li><p>男性</p></li><li><p>所属が大阪支社以外</p></li></ul></li><li><p><strong>ケース2</strong>：次の条件をすべて満たすデータの個数</p><ul><li><p>所属が東京本社または大阪支社</p></li><li><p>男性</p></li></ul></li></ul><h3>デザイナによる設定</h3><p>サマリ型セルの集計条件は、設計時に専用のダイアログ画面で設定できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_summarycell_conditionalsum_03.png" contenteditable="false"><br></p><p>ここでは、集計条件を設定する手順について説明します。</p><p>なお、以下の説明では、テンプレートの行（Row）と列フッタ（ColumnFooterSection）に次のセル型が配置されていることとします。</p><ul><li><p>行：textBoxCell1、numericUpDownCell1、textBoxCell2、textBoxCell3、numericUpDownCell2</p></li><li><p>列フッタ：summaryCell1、summaryCell2</p></li></ul><h4>売上げの合計値（ケース1）の設定</h4><ol><li><p>summaryCell1を選択し、プロパティウィンドウで、CalculationプロパティのドロップダウンリストからMathStatisticsを選択する。</p></li><li><p>Calculationプロパティの右のプラスマークをクリックし、MathStatisticsオブジェクトのプロパティを展開する。</p></li><li><p>CellNameプロパティにnumericUpDownCell2を設定する。</p></li><li><p>StatisticsTypeプロパティにSumを設定する。</p></li><li><p>Conditionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたMultiRowConditionコレクションエディタで追加ボタンを押下してメンバーを追加する。</p></li><li><p>追加したメンバーを選択し、右側のプロパティでCellNameにnumericUpDownCell1を設定する。</p></li><li><p>Itemsプロパティを選択し、［...］ボタンをクリックし、MultiRowConditionItemコレクションエディタを開く。</p></li><li><p>条件に「より大きい」を追加して、セル値の右側のリストからNumber（数値型）を選択し、30を設定する。</p></li><li><p>手順6-9と同じ手順で次の条件を設定する。</p><p>条件1：</p><ul><li><p>CellName：textBoxCell2</p></li><li><p>Items：'M'と等しい（セル値の右側のリストからString（文字列型）を選択）</p></li></ul><p>条件2：</p><ul><li><p>CellName：textBoxCell3</p></li><li><p>Items：'大阪支社'と等しくない（セル値の右側のリストからString（文字列型）を選択）</p></li></ul></li></ol><h4>対象データの個数（ケース2）の設定</h4><ol><li><p>summaryCell2を選択し、プロパティウィンドウで、CalculationプロパティのドロップダウンリストからMathStatisticsを選択する。</p></li><li><p>Calculationプロパティの右のプラスマークをクリックし、MathStatisticsオブジェクトのプロパティを展開する。</p></li><li><p>StatisticsTypeプロパティにCountを設定する。</p></li><li><p>Conditionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたMultiRowConditionコレクションエディタで追加ボタンを押下してメンバーを追加する。</p></li><li><p>追加したメンバーを選択し、右側のプロパティでCellNameにtextBoxCell3を設定する。</p></li><li><p>Itemsプロパティを選択し、［...］ボタンをクリックし、MultiRowConditionItemコレクションエディタを開く。</p></li><li><p>条件に「と等しい」を追加し、セル値の右側のリストからString（文字列型）を選択し、'東京本社'を設定する。</p></li><li><p>条件に「と等しい」をもう1つ追加し、セル値の右側のリストからString（文字列型）を選択し、'大阪支社'を設定する。</p></li><li><p>手順5-9と同じ手順で次の条件を設定する。</p><p>条件1：</p><ul><li><p>CellName：textBoxCell2</p></li><li><p>Items：'M'と等しい（セル値の右側のリストからString（文字列型）を選択）</p></li></ul></li></ol><p>上記の設定後にForm1に次のコードを追加してプロジェクトを実行すると、サマリ型セルに条件に一致した集計結果が表示されます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// データを作成する</span>
+    DataTable dt = <span class="hljs-keyword">new</span> DataTable(<span class="hljs-string">"TEST"</span>);
+    dt.Columns.Add(<span class="hljs-string">"Emplyee"</span>, <span class="hljs-keyword">typeof</span>(String));
+    dt.Columns.Add(<span class="hljs-string">"Age"</span>, <span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">int</span>));
+    dt.Columns.Add(<span class="hljs-string">"Gender"</span>, <span class="hljs-keyword">typeof</span>(String));
+    dt.Columns.Add(<span class="hljs-string">"Division"</span>, <span class="hljs-keyword">typeof</span>(String));
+    dt.Columns.Add(<span class="hljs-string">"Sales"</span>, <span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">int</span>));
+    dt.Rows.Add(<span class="hljs-string">"渡部 博久"</span>, <span class="hljs-number">28</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"東京本社"</span>, <span class="hljs-number">150000</span>);
+    dt.Rows.Add(<span class="hljs-string">"中島 雄太"</span>, <span class="hljs-number">47</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"東京本社"</span>, <span class="hljs-number">240000</span>);
+    dt.Rows.Add(<span class="hljs-string">"秋山 佳美"</span>, <span class="hljs-number">34</span>, <span class="hljs-string">"F"</span>, <span class="hljs-string">"大阪支社"</span>, <span class="hljs-number">180000</span>);
+    dt.Rows.Add(<span class="hljs-string">"佐藤 政義"</span>, <span class="hljs-number">41</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"大阪支社"</span>, <span class="hljs-number">350000</span>);
+    dt.Rows.Add(<span class="hljs-string">"坂本 則夫"</span>, <span class="hljs-number">26</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"大阪支社"</span>, <span class="hljs-number">120000</span>);
+    dt.Rows.Add(<span class="hljs-string">"黒田 宏則"</span>, <span class="hljs-number">51</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"仙台支社"</span>, <span class="hljs-number">100000</span>);
+    dt.Rows.Add(<span class="hljs-string">"木村 栄一"</span>, <span class="hljs-number">44</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"仙台支社"</span>, <span class="hljs-number">200000</span>);
+    dt.Rows.Add(<span class="hljs-string">"赤坂 美和"</span>, <span class="hljs-number">35</span>, <span class="hljs-string">"F"</span>, <span class="hljs-string">"京都支社"</span>, <span class="hljs-number">160000</span>);
+    dt.Rows.Add(<span class="hljs-string">"遠藤 保孝"</span>, <span class="hljs-number">56</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"京都支社"</span>, <span class="hljs-number">380000</span>);
+    dt.Rows.Add(<span class="hljs-string">"小川 和義"</span>, <span class="hljs-number">27</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"京都支社"</span>, <span class="hljs-number">230000</span>);
+    dt.AcceptChanges();
+
+    <span class="hljs-comment">// テンプレートを作成する</span>
+    Template template1 = <span class="hljs-keyword">new</span> Template1();
+
+    template1.Row.Cells[<span class="hljs-number">0</span>].DataField = <span class="hljs-string">"Emplyee"</span>;
+    template1.Row.Cells[<span class="hljs-number">1</span>].DataField = <span class="hljs-string">"Age"</span>;
+    template1.Row.Cells[<span class="hljs-number">2</span>].DataField = <span class="hljs-string">"Gender"</span>;
+    template1.Row.Cells[<span class="hljs-number">3</span>].DataField = <span class="hljs-string">"Division"</span>;
+    template1.Row.Cells[<span class="hljs-number">4</span>].DataField = <span class="hljs-string">"Sales"</span>;
+
+    <span class="hljs-comment">// MultiRowを設定する</span>
+    gcMultiRow1.Template = template1;
+    gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+    gcMultiRow1.DataSource = dt;            
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' データを作成する
+    Dim dt As New DataTable("TEST")
+    dt.Columns.Add("Emplyee", GetType(String))
+    dt.Columns.Add("Age", GetType(Integer))
+    dt.Columns.Add("Gender", GetType(String))
+    dt.Columns.Add("Division", GetType(String))
+    dt.Columns.Add("Sales", GetType(Integer))
+    dt.Rows.Add("渡部 博久", 28, "M", "東京本社", 150000)
+    dt.Rows.Add("中島 雄太", 47, "M", "東京本社", 240000)
+    dt.Rows.Add("秋山 佳美", 34, "F", "大阪支社", 180000)
+    dt.Rows.Add("佐藤 政義", 41, "M", "大阪支社", 350000)
+    dt.Rows.Add("坂本 則夫", 26, "M", "大阪支社", 120000)
+    dt.Rows.Add("黒田 宏則", 51, "M", "仙台支社", 100000)
+    dt.Rows.Add("木村 栄一", 44, "M", "仙台支社", 200000)
+    dt.Rows.Add("赤坂 美和", 35, "F", "京都支社", 160000)
+    dt.Rows.Add("遠藤 保孝", 56, "M", "京都支社", 380000)
+    dt.Rows.Add("小川 和義", 27, "M", "京都支社", 230000)
+    dt.AcceptChanges()
+
+    ' テンプレートを作成する
+    Dim Template1 As New Template1()
+
+    Template1.Row.Cells(0).DataField = "Emplyee"
+    Template1.Row.Cells(1).DataField = "Age"
+    Template1.Row.Cells(2).DataField = "Gender"
+    Template1.Row.Cells(3).DataField = "Division"
+    Template1.Row.Cells(4).DataField = "Sales"
+
+    ' MultiRowを設定する
+    GcMultiRow1.Template = Template1
+    GcMultiRow1.AllowUserToAddRows = False
+    GcMultiRow1.DataSource = dt
+End Sub</code></pre></div><h3>コードによる設定</h3><p>サマリ型セルの集計条件はコードで設定することもできます。</p><p>上記の「売上げの合計値（ケース1）の設定」をコードで設定すると、次のようになります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+SummaryCell summaryCell1 = <span class="hljs-keyword">new</span> SummaryCell();
+
+MathStatistics statis = <span class="hljs-keyword">new</span> MathStatistics();
+
+<span class="hljs-comment">// 集計条件を設定する</span>
+<span class="hljs-comment">// 年齢が30歳以上</span>
+MultiRowCondition conditionAge = <span class="hljs-keyword">new</span> MultiRowCondition();
+conditionAge.CellName = <span class="hljs-string">"numericUpDownCell1"</span>;
+conditionAge.Items.Add(ConditionalCellStyleOperator.GreaterThan, <span class="hljs-number">30</span>);
+
+<span class="hljs-comment">// 性別が男性</span>
+MultiRowCondition conditionGender = <span class="hljs-keyword">new</span> MultiRowCondition();
+conditionGender.CellName = <span class="hljs-string">"textBoxCell2"</span>;
+conditionGender.Items.Add(ConditionalCellStyleOperator.Equals, <span class="hljs-string">"M"</span>);
+
+<span class="hljs-comment">// 所属が大阪支社</span>
+MultiRowCondition conditionDicision = <span class="hljs-keyword">new</span> MultiRowCondition();
+conditionDicision.CellName = <span class="hljs-string">"textBoxCell3"</span>;
+conditionDicision.Items.Add(ConditionalCellStyleOperator.NotEquals, <span class="hljs-string">"大阪支社"</span>);
+
+statis.Conditions.Add(conditionAge);
+statis.Conditions.Add(conditionGender);
+statis.Conditions.Add(conditionDicision);
+
+<span class="hljs-comment">// 集計の対象セルを設定する</span>
+statis.CellName = <span class="hljs-string">"numericUpDownCell2"</span>;
+
+summaryCell1.Calculation = statis;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim SummaryCell1 As New SummaryCell()
+
+Dim statis As New MathStatistics()
+
+' 集計条件を設定する
+' 年齢が30歳以上
+Dim conditionAge = New MultiRowCondition()
+conditionAge.CellName = "numericUpDownCell1"
+conditionAge.Items.Add(ConditionalCellStyleOperator.GreaterThan, 30)
+
+' 性別が男性
+Dim conditionGender As New MultiRowCondition()
+conditionGender.CellName = "textBoxCell2"
+conditionGender.Items.Add(ConditionalCellStyleOperator.Equals, "M")
+
+' 所属が大阪支社
+Dim conditionDicision As New MultiRowCondition()
+conditionDicision.CellName = "textBoxCell3"
+conditionDicision.Items.Add(ConditionalCellStyleOperator.NotEquals, "大阪支社")
+
+statis.Conditions.Add(conditionAge)
+statis.Conditions.Add(conditionGender)
+statis.Conditions.Add(conditionDicision)
+
+' 集計の対象セルを設定する
+statis.CellName = "numericUpDownCell2"
+
+SummaryCell1.Calculation = statis</code></pre></div><p>上記の「対象データの個数（ケース2）の設定」をコードで設定すると、次のようになります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+SummaryCell summaryCell1 = <span class="hljs-keyword">new</span> SummaryCell();
+
+MathStatistics statis = <span class="hljs-keyword">new</span> MathStatistics();
+
+<span class="hljs-comment">// 集計条件を設定する</span>
+<span class="hljs-comment">// 性別が男性</span>
+MultiRowCondition conditionGender = <span class="hljs-keyword">new</span> MultiRowCondition();
+conditionGender.CellName = <span class="hljs-string">"textBoxCell2"</span>;
+conditionGender.Items.Add(ConditionalCellStyleOperator.Equals, <span class="hljs-string">"M"</span>);
+
+<span class="hljs-comment">// 所属が東京本社または大阪支社</span>
+MultiRowCondition conditionDicision = <span class="hljs-keyword">new</span> MultiRowCondition();
+conditionDicision.CellName = <span class="hljs-string">"textBoxCell3"</span>;
+conditionDicision.Items.Add(ConditionalCellStyleOperator.Equals, <span class="hljs-string">"東京本社"</span>);
+conditionDicision.Items.Add(ConditionalCellStyleOperator.Equals, <span class="hljs-string">"大阪支社"</span>);
+
+statis.Conditions.Add(conditionGender);
+statis.Conditions.Add(conditionDicision);
+
+<span class="hljs-comment">// 集計の対象セルを設定する</span>
+statis.CellName = <span class="hljs-string">"numericUpDownCell2"</span>;
+
+<span class="hljs-comment">// 集計の種類を個数に設定する</span>
+statis.StatisticsType = StatisticsType.Count;
+
+summaryCell1.Calculation = statis;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim SummaryCell1 As New SummaryCell()
+
+Dim statis As New MathStatistics()
+
+' 集計条件を設定する
+' 性別が男性
+Dim conditionGender As New MultiRowCondition()
+conditionGender.CellName = "textBoxCell2"
+conditionGender.Items.Add(ConditionalCellStyleOperator.Equals, "M")
+
+' 所属が東京本社または大阪支社
+Dim conditionDicision As New MultiRowCondition()
+conditionDicision.CellName = "textBoxCell3"
+conditionDicision.Items.Add(ConditionalCellStyleOperator.Equals, "東京本社")
+conditionDicision.Items.Add(ConditionalCellStyleOperator.Equals, "大阪支社")
+
+statis.Conditions.Add(conditionGender)
+statis.Conditions.Add(conditionDicision)
+
+' 集計の対象セルを設定する
+statis.CellName = "numericUpDownCell2"
+
+' 集計の種類を個数に設定する
+statis.StatisticsType = StatisticsType.Count
+
+SummaryCell1.Calculation = statis</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4544130d-c322-4a8e-b314-7a8523ab4c89" title="">サマリ型セル (SummaryCell)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2d9e4d2f-20b1-43ff-b327-0762d80075bc" title="">列の合計をフッタに表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4018de86-4467-46c3-9aa7-716faaa39192" title="">入出金履歴の作成</a></p><p><a href="gcdocsite__documentlink?toc-item-id=90af16df-b408-4ef6-b00a-0a9f2cb7c0f2" title="">データエラー時のエラーアイコン表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=334b6be9-ca5e-4f18-965d-ce35728811df" title="">非表示行を合計値から除外</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5d99f298-d2bb-4fe2-ae43-a250f662042d" title="">値の端数処理</a></p>

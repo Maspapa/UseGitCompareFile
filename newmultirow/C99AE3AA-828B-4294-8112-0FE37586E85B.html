@@ -1,0 +1,22 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=09f0be66-968c-4abe-8111-98a3f63a8ae6" title="">GcMultiRow.NewCellPositionNeeded</a>イベントで<a href="gcdocsite__documentlink?toc-item-id=c3590715-97d5-49de-ac83-d0acfa8f3b44" title="">NewCellPosition</a>プロパティを使用することで、セルの移動先を変更することができます。</p><h2>サンプルコード</h2><p>次のコードは、第1セルに入力された値によって、セルの移動先を変更しています。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_NewCellPositionNeeded(object sender, NewCellPositionNeededEventArgs e)</span>
+{
+　　<span class="hljs-comment">// 第１セルで"a"が入力された場合、同じ行の第３セルへ移動します</span>
+　　<span class="hljs-keyword">if</span> (gcMultiRow1.CurrentCell.CellIndex == <span class="hljs-number">0</span>)
+　　{ 
+　　　　<span class="hljs-keyword">if</span> ((<span class="hljs-built_in">string</span>)gcMultiRow1.CurrentCell.EditedFormattedValue == <span class="hljs-string">"a"</span>)
+　　　　{
+　　　　　　e.NewCellPosition = <span class="hljs-keyword">new</span> CellPosition(e.RowIndex, <span class="hljs-number">2</span>);
+　　　　}
+　　}
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_NewCellPositionNeeded(ByVal sender As Object, ByVal e As NewCellPositionNeededEventArgs) Handles GcMultiRow1.NewCellPositionNeeded
+　　' 第１セルで"a"が入力された場合、同じ行の第３セルへ移動します
+　　If GcMultiRow1.CurrentCellPosition.CellIndex = 0 Then
+　　　　If GcMultiRow1.CurrentCell.EditedFormattedValue = "a" Then
+　　　　　　e.NewCellPosition = New CellPosition(e.RowIndex, 2)
+　　　　End If
+　　End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=8f564520-e11d-4128-9226-657e7ea0460d" title="">便利なイベント</a></p>

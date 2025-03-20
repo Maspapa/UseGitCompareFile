@@ -1,0 +1,15 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_textboxcell_crlf.png" contenteditable="false"><br></p><p>ユーザーの操作で文字列型セル（TextBoxCell）に改行を入力するには、[Shift]+[Enter]をタイプします。このキーはSystem.Windows.Forms.TextBoxと同じです。TextBoxCellで改行の入力を許可するには、次の設定を行います。</p><h2>デザイナによる設定</h2><ol><li><p>改行の入力を許可する文字列型セルを選択する。（例: textBoxCell1）</p></li><li><p>セルをドラッグして高さをおよそ2倍にする。</p></li><li><p>プロパティウィンドウでTextBoxCell.Style.Multilineプロパティを選択し、ドロップダウンリストから「True」を選択する。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>[Shift]+[Enter]キーで改行を入力する。</p></li></ol><h2>コーディングによる設定</h2><p>コーディングで改行を入力するには、TextBoxコントロールと同じようにMultilineプロパティで改行を許可した状態で改行コードを入力します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { <span class="hljs-keyword">new</span> TextBoxCell() });
+<span class="hljs-comment">// 複数行を有効にする</span>
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Style.Multiline = MultiRowTriState.True;
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-string">"Hello\r\nWorld"</span>;
+<span class="hljs-comment">// セルの高さを自動調節する</span>
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].PerformVerticalAutoFit();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {New TextBoxCell()})
+' 複数行を有効にする
+GcMultiRow1.Rows(0).Cells(0).Style.Multiline = MultiRowTriState.True
+GcMultiRow1.Rows(0).Cells(0).Value = "Hello" &amp; vbCrLf &amp; "World"
+' セルの高さを自動調節する
+GcMultiRow1.Rows(0).Cells(0).PerformVerticalAutoFit()</code></pre></div><p>複数行の表示については、「<a href="gcdocsite__documentlink?toc-item-id=b113b6cb-598e-48a9-917e-8eec48db994b" title="">複数行とワードラップ</a>」も参照してください。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=1b6c7280-45b3-4c45-a239-a64c1bdd0242" title="">文字列型セル（TextBoxCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f8aafa29-710b-43fd-8254-5f1eb57f648a" title="">垂直スクロール バーの表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1f9249c6-d90c-43ac-9b36-679b7ef5e7db" title="">KeyDown イベントの使用方法</a></p>

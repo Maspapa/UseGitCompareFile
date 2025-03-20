@@ -1,0 +1,50 @@
+<p>現在のセルが編集状態でない場合に<a href="gcdocsite__documentlink?toc-item-id=208cd01d-688d-461a-9b6b-eaff2ceefda7" title="">EditingActions.CancelEdit</a>プロパティを実行すると、行レベルの編集がキャンセルされます。このキャンセルを禁止するには、現在のセルの編集状態とダーティ状態をチェックする必要があります。</p><h2>サンプルコード</h2><p>次のコードは、現在のセルが編集中で、なおかつダーティ状態の場合にキャンセルアクションを実行します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomCancelAction</span> : <span class="hljs-title">IAction</span>
+{
+　　<span class="hljs-function">public bool CanExecute(GcMultiRow target)</span>
+　　{
+　　　　<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+　　}
+
+　　<span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> DisplayName
+　　{
+　　　　<span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.ToString(); }
+　　}
+
+　　<span class="hljs-function">public void Execute(GcMultiRow target)</span>
+　　{
+　　　　<span class="hljs-keyword">if</span> (target.IsCurrentCellInEditMode == <span class="hljs-literal">true</span>)
+　　　　{
+　　　　　　<span class="hljs-keyword">if</span> (target.IsCurrentCellDirty == <span class="hljs-literal">true</span>)
+　　　　　　{
+　　　　　　　　<span class="hljs-comment">// アクティブなセルが編集中でダーティ状態の場合のみキャンセルアクションを実行します。</span>
+　　　　　　　　EditingActions.CancelEdit.Execute(target);
+　　　　　　}
+　　　　}
+　　}
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class CustomCancelAction
+　　Implements IAction
+
+　　Public Function CanExecute(ByVal target As GcMultiRow) As Boolean Implements IAction.CanExecute
+　　　　Return True
+　　End Function
+
+　　Public ReadOnly Property DisplayName() As String Implements IAction.DisplayName
+　　　　Get
+　　　　　　Return Me.ToString()
+　　　　End Get
+　　End Property
+
+　　Public Sub Execute(ByVal target As GcMultiRow) Implements IAction.Execute
+　　　　If target.IsCurrentCellInEditMode Then
+　　　　　　If target.IsCurrentCellDirty Then
+　　　　　　　　' アクティブなセルが編集中でダーティ状態の場合のみキャンセルアクションを実行します。
+　　　　　　　　EditingActions.CancelEdit.Execute(target)
+　　　　　　End If
+　　　　End If
+　　End Sub
+End Class</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6c33e2eb-8db5-46d3-9ca5-86dc57689993" title="">ユーザー定義のショートカットキー</a></p>

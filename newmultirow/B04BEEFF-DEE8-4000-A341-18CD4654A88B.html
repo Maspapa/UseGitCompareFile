@@ -1,0 +1,31 @@
+<p>DateTimePickerCellの既定の動作では、セルの編集時に初期値として現在の日時が表示されます。この初期値は、セルの値を明示的に入力しない限りセルの値として保存されません。これはSystem.Windows.Forms.DateTimePickerコントロールを継承するDateTimePickerEditingControlの動作によるものです。</p><p>DateTimePickerCellに表示される初期値をそのまま入力値として適用するには、セルの編集が完了したタイミングで、初期値を持つDateTimePickerCellに対して、明示的に値を入力する処理を行う必要があります。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellEndEdit(object sender, CellEndEditEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+    
+    <span class="hljs-keyword">if</span> (e.EditCanceled == <span class="hljs-literal">false</span>)
+    {
+        <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> DateTimePickerCell)
+        {
+            <span class="hljs-keyword">if</span> (currentCell.Value == <span class="hljs-literal">null</span>)
+            {
+                currentCell.Value = DateTime.Now;
+            }
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellEndEdit(ByVal sender As System.Object, ByVal e As CellEndEditEventArgs) Handles GcMultiRow1.CellEndEdit
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+    
+    If e.EditCanceled = False Then
+        If TypeOf currentCell Is DateTimePickerCell Then
+            If currentCell.Value Is Nothing Then
+                currentCell.Value = Date.Now
+            End If
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7e1bd51b-9e9b-44b5-a31f-56c5672e613c" title="">日付型セル（DateTimePickerCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=52a20b79-14bc-4ca2-81ba-909274f1161d" title="">和暦の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=485f0df2-9264-4b73-89fa-087fe4fa90d8" title="">書式設定済みの値の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcd4c78d-1a80-4229-b1e9-57c31031cea4" title="">ValueChangedイベントの使用方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3ed4de8-e23e-4631-b601-93ffc6f32a5c" title="">値がnullのときの代替文字列</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6a710a0-4045-48a1-aeba-c53dd9ad8f5a" title="">ドロップダウンボタンの非表示</a></p>

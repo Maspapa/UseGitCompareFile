@@ -1,0 +1,21 @@
+<p>InputManCellに含まれる次のセル型をデザイナで配置すると、Template.Designer.vbファイルの初期化コードで、コンストラクタにFalse をとるコードが生成されます。</p><ul><li><p>GcCharMaskCell</p></li><li><p>GcComboBoxCell</p></li><li><p>GcNumberCell</p></li><li><p>GcTimeSpanCell</p></li></ul><p>この引数はinitializationとして定義されているもので、次のような機能を提供しています。</p><ul><li><p>Trueのとき既定のドロップダウンボタンやショートカットキーを自動的に生成します。Falseの場合はこれらのオブジェクトを自動的に生成しません。</p></li></ul><p>たとえば、GcComboBoxCellを引数なしでインスタンス化した場合、ドロップダウンボタンを持つコンボボックスが作成されます。一方、引数にFalseを渡してインスタンス化した場合、ドロップダウンボタンを持たないコンボボックスが作成されます。前者は一般的なコンボボックスに適し、後者は複数のボタンを持つカスタマイズされたコンボボックスを作成するのに適しています。つまり、この引数は用途に応じて異なる初期化の方法を提供しています。</p><p>MultiRowのデザイナでは、ユーザーがドロップダウンボタン（サイドボタン）やショートカットキーをカスタマイズする可能性を考慮するため、上記のセルをFalseの引数で初期化し、合わせてドロップダウンボタンを明示的に定義します。ユーザーはドロップダウンボタンをすべて削除したり、既定のボタンを除いて独自のボタンを定義することができます。</p><p>次のコードは、引数の違いによる結果の違いを示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcComboBoxCell gcComboBoxCell1 = <span class="hljs-keyword">new</span> InputManCell.GcComboBoxCell(<span class="hljs-literal">true</span>);
+<span class="hljs-comment">// InputManCell.GcComboBoxCell gcComboBoxCell1 = new InputManCell.GcComboBoxCell(false);</span>
+gcComboBoxCell1.DropDownStyle = MultiRowComboBoxStyle.DropDown;
+Console.WriteLine(<span class="hljs-string">"サイドボタンの数: {0}"</span>, gcComboBoxCell1.SideButtons.Count);
+Console.WriteLine(<span class="hljs-string">"ショートカットキーの数: {0}"</span>, gcComboBoxCell1.ShortcutKeys.Count);
+<span class="hljs-keyword">this</span>.gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcComboBoxCell1 });
+<span class="hljs-keyword">this</span>.gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim GcComboBoxCell1 As New InputManCell.GcComboBoxCell(True)
+    ' Dim GcComboBoxCell1 As New InputManCell.GcComboBoxCell(False)
+    GcComboBoxCell1.DropDownStyle = MultiRowComboBoxStyle.DropDown
+    Console.WriteLine("サイドボタンの数: {0}", GcComboBoxCell1.SideButtons.Count)
+    Console.WriteLine("ショートカットキーの数: {0}", GcComboBoxCell1.ShortcutKeys.Count)
+    Me.GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcComboBoxCell1})
+    Me.GcMultiRow1.RowCount = 5
+End Sub</code></pre></div><p>引数がTrueの場合、サイドボタンの数は1、ショートカットキーの数は2になります。引数がFalseの場合、サイドボタンの数は0、ショートカットキーの数は0になり、開発者が明示的にこれらを追加する必要があることがわかります。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=71edf1f4-ff7c-4615-b910-c00736a3b592" title="">InputManCellの使い方</a></p>

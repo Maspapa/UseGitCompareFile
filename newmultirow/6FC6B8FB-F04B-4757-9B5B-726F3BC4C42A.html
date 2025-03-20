@@ -1,0 +1,15 @@
+<p>ポップアップ型セル（PopupCell）を使用して色を選択するには、System.Windows.Forms.ColorDialogをPopupCellに割り当てます。</p><h2>デザイナによる設定</h2><ol><li><p>行（Row）にポップアップ型セルを追加する。（例：popupCell1）</p></li><li><p>行（Row）にColorDialogを追加する。（例：colorDialog1）</p></li><li><p>popupCell1を選択し、プロパティウィンドウでpopupCell1.Popupプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示された「ポップアップ」画面でツリーを展開し、「colorDialog1」を選択する。</p></li><li><p>［OK］ボタンをクリックして画面を閉じる。</p></li><li><p>popupCell1を選択し、プロパティウィンドウでpopupCell1.PopupValueMemberプロパティを選択し、ドロップダウンウィンドウから「Color」を選択する。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>popupCell1のボタンをクリックし、「色の設定」ダイアログが表示されることを確認する。</p></li><li><p>「色の設定」ダイアログで任意の色を選択し、［OK］ボタンをクリックする。</p></li><li><p>popupCell1の入力領域に選択した色の文字列が表示されることを確認する。</p></li></ol><h2>コーディングによる設定</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+PopupCell popupCell1 = <span class="hljs-keyword">new</span> PopupCell();
+popupCell1.Popup = <span class="hljs-keyword">new</span> ColorDialog();
+popupCell1.PopupValueMember = <span class="hljs-string">"Color"</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { popupCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim PopupCell1 As New PopupCell()
+PopupCell1.Popup = New ColorDialog()
+PopupCell1.PopupValueMember = "Color"
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() { PopupCell1 })
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=52b8d370-b035-4b30-9dd0-a90dc8e5bc19" title="">ポップアップ型セル (PopupCell)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f17bfd35-4a1d-4232-894f-5d78c4879b4e" title="">フォームの表示</a></p>

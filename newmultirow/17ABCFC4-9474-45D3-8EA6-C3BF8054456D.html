@@ -1,0 +1,33 @@
+<p>RadioGroupCellのグループ内のラジオボタンを表示する方向は、<a href="gcdocsite__documentlink?toc-item-id=a1b0782b-ef3e-48c1-be94-517b2dc46a04" title="">RadioGroupCell.FlowDirection</a>プロパティを使用します。また、<a href="gcdocsite__documentlink?toc-item-id=31d1886d-1ce9-4e58-b932-5776ba3f4b6f" title="">RadioGroupCell.ColumnCount</a>プロパティと組み合わせることで、N文字の順またはZ文字の順にラジオボタンを表示することができます。</p><h2>サンプルコード</h2><p>次のコードは、RadioGroupCellにN文字の順およびZ文字の順にラジオボタンを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// Z文字の順でラジオボタンを表示</span>
+RadioGroupCell radioGroupCell1 = <span class="hljs-keyword">new</span> RadioGroupCell();
+radioGroupCell1.Items.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] {<span class="hljs-string">"AAA"</span>, <span class="hljs-string">"BBB"</span>, <span class="hljs-string">"CCC"</span>, <span class="hljs-string">"DDD"</span>});
+radioGroupCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">120</span>, <span class="hljs-number">60</span>);
+radioGroupCell1.FlowDirection = Orientation.Horizontal;
+radioGroupCell1.ColumnCount = <span class="hljs-number">2</span>;
+
+<span class="hljs-comment">// N文字の順でラジオボタンを表示</span>
+RadioGroupCell radioGroupCell2  = <span class="hljs-keyword">new</span> RadioGroupCell();
+radioGroupCell2.Items.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] {<span class="hljs-string">"AAA"</span>, <span class="hljs-string">"BBB"</span>, <span class="hljs-string">"CCC"</span>, <span class="hljs-string">"DDD"</span>});
+radioGroupCell2.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">120</span>, <span class="hljs-number">60</span>);
+radioGroupCell2.FlowDirection = Orientation.Vertical;
+radioGroupCell2.ColumnCount = <span class="hljs-number">2</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] {radioGroupCell1, radioGroupCell2});</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' Z文字の順でラジオボタンを表示
+Dim RadioGroupCell1 As New RadioGroupCell()
+RadioGroupCell1.Items.AddRange(New String() {"AAA", "BBB", "CCC", "DDD"})
+RadioGroupCell1.Size = New Size(120, 60)
+RadioGroupCell1.FlowDirection = Orientation.Horizontal
+RadioGroupCell1.ColumnCount = 2
+
+' N文字の順でラジオボタンを表示
+Dim RadioGroupCell2 As New RadioGroupCell()
+RadioGroupCell2.Items.AddRange(New String() {"AAA", "BBB", "CCC", "DDD"})
+RadioGroupCell2.Size = New Size(120, 60)
+RadioGroupCell2.FlowDirection = Orientation.Vertical
+RadioGroupCell2.ColumnCount = 2
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {RadioGroupCell1, RadioGroupCell2})</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=1cf6f9b7-2d1e-45bc-9639-a3ff57c4935f" title="">ラジオグループ型セル（RadioGroupCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b7ba1bb3-fcea-4c4b-91af-4c13ada4f605" title="">値の変更の検出</a></p>

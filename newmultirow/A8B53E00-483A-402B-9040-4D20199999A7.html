@@ -1,0 +1,48 @@
+<p>MultiRowでは、セルを選択したときにそのセルが属する行と列のヘッダをハイライト表示できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_highlightstyle01.png" contenteditable="false"><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>ハイライト表示が有効なセルは、列ヘッダ型セルと行ヘッダ型セルのみです。</p></li></ul></blockquote><h2>ハイライトモードの設定</h2><p>ヘッダセルのハイライトを有効にするには、<a href="gcdocsite__documentlink?toc-item-id=9641b15d-99f5-434e-8d02-7faf2a85f037" title="">GcMultiRow.HeaderCellHighlightMode</a>プロパティを使用します。ハイライト表示の対象となるヘッダセルはHeaderCellHighlightModeプロパティの設定によって次のようになります。</p><p><strong>ContainedCells</strong></p><p>選択したセルの範囲内に全体が含まれているヘッダセルがハイライト表示します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_highlightstyle02.png" contenteditable="false"><br></p><p><strong>IntersectedCells</strong></p><p>選択したセルの範囲内に全体または一部が含まれているヘッダセルがハイライト表示します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_highlightstyle03.png" contenteditable="false"><br></p><p><strong>None</strong></p><p>すべてのヘッダセルがハイライト表示しません。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_highlightstyle04.png" contenteditable="false"><br></p><p>次のコードでは、選択したセルの範囲内に全体が含まれているヘッダセルがハイライト表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.HeaderCellHighlightMode = GrapeCity.Win.MultiRow.HighlightMode.ContainedCells;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.HeaderCellHighlightMode = GrapeCity.Win.MultiRow.HighlightMode.ContainedCells</code></pre></div><h2>ハイライトスタイルの設定</h2><p>ヘッダのハイライト表示では、セルの背景色と文字色を変更できます。この2つの色は、CellStyle.SelectionBackColorプロパティとCellStyle.SelectionForeColorプロパティを使用して設定します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>ヘッダセルのハイライト表示で背景色の設定を有効にするには<a href="gcdocsite__documentlink?toc-item-id=9159bbc8-541f-4e22-9658-b9ff7f7b7ef3" title="">FlatStyle</a>プロパティにFlatまたはPopupを設定する必要があります。</p></li></ul></blockquote><p>次のコードでは、GcMultiRowコントロールに設定されているテンプレートのColumHeaderCellのFlayStyleプロパティにFlatを設定して、ヘッダのハイライト表示を有効にします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// GcMultiRowコントロールに設定されているテンプレートを取得します。</span>
+Template template1 = gcMultiRow1.Template;
+
+<span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> _count = <span class="hljs-number">0</span>; _count&lt;template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells.Count; _count++)
+{
+    <span class="hljs-keyword">if</span>(template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[_count] <span class="hljs-keyword">is</span> ColumnHeaderCell)
+    {
+        <span class="hljs-comment">// テンプレートの列ヘッダセクションに配置されているColumnHeaderCellのFlatStyleプロパティにFlatを設定します。</span>
+        (template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[_count] <span class="hljs-keyword">as</span> ColumnHeaderCell).FlatStyle = FlatStyle.Flat;
+    }
+}
+
+<span class="hljs-comment">// GcMultiRowコントロールにテンプレートを再設定します。</span>
+gcMultiRow1.Template = template1;
+
+<span class="hljs-comment">// ヘッダのハイライト表示を有効にします。</span>
+gcMultiRow1.HeaderCellHighlightMode = HighlightMode.ContainedCells;
+
+<span class="hljs-comment">// ヘッダのハイライト表示の背景色と前景色を設定ます。</span>
+gcMultiRow1.ColumnHeadersDefaultHeaderCellStyle.SelectionBackColor = Color.LightGray;
+gcMultiRow1.ColumnHeadersDefaultHeaderCellStyle.SelectionForeColor = Color.Green;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' GcMultiRowコントロールに設定されているテンプレートを取得します。
+Dim Template1 As Template = GcMultiRow1.Template
+
+For _count As Integer = 0 To Template1.ColumnHeaders(0).Cells.Count - 1
+    If TypeOf (Template1.ColumnHeaders(0).Cells(_count)) Is ColumnHeaderCell Then
+        ' テンプレートの列ヘッダセクションに配置されているColumnHeaderCellのFlatStyleプロパティにFlatを設定します。
+        DirectCast(Template1.ColumnHeaders(0).Cells(_count), ColumnHeaderCell).FlatStyle = FlatStyle.Flat
+
+    End If
+Next
+
+' GcMultiRowコントロールにテンプレートを再設定します。
+GcMultiRow1.Template = Template1
+
+' ヘッダのハイライト表示を有効にします。
+GcMultiRow1.HeaderCellHighlightMode = HighlightMode.ContainedCells
+
+' ヘッダのハイライト表示の背景色と前景色を設定ます。
+GcMultiRow1.ColumnHeadersDefaultHeaderCellStyle.SelectionBackColor = Color.LightGray
+GcMultiRow1.ColumnHeadersDefaultHeaderCellStyle.SelectionForeColor = Color.Green</code></pre></div><h2>対象セルのカスタマイズ</h2><p><a href="gcdocsite__documentlink?toc-item-id=6b320d3e-dfc7-4f81-be40-2e7028cf55ab" title="">ColumnHeaderCell</a>クラスまたは<a href="gcdocsite__documentlink?toc-item-id=340c0a6d-2586-4dfd-911f-522d3844501b" title="">RowHeaderCell</a>クラスのHighlightRelatedCellNamesプロパティを使用すると、セルを選択したときにハイライト表示する対象のヘッダセルを任意に指定できます。</p><p>HighlightRelatedCellNamesプロパティには、ヘッダセルをハイライト表示するために選択が必要となるセルの名前を追加します。</p><p>次のコードでは、TextBoxCell1とTextBoxCell3が選択されたときにColumnHeaderCell1がハイライト表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// columnHeaderCell1のハイライト表示に必要なセルを設定します。</span>
+ColumnHeaderCell columnHeaderCell1 = gcMultiRow1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-string">"columnHeaderCell1"</span>] <span class="hljs-keyword">as</span> ColumnHeaderCell;
+columnHeaderCell1.HighlightRelatedCellNames.Add(<span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-string">"textBoxCell3"</span> }));</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' ColumnHeaderCell1のハイライト表示に必要なセルを設定します。
+Dim ColumnHeaderCell1 As ColumnHeaderCell = DirectCast(GcMultiRow1.ColumnHeaders(0).Cells("ColumnHeaderCell1"), ColumnHeaderCell)
+ColumnHeaderCell1.HighlightRelatedCellNames.Add(New List(Of String)(New String() {"TextBoxCell1", "TextBoxCell3"}))</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_highlightstyle05.png" contenteditable="false"><br></p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b6a8b45a-2db8-4ffc-8c99-d5b6c5824ddd" title="">ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b7382e19-e827-417e-9e88-6011b4836b2f" title="">ヘッダによるセル選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7ce7c90d-3e70-485d-82b9-55dd525c82b0" title="">ヘッダによる行と列のサイズ変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bb220af2-09dc-4d51-a882-9df03363c4af" title="">列ヘッダによる行のフィルタ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8e79ba17-0253-40a0-93d7-8f081ef9c676" title="">列ヘッダによる行の並び替え</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6173680d-08b4-4f11-a32b-b1f4a0ceca44" title="">ヘッダの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3d7bd8ef-a1b3-4b08-9b49-bf62fcb1770a" title="">行ヘッダ</a></p>

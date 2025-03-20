@@ -1,0 +1,51 @@
+<p>ここでは、キーワードによる書式設定について説明します。</p><h2>概要</h2><p>GcDateTimeCellでは、日付のキーワードを設定することで書式を設定することができます。 フィールドオブジェクトによる書式設定のように柔軟なスタイル設定が不要な場合、入力および表示書式についてそれぞれ1度のメソッド実行だけで定義できるため、簡単な実装が可能です。</p><blockquote type="warning"><p>!type=warning</p><p>キーワードによる書式設定は、El Tabelle MultiRow 4.0J の日付型セルで利用されていた方法と同様の方法です。</p></blockquote><h2>設定方法</h2><h4>コードによる設定</h4><p>入力書式を設定するには、<a href="gcdocsite__documentlink?toc-item-id=440e0161-07b6-4018-b351-e2ec0f335ae3" title="">Fields</a>プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=def2bbd2-a165-4f12-a721-e74eb3018c61" title="">DateTimeFieldCollection</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=667367ea-6462-400b-9da5-32296049100f" title="">AddRange</a>メソッドに、入力書式用のキーワードを使用した文字列を設定します。</p><p>表示書式を設定するには、<a href="gcdocsite__documentlink?toc-item-id=fdd65429-f1cc-412f-ad4d-acc196b9b69b" title="">DisplayFields</a>プロパティが参照する <a href="gcdocsite__documentlink?toc-item-id=81fd8676-8105-45a1-9fb2-ef7ef5503bd7" title="">DateTimeDisplayFieldCollection</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=35919500-442e-48bc-b420-0449f5aa9d66" title="">AddRange</a>メソッドに、表示書式用のキーワードを使用した文字列を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+gcDateTimeCell1.Name = <span class="hljs-string">"gcDateTimeCell1"</span>;
+gcDateTimeCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">180</span>, <span class="hljs-number">20</span>);
+
+<span class="hljs-comment">// フィールドをクリアします。</span>
+gcDateTimeCell1.Fields.Clear();
+gcDateTimeCell1.DisplayFields.Clear();
+
+<span class="hljs-comment">// キーワードから書式を設定します。 </span>
+gcDateTimeCell1.Fields.AddRange(<span class="hljs-string">"yyyy年 MM月 dd日 HH時 mm分 ss秒"</span>);
+gcDateTimeCell1.DisplayFields.AddRange(<span class="hljs-string">"ggg ee年 MM月 dd日 HH時 mm分 ss秒"</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+GcDateTimeCell1.Name = "GcDateTimeCell1"
+GcDateTimeCell1.Size = New Size(180, 20)
+
+' フィールドをクリアします。
+GcDateTimeCell1.Fields.Clear()
+GcDateTimeCell1.DisplayFields.Clear()
+
+' キーワードから書式を設定します。
+GcDateTimeCell1.Fields.AddRange("yyyy年 MM月 dd日 HH時 mm分 ss秒")
+GcDateTimeCell1.DisplayFields.AddRange("ggg ee年 MM月 dd日 HH時 mm分 ss秒")
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})
+GcMultiRow1.RowCount = 5</code></pre></div><p>なお、AddRangeメソッドにより書式を設定する場合でも、自動的にフィールドオブジェクトに変換されているため、設定後に特定のフィールドスタイルを変更することが可能です。</p><p>次のサンプルコードは、キーワードにより設定した日付書式で特定のフィールドのスタイルを設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// 入力書式フィールドのスタイルを設定します。</span>
+gcDateTimeCell1.Fields[<span class="hljs-number">0</span>].BackColor = Color.Bisque;
+gcDateTimeCell1.Fields[<span class="hljs-number">1</span>].ForeColor = Color.DarkGray;
+gcDateTimeCell1.Fields[<span class="hljs-number">2</span>].Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"Meiryo UI"</span>, <span class="hljs-number">12</span>);
+
+
+<span class="hljs-comment">// 表示書式フィールドのスタイルを設定します。</span>
+gcDateTimeCell1.DisplayFields[<span class="hljs-number">0</span>].Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"ＭＳ ゴシック"</span>, <span class="hljs-number">15</span>);
+gcDateTimeCell1.DisplayFields[<span class="hljs-number">1</span>].BackColor = Color.Yellow;
+gcDateTimeCell1.DisplayFields[<span class="hljs-number">2</span>].ForeColor = Color.Gray;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' 入力書式フィールドのスタイルを設定します。
+GcDateTimeCell1.Fields(0).BackColor = Color.Bisque
+GcDateTimeCell1.Fields(1).ForeColor = Color.DarkGray
+GcDateTimeCell1.Fields(2).Font = New Font("Meiryo UI", 12)
+
+
+' 表示書式フィールドのスタイルを設定します。
+GcDateTimeCell1.DisplayFields(0).Font = New Font("ＭＳ ゴシック", 15)
+GcDateTimeCell1.DisplayFields(1).BackColor = Color.Yellow
+GcDateTimeCell1.DisplayFields(2).ForeColor = Color.Gray</code></pre></div><h4>デザイン画面での設定</h4><p>デザイン画面では「入力書式の設定」「表示書式の設定」エディタを使用して容易な設定が可能です。これらのエディタは次のいずれかの方法で起動でき、 日付時刻のキーワードを設定することで書式を作成します。</p><p>入力書式</p><ul><li><p>コントロールのスマート タグから「入力書式の設定...」を選択</p></li></ul><p>表示書式</p><ul><li><p>コントロールのスマート タグから「表示書式の設定...」を選択</p></li></ul><p>個々のフィールドのプロパティは設定できませんが、和暦表示や「年」「月」「日」などのリテラル文字を使用した書式が予めビルトイン書式として用意されているため、これらのリストから書式を選択するだけで簡単に書式を定義することが可能です。</p><h2>入力書式のキーワード</h2><p>入力書式として使用可能なキーワードは以下のとおりです。</p><table><thead><tr><th><p>キーワード</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>g</p></td><td><p>年号の頭文字をアルファベットで表示（M、T、S、H、R）</p></td></tr><tr><td><p>gg</p></td><td><p>年号の頭文字を漢字で表示（明、大、昭、平、令）</p></td></tr><tr><td><p>ggg</p></td><td><p>年号の正式名称を漢字で表示（明治、大正、昭和、平成、令和）</p></td></tr><tr><td><p>e</p></td><td><p>和暦年を２桁で表示（先頭に0を付けない）</p></td></tr><tr><td><p>ee</p></td><td><p>和暦年を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>yy</p></td><td><p>年を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>yyyy</p></td><td><p>年を４桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>MM</p></td><td><p>月を２桁の数字で表示（先頭に0を付ける）</p></td></tr><tr><td><p>MMM</p></td><td><p>月を省略形で表示</p><p>（DateTimeFormatInfo.AbbreviatedMonthNames() で指定された形式）</p></td></tr><tr><td><p>MMMM</p></td><td><p>月を正式名称で表示</p><p>（DateTimeFormatInfo.MonthNames() で指定された形式）</p></td></tr><tr><td><p>dd</p></td><td><p>日を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>t</p></td><td><p>12時間制で時刻を表示するときに午前（AMDesignatorプロパティで設定）または午後（PMDesignatorプロパティで設定）を表す文字列の最初の１文字を表示</p></td></tr><tr><td><p>tt</p></td><td><p>12時間制で時刻を表示するときに午前（AMDesignatorプロパティで設定）または午後（PMDesignatorプロパティで設定）を表す文字列を表示</p></td></tr><tr><td><p>hh</p></td><td><p>時を12時間制で表示（先頭に0を付ける）</p></td></tr><tr><td><p>HH</p></td><td><p>時を24時間制で表示（先頭に0を付ける）</p></td></tr><tr><td><p>mm</p></td><td><p>分を表示（先頭に0を付ける）</p></td></tr><tr><td><p>ss</p></td><td><p>秒を表示（先頭に0を付ける）</p></td></tr><tr><td><p>\（Chr(92)）</p></td><td><p>キーワードをリテラル文字として表示</p></td></tr></tbody></table><h2>表示書式のキーワード</h2><p>表示書式として使用可能なキーワードは以下のとおりです。</p><table><thead><tr><th><p>キーワード</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>A</p></td><td><p>紀元後を表す"A.D.（Anno Domini）"を表示</p></td></tr><tr><td><p>g</p></td><td><p>年号の頭文字をアルファベットで表示（M、T、S、H、R）</p></td></tr><tr><td><p>gg</p></td><td><p>年号の頭文字を漢字で表示（明、大、昭、平、令）</p></td></tr><tr><td><p>ggg</p></td><td><p>年号の正式名称を漢字で表示（明治、大正、昭和、平成、令和）</p></td></tr><tr><td><p>e</p></td><td><p>和暦年を２桁で表示（先頭に0を付けない）</p></td></tr><tr><td><p>ee</p></td><td><p>和暦年を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>E</p></td><td><p>和暦年を２桁で表示し開始年を元と表示（先頭に0を付けない）</p><p>（例：平成元年）</p></td></tr><tr><td><p>EE</p></td><td><p>和暦年を２桁で表示し開始年を元と表示（先頭に0を付ける）</p><p>（例：平成元年）</p></td></tr><tr><td><p>y</p></td><td><p>年を２桁で表示（先頭に0を付けない）</p></td></tr><tr><td><p>yy</p></td><td><p>年を２桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>yyy</p></td><td><p>年を４桁で表示（先頭に0を付けない）</p></td></tr><tr><td><p>yyyy</p></td><td><p>年を４桁で表示（先頭に0を付ける）</p></td></tr><tr><td><p>M</p></td><td><p>月を２桁の数字で表示（先頭に0を付けない）</p></td></tr><tr><td><p>MM</p></td><td><p>月を２桁の数字で表示（先頭に0を付ける）</p></td></tr><tr><td><p>MMM</p></td><td><p>月を省略形で表示</p><p>（DateTimeFormatInfo.AbbreviatedMonthNames() で指定された形式）</p></td></tr><tr><td><p>MMMM</p></td><td><p>月を正式名称で表示</p><p>（DateTimeFormatInfo.MonthNames()で指定された形式）</p></td></tr><tr><td><p>d</p></td><td><p>日を表示（先頭に0を付けない）</p></td></tr><tr><td><p>dd</p></td><td><p>日を表示（先頭に0を付ける）</p></td></tr><tr><td><p>ddd</p></td><td><p>曜日を省略形で表示（DateTimeFormatInfo.AbbreviatedDayNames()で指定された形式）</p></td></tr><tr><td><p>dddd</p></td><td><p>曜日を正式名称で表示（DateTimeFormatInfo.DayNames()で指定された形式）</p></td></tr><tr><td><p>t</p></td><td><p>12時間制で時刻を表示するときに午前（AMDesignatorプロパティで設定）または午後（PMDesignatorプロパティで設定）を表す文字列の最初の１文字を表示</p></td></tr><tr><td><p>tt</p></td><td><p>12時間制で時刻を表示するときに午前（AMDesignatorプロパティで設定）または午後（PMDesignatorプロパティで設定）を表す文字列を表示</p></td></tr><tr><td><p>h</p></td><td><p>時を12時間制で表示（先頭に0を付けない）</p></td></tr><tr><td><p>hh</p></td><td><p>時を12時間制で表示（先頭に0を付ける）</p></td></tr><tr><td><p>H</p></td><td><p>時を24時間制で表示（先頭に0を付けない）</p></td></tr><tr><td><p>HH</p></td><td><p>時を24時間制で表示（先頭に0を付ける）</p></td></tr><tr><td><p>m</p></td><td><p>分を表示（先頭に0を付けない）</p></td></tr><tr><td><p>mm</p></td><td><p>分を表示（先頭に0を付ける）</p></td></tr><tr><td><p>s</p></td><td><p>秒を表示（先頭に0を付けない）</p></td></tr><tr><td><p>ss</p></td><td><p>秒を表示（先頭に0を付ける）</p></td></tr><tr><td><p>\（Chr(92)）</p></td><td><p>キーワードをリテラル文字として表示</p></td></tr></tbody></table><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b80001db-fab9-48f7-baab-a639554c60a2" title="">GcDateTimeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7af683d1-49d4-4662-8d5c-ff95be53c699" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5f218ebc-6bf1-4c1b-a58b-4c253539cdc3" title="">フィールドオブジェクトによる書式設定</a></p>

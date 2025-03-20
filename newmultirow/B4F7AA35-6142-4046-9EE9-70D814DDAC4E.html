@@ -1,0 +1,35 @@
+<p>CheckBoxCellのチェック状態が変更されたことを検出するには、<a href="gcdocsite__documentlink?toc-item-id=25d6288b-b69a-4969-a9d9-d468a6f9cf68" title="">GcMultiRow.CellEditedFormattedValueChanged</a>イベントを使用します。現在編集中の値は、<a href="gcdocsite__documentlink?toc-item-id=61759fc5-ef1f-4ea9-baa6-6a03a0a187fe" title="">Cell.EditedFormattedValue</a>プロパティで取得します。</p><h2>サンプルコード</h2><p>次のコードは、テスト用のテンプレートを作成します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+CheckBoxCell checkBoxCell1 = <span class="hljs-keyword">new</span> CheckBoxCell();
+checkBoxCell1.Text = <span class="hljs-string">"Test"</span>;
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { checkBoxCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim CheckBoxCell1 As New CheckBoxCell()
+CheckBoxCell1.Text = "Test"
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {CheckBoxCell1})</code></pre></div><p>次のコードは、ユーザーがチェックボックスのチェック状態を変更したとき、現在の値を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellEditedFormattedValueChanged(object sender, CellEditedFormattedValueChangedEventArgs e)</span>
+{
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+    
+    <span class="hljs-keyword">if</span> (e.Scope == CellScope.Row)
+    {
+        <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> CheckBoxCell)
+        {
+            Console.WriteLine(<span class="hljs-string">"編集中のセルの値: {0}"</span>, currentCell.EditedFormattedValue);
+            Console.WriteLine(<span class="hljs-string">"セルの値: {0}"</span>, currentCell.Value);
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellEditedFormattedValueChanged(ByVal sender As System.Object, ByVal e As CellEditedFormattedValueChangedEventArgs) Handles GcMultiRow1.CellEditedFormattedValueChanged
+
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+
+    If e.Scope = CellScope.Row Then
+        If TypeOf currentCell Is CheckBoxCell Then
+            Console.WriteLine("編集中のセルの値: {0}", currentCell.EditedFormattedValue)
+            Console.WriteLine("セルの値: {0}", currentCell.Value)
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=fed38959-70df-4b59-b547-8ef8b5554fda" title="">チェックボックス型セル（CheckBoxCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e72716a9-c915-4e9a-8764-411551b6ea77" title="">TrueValue／FalseValueの編集中の値の参照</a></p>

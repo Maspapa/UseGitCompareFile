@@ -1,0 +1,117 @@
+<p>GcCharMaskCellのマス目の設定方法について解説します。</p><h2>マス目の概要</h2><p>セルに表示されるマス目は、<a href="gcdocsite__documentlink?toc-item-id=df896e49-3dab-41a6-b0f7-2fc14876402f" title="">CharBoxes</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=36215d6e-ce92-4a1f-96dd-024a334232c4" title="">CharBoxCollection</a>オブジェクトによって定義されます。CharBoxCollectionオブジェクトは、1つ１つのマス目を表す<a href="gcdocsite__documentlink?toc-item-id=366a8ab0-b869-4c9b-976d-da0077b46272" title="">CharBox</a>オブジェクトの集合を保持するコレクションです。つまり、キャラクタボックスコントロールでは、オブジェクトに保持されるCharBoxオブジェクトをマス目の１つ１つとして表示します。</p><p>マス目を表すCharBoxオブジェクトは、次の３つの種類のオブジェクトを持つことができます。</p><ul><li><p>InputBox（入力用の枠）</p></li><li><p>LiteralBox（リテラル文字）</p></li><li><p>SeparatorBox（ハイフン）</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/03gccharmask/charmask_charbox.png" contenteditable="false"><br></p><p><a href="gcdocsite__documentlink?toc-item-id=a3766532-61ce-42c7-85e0-67b1bda3548f" title="">InputBox</a>は、入力用の枠で１つのInputBoxに対して1文字入力することができます。<a href="gcdocsite__documentlink?toc-item-id=aea83caa-b528-47b3-93ce-2b240bcbd414" title="">LiteralBox</a>は、任意の文字をリテラル文字として表示します。<a href="gcdocsite__documentlink?toc-item-id=d42e936c-2d8d-4f14-9c1f-1c4ed7ef68fa" title="">SeparatorBox</a>は、入力枠を区切るハイフンを表示します。</p><h2>マス目の設定</h2><h4>コードによる設定</h4><p>GcCharMaskCellにマス目を設定するには、CharBoxesプロパティが参照するCharBoxCollectionオブジェクトの<a href="gcdocsite__documentlink?toc-item-id=0f0fd190-756c-41f7-bff3-7cfbb6a8bd7d" title="">Add</a>メソッドを使用します。また、設定されているマス目をすべて削除するには、Clearメソッドを使用します。</p><p>次のサンプルコードは、郵便番号用の入力書式を例としたCharBoxを追加する例です。尚、マス目間のスペースや境界線、マス目のサイズ等の設定も行っています。これらの外観の設定に関する詳細は「<a href="gcdocsite__documentlink?toc-item-id=8df94c76-b7d6-4897-ae89-73b5e0127018" title="">外観の設定</a>」を参照してください。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcCharMaskCell gcCharMaskCell1 = <span class="hljs-keyword">new</span> InputManCell.GcCharMaskCell();
+gcCharMaskCell1.Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">200</span>, <span class="hljs-number">28</span>);
+
+<span class="hljs-comment">// マス目間のスペースを設定します。 </span>
+gcCharMaskCell1.CharBoxSpacing = <span class="hljs-number">2</span>;
+
+<span class="hljs-comment">// 既定値のマス目の設定をクリアします。 </span>
+gcCharMaskCell1.CharBoxes.Clear();
+
+<span class="hljs-comment">// 入力枠用の境界線を定義します。 </span>
+InputManCell.CharBoxBorder borderSingle = <span class="hljs-keyword">new</span> InputManCell.CharBoxBorder(<span class="hljs-keyword">new</span> InputManCell.Line(GrapeCity.Win.Editors.LineStyle.Single, Color.Black));
+
+<span class="hljs-comment">// リテラル文字とハイフン用の境界線を定義します。 </span>
+InputManCell.CharBoxBorder borderNone = <span class="hljs-keyword">new</span> InputManCell.CharBoxBorder(<span class="hljs-keyword">new</span> InputManCell.Line(GrapeCity.Win.Editors.LineStyle.None, Color.White));
+
+<span class="hljs-comment">// リテラル文字を作成します。 </span>
+InputManCell.LiteralBox aLiteralBox = <span class="hljs-keyword">new</span> InputManCell.LiteralBox();
+aLiteralBox.Size = <span class="hljs-keyword">new</span> System.Drawing.Size(<span class="hljs-number">14</span>, <span class="hljs-number">24</span>);
+aLiteralBox.Text = <span class="hljs-string">"〒"</span>;
+aLiteralBox.Border = borderNone;
+
+<span class="hljs-comment">// 郵便番号の前の３桁用の枠を作成します。 </span>
+InputManCell.InputBox aInputBoxl = <span class="hljs-keyword">new</span> InputManCell.InputBox();
+aInputBoxl.Size = <span class="hljs-keyword">new</span> System.Drawing.Size(<span class="hljs-number">18</span>, <span class="hljs-number">24</span>);
+aInputBoxl.Border = borderSingle;
+
+<span class="hljs-comment">// ハイフンを作成します。 </span>
+InputManCell.SeparatorBox aSeparatorBox = <span class="hljs-keyword">new</span> InputManCell.SeparatorBox();
+aSeparatorBox.Size = <span class="hljs-keyword">new</span> System.Drawing.Size(<span class="hljs-number">10</span>, <span class="hljs-number">24</span>);
+aSeparatorBox.Border = borderNone;
+
+<span class="hljs-comment">// 郵便番号の後の４桁用の枠を作成します。 </span>
+InputManCell.InputBox aInputBoxs = <span class="hljs-keyword">new</span> InputManCell.InputBox();
+aInputBoxs.Size = <span class="hljs-keyword">new</span> System.Drawing.Size(<span class="hljs-number">16</span>, <span class="hljs-number">20</span>);
+aInputBoxs.Border = borderSingle;
+
+<span class="hljs-comment">// コントロールに作成したマス目を追加します。 </span>
+gcCharMaskCell1.CharBoxes.Add(aLiteralBox);
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxl.Clone());
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxl.Clone());
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxl.Clone());
+gcCharMaskCell1.CharBoxes.Add(aSeparatorBox);
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxs.Clone());
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxs.Clone());
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxs.Clone());
+gcCharMaskCell1.CharBoxes.Add((InputManCell.CharBox)aInputBoxs.Clone());
+
+<span class="hljs-comment">// 設定したマス目のサイズを有効にするために </span>
+<span class="hljs-comment">// AutoSizeプロパティをFalseに設定します。 </span>
+<span class="hljs-keyword">foreach</span> (InputManCell.CharBox aCharBox <span class="hljs-keyword">in</span> gcCharMaskCell1.CharBoxes)
+{
+    aCharBox.AutoSize = <span class="hljs-literal">false</span>;
+}
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCharMaskCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcCharMaskCell1 = New InputManCell.GcCharMaskCell()
+GcCharMaskCell1.Size = New Size(200, 28)
+
+' マス目間のスペースを設定します。
+GcCharMaskCell1.CharBoxSpacing = 2
+
+' 既定値のマス目の設定をクリアします。
+GcCharMaskCell1.CharBoxes.Clear()
+
+' 入力枠用の境界線を定義します。
+Dim borderSingle As New InputManCell.CharBoxBorder(New InputManCell.Line(GrapeCity.Win.Editors.LineStyle.Single, Color.Black))
+
+' リテラル文字とハイフン用の境界線を定義します。
+Dim borderNone As New InputManCell.CharBoxBorder(New InputManCell.Line(GrapeCity.Win.Editors.LineStyle.None, Color.White))
+
+' リテラル文字を作成します。
+Dim aLiteralBox As New InputManCell.LiteralBox()
+aLiteralBox.Size = New System.Drawing.Size(14, 24)
+aLiteralBox.Text = "〒"
+aLiteralBox.Border = borderNone
+
+' 郵便番号の前の３桁用の枠を作成します。
+Dim aInputBoxl As New InputManCell.InputBox
+aInputBoxl.Size = New System.Drawing.Size(18, 24)
+aInputBoxl.Border = borderSingle
+
+' ハイフンを作成します。
+Dim aSeparatorBox As New InputManCell.SeparatorBox()
+aSeparatorBox.Size = New System.Drawing.Size(10, 24)
+aSeparatorBox.Border = borderNone
+
+' 郵便番号の後の４桁用の枠を作成します。
+Dim aInputBoxs As New InputManCell.InputBox
+aInputBoxs.Size = New System.Drawing.Size(16, 20)
+aInputBoxs.Border = borderSingle
+
+' セルに作成したマス目を追加します。
+GcCharMaskCell1.CharBoxes.Add(aLiteralBox)
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxl.Clone, InputManCell.CharBox))
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxl.Clone, InputManCell.CharBox))
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxl.Clone, InputManCell.CharBox))
+GcCharMaskCell1.CharBoxes.Add(aSeparatorBox)
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxs.Clone, InputManCell.CharBox))
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxs.Clone, InputManCell.CharBox))
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxs.Clone, InputManCell.CharBox))
+GcCharMaskCell1.CharBoxes.Add(DirectCast(aInputBoxs.Clone, InputManCell.CharBox))
+
+' 設定したマス目のサイズを有効にするために
+' AutoSizeプロパティをFalseに設定します。
+For Each aCharBox As InputManCell.CharBox In GcCharMaskCell1.CharBoxes
+    aCharBox.AutoSize = False
+Next
+
+' MultiRowのテンプレートを設定します。  
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCharMaskCell1})
+GcMultiRow1.RowCount = 5</code></pre></div><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/03gccharmask/gccharmask_charboxes_sample.png" contenteditable="false"><br></p><p>(図) 上記サンプルコードを適用したGcCharMaskCell</p><h4>デザイン画面での設定</h4><p>デザイン画面では「キャラクタボックスの編集」エディタから容易な設定が可能です。 このエディタは次のいずれかの方法で起動でき、マス目の詳細を設定できます。</p><ul><li><p>セルのスマート タグから「キャラクタボックスの編集...」を選択</p></li><li><p>プロパティウィンドウのCharBoxes プロパティをアクティブした時に表示される「…」ボタンを押下</p></li></ul><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6213468d-8383-4747-9da7-55c8cdc02946" title="">GcCharMaskCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=911cdfa4-0d67-44bc-9134-fc41b1d56b58" title="">入力の制御</a></p><p><a href="gcdocsite__documentlink?toc-item-id=649aebdc-59be-4cdb-8e7b-651617976a20" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ad3eae02-d613-45bd-93ed-18e46c0bbcba" title="">視覚的な補助</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8df94c76-b7d6-4897-ae89-73b5e0127018" title="">外観の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ee3d6383-1642-4d0c-963e-f01192324109" title="">データベース接続</a></p>

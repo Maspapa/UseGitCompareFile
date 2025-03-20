@@ -1,0 +1,7 @@
+<p>MultiRowでは、高DPIのサポートが有効なアプリケーションにおいて、高DPI設定をサポートします。アプリケーションのDPIのサポートを有効にする方法については、Microsoft社のWebサイトを参照してください。</p><h4>.NET Framework 4.8でのHDPIの有効化</h4><p>アプリケーションを.NET Framework 4.8 以上で作成する場合は、app.config に以下のように設定します。</p><div data-language="app.config" class="toastui-editor-ww-code-block-highlighting"><pre class="language-app.config"><code data-language="app.config" class="language-app.config">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+  &lt;System.Windows.Forms.ApplicationConfigurationSection&gt;
+        &lt;add key="DpiAwareness" value="PerMonitorV2" /&gt;
+        &lt;add key="EnableWindowsFormsHighDpiAutoResizing" value="true" /&gt;
+  &lt;/System.Windows.Forms.ApplicationConfigurationSection&gt;
+&lt;/configuration&gt;</code></pre></div>

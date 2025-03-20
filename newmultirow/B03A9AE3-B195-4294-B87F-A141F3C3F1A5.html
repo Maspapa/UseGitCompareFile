@@ -1,0 +1,47 @@
+<p>ラベル型セル（LabelCell）では、Valueプロパティに含まれるアンパサンド文字(&amp;)をアクセスキーの接頭文字として表示できます。アンパサンド文字をアクセスキーの接頭文字として表示するには、<a href="gcdocsite__documentlink?toc-item-id=29ce838d-7dce-4cd7-8d58-b68a2a30487d">UseMnemonic</a>プロパティをTrueに設定します。</p>
+<h2 id="サンプルコード">サンプルコード</h2>
+<p>次のコードでは、ラベル型セルに「コピー(&amp;C)」を表示します。</p>
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_buttoncell_usemnemonic.png" alt="" /></p>
+<pre><code class="language-csharp">using GrapeCity.Win.MultiRow;
+                                                                
+private void Form1_Load(object sender, EventArgs e)
+{
+    LabelCell labelCell1 = new LabelCell();
+    labelCell1.Name = &quot;labelCell1&quot;;
+    labelCell1.Value = &quot;コピー(&amp;C)&quot;;
+    labelCell1.UseMnemonic = true;
+
+    Template template1 = Template.CreateGridTemplate(new Cell[] { labelCell1 });
+    gcMultiRow1.Template = template1;
+    gcMultiRow1.RowCount = 10;
+
+    gcMultiRow1.KeyDown += new KeyEventHandler(gcMultiRow1_KeyDown);
+}
+
+void gcMultiRow1_KeyDown(object sender, KeyEventArgs e)
+{
+    if (e.KeyCode == Keys.C &amp;&amp; e.Modifiers == Keys.Control)
+    {
+        EditingActions.Copy.Execute(gcMultiRow1);
+    }
+}
+</code></pre>
+<pre><code class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim LabelCell1 As New LabelCell()
+    LabelCell1.Name = &quot;LabelCell1&quot;
+    LabelCell1.Value = &quot;コピー(&amp;C)&quot;
+    LabelCell1.UseMnemonic = True
+
+    Dim Template1 As Template = Template.CreateGridTemplate(New Cell() {LabelCell1})
+    GcMultiRow1.Template = Template1
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_KeyDown(sender As Object, e As KeyEventArgs) Handles GcMultiRow1.KeyDown
+    If e.KeyCode = Keys.C AndAlso e.Modifiers = Keys.Control Then
+        EditingActions.Copy.Execute(GcMultiRow1)
+    End If
+End Sub
+</code></pre>

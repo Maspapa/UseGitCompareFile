@@ -1,0 +1,137 @@
+<p>GcMultiRowコントロールでは、単一または複数のセルの値を使用して行を並び替えることができます。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=1d6049ba-30df-463f-8d37-f740834f5496" title="">GcMultiRow.AllowUserToAddRows</a>プロパティがTrueのとき、画面の一番下に表示される行は並べ替えの対象ではありません。</p></li></ul></blockquote><h2>単一のセル値からの行の並び替え</h2><p>単一のセルの値を元に行を並び替えるには、<a href="gcdocsite__documentlink?toc-item-id=c13b7b90-6d2c-4904-9cb6-afd7483f3d2f" title="">GcMultiRow.Sort</a>メソッドを使用します。Sortメソッドでは、ソートの基準となるセル、昇順または降順、大文字小文字の区別を指定できます。</p><p>次のコードは既定のテンプレートを使用して、２番目のセルの値を基準に用を並び替えます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 既定のテンプレートを設定する</span>
+gcMultiRow1.Template = Template.Default;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+
+<span class="hljs-comment">// サンプルデータを設定する</span>
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"E"</span>, <span class="hljs-string">"1"</span>, <span class="hljs-string">"VB"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">1</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"D"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"VB"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">2</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"C"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"CS"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">3</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"B"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"VB"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">4</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"A"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"CS"</span>});
+
+<span class="hljs-comment">// 最初のセルを基準に昇順で並び替える</span>
+gcMultiRow1.Sort(<span class="hljs-number">0</span>, SortOrder.Ascending);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 既定のテンプレートを設定する
+GcMultiRow1.Template = Template.Default
+GcMultiRow1.AllowUserToAddRows = False
+GcMultiRow1.RowCount = 5
+
+' サンプルデータを設定する
+GcMultiRow1.Rows(0).SetValues(New String(2) {"E", "1", "VB"})
+GcMultiRow1.Rows(1).SetValues(New String(2) {"D", "2", "VB"})
+GcMultiRow1.Rows(2).SetValues(New String(2) {"C", "3", "CS"})
+GcMultiRow1.Rows(3).SetValues(New String(2) {"B", "4", "VB"})
+GcMultiRow1.Rows(4).SetValues(New String(2) {"A", "5", "CS"})
+
+' 最初のセルを基準に昇順で並び替える
+GcMultiRow1.Sort(0, SortOrder.Ascending)</code></pre></div><p>Sortメソッドを使用した結果、グリッドの現在のソート状態を取得するには <a href="gcdocsite__documentlink?toc-item-id=c5e586e2-3802-40c0-a548-5ea8a2c963ec" title="">GcMultiRow.SortOrder</a>プロパティを使用します。</p><h2>複数のセル値からの行の並び替え</h2><p>最初のセルに同じ値が存在する場合に次のセルを基準にする、といった要件で並び替えを実行する場合、<a href="gcdocsite__documentlink?toc-item-id=e981bcd5-bb03-4586-9cb7-f7a20ff2edd7" title="">SortItem</a>クラスのインスタンスで並び替えの条件を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 既定のテンプレートを設定する</span>
+gcMultiRow1.Template = Template.Default;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+
+<span class="hljs-comment">// サンプルデータを設定する</span>
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"B"</span>, <span class="hljs-string">"1"</span>, <span class="hljs-string">"VB"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">1</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"B"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"VB"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">2</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"C"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"CS"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">3</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"B"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"VB"</span>});
+gcMultiRow1.Rows[<span class="hljs-number">4</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] {<span class="hljs-string">"A"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"CS"</span>});
+
+<span class="hljs-comment">// 並び替えの基準を作成する</span>
+SortItem sortItem1 = <span class="hljs-keyword">new</span> SortItem(<span class="hljs-number">0</span>, SortOrder.Ascending);
+SortItem sortItem2 = <span class="hljs-keyword">new</span> SortItem(<span class="hljs-number">1</span>, SortOrder.Ascending);
+<span class="hljs-comment">// 行を並び替える</span>
+gcMultiRow1.Sort(<span class="hljs-keyword">new</span> SortItem[<span class="hljs-number">2</span>] {sortItem1, sortItem2}, <span class="hljs-number">0</span>, gcMultiRow1.RowCount - <span class="hljs-number">1</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 既定のテンプレートを設定する
+GcMultiRow1.Template = Template.Default
+GcMultiRow1.AllowUserToAddRows = False
+GcMultiRow1.RowCount = 5
+
+' サンプルデータを設定する
+GcMultiRow1.Rows(0).SetValues(New String(2) {"B", "1", "VB"})
+GcMultiRow1.Rows(1).SetValues(New String(2) {"B", "2", "VB"})
+GcMultiRow1.Rows(2).SetValues(New String(2) {"C", "3", "CS"})
+GcMultiRow1.Rows(3).SetValues(New String(2) {"B", "4", "VB"})
+GcMultiRow1.Rows(4).SetValues(New String(2) {"A", "5", "CS"})
+
+' 並び替えの基準を作成する
+Dim sortItem1 As New SortItem(0, SortOrder.Ascending)
+Dim sortItem2 As New SortItem(1, SortOrder.Ascending)
+' 行を並び替える
+GcMultiRow1.Sort(New SortItem(1) {sortItem1, sortItem2}, 0, GcMultiRow1.RowCount - 1)</code></pre></div><h2>ユーザー定義ソート</h2><p>並び替えの基準を独自に作成するには、System.Collections.IComparerインターフェイスを実装するクラスを作成し、そのインスタンスを<a href="gcdocsite__documentlink?toc-item-id=c13b7b90-6d2c-4904-9cb6-afd7483f3d2f" title="">GcMultiRow.Sort</a>メソッドに割り当てます。</p><p>次のコードでは、値よりもNullを優先して並び替えます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 既定のテンプレートを設定する </span>
+gcMultiRow1.Template = Template.Default;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+
+<span class="hljs-comment">// サンプルデータを設定する </span>
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-number">3</span>;
+gcMultiRow1.Rows[<span class="hljs-number">1</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-number">1</span>;
+gcMultiRow1.Rows[<span class="hljs-number">2</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-number">4</span>;
+gcMultiRow1.Rows[<span class="hljs-number">3</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-literal">null</span>;
+gcMultiRow1.Rows[<span class="hljs-number">4</span>].Cells[<span class="hljs-number">0</span>].Value = <span class="hljs-number">0</span>;
+
+<span class="hljs-comment">// 行を並び替える </span>
+gcMultiRow1.Sort(<span class="hljs-number">0</span>, SortOrder.Ascending, <span class="hljs-keyword">new</span> NullComparer());
+
+<span class="hljs-comment">// Null を優先して並び替える</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NullComparer</span> : <span class="hljs-title">System.Collections.IComparer</span>
+{
+    <span class="hljs-built_in">int</span> System.Collections.IComparer.Compare(<span class="hljs-built_in">object</span> x, <span class="hljs-built_in">object</span> y)
+    {
+        <span class="hljs-keyword">if</span> (x == y)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span> (x == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">if</span> (y == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+
+        <span class="hljs-built_in">int</span> ix = (<span class="hljs-built_in">int</span>)x;
+        <span class="hljs-built_in">int</span> iy = (<span class="hljs-built_in">int</span>)y;
+        <span class="hljs-keyword">return</span> ix - iy;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 既定のテンプレートを設定する
+GcMultiRow1.Template = Template.Default
+GcMultiRow1.AllowUserToAddRows = False
+GcMultiRow1.RowCount = 5
+
+' サンプルデータを設定する  
+GcMultiRow1.Rows(0).Cells(0).Value = 3
+GcMultiRow1.Rows(1).Cells(0).Value = 1
+GcMultiRow1.Rows(2).Cells(0).Value = 2
+GcMultiRow1.Rows(3).Cells(0).Value = Nothing
+GcMultiRow1.Rows(4).Cells(0).Value = 0
+
+' 行を並び替える  
+GcMultiRow1.Sort(0, SortOrder.Ascending, New NullComparer())
+
+' Null を優先して並び替える
+Public Class NullComparer
+    Implements System.Collections.IComparer
+
+    Public Function Compare(ByVal x As Object, ByVal y As Object) As Integer _
+        Implements System.Collections.IComparer.Compare
+        If x = y Then
+            Return 0
+        End If
+        If x Is Nothing Then
+            Return -1
+        End If
+        If y Is Nothing Then
+            Return 1
+        End If
+
+        Dim ix As Integer = DirectCast(x, Integer)
+        Dim iy As Integer = DirectCast(y, Integer)
+        Return ix - iy
+    End Function
+End Class</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=c96288bd-334e-4b75-8bfc-43dc6af17e13" title="">データの管理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a11001f1-e97b-4d87-98a5-66b8e222b3b1" title="">データの設定と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9375cf8f-f355-41a8-a024-581534a3946e" title="">データの連結モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c7f1257c-84eb-494a-ad04-3506e5b696a9" title="">クリップボードの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcb261f3-fa94-4023-b03a-7337535fe58a" title="">新しい行に既定値を設定</a></p>

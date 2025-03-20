@@ -1,0 +1,19 @@
+<p>RadioGroupCellに表示される50%などのテキストを非表示にするには、<a href="gcdocsite__documentlink?toc-item-id=5538e4cd-bca3-41c5-adac-e560a0cf9913" title="">ShowText</a>プロパティにFalseを設定します。</p><h2>サンプルコード</h2><p>次のコードは、プログレスバー内のテキストを非表示にします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// セル型の作成</span>
+ProgressBarCell progressBarCell1 = <span class="hljs-keyword">new</span> ProgressBarCell();
+progressBarCell1.Name = <span class="hljs-string">"progressBarCell1"</span>;
+progressBarCell1.ShowText = <span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">// MultiRowの設定</span>
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { progressBarCell1 });
+gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">50</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' セル型の作成
+Dim ProgressBarCell1 As New ProgressBarCell()
+ProgressBarCell1.Name = "ProgressBarCell1"
+ProgressBarCell1.ShowText = False
+
+' MultiRowの設定
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {ProgressBarCell1})
+GcMultiRow1.SetValue(0, 0, 50)</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=da068234-1cae-400e-9123-33ebbe1e4138" title="">プログレスバー型セル（ProgressBarCell）</a></p>

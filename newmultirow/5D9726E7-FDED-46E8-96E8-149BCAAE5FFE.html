@@ -1,0 +1,25 @@
+<p>ThreeStateIconNotifyを使用すると、入力値が有効な値、無効な値の場合にそれぞれアイコンを表示して、エラーの内容を通知できます。また、未入力の場合にはアイコンを表示しません。</p><h2>デザイナによる設定</h2><p>デザイナでセルの検証と共にThreeStateIconNotify使用するには、次のように操作します。</p><ol><li><p>値を検証するセルを選択する。(例: numericUpDownCell1)</p></li><li><p>プロパティウィンドウでValidatorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidatorコレクションエディタで左上のコンボボックスから「RangeValidator」を選択し、［追加］をクリックする。</p></li><li><p>[メンバ]リストでRangeValidatorが選択されていることを確認する。</p></li><li><p>画面右のプロパティグリッドでMaxValueプロパティを選択し、「10」を入力する。</p></li><li><p>画面右のプロパティグリッドでMinValueプロパティを選択し、「0」を入力する。</p></li><li><p>［OK］ボタンをクリックしてウィンドウを閉じる。</p></li><li><p>画面右のプロパティグリッドでActionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidateActionコレクションエディタでThreeStateIconNotifyを追加する。</p></li><li><p>[メンバ]リストでThreeStateIconNotifyが選択されていることを確認する。画面右のプロパティグリッドでDoActionReasonプロパティにEndEditを設定する。</p></li><li><p>［OK］ボタンをクリックしてCellValidateActionコレクションエディタを閉じる。</p></li><li><p>［OK］ボタンをクリックしてCellValidatorコレクションエディタを閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>numericUpDownCell1に「20」を入力してセルを移動して、エラー時のアイコンが表示されることを確認する。</p></li><li><p>numericUpDownCell1に「5」を入力してセルを移動して、正常時のアイコンが表示されることを確認する。</p></li></ol><h2>コーディングによる設定</h2><p>次のコードは、セルに0～10の範囲を超える数値が入力されたときにエラー時のアイコンを表示し、0～10の範囲内の値が入力されたときに正常時のアイコンを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+RangeValidator rangeValidator1 = <span class="hljs-keyword">new</span> RangeValidator();
+rangeValidator1.RequiredType = <span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">int</span>);
+rangeValidator1.MaxValue = <span class="hljs-number">10</span>;
+rangeValidator1.MinValue = <span class="hljs-number">0</span>;
+rangeValidator1.Actions.Add(<span class="hljs-keyword">new</span> ThreeStateIconNotify());
+numericUpDownCell1.Validators.Add(rangeValidator1);
+
+Cell[] cells = { numericUpDownCell1 };
+gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+Dim RangeValidator1 As New RangeValidator()
+RangeValidator1.RequiredType = GetType(Integer)
+RangeValidator1.MaxValue = 10
+RangeValidator1.MinValue = 0
+RangeValidator1.Actions.Add(New ThreeStateIconNotify())
+NumericUpDownCell1.Validators.Add(RangeValidator1)
+
+Dim cells As Cell() = {NumericUpDownCell1}
+GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+GcMultiRow1.RowCount = 10</code></pre></div><blockquote type="warning"><p>!type=warning</p><ul><li><p>InputManのThreeStateIconNotifyプロパティで提供されているBlinkRateプロパティ、BlinkStyleプロパティ、IconPaddingプロパティはサポートされません。</p></li></ul></blockquote><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=d92d06e8-ede7-4f1b-8070-44228f223ad0" title="">組み込みの検証アクション</a></p><p><a href="gcdocsite__documentlink?toc-item-id=960673a4-e504-4aab-9966-671de457d274" title="">下線による通知（LineNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=afc60e76-a586-42e6-8eb0-106c53a305a6" title="">セルのスタイルによる通知（CellStyleNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2122b628-cbd5-48aa-b4f2-c9f18c75c50a" title="">エラーアイコンによる通知（IconNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b2c54841-df5b-4a46-b0e2-74cf29c2d8e9" title="">サウンドによる通知（SoundNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0511622d-3f3a-4580-87bb-94b2ef855c82" title="">バルーンチップによる通知（TipNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=07b9eee6-11f8-4a1e-af39-9e1a6ba6e027" title="">フォーカスの遷移（FocusProcess）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9da0a3d0-03d9-4899-841b-a53eb3da525e" title="">値の処理（ValueProcess）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3a71566a-6012-4e17-ae1c-8e6f68905cd4" title="">メッセージボックスによる通知（MessageBoxNotify）</a></p>

@@ -1,0 +1,83 @@
+<p>GcMultiRowコントロールでは、セルノートの機能を提供します。セルノートを追加することで、グリッド上に補足情報を表示することができます。</p><h2>セルノートを作成する</h2><p>セルにセルノートを追加するには、<a href="gcdocsite__documentlink?toc-item-id=53c7fc99-6172-4975-9404-b51bd042d1e0" title="">CellNote</a>クラスを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.CurrentCell.Note = <span class="hljs-keyword">new</span> GrapeCity.Win.MultiRow.CellNote();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.CurrentCell.Note = New GrapeCity.Win.MultiRow.CellNote()</code></pre></div><h2>セルノートの編集を開始する</h2><p>セルに追加されているセルノートの編集を開始するには<a href="gcdocsite__documentlink?toc-item-id=750ba75b-3236-4e25-9eee-585fe7882ed7" title="">GcMultiRow.BeginEditCellNote</a>メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.MultiRow.CellPosition pos = gcMultiRow1.CurrentCellPosition;
+GrapeCity.Win.MultiRow.Cell cell = gcMultiRow1.CurrentCell;
+
+<span class="hljs-keyword">if</span> (cell.Note != <span class="hljs-literal">null</span>)
+{
+    gcMultiRow1.BeginEditCellNote(pos);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim pos As GrapeCity.Win.MultiRow.CellPosition = GcMultiRow1.CurrentCellPosition
+Dim cell As GrapeCity.Win.MultiRow.Cell = GcMultiRow1.CurrentCell
+
+If cell.Note IsNot Nothing Then
+    GcMultiRow1.BeginEditCellNote(pos)
+End If</code></pre></div><h2>セルノートを削除する</h2><p>セルに追加されているセルノートを削除するにはCell.NoteクラスにNull値を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">GrapeCity.Win.MultiRow.Cell cell = gcMultiRow1.CurrentCell;
+
+<span class="hljs-keyword">if</span> (cell.Note != <span class="hljs-literal">null</span>)
+{
+    cell.Note = <span class="hljs-literal">null</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim cell As GrapeCity.Win.MultiRow.Cell = GcMultiRow1.CurrentCell
+
+If cell.Note IsNot Nothing Then
+    cell.Note = Nothing
+End If</code></pre></div><h2>セルノートの表示モードを設定する</h2><p>セルノートの表示モードは<a href="gcdocsite__documentlink?toc-item-id=1b039939-6c91-41c4-9f1a-97912eb6aa3b" title="">CellNote.DisplayMode</a>プロパティを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Cell cell = gcMultiRow1.CurrentCell;
+
+<span class="hljs-keyword">if</span> (cell.Note != <span class="hljs-literal">null</span>)
+{
+    <span class="hljs-keyword">if</span> (cell.Note.DisplayMode == CellNoteDisplayMode.AlwaysShown)
+    {
+        cell.Note.DisplayMode = CellNoteDisplayMode.HoverShown;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        cell.Note.DisplayMode = CellNoteDisplayMode.AlwaysShown;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim cell As GrapeCity.Win.MultiRow.Cell = GcMultiRow1.CurrentCell
+
+If Cell.Note IsNot Nothing Then
+    If cell.Note.DisplayMode = CellNoteDisplayMode.AlwaysShown Then
+        cell.Note.DisplayMode = CellNoteDisplayMode.HoverShown
+    Else
+        cell.Note.DisplayMode = CellNoteDisplayMode.AlwaysShown
+    End If
+End If</code></pre></div><h2>セルノートのスタイルを設定する</h2><p>セルノートのスタイルは<a href="gcdocsite__documentlink?toc-item-id=8feec7fa-2c08-480e-aa7c-7a103c0fb44f" title="">CellNote.Style</a>プロパティを使用します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/grid_cellnote_01.png" contenteditable="false"><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>セルノートの接続線のスタイルは、常に1ピクセル幅の実線で表示されます。</p></li><li><p>セルノートの接続線の色は<a href="gcdocsite__documentlink?toc-item-id=370a421e-2853-43f5-b9e7-e2943d79d8a9" title="">CellNoteStyle.LineColor</a>プロパティで設定された値が適用されます。</p></li></ul></blockquote><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+CellNote cellNote = <span class="hljs-keyword">new</span> CellNote();
+
+cellNote.Style.BackColor = Color.Azure;
+cellNote.Style.ForeColor = Color.Blue;
+cellNote.Text = <span class="hljs-string">"セルノート"</span>;
+
+<span class="hljs-comment">// 罫線のスタイル</span>
+cellNote.Style.LineColor = Color.Pink;
+cellNote.Style.LineStyle = CellNoteLineStyle.Thin;
+cellNote.Style.LineWidth = <span class="hljs-number">5</span>;
+
+<span class="hljs-comment">// 三角マークの色</span>
+cellNote.Style.TriangleSymbolColor = Color.Blue;
+
+<span class="hljs-comment">// 影の表示</span>
+cellNote.Style.ShowShadow = MultiRowTriState.True;
+
+gcMultiRow1.CurrentCell.Note = cellNote;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim cellNote As CellNote = New CellNote()
+
+cellNote.Style.BackColor = Color.Azure
+cellNote.Style.ForeColor = Color.Blue
+cellNote.Text = "セルノート"
+
+' 罫線のスタイル
+cellNote.Style.LineColor = Color.Red
+cellNote.Style.LineStyle = CellNoteLineStyle.Thin
+cellNote.Style.LineWidth = 5
+
+' 三角マークの色
+cellNote.Style.TriangleSymbolColor = Color.Blue
+
+' 影の表示
+cellNote.Style.ShowShadow = MultiRowTriState.True
+
+GcMultiRow1.CurrentCell.Note = cellNote</code></pre></div><h2>セルノートのスタイルの適用ルール</h2><p>セルノートのStyleプロパティがnullでない場合、各プロパティに次の値が設定されている場合には<a href="gcdocsite__documentlink?toc-item-id=466faa75-e769-4318-8498-c5e974da7265" title="">GcMultiRow.DefaultCellNoteStyle</a>プロパティの設定値が適用されます。それ以外は、各プロパティに設定された値が適用されます。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>設定値</p></th></tr></thead><tbody><tr><td><p>BackColor</p><p>ForeColor</p><p>PatternColor</p><p>LineColor</p><p>TriangleSymbolColor</p></td><td><p>Color.Empty</p></td></tr><tr><td><p>Font</p><p>BackgroundImage</p><p>ContextMenuStrip</p></td><td><p>Null</p></td></tr><tr><td><p>LineAdjustment</p><p>TextEffect</p><p>Multiline</p><p>PatternStyle</p><p>TextAdjustment</p><p>TextAlign</p><p>TextVertical</p><p>BackgroundImageLayout</p><p>BackgroundGradientEffect</p><p>UseCompatibleTextRendering</p><p>WordWrap</p><p>LineStyle</p><p>ShowShadow</p></td><td><p>Inherit</p></td></tr><tr><td><p>Padding</p></td><td><p>(-1,-1,-1,-1)</p></td></tr><tr><td><p>TextAngle</p><p>LineWidth</p></td><td><p>float.NaN</p></td></tr><tr><td><p>BackgroundImageOpacity</p></td><td><p>double.NaN</p></td></tr><tr><td><p>TextIndent</p></td><td><p>-1</p></td></tr></tbody></table><p>GcMultiRow.DefaultCellNoteStyleプロパティの既定値は次の通りです。</p><table><thead><tr><th><p>プロパティ</p></th><th><p>既定値</p></th></tr></thead><tbody><tr><td><p>BackColor</p></td><td><p>LightYellow</p></td></tr><tr><td><p>ForeColor</p></td><td><p>GcMultiRowコントロールのForeColorプロパティの設定値</p></td></tr><tr><td><p>Font</p></td><td><p>GcMultiRowコントロールのFontプロパティの設定値</p></td></tr><tr><td><p>BackgroundGradientEffect</p></td><td><p>Null</p></td></tr><tr><td><p>Direction</p></td><td><p>Center</p></td></tr><tr><td><p>BackgroundImage</p></td><td><p>Null</p></td></tr><tr><td><p>BackgroundImageLayout</p></td><td><p>Tile</p></td></tr><tr><td><p>BackgroundImageOpacity</p></td><td><p>1</p></td></tr><tr><td><p>LineAdjustment</p></td><td><p>None</p></td></tr><tr><td><p>Multiline</p></td><td><p>True</p></td></tr><tr><td><p>Padding</p></td><td><p>(0,0,0,0)</p></td></tr><tr><td><p>PatternColor</p></td><td><p>WindowText</p></td></tr><tr><td><p>PatternStyle</p></td><td><p>None</p></td></tr><tr><td><p>TextAdjustment</p></td><td><p>Near</p></td></tr><tr><td><p>TextAlign</p></td><td><p>TopLeft</p></td></tr><tr><td><p>TextAngle</p></td><td><p>0</p></td></tr><tr><td><p>TextEffect</p></td><td><p>Flat</p></td></tr><tr><td><p>TextIndent</p></td><td><p>0</p></td></tr><tr><td><p>TextVertical</p></td><td><p>False</p></td></tr><tr><td><p>UseCompatibleTextRendering</p></td><td><p>False</p></td></tr><tr><td><p>WordWrap</p></td><td><p>True</p></td></tr><tr><td><p>LineColor</p></td><td><p>Color.Black</p></td></tr><tr><td><p>LineStyle</p></td><td><p>Thin</p></td></tr><tr><td><p>LineWidth</p></td><td><p>1</p></td></tr><tr><td><p>ShowShadow</p></td><td><p>Ture</p></td></tr><tr><td><p>ContextMenuStrip</p></td><td><p>Null</p></td></tr><tr><td><p>TriangleSymbolColor</p></td><td><p>Color.Red</p></td></tr></tbody></table><h2>セルノートを作成する</h2><p>セルにセルノートを追加するには、Cell.Noteクラスを使用します。</p><ul><li><p>セルノートの編集コントールはリッチテキストフォーマットをサポートしていません。</p></li><li><p>セルノートは実行時にだけ追加することができます。設計時にセルノートを追加した場合には例外が発生します。</p></li><li><p>1つのセルノートは1つのセルにだけ設定することができます。同じセルノートを複数のセルに設定した場合には例外が発生します。</p></li><li><p>セルノートはコミットされていない新規行に追加することはできません。</p></li></ul><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=324fb6a9-dfd4-47c6-a50b-e5d6a733482c" title="">行とセル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7b0ccaf9-9a5f-4a5f-8213-ad223b742c47" title="">現在の行</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6a3e5e39-1e55-4d17-92f8-f98e089d50d6" title="">現在のセル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6a5f283a-fdc8-42fa-af13-1298526d1974" title="">行の追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=722f1dee-d553-42d5-8c58-5f9c89e3edb3" title="">行の削除</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bec8974f-59e4-439e-8bff-62e0068fc64c" title="">行の移動</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6bd87f6c-4ec6-4996-ad1b-90a1ea751ff6" title="">行の固定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7f09d5fd-1715-4c72-bd9a-9d59f7302ae2" title="">行数の設定と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b2694627-470d-4dc7-8892-0e1a86a847b6" title="">セル数の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9c2ffa5b-afc7-4e48-a7dd-8ea7ed014357" title="">非スクロール領域</a></p><p><a href="gcdocsite__documentlink?toc-item-id=34eab7a7-4714-49ae-b8df-7afa70750da1" title="">選択された行とセル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=44b1d9b5-a649-4d0d-b686-4884fcfd887a" title="">セルの選択禁止</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8fdf67b2-a648-40ce-b095-ca253fa79ad2" title="">セルの無効表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=35fe0c78-93bb-4048-8b2d-3e76d5c4a46d" title="">行とセルのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=740237fd-48df-4acb-bf6e-e927ba73941e" title="">表示と非表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9c3197b6-f2e2-4c66-9f4e-03d277a8c087" title="">セルの編集</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c7f2f4ef-e8a2-4cdb-90be-1a4e8ded871a" title="">エラーメッセージの表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3aed4939-b469-4405-a52a-e07d9aff2327" title="">セルの読み取り専用</a></p>

@@ -1,0 +1,83 @@
+<p>サマリ型セル（SummaryCell）を使用すると、列の合計をフッタに表示できます。次の例は、NumericUpDownCellに入力された値の合計をフッタのSummaryCellに表示します。</p><h2>単一セルの計算（デザイナによる設定）</h2><p>単一セルの計算を行う場合、MathStatisticsのCellNameプロパティに計算を行うセルを設定します。</p><p>デザイナでフッタに単一セルの合計を表示するには、次のように操作します。</p><ol><li><p>行（Row）に数値型セルを追加する。（例：numericUpDownCell1）</p></li><li><p>Visual Studioの［テンプレート］－［追加］－［列フッタ］メニューを選択し、列フッタ（ColumnFooterSection）を追加する。</p></li><li><p>列フッタ（ColumnFooterSection）にサマリ型セルを追加する。（例：summaryCell1）</p></li><li><p>summaryCell1を選択し、プロパティウィンドウでsummaryCell1.Style.Formatプロパティを「###,###」に設定する。</p></li><li><p>プロパティウィンドウでsummaryCell1.CalculationプロパティのドロップダウンリストからMathStatisticsを選択する。</p></li><li><p>summaryCell1.Calculationプロパティの右のプラスマークをクリックし、MathStatisticsオブジェクトのプロパティを展開する。</p></li><li><p>MathStatisticsのStatisticsTypeプロパティを「Sum」に設定する。</p></li><li><p>MathStatisticsのCellNameプロパティを「numericUpDownCell1」に設定する。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li></ol><p>各行のnumericUpDownCell1に値を入力すると、その合計がフッタに表示されます。</p><h2>単一セルの計算（コーディングによる設定）</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell(); 
+numericUpDownCell1.Name = <span class="hljs-string">"numericUpDownCell1"</span>;
+SummaryCell summaryCell1 = <span class="hljs-keyword">new</span> SummaryCell(); 
+<span class="hljs-comment">// セルの値の表示書式を設定する </span>
+summaryCell1.Style.Format = <span class="hljs-string">"###,###"</span>; 
+<span class="hljs-comment">// "numericUpDownCell1" セルの列の合計を表示する </span>
+summaryCell1.Calculation = <span class="hljs-keyword">new</span> MathStatistics(StatisticsType.Sum, <span class="hljs-string">"numericUpDownCell1"</span>); 
+
+Cell[] cells = { numericUpDownCell1 }; 
+Template template1 = Template.CreateGridTemplate(cells); 
+
+ColumnFooterSection columnFooterSection = <span class="hljs-keyword">new</span> ColumnFooterSection();
+summaryCell1.Location = template1.Row.Cells[<span class="hljs-string">"numericUpDownCell1"</span>].Location;
+columnFooterSection.Cells.Add(summaryCell1);
+template1.ColumnFooters.Add(columnFooterSection);
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+NumericUpDownCell1.Name = "NumericUpDownCell1"
+Dim SummaryCell1 As New SummaryCell()
+
+' セルの値の表示書式を設定する  
+SummaryCell1.Style.Format = "###,###"
+' "NumericUpDownCell1" セルの列の合計を表示する  
+SummaryCell1.Calculation = New MathStatistics(StatisticsType.Sum, "NumericUpDownCell1")
+
+Dim cells As Cell() = {NumericUpDownCell1}
+Dim Template1 As Template = Template.CreateGridTemplate(cells)
+
+Dim ColumnFooterSection1 As ColumnFooterSection = New ColumnFooterSection()
+SummaryCell1.Location = Template1.Row.Cells("NumericUpDownCell1").Location
+ColumnFooterSection1.Cells.Add(SummaryCell1)
+Template1.ColumnFooters.Add(ColumnFooterSection1)
+GcMultiRow1.Template = Template1</code></pre></div><h2>複数セルの計算（デザイナによる設定）</h2><p>複数セルの計算を行う場合、MathStatisticsのExpressionStringプロパティに計算を行うセルを設定します。ExpressionStringプロパティには、計算に使用する式文字列を設定します。</p><p>デザイナでフッタに複数セルの合計の平均を表示するには、次のように操作します。</p><ol><li><p>行（Row）に数値型セルを２つ追加する。（例：numericUpDownCell1、numericUpDownCell2）</p></li><li><p>Visual Studioの［テンプレート］－［追加］－［列フッタ］メニューを選択し、列フッタ（ColumnFooterSection）を追加する。</p></li><li><p>列フッタ（ColumnFooterSection）にサマリ型セルを追加する。（例：summaryCell1）</p></li><li><p>summaryCell1を選択し、プロパティウィンドウでsummaryCell1.Style.Formatプロパティを「###,###」に設定する。</p></li><li><p>プロパティウィンドウでsummaryCell1.CalculationプロパティのドロップダウンリストからMathStatisticsを選択する。</p></li><li><p>summaryCell1.Calculationプロパティの右のプラスマークをクリックし、MathStatisticsオブジェクトのプロパティを展開する。</p></li><li><p>MathStatisticsのStatisticsTypeプロパティを「Average」に設定する。</p></li><li><p>MathStatisticsのExpressionStringプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたExpression Builderで計算式を設定する。（例：numericUpDownCell1 + numericUpDownCell2）</p></li><li><p>［OK］ボタンをクリックしてExpression Builderを閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li></ol><p>各行のnumericUpDownCell1およびnumericUpDownCell2に値を入力すると、行ごとの合計の平均値がフッタに表示されます。</p><h2>複数セルの計算（コーディングによる設定）</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell1.Name = <span class="hljs-string">"numericUpDownCell1"</span>;
+NumericUpDownCell numericUpDownCell2 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell2.Name = <span class="hljs-string">"numericUpDownCell2"</span>;
+
+SummaryCell summaryCell1 = <span class="hljs-keyword">new</span> SummaryCell();
+<span class="hljs-comment">// セルの値の表示書式を設定する </span>
+summaryCell1.Style.Format = <span class="hljs-string">"###,###"</span>;
+
+<span class="hljs-comment">// "numericUpDownCell1"と"numericUpDownCell2"の合計の平均値を表示する </span>
+MathStatistics mathStatistics1 = <span class="hljs-keyword">new</span> MathStatistics();
+mathStatistics1.ExpressionString = <span class="hljs-string">"numericUpDownCell1 + numericUpDownCell2"</span>;
+mathStatistics1.StatisticsType = StatisticsType.Average;
+summaryCell1.Calculation = mathStatistics1;
+
+Cell[] cells = { numericUpDownCell1, numericUpDownCell2 };
+Template template1 = Template.CreateGridTemplate(cells);
+
+ColumnFooterSection columnFooterSection = <span class="hljs-keyword">new</span> ColumnFooterSection();
+summaryCell1.Location = template1.Row.Cells[<span class="hljs-string">"numericUpDownCell1"</span>].Location;
+columnFooterSection.Cells.Add(summaryCell1);
+template1.ColumnFooters.Add(columnFooterSection);
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+NumericUpDownCell1.Name = "NumericUpDownCell1"
+Dim NumericUpDownCell2 As New NumericUpDownCell()
+NumericUpDownCell2.Name = "NumericUpDownCell2"
+Dim SummaryCell1 As New SummaryCell()
+
+' セルの値の表示書式を設定する  
+SummaryCell1.Style.Format = "###,###"
+' "NumericUpDownCell1"と"NumericUpDownCell2"の合計の平均値を表示する 
+Dim MathStatistics1 As New MathStatistics()
+MathStatistics1.ExpressionString = "NumericUpDownCell1 + NumericUpDownCell2"
+MathStatistics1.StatisticsType = StatisticsType.Average
+SummaryCell1.Calculation = MathStatistics1
+
+Dim cells As Cell() = {NumericUpDownCell1, NumericUpDownCell2}
+Dim Template1 As Template = Template.CreateGridTemplate(cells)
+
+Dim columnFooterSection1 As ColumnFooterSection = New ColumnFooterSection()
+SummaryCell1.Location = Template1.Row.Cells("NumericUpDownCell1").Location
+columnFooterSection1.Cells.Add(SummaryCell1)
+Template1.ColumnFooters.Add(columnFooterSection1)
+GcMultiRow1.Template = Template1</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4544130d-c322-4a8e-b314-7a8523ab4c89" title="">サマリ型セル (SummaryCell)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4018de86-4467-46c3-9aa7-716faaa39192" title="">入出金履歴の作成</a></p><p><a href="gcdocsite__documentlink?toc-item-id=90af16df-b408-4ef6-b00a-0a9f2cb7c0f2" title="">データエラー時のエラーアイコン表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=334b6be9-ca5e-4f18-965d-ce35728811df" title="">非表示行を合計値から除外</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5d99f298-d2bb-4fe2-ae43-a250f662042d" title="">値の端数処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=62e55c75-4b79-4fb6-8663-dcb584bb55de" title="">条件付き集計の定義</a></p>

@@ -1,0 +1,47 @@
+<p>ボタン型セル（ButtonCell）では、Valueプロパティに含まれるアンパサンド文字(&amp;)をアクセスキーの接頭文字として表示できます。アンパサンド文字をアクセスキーの接頭文字として表示するには、<a href="gcdocsite__documentlink?toc-item-id=a79f72de-0b75-489c-a15d-59f5a9b768b4">UseMnemonic</a>プロパティをTrueに設定します。</p>
+<h2 id="サンプルコード">サンプルコード</h2>
+<p>次のコードでは、ボタン型セルに「削除(&amp;D)」を表示します。</p>
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_buttoncell_usemnemonic.png" alt="" /></p>
+<pre><code class="language-csharp">using GrapeCity.Win.MultiRow;
+                                                                
+private void Form1_Load(object sender, EventArgs e)
+{
+    ButtonCell buttonCell1 = new ButtonCell();
+    buttonCell1.Name = &quot;buttonCell1&quot;;
+    buttonCell1.Value = &quot;削除(&amp;D)&quot;;
+    buttonCell1.UseMnemonic = true;
+
+    Template template1 = Template.CreateGridTemplate(new Cell[] { buttonCell1 });
+    gcMultiRow1.Template = template1;
+    gcMultiRow1.RowCount = 10;
+
+    gcMultiRow1.KeyDown += new KeyEventHandler(gcMultiRow1_KeyDown);
+}
+
+void gcMultiRow1_KeyDown(object sender, KeyEventArgs e)
+{
+    if (e.KeyCode == Keys.D &amp;&amp; e.Modifiers == Keys.Control)
+    {
+        gcMultiRow1.Rows.Remove(gcMultiRow1.CurrentRow);
+    }
+}
+</code></pre>
+<pre><code class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim ButtonCell1 As New ButtonCell()
+    ButtonCell1.Name = &quot;ButtonCell1&quot;
+    ButtonCell1.Value = &quot;削除(&amp;D)&quot;
+    ButtonCell1.UseMnemonic = True
+
+    Dim Template1 As Template = Template.CreateGridTemplate(New Cell() {ButtonCell1})
+    GcMultiRow1.Template = Template1
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_KeyDown(sender As Object, e As KeyEventArgs) Handles GcMultiRow1.KeyDown
+    If e.KeyCode = Keys.D AndAlso e.Modifiers = Keys.Control Then
+        GcMultiRow1.Rows.Remove(GcMultiRow1.CurrentRow)
+    End If
+End Sub
+</code></pre>

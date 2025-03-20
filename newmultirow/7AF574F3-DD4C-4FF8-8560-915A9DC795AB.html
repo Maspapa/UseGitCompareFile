@@ -1,0 +1,47 @@
+<p>ここでは、キーワードによる書式設定について説明します。</p><h2>概要</h2><p>GcMaskCellでは、正規表現のキーワード（メタ文字）を設定することで書式を設定することができます。 フィールドオブジェクトによる書式設定のように柔軟なスタイル設定が不要な場合、1度のメソッド実行だけで書式を定義できるため、簡単な実装が可能です。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>キーワードによる書式設定は、El Tabelle MultiRow 4.0J のマスクコントロールで利用されていた方法と同様の方法です。</p></li></ul></blockquote><h2>設定方法</h2><h4>コードによる設定</h4><p>キーワードを使用して書式を設定するには、<a href="gcdocsite__documentlink?toc-item-id=31d2fe57-4bac-4be1-a0bc-98bcfbe84a1f" title="">AddRange</a>メソッドのオーバーロードの１つを使用します。 たとえば、郵便番号書式を設定するには、郵便番号を示す正規表現文字列は「\\D{3}-\\D{4}」（Visual Basicでは「\D{3}-\D{4}」）なので、AddRangeメソッドのパラメータにこの文字列を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcMaskCell gcMaskCell1 = <span class="hljs-keyword">new</span> InputManCell.GcMaskCell();
+
+<span class="hljs-comment">// キーワードから書式を設定します。 </span>
+gcMaskCell1.Fields.AddRange(<span class="hljs-string">"\\D{3}-\\D{4}"</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcMaskCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcMaskCell1 = New InputManCell.GcMaskCell()
+
+' キーワードから書式を設定します。 
+GcMaskCell1.Fields.AddRange("\D{3}-\D{4}")
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcMaskCell1})
+GcMultiRow1.RowCount = 5</code></pre></div><p>なお、AddRangeメソッドにより書式を設定する場合でも、自動的にフィールドオブジェクトに変換されているため、設定後に特定のフィールドスタイルを変更することは可能です。 次のサンプルコードは、キーワードにより設定した郵便番号書式の各フィールドのスタイルを設定する例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+InputManCell.GcMaskCell gcMaskCell1 = <span class="hljs-keyword">new</span> InputManCell.GcMaskCell();
+
+<span class="hljs-comment">// 郵便番号書式を設定します。</span>
+gcMaskCell1.Fields.AddRange(<span class="hljs-string">"\\D{3}-\\D{4}"</span>);
+
+<span class="hljs-comment">// 各フィールドのスタイルを設定します。</span>
+gcMaskCell1.Fields[<span class="hljs-number">0</span>].Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"メイリオ"</span>, <span class="hljs-number">12</span>);
+gcMaskCell1.Fields[<span class="hljs-number">1</span>].ForeColor = Color.Gray;
+gcMaskCell1.Fields[<span class="hljs-number">2</span>].Font = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"メイリオ"</span>, <span class="hljs-number">9</span>);
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcMaskCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">5</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+Dim GcMaskCell1 = New InputManCell.GcMaskCell()
+
+' 郵便番号書式を設定します。
+GcMaskCell1.Fields.AddRange("\D{3}-\D{4}")
+
+' 各フィールドのスタイルを設定します。
+GcMaskCell1.Fields(0).Font = New Font("メイリオ", 12)
+GcMaskCell1.Fields(1).ForeColor = Color.Gray
+GcMaskCell1.Fields(2).Font = New Font("メイリオ", 9)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcMaskCell1})
+GcMultiRow1.RowCount = 5</code></pre></div><h4>デザイン画面での設定</h4><p>デザイン画面では「書式の設定」エディタを使用して容易な設定が可能です。このエディタは次のいずれかの方法で起動でき、 正規表現のキーワード（メタ文字）を設定することで書式を設定します。</p><ul><li><p>セルのスマート タグから「入力書式の編集...」を選択</p></li></ul><p>個々のフィールドのプロパティは設定できませんが、郵便番号のような一般的な定型書式が予めビルトイン書式として用意されているため、これらのリストから書式を選択するだけで簡単に書式を定義することが可能です。</p><p>なお、キーワードを使って設定した書式は、フィールドオブジェクトのコレクションに変換されます。フィールドオブジェクトに変換された後は「入力フィールドの編集」エディタで編集できるようになります。</p><h2>キーワード一覧</h2><p>Addrangeメソッドで使用可能なキーワードは以下のとおりです。</p><p><strong>1. 主要なキーワード</strong></p><table><thead><tr><th><p>半角</p></th><th><p>全角</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>\A</p></td><td><p>\Ａ</p></td><td><p>大文字のアルファベットを表します。[A-Z]または[Ａ-Ｚ]と同等です。</p></td></tr><tr><td><p>\a</p></td><td><p>\ａ</p></td><td><p>小文字のアルファベットを表します。[a-z]または[ａ-ｚ]と同等です。</p></td></tr><tr><td><p>\D</p></td><td><p>\Ｄ</p></td><td><p>数字を表します。[0-9]または[０-９]と同等です。</p></td></tr><tr><td><p>\B</p></td><td><p>\Ｂ</p></td><td><p>2進数を表します。[0-1]または[０-１]と同等です。</p></td></tr><tr><td><p>\X</p></td><td><p>\Ｘ</p></td><td><p>16進数を表します。[0-9A-Fa-f]または[０-９Ａ-Ｆａ-ｆ]と同等です。</p></td></tr><tr><td><p>\W</p></td><td><p>\Ｗ</p></td><td><p>すべての英数字を表します。[a-zA-Z_0-9]または[ａ-ｚＡ-Ｚ＿０-９]と同等です。</p></td></tr><tr><td><p>\K</p></td><td><p>\Ｋ</p></td><td><p>カタカナ（促音・拗音の小書き表記あり）を表します。</p></td></tr><tr><td><p>\N</p></td><td><p>\Ｎ</p></td><td><p>カタカナ（促音・拗音の小書き表記なし）を表します。</p></td></tr><tr><td><p>\H</p></td><td><p>-</p></td><td><p>すべての半角文字を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｊ</p></td><td><p>ひらがな（促音・拗音の小書き表記あり）を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｇ</p></td><td><p>ひらがな（促音・拗音の小書き表記なし）を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｚ</p></td><td><p>すべての全角文字を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｔ</p></td><td><p>サロゲート ペア文字を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｉ</p></td><td><p>JIS X 0208文字を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｍ</p></td><td><p>Shift JIS文字を表します。</p></td></tr><tr><td><p>-</p></td><td><p>\Ｖ</p></td><td><p>IVS(Ideographic Variation Sequence)文字を表します。</p></td></tr></tbody></table><blockquote type="warning"><p>!type=warning</p><p>半角文字と全角文字は、その文字のShift-JISコードを使って識別されます。</p></blockquote><p><strong>2. 補助的なキーワード</strong></p><table><thead><tr><th><p>メタ文字</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>[]</p></td><td><p>[]内の文字のどれか１つにマッチすることを表します。</p></td></tr><tr><td><p>()</p></td><td><p>()内の文字列のどれか１つにマッチすることを表します。</p></td></tr><tr><td><p>|</p></td><td><p>()内で使用し、文字列間の区切り文字として機能します。</p></td></tr><tr><td><p>{n}</p></td><td><p>直前のキーワードのn回の繰り返しを表します。</p></td></tr><tr><td><p>{n,}</p></td><td><p>直前のキーワードのn回以上の繰り返しを表します。</p></td></tr><tr><td><p>{n,m}</p></td><td><p>直前のキーワードのn回以上でm回以下の繰り返しを表します。</p></td></tr><tr><td><p>*</p></td><td><p>直前のキーワードの0回以上の繰り返しを表します。{0,}と同等です。</p></td></tr><tr><td><p>+</p></td><td><p>直前のキーワードの1回以上の繰り返しを表します。{1,}と同等です。</p></td></tr><tr><td><p>?</p></td><td><p>直前のキーワードの0回または1回の繰り返しを表します。{0,1}と同等です。</p></td></tr><tr><td><p>\（Chr(92)）</p></td><td><p>キーワードをリテラル文字として表示</p></td></tr></tbody></table><p>以下にキーワードでの書式設定の例をあげます。</p><table><thead><tr><th><p>キーワード</p></th><th><p>表示例</p></th><th><p>説明</p></th></tr></thead><tbody><tr><td><p>\Ｚ{0, 50}</p></td><td><p>あア漢１Ａａ</p></td><td><p>0文字以上、50文字以下のすべての全角を表します。</p></td></tr><tr><td><p>\D{3, 5}</p></td><td><p>1234</p></td><td><p>3文字以上、5文字以下のすべての半角数字を表します。</p></td></tr><tr><td><p>[1-3,a-c,A-C]{10}</p></td><td><p>1234</p></td><td><p>10文字の1,2,3,a,b,c,A,B,Cを表します。</p></td></tr><tr><td><p>[A-Z]{0, 65535}</p></td><td><p>ABCDE</p></td><td><p>半角大文字アルファベットを表します。\Aと同等です。</p></td></tr><tr><td><p>[H^a-z]{0, 65535}</p></td><td><p>12ABｱｲｳ</p></td><td><p>小文字のアルファベットを除くすべての半角文字を表します。</p></td></tr><tr><td><p>[^\T]{0, 65535}</p></td><td><p>あア漢１Ａａ</p></td><td><p>サロゲート ぺア文字を除くすべての文字を表します。</p></td></tr></tbody></table><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=f5bfae8e-29fa-4aa3-b8a2-00ea41bc049a" title="">GcMaskCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=34f3ea20-b1b1-4807-b66c-0c33770dbc4b" title="">書式の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9140109d-3b0a-4bc0-bb93-673057e6c5b4" title="">フィールドオブジェクトによる書式設定</a></p>

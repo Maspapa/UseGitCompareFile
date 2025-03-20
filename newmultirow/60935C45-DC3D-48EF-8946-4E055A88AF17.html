@@ -1,0 +1,59 @@
+<p>テンプレートの列フッタを操作するには、Template.ColumnFootersプロパティを通してColumnFooterSectionCollectionオブジェクトを操作します。</p><h2>列フッタセクションの追加</h2><p>コーディングで列ヘッダを追加するには、ColumnFooterSectionクラスのインスタンスを作成し、ColumnFooterSectionCollection.Addメソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template = <span class="hljs-keyword">new</span> Template(); 
+
+ColumnHeaderSection columnHeaderSection1 = <span class="hljs-keyword">new</span> ColumnHeaderSection(); 
+ColumnHeaderCell columnHeaderCell1 = <span class="hljs-keyword">new</span> ColumnHeaderCell(); 
+columnHeaderCell1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>); 
+columnHeaderCell1.Value = <span class="hljs-string">"列1"</span>; 
+columnHeaderSection1.Cells.Add(columnHeaderCell1);
+columnHeaderSection1.Height = columnHeaderCell1.Height; 
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell(); 
+textBoxCell1.Name = <span class="hljs-string">"textBoxCell1"</span>; 
+textBoxCell1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+
+ColumnFooterSection columnFooterSection = <span class="hljs-keyword">new</span> ColumnFooterSection();
+HeaderCell headerCell1 = <span class="hljs-keyword">new</span> HeaderCell();
+headerCell1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+headerCell1.Value = <span class="hljs-string">"フッタ"</span>;
+columnFooterSection.Cells.Add(headerCell1);
+columnFooterSection.Height = headerCell1.Height; 
+
+template.Width = textBoxCell1.Width; 
+template.Row.Cells.Add(textBoxCell1);
+template.Row.Height = textBoxCell1.Height; 
+template.ColumnHeaders.Add(columnHeaderSection1);
+template.ColumnFooters.Add(columnFooterSection);
+
+gcMultiRow1.Template = template; 
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = New Template()
+
+Dim ColumnHeaderSection1 As ColumnHeaderSection = new ColumnHeaderSection()
+Dim ColumnHeaderCell1 As ColumnHeaderCell = New ColumnHeaderCell()
+ColumnHeaderCell1.Location = New Point(0, 0)
+ColumnHeaderCell1.Value = "列1"
+ColumnHeaderSection1.Cells.Add(ColumnHeaderCell1)
+ColumnHeaderSection1.Height = ColumnHeaderCell1.Height
+
+Dim TextBoxCell1 As TextBoxCell = New TextBoxCell()
+TextBoxCell1.Name = "TextBoxCell1"
+TextBoxCell1.Location = New Point(0, 0)
+
+Dim columnFooterSection As ColumnFooterSection = new ColumnFooterSection()
+Dim headerCell1 As HeaderCell = new HeaderCell()
+headerCell1.Location = New Point(0, 0)
+headerCell1.Value = "フッタ"
+columnFooterSection.Cells.Add(headerCell1)
+columnFooterSection.Height = headerCell1.Height
+
+Template1.Width = TextBoxCell1.Width
+Template1.Row.Cells.Add(TextBoxCell1)
+Template1.Row.Height = TextBoxCell1.Height
+Template1.ColumnHeaders.Add(ColumnHeaderSection1)
+Template1.ColumnFooters.Add(columnFooterSection)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.RowCount = 10</code></pre></div><h2>列フッタセクションの削除</h2><p>列フッタセクションを削除するには、ColumnFooterSectionCollection.RemoveまたはRemoveAtメソッドを使用します。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=12dbf56f-5a46-4435-8891-3b3abe3e9eb3" title="">テンプレート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f2f425aa-557a-4890-a00b-e9d4a2737f6b" title="">セルの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=23b0e751-a9db-4407-b8ec-e6a020a9d410" title="">列ヘッダの追加</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a96686ee-8850-4079-9aea-28c1c7192224" title="">テンプレートの幅と高さ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3653f914-c6d7-4724-875a-4239a90fcafc" title="">列モード テンプレート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cfefbed2-05ac-4449-8f34-2fa1938ca676" title="">セルのプロパティ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0932011c-fd41-4ba0-bbe2-5ef736213100" title="">大文字／小文字の区別なくセル名を認識</a></p>

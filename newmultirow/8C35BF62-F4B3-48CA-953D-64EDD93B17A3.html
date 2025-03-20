@@ -1,0 +1,37 @@
+<p>CompareCellValidatorを使用すると、セルの値と任意のセルの値とを比較して検証できます。CompareValueValidatorは、DateTime、TimeSpanまたはDecimal型（数値型）の値のみ比較できます。</p><h2>デザイナによる設定</h2><p>デザイナでセルの値の比較による検証を設定するには、次のように操作します。この例では、2つの数値型セルの値が異なる場合に検証エラーを表示します。</p><ol><li><p>数値型セルを2つ配置する。（例：numericUpDownCell1、numericUpDownCell2）</p></li><li><p>値を検証するセルを選択する。(例: numericUpDownCell2)</p></li><li><p>プロパティウィンドウでValidatorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidatorコレクションエディタで左上のコンボボックスから「CompareCellValidator」を選択し、［追加］をクリックする。</p></li><li><p>[メンバ]リストでCompareCellValidatorが選択されていることを確認する。</p></li><li><p>画面右のプロパティグリッドでComparedCellNameプロパティを選択し、「numericUpDownCell1」を選択する。</p></li><li><p>画面右のプロパティグリッドでComparedOperatorプロパティを選択し、「Equals」を選択する。</p></li><li><p>画面右のプロパティグリッドでActionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidateActionコレクションエディタでLineNotifyを追加する。</p></li><li><p>［OK］ボタンをクリックしてCellValidateActionコレクションエディタを閉じる。</p></li><li><p>［OK］ボタンをクリックしてCellValidatorコレクションエディタを閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>numericUpDownCell1とnumericUpDownCell2に異なる値を入力し、検証エラーになることを確認する。</p></li></ol><h2>コーディングによる設定</h2><p>次のコードは、セルと隣接するセルの値が異なる場合に検証エラーを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell1.Name = <span class="hljs-string">"numericUpDownCell1"</span>;
+numericUpDownCell1.Value = <span class="hljs-number">12</span>;
+NumericUpDownCell numericUpDownCell2 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+numericUpDownCell2.Name = <span class="hljs-string">"numericUpDownCell2"</span>;
+numericUpDownCell2.Value = <span class="hljs-number">12</span>;
+
+CompareCellValidator compareCellValidator1 = <span class="hljs-keyword">new</span> CompareCellValidator();
+compareCellValidator1.RequiredType = <span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">int</span>);
+compareCellValidator1.ComparedCellName = <span class="hljs-string">"numericUpDownCell2"</span>;
+compareCellValidator1.ComparedOperator = ValidateComparisonOperator.Equals;
+compareCellValidator1.Actions.Add(<span class="hljs-keyword">new</span> LineNotify());
+numericUpDownCell1.Validators.Add(compareCellValidator1);
+
+Cell[] cells = { numericUpDownCell1, numericUpDownCell2 };
+gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim NumericUpDownCell1 As New NumericUpDownCell()
+NumericUpDownCell1.Name = "NumericUpDownCell1"
+NumericUpDownCell1.Value = 12
+Dim NumericUpDownCell2 As New NumericUpDownCell()
+NumericUpDownCell2.Name = "NumericUpDownCell2"
+NumericUpDownCell2.Value = 12
+
+Dim CompareCellValidator1 As New CompareCellValidator()
+CompareCellValidator1.RequiredType = GetType(Integer)
+CompareCellValidator1.ComparedCellName = "NumericUpDownCell2"
+CompareCellValidator1.ComparedOperator = ValidateComparisonOperator.Equals
+CompareCellValidator1.Actions.Add(New LineNotify())
+NumericUpDownCell1.Validators.Add(CompareCellValidator1)
+
+Dim cells As Cell() = {NumericUpDownCell1, NumericUpDownCell2}
+GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+GcMultiRow1.RowCount = 10</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6fe09a91-f3b9-4a7d-94f4-6cbb7ad812b4" title="">組み込みのセルバリデータ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e0b9198f-61a4-4745-824b-8d670699f6fb" title="">範囲の検証（RangeValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7f725f3c-12f5-4066-a959-4adbe9c54f17" title="">必須リストの検証（IncludeListValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=604bcc1b-e817-4a3f-a3b4-811a8f3a72dd" title="">型の検証（RequiredTypeValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7375a31d-584e-405a-ba5c-0b956889af4a" title="">必須入力の検証（RequiredFieldValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af47d5a9-b5c2-4661-8820-ec3913164897" title="">除外リストの検証（ExcludeListValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=da267556-3edb-4463-ba2c-556a5504bbb4" title="">値の比較による検証（CompareValueValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=44d12cc8-b7cd-4eaa-bd02-a0d36b9697a2" title="">対になる文字の検証（PairCharValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2d9ca60a-70e8-40cc-aded-d87c303663c9" title="">サロゲート文字の検証（SurrogateCharValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2c885eaa-9c02-44fe-befa-6bc0672d3d33" title="">正規表現による検証（RegularExpressionValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=20914c6d-509c-40e0-a597-9b727ffd3b26" title="">文字列の比較による検証（CompareStringValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4585221a-8a6d-4e92-a0d8-def591c7745b" title="">文字列の長さの検証（TextLengthValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8b80cc82-4814-4dc2-83bb-0504ee4f1a44" title="">エンコード形式の検証（EncodingValidator）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8acc8368-e274-4aaa-9dd3-58656ce93d78" title="">書式の検証（CharFormatValidator）</a></p>

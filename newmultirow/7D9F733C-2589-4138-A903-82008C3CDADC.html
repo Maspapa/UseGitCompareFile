@@ -1,0 +1,93 @@
+<p>GcCalendarCellでカレンダーの表示を切り替える方法について、以下に解説します。</p><h2>コンテキストメニューの切り替え</h2><p>GcCalendarEditingControl.ShowContextMenuプロパティを使用すると、セル上でマウスの右ボタンをクリックしたときに表示されるコンテキストメニューの表示／非表示を切り替えられます。</p><p>また、<a href="gcdocsite__documentlink?toc-item-id=fee18960-9653-4acc-9595-552d1fa22279" title="">ContextMenuContent</a>プロパティを使用することでコンテキストメニューに表示する項目の種類を設定できます。休日スタイル(HolidayStyles)、”今日へ移動”(GoToToday)、もしくはその両方（both）の種類が設定可能になっており、既定値はBoth（両方）です。</p><table><thead><tr><th><p>ContextMenuContentの値</p></th><th><p>コンテキストメニューの表示内容</p></th></tr></thead><tbody><tr><td><p>HolidayStyles</p></td><td><p>休日スタイルを指定または解除</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/calendercontext_holyday_new.png" contenteditable="false"><br></p></td></tr><tr><td><p>GoToToday</p></td><td><p>今日に該当するカレンダー上の日付への移動</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/calendercontext_today_new.png" contenteditable="false"><br></p></td></tr><tr><td><p>Both</p></td><td><p>HolidayStylesとGoToTodayの両方</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/calendercontext_both_new.png" contenteditable="false"><br></p></td></tr></tbody></table><p><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>コンテキストメニュー上の休日スタイルは<a href="gcdocsite__documentlink?toc-item-id=9ab1c2c3-cc9e-47fd-885d-c0554ed92731" title="">HolidayStyleCollection</a>コレクションに<a href="gcdocsite__documentlink?toc-item-id=d86ce810-21fd-4508-a17c-c0db4a4151da" title="">HolidayStyle</a>オブジェクトが追加されているときだけ表示されます。</p></li></ul></blockquote><h2>独自コンテキストメニューの使用</h2><p>表示するコンテキストメニューをデフォルトのコンテキストメニューから独自のコンテキストメニューに切り替えるにはGcCalendarEditingControl.ContextMenuプロパティを使用します。</p><p>なお、デフォルトのコンテキストメニューは<a href="gcdocsite__documentlink?toc-item-id=9ab1c2c3-cc9e-47fd-885d-c0554ed92731" title="">HolidayStyleCollection</a>クラスにHolidayStyleオブジェクトが追加されているときだけ表示されます。このメニューは、実行時に休日スタイルを指定または解除するために用意されています。</p><p>次のコードは、<a href="gcdocsite__documentlink?toc-item-id=ac2b0a2f-3e5e-419f-a5f6-5a91683f33d8" title="">GcMultiRow.EditingControlShowing</a>イベントを使用してGcCalendarCellの編集セルに独自のコンテキストメニューを表示します。また、フォームに配置された CheckBoxの値によってコンテキストメニューの表示／非表示を切り替えます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-keyword">private</span> ContextMenu contextMenu1;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+    <span class="hljs-comment">// コンテキストメニューの設定</span>
+    MenuItem item1 = <span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">"AAA"</span>);
+    MenuItem item2 = <span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">"BBB"</span>);
+    MenuItem item3 = <span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">"CCC"</span>);
+
+    contextMenu1 = <span class="hljs-keyword">new</span> ContextMenu(<span class="hljs-keyword">new</span> MenuItem[] { item1, item2, item3 });
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, GrapeCity.Win.MultiRow.EditingControlShowingEventArgs e)</span>
+{
+    PlusPakCell.GcCalendarEditingControl gcCalendarEditor = (e.Control <span class="hljs-keyword">as</span> PlusPakCell.GcCalendarEditingControl);
+
+    <span class="hljs-keyword">if</span> (gcCalendarEditor != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-comment">// GcCalendarCellの編集セルにコンテキストメニューを設定</span>
+        gcCalendarEditor.ContextMenu = contextMenu1;
+
+        <span class="hljs-comment">// コンテキストメニューの表示／非表示の設定</span>
+        <span class="hljs-keyword">if</span> (checkBox1.Checked)
+        {
+            gcCalendarEditor.ShowContextMenu = <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            gcCalendarEditor.ShowContextMenu = <span class="hljs-literal">false</span>;
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private contextMenu1 As ContextMenu
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcCalendarCell1 As New PlusPakCell.GcCalendarCell()
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+    GcMultiRow1.RowCount = 10
+
+    ' コンテキストメニューの設定
+    Dim item1 As New MenuItem("AAA")
+    Dim item2 As New MenuItem("BBB")
+    Dim item3 As New MenuItem("CCC")
+
+    contextMenu1 = New ContextMenu(New MenuItem() {item1, item2, item3})
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(sender As Object, e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    Dim gcCalendarEditor As PlusPakCell.GcCalendarEditingControl = DirectCast(e.Control, PlusPakCell.GcCalendarEditingControl)
+
+    If Not gcCalendarEditor Is Nothing Then
+        ' GcCalendarCellの編集セルにコンテキストメニューを設定
+        gcCalendarEditor.ContextMenu = contextMenu1
+
+        ' コンテキストメニューの表示／非表示の設定
+        If CheckBox1.Checked Then
+            gcCalendarEditor.ShowContextMenu = True
+        Else
+            gcCalendarEditor.ShowContextMenu = False
+        End If
+    End If
+End Sub</code></pre></div><h2>ナビゲーション</h2><p>GcCalendarCellでは、<a href="gcdocsite__documentlink?toc-item-id=fde97788-fcd1-42fe-84e9-bb88fb3ee05a" title="">ShowNavigator</a>プロパティの設定によって、ナビゲータをOutlookスタイルまたは表示なしに設定することができます。ナビゲータをOutlookスタイルにすることで、表示されている年や月を自由に切り替えられます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/navigator.png" contenteditable="false"><br></p><p>また、Outlookスタイルのナビゲータに表示されているスキップボタンの１回の操作で移動する月の数は、<a href="gcdocsite__documentlink?toc-item-id=29f8e9b2-fe21-4056-a94d-f8bac4ca35cb" title="">ScrollRate</a>プロパティで設定します。</p><p>ShowNavigatorプロパティがCalendarNavigators.Outlookの場合、ナビゲータを左クリックすることで年と月のリストが表示されます。このリストは<a href="gcdocsite__documentlink?toc-item-id=f21dffe0-bea4-45fd-9753-5a94707eae65" title="">ShowNavigationPopupList</a>プロパティをFalseに設定することで非表示に設定可能です。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/ymlist.png" contenteditable="false"><br></p><p>以下のコードはナビゲータをOutlookに設定し、年と月のリストを非表示にする例です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+<span class="hljs-comment">//ナビゲータをOutlookに設定します。</span>
+gcCalendarCell1.ShowNavigator = PlusPakCell.CalendarNavigators.Outlook;
+<span class="hljs-comment">//年月リストを非表示に設定します。</span>
+gcCalendarCell1.ShowNavigationPopupList = <span class="hljs-literal">false</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+' ナビゲータをOutlookに設定します。
+GcCalendarCell1.ShowNavigator = PlusPakCell.CalendarNavigators.Outlook
+' 年月リストを非表示に設定します。
+GcCalendarCell1.ShowNavigationPopupList = False
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>基点と期間の設定</h2><p>カレンダーの最初の列に表示する曜日は、<a href="gcdocsite__documentlink?toc-item-id=03ed759e-9b8d-4031-ab06-f7c1e12a25e3" title="">FirstDayOfWeek</a>プロパティで設定します。通常のカレンダーでは、日曜日または月曜日が最初の列に表示されます。なお、デフォルトでは、週の開始曜日はシステムから取得されます。</p><p>12か月分のカレンダーを表示している場合に、左上に配置する最初の月は、<a href="gcdocsite__documentlink?toc-item-id=b1346ae5-ce33-459d-bc18-24cf3d56daea" title="">FirstMonthInView</a>プロパティで設定します。FirstMonthInViewプロパティをMonths.Default以外に設定すると、指定した月が左上に表示されます。ナビゲータのスキップボタン、またはマウスホイールによるカレンダーのスクロールを行うと、<a href="gcdocsite__documentlink?toc-item-id=29f8e9b2-fe21-4056-a94d-f8bac4ca35cb" title="">ScrollRate</a>プロパティの設定にかかわらず、常に１回の操作につき１年分のカレンダーがスクロールされます。カレンダー内に表示される最初の月はどんな場合にも変更されません。</p><p>カレンダーに表示する日付の最小値と最大値は、<a href="gcdocsite__documentlink?toc-item-id=913a26ff-3fee-4f0b-94ad-cd29d9a63ab4" title="">MinDate</a>プロパティと<a href="gcdocsite__documentlink?toc-item-id=273f56ad-e603-45ff-bde9-72508f15a3ce" title="">MaxDate</a>プロパティで設定します。この最小値と最大値を超える日付には、フォーカスを移動することはできません。</p><h2>六曜の表示と取得</h2><p><a href="gcdocsite__documentlink?toc-item-id=5f49ecd1-690c-409d-a70f-cb9caa5d371c" title="">ShowRokuyou</a> プロパティを設定することで、カレンダーの日付領域に六曜を表示することが可能です。日付領域に表示する六曜の配置位置は、<a href="gcdocsite__documentlink?toc-item-id=f5ff4595-e585-46d2-ae0e-e374ed12c23d" title="">RokuyouAlignment</a> プロパティの設定によって決めます。</p><p>六曜のスタイル（フォント、文字色、文字の立体効果）は、その日付に指定しているスタイルに基づきます。日付に対するフォントサイズの比率は、<a href="gcdocsite__documentlink?toc-item-id=beca7df4-6e98-4e7e-91f7-ea4e362e77d7" title="">RokuyouFontScale</a> プロパティで設定できます。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=5c66b65d-4c55-4789-8a07-8e32216ca253" title="">GcCalendarCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ec9a15e1-311b-4a1c-972d-2b1eabd65071" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e70e569d-bed2-4b51-b0ec-b437f82912b3" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6a94c6aa-81e3-41bc-a45a-09aff2ba497d" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9f75582f-079b-4e5a-a0c8-8daf097f923f" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=93fe3668-cc67-4b54-b42a-6515be44c158" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=aec3550b-c240-4c73-ad30-2553bc0a2507" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af4ba527-0df7-42a3-b1f5-037ed5794607" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=17ac25c3-6e23-4b97-9e71-6f357056feae" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5fb8054d-bcf8-40e9-834c-3de9507cb4d5" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0a830c95-ffd4-47ae-8ac3-20385e029647" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcc64849-d39e-43d1-9a4b-ed57c6e6e911" title="">日付のメモ設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac39bee9-c89e-479f-9bfd-d16997abb999" title="">和暦表示の設定変更</a></p>

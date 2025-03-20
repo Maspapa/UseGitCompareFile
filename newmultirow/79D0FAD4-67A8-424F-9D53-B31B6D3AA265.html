@@ -1,0 +1,29 @@
+<p>イメージ型セル（ImageCell）のユーザーによるクリックを処理するには、<a href="gcdocsite__documentlink?toc-item-id=a59fc2ac-3093-446c-98fe-5b601036b877" title="">GcMultiRow.CellContentClick</a>イベントを使用します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellContentClick(object sender, CellEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+    
+    <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> ImageCell)
+    {
+        <span class="hljs-keyword">if</span> (e.CellName == <span class="hljs-string">"セル名"</span>)
+        {
+            <span class="hljs-comment">// ここに処理を記述してください。</span>
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellContentClick(ByVal sender As System.Object, _
+    ByVal e As CellEventArgs) _
+    Handles GcMultiRow1.CellContentClick
+    
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+    
+    If TypeOf currentCell Is ImageCell Then
+        If e.CellName = "セル名" Then
+            ' ここに処理を記述してください。
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=efa0c972-f86c-4263-bed6-859e40f17527" title="">イメージ型セル（ImageCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a945b865-77fb-4422-972c-457a44230bdf" title="">画像の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=68eb5d2b-b7e7-4318-b116-94efdc605679" title="">値が空のときの代替イメージ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=cf5e867e-934f-4938-98ac-923c124a777a" title="">アニメーションの表示</a></p>

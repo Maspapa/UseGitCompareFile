@@ -1,0 +1,174 @@
+<p>GcCalendarCellでは、カレンダーの日付にメモを追加する機能を提供しています。メモは外観のスタイル変更や休日用のメモを表示することができます。</p><h2>メモ区域の設定</h2><p>カレンダーの日付には、メモを表示するためのメモ区域があります。このメモ区域は<a href="gcdocsite__documentlink?toc-item-id=92811ef3-0768-456c-9f6c-fb35fa12676e" title="">NoteArea</a>クラスによって構成されます。</p><h4>メモ区域の表示位置</h4><p>メモ区域の表示位置は<a href="gcdocsite__documentlink?toc-item-id=83dfb9d7-29f5-4c27-bc21-1a9dea2a8df4" title="">NoteArea.NoteAreaAlignment</a>プロパティを使用して設定することができます。また、メモ区域は日付区域のスタイル設定および六曜の表示設定によって表示位置が異なります。</p><ul><li><p>六曜を表示しない場合</p><p>日付が表示された区域以外の部分がメモ区域になります。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notearea01.png" contenteditable="false"><br></p><p><br></p><p>また、ItemStyle.TextVAlignプロパティとNoteArea.NoteAreaAlignmentプロパティにどちらもTopを設定した場合には、日付よりメモを優先して表示します。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notearea02.png" contenteditable="false"><br></p></li><li><p>六曜を表示する場合</p><p>日付と六曜が表示された区域以外の部分がメモ区域になります。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notearea03.png" contenteditable="false"><br></p><p><br></p><p>また、ItemStyle.TextVAlignプロパティとNoteArea.NoteAreaAlignmentプロパティにTopを設定し、RokuyouAlignmentプロパティにLeftTopを設定した場合には、メモを優先して上部に表示します。</p><p><br></p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notearea04.png" contenteditable="false"><br></p></li></ul><h4>メモの表示設定</h4><p>メモを表示するには<a href="gcdocsite__documentlink?toc-item-id=bf69c482-4a07-4c4c-ac2b-e1d4ee589221" title="">ShowNotes</a>プロパティにTrueを設定する必要があります。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+<span class="hljs-comment">// メモを表示します。</span>
+gcCalendarCell1.ShowNotes = <span class="hljs-literal">true</span>;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+' メモを表示します。
+GcCalendarCell1.ShowNotes = True
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><p><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>ShowNotesプロパティにFalseが設定されている場合、日付にメモを追加してもカレンダー上に表示されません。</p></li></ul></blockquote><h4>背景色と境界線の設定</h4><p>メモ区域は<a href="gcdocsite__documentlink?toc-item-id=0bdff7b6-88b8-4417-a823-ba6b6f13b23a" title="">NoteArea.BackColor</a>プロパティを使用して背景色を設定することができます。</p><p>また、<a href="gcdocsite__documentlink?toc-item-id=b4c71e49-371c-458c-a6d4-f702f1a576fc" title="">NoteArea.BorderStyle</a>プロパティを使用して境界線のスタイルを設定することができ、NoteArea.BorderStyleプロパティにFixedSingleが設定されている場合には<a href="gcdocsite__documentlink?toc-item-id=8b096512-e240-4c98-a7e1-36a52e37dbb4" title="">NoteArea.SingleBorderColor</a>プロパティで境界線の色を設定することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCalendarCell1.NoteArea.BackColor = Color.Yellow;
+gcCalendarCell1.NoteArea.BorderStyle = BorderStyle.FixedSingle;
+gcCalendarCell1.NoteArea.SingleBorderColor = Color.Red;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCalendarCell1.NoteArea.BackColor = Color.Yellow
+GcCalendarCell1.NoteArea.BorderStyle = BorderStyle.FixedSingle
+GcCalendarCell1.NoteArea.SingleBorderColor = Color.Red</code></pre></div><h4>メモの表示方向の設定</h4><p><a href="gcdocsite__documentlink?toc-item-id=8d225a82-098b-4ea7-af33-1ead1af1bf22" title="">NoteArea.NoteFlowDirection</a>プロパティを使用すると、メモ区域に表示しているメモの表示方向を設定することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notearea05.png" contenteditable="false"><br></p><p>次のコードは、メモ区域に表示しているメモを下から上に表示します</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCalendarCell1.NoteArea.NoteFlowDirection = GrapeCity.Win.Calendar.NoteFlowDirection.BottomToTop;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCalendarCell1.NoteArea.NoteFlowDirection = GrapeCity.Win.Calendar.NoteFlowDirection.BottomToTop</code></pre></div><h4>テキストのフォントサイズの比率設定</h4><p>メモ区域内のメモのテキストのフォントサイズの比率は<a href="gcdocsite__documentlink?toc-item-id=883cc8bf-4519-4c9d-9111-ce91e585da4b" title="">NoteArea.NoteFontScale</a>プロパティを使用して設定することができます。</p><p>次のコードは、メモのテキストのフォントサイズを100%で表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCalendarCell1.NoteArea.NoteFontScale = <span class="hljs-number">100</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCalendarCell1.NoteArea.NoteFontScale = 100</code></pre></div><blockquote type="warning"><p>!type=warning</p><ul><li><p>NoteArea.NoteFontScaleプロパティの値はInteger型（C#ではint型）を使用し、設定可能な範囲は「1～100」になります。</p></li></ul></blockquote><h4>メモの省略表示</h4><p>複数のメモを追加してメモ区域内に収まりきらないときに、すべてのメモが表示されていないことを示す省略文字を表示することができます。省略文字を表示するには<a href="gcdocsite__documentlink?toc-item-id=c1975d0f-3e75-4a92-ac25-8a37999ca2bb" title="">NoteArea.ShowMoreNotesEllipsis</a>プロパティにTrueを設定します。</p><p>また、省略文字上にマウスポインタが置かれたときに、ツールチップで表略表示されているメモを表示することができます。ツールチップを表示するには<a href="gcdocsite__documentlink?toc-item-id=05f91906-ed56-44f0-b323-205a77fb009a" title="">NoteArea.ShowMoreNotesTip</a>プロパティにTrueを設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notearea06.png" contenteditable="false"><br></p><p>次のコードは、メモの省略文字とツールチップを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCalendarCell1.NoteArea.ShowMoreNotesEllipsis = <span class="hljs-literal">true</span>;
+gcCalendarCell1.NoteArea.ShowMoreNotesTip = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCalendarCell1.NoteArea.ShowMoreNotesEllipsis = True
+GcCalendarCell1.NoteArea.ShowMoreNotesTip = True</code></pre></div><h2>営業日にメモを追加</h2><p>メモを追加するには、プロパティウィンドウのNotesプロパティから開かれる「Note コレクション エディタ」ダイアログを使用します。Note コレクション エディタは営業日と休日で別々のタブからメモを追加します。</p><h4>メモの追加</h4><p>営業日にメモを追加するには、「日付にメモを追加」タブで行います。メモを追加する操作は、以下のような手順になります。</p><ol><li><p>GcCalendarCellを選択する。(例:gcCalendarCell1)</p></li><li><p>ShowNotesプロパティにTrueを設定する。</p></li><li><p>プロパティウィンドウでNotesプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたNote コレクション エディタで「日付にメモを追加」タブを選択する。</p></li><li><p>左下の日付コントロールにメモを追加する日付を設定する。</p></li><li><p>［追加］ボタンをクリックする。</p></li><li><p>左上のリストに追加されたメモを選択する。</p></li><li><p>メモのプロパティからTextプロパティを選択し、任意のテキストを設定する。</p></li><li><p>［OK］ボタンをクリックしてNote コレクション エディタを閉じる。</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_addnote01.png" contenteditable="false"><br></p><p>また、コードからメモを追加するには<a href="gcdocsite__documentlink?toc-item-id=2b6ad5dd-ecf2-499e-90ea-b878ce499aaf" title="">CalendarNote</a>クラスを使用します。</p><p>次のコードは 指定した日付にメモを追加します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCalendarCell1.Notes.Add(<span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2015</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>), <span class="hljs-keyword">new</span> PlusPakCell.CalendarNote(<span class="hljs-string">"メモ１"</span>, <span class="hljs-literal">null</span>, GrapeCity.Win.Calendar.NoteDisplayMode.Text));</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCalendarCell1.Notes.Add(New Date(2015, 5, 1), New PlusPakCell.CalendarNote("メモ１", Nothing, GrapeCity.Win.Calendar.NoteDisplayMode.Text))</code></pre></div><h2>休日にメモを追加</h2><h4>休日にメモを追加</h4><p>休日にメモを追加するには、「休日にメモを追加」タブで行います。メモを追加する操作は、以下のような手順になります。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>休日にメモを追加には、あらかじめGcCalendarCellに休日スタイルが設定されている必要があります。</p></li><li><p>ShowHolidayNameプロパティにFalseを設定した場合、Textプロパティに設定した値をメモとして表示します。</p></li><li><p>ShowHolidayNameプロパティにTrueを設定した場合、休日の名前をメモとして表示します。</p></li></ul></blockquote><ol><li><p>GcCalendarCellを選択する。(例:gcCalendarCell1)</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=17ac25c3-6e23-4b97-9e71-6f357056feae" title="">定義ファイルのインポート／エクスポート</a>の「インポートの手順」に沿って、GcCalendarCellに休日スタイルを設定する。</p></li><li><p>ShowNotesプロパティにTrueを設定する。</p></li><li><p>プロパティウィンドウでNotesプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたNote コレクション エディタで「休日にメモを追加」タブを選択する。</p></li><li><p>メモを追加する休日のスタイルを選択し、［追加］ボタンをクリックする。</p></li><li><p>左上のリストに追加されたメモを選択する。</p></li><li><p>メモのプロパティからShowHolidayNameプロパティを選択しTrueを設定する。</p></li><li><p>［OK］ボタンをクリックしてNote コレクション エディタを閉じる。</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_addnote02.png" contenteditable="false"><br></p><p>また、コードから休日にメモを追加することもできます。</p><p>次のコードは本製品に付属するサンプルの祝日定義ファイルを使用して休日を表示し、その休日にメモを追加します。サンプルの祝日定義ファイルは、本製品のインストールフォルダ内のSamplesフォルダに配置されている「Holiday.xml」です。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+
+<span class="hljs-comment">// メモを表示する </span>
+gcCalendarCell1.ShowNotes = <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// 休日定義ファイルを GcCalendarCell にインポートする</span>
+gcCalendarCell1.HolidayStyles = PlusPakCell.HolidayStyleCollection.Load(<span class="hljs-string">@"C:\Program Files\MultiRowWin8\Data\Holiday.xml"</span>);
+<span class="hljs-comment">// GcCalendarCell に表示する休日スタイルを設定する </span>
+gcCalendarCell1.ActiveHolidayStyles = <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"NationalHoliday"</span> };
+
+<span class="hljs-comment">// 休日にメモを追加する </span>
+gcCalendarCell1.Notes.Add(<span class="hljs-keyword">new</span> PlusPakCell.CalendarNoteItem(<span class="hljs-string">"NationalHoliday"</span>,
+    <span class="hljs-keyword">new</span> PlusPakCell.CalendarNote(<span class="hljs-string">""</span>, <span class="hljs-literal">null</span>, GrapeCity.Win.Calendar.NoteDisplayMode.Text, <span class="hljs-string">""</span>)));
+ 
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+
+' メモを表示する 
+GcCalendarCell1.ShowNotes = True
+
+' 休日定義ファイルをGcCalendarCell にインポートする
+GcCalendarCell1.HolidayStyles = PlusPakCell.HolidayStyleCollection.Load("C:\Program Files\MultiRowWin8\Data\Holiday.xml")
+' GcCalendarCell に表示する休日スタイルを設定する 
+GcCalendarCell1.ActiveHolidayStyles = New String() {"NationalHoliday"}
+
+' 休日にメモを追加する 
+GcCalendarCell1.Notes.Add(New PlusPakCell.CalendarNoteItem("NationalHoliday",
+  New PlusPakCell.CalendarNote("", Nothing, GrapeCity.Win.Calendar.NoteDisplayMode.Text, "")))
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>メモのスタイル設定</h2><p>メモのスタイルを設定するには<a href="gcdocsite__documentlink?toc-item-id=bba7017c-9ce7-4349-a7fd-94e77fff4577" title="">NoteStyle</a>クラスを使用します。NoteStyleクラスを使用して設定したメモのスタイルを<a href="gcdocsite__documentlink?toc-item-id=2b6ad5dd-ecf2-499e-90ea-b878ce499aaf" title="">CalendarNote</a>クラスの<a href="gcdocsite__documentlink?toc-item-id=4509b084-4750-449b-8949-e0e90d909899" title="">NoteStyleName</a>プロパティに割り当てることで、メモにスタイルが設定されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notestyle01.png" contenteditable="false"><br></p><h4>メモのスタイルを設定</h4><p>メモのスタイルを設定するには、以下のような手順になります。</p><ol><li><p>GcCalendarCellを選択する。(例:gcCalendarCell1)</p></li><li><p>プロパティウィンドウでNoteStylesプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたNoteStyle コレクション エディターで［追加］ボタンをクリックする。</p></li><li><p>左のメンバーリストに追加されたメモスタイルを選択する。</p></li><li><p>画面右のプロパティグリッドで以下の設定をする。</p><ul><li><p>BackColor : Yellow</p></li><li><p>BarDisplayMode : Hover</p></li><li><p>ForeColor : Red</p></li><li><p>Name : notestyle1</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notestyle02.png" contenteditable="false"><br></p></li><li><p>［OK］ボタンをクリックしてNoteStyle コレクション エディターを閉じる。</p></li></ol><h4>営業日のメモにスタイルを設定</h4><p>メモのスタイルは、営業日のそれぞれのメモに設定することができます。営業日のメモにスタイルを設定するには、以下のような手順になります。</p><ol><li><p>GcCalendarCellを選択する。(例: gcCalendarCell1)</p></li><li><p>ShowNotesプロパティにTrueを設定する。</p></li><li><p>プロパティウィンドウでNotesプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたNote コレクション エディタで「日付にメモを追加」タブを選択する。</p></li><li><p>左下の日付コントロールにメモを追加する日付を設定する。</p></li><li><p>［追加］ボタンをクリックする。</p></li><li><p>左上のリストに追加されたメモを選択する。</p></li><li><p>画面右のプロパティグリッドで以下の設定をする。</p><ul><li><p>Text : メモ</p></li><li><p>NoteStyleName : notestyle1</p></li></ul><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notestyle03.png" contenteditable="false"><br></p></li><li><p>［OK］ボタンをクリックしてNote コレクション エディタを閉じる。</p><p><br></p></li></ol><p>次のコードは、上記の内容と同じスタイルをメモに設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+<span class="hljs-comment">// メモを表示します。</span>
+gcCalendarCell1.ShowNotes = <span class="hljs-literal">true</span>;
+
+PlusPakCell.NoteStyle notestyle1 = <span class="hljs-keyword">new</span> PlusPakCell.NoteStyle();
+notestyle1.BackColor = Color.Yellow;
+notestyle1.BarDisplayMode = GrapeCity.Win.Calendar.BarDisplayMode.Hover;
+notestyle1.ForeColor = Color.Red;
+notestyle1.Name = <span class="hljs-string">"notestyle1"</span>;
+
+gcCalendarCell1.Notes.Add(<span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2015</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>), <span class="hljs-keyword">new</span> PlusPakCell.CalendarNote(<span class="hljs-string">"メモ"</span>, <span class="hljs-literal">null</span>, GrapeCity.Win.Calendar.NoteDisplayMode.Text, notestyle1));
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+' メモを表示します。
+GcCalendarCell1.ShowNotes = True
+
+
+Dim notestyle1 As New PlusPakCell.NoteStyle()
+notestyle1.BackColor = Color.Yellow
+notestyle1.BarDisplayMode = GrapeCity.Win.Calendar.BarDisplayMode.Hover
+notestyle1.ForeColor = Color.Red
+notestyle1.Name = "notestyle1"
+
+GcCalendarCell1.Notes.Add(New Date(2015, 5, 1), New PlusPakCell.CalendarNote("メモ", Nothing, GrapeCity.Win.Calendar.NoteDisplayMode.Text, notestyle1))
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h4>休日のメモにスタイルを設定</h4><p>休日スタイルごとにメモのスタイルを設定することができます。休日のメモにスタイルを設定するには、以下のような手順になります。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>休日のメモにスタイルを設定するには、あらかじめGcCalendarCellに休日スタイルが設定されている必要があります。</p></li></ul></blockquote><ol><li><p>GcCalendarCellを選択する。(例: gcCalendarCell1)</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=17ac25c3-6e23-4b97-9e71-6f357056feae" title="">祝日定義ファイルのインポート／エクスポート</a>の「インポートの手順」に沿って、GcCalendarコントロールに休日スタイルを設定する。</p></li><li><p>ShowNotesプロパティにTrueを設定する。</p></li><li><p>プロパティウィンドウでNotesプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたNote コレクション エディタで「休日にメモを追加」タブを選択する。</p></li><li><p>メモを追加する休日のスタイルを選択し、［追加］ボタンをクリックする。</p></li><li><p>左上のリストに追加されたメモを選択する。</p></li><li><p>画面右のプロパティグリッドで以下の設定をする。</p><ul><li><p>ShowHolidayName : True</p></li><li><p>NoteStyleName : notestyle1</p></li></ul></li><li><p>［OK］ボタンをクリックしてNote コレクション エディタを閉じる。</p></li></ol><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notestyle05.png" contenteditable="false"><br></p><p>次のコードは、上記の内容と同じスタイルをメモに設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+<span class="hljs-comment">// メモを表示します。</span>
+gcCalendarCell1.ShowNotes = <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// 休日定義ファイルをGcCalendarCellにインポートする </span>
+gcCalendarCell1.HolidayStyles = PlusPakCell.HolidayStyleCollection.Load(<span class="hljs-string">@"C:\Program Files\MultiRowWin8\Data\Holiday.xml"</span>);
+<span class="hljs-comment">// GcCalendar コントロールに表示する休日スタイルを設定する </span>
+gcCalendarCell1.ActiveHolidayStyles = <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"NationalHoliday"</span> };
+
+PlusPakCell.NoteStyle notestyle1 = <span class="hljs-keyword">new</span> PlusPakCell.NoteStyle();
+notestyle1.BackColor = Color.Yellow;
+notestyle1.BarDisplayMode = GrapeCity.Win.Calendar.BarDisplayMode.Hover;　
+notestyle1.ForeColor = Color.Red;
+notestyle1.Name = <span class="hljs-string">"notestyle1"</span>;
+
+<span class="hljs-comment">// 休日にメモを追加する </span>
+gcCalendarCell1.Notes.Add(<span class="hljs-string">"NationalHoliday"</span>, <span class="hljs-keyword">new</span> PlusPakCell.CalendarNote(<span class="hljs-string">""</span>, <span class="hljs-literal">null</span>, GrapeCity.Win.Calendar.NoteDisplayMode.Text, notestyle1), <span class="hljs-literal">true</span>);
+
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+' メモを表示します。
+GcCalendarCell1.ShowNotes = True
+
+' 休日定義ファイルをGcCalendarCellにインポートする 
+GcCalendarCell1.HolidayStyles = PlusPakCell.HolidayStyleCollection.Load("C:\Program Files\MultiRowWin8\Data\Holiday.xml")
+' GcCalendar コントロールに表示する休日スタイルを設定する 
+GcCalendarCell1.ActiveHolidayStyles = New String() {"NationalHoliday"}
+
+
+Dim notestyle1 As New PlusPakCell.NoteStyle()
+notestyle1.BackColor = Color.Yellow
+notestyle1.BarDisplayMode = GrapeCity.Win.Calendar.BarDisplayMode.Hover
+notestyle1.ForeColor = Color.Red
+notestyle1.Name = "notestyle1"
+
+' 休日にメモを追加する 
+GcCalendarCell1.Notes.Add("NationalHoliday", New PlusPakCell.CalendarNote("", Nothing, GrapeCity.Win.Calendar.NoteDisplayMode.Text, notestyle1), True)
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h4>メモのスタイルを一括設定</h4><p><a href="gcdocsite__documentlink?toc-item-id=ec7562bf-703e-4113-8846-cebe781c4974" title="">DefaultNoteStyle</a>プロパティを使用してメモのスタイルを設定すると<a href="gcdocsite__documentlink?toc-item-id=4509b084-4750-449b-8949-e0e90d909899" title="">NoteStyleName</a>プロパティを設定していないメモに対して一括でスタイルを設定することができます。DefaultNoteStyleプロパティは、営業日と休日の両方のメモに対してスタイルを設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_notestyle06.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+gcCalendarCell1.DefaultNoteStyle.BackColor = Color.Blue;
+gcCalendarCell1.DefaultNoteStyle.ForeColor = Color.White;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+GcCalendarCell1.DefaultNoteStyle.BackColor = Color.Blue
+GcCalendarCell1.DefaultNoteStyle.ForeColor = Color.White</code></pre></div><blockquote type="warning"><p>!type=warning</p><ul><li><p>NoteStyleName プロパティを使用してスタイルを設定しているメモは NoteStyleName プロパティのスタイルが優先されます。</p></li></ul></blockquote><h2>メモに画像を表示</h2><p>メモに画像を表示するには<a href="gcdocsite__documentlink?toc-item-id=2b6ad5dd-ecf2-499e-90ea-b878ce499aaf" title="">CalendarNote</a>クラスの次のプロパティを使用します。</p><ul><li><p><a href="gcdocsite__documentlink?toc-item-id=38d44d50-25eb-4200-a992-b34acd169f44" title="">Image</a>プロパティ : メモに表示する画像を設定します</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=7e346283-288d-4185-9e34-572d12971fce" title="">NoteDisplayMode</a>プロパティ : メモにテキストまたは画像を表示するかどうかを設定します。</p></li></ul><p>メモに画像を表示するにはNoteDisplayModeプロパティにImageまたはImageWithTextを設定します。</p><p>また、<a href="gcdocsite__documentlink?toc-item-id=bba7017c-9ce7-4349-a7fd-94e77fff4577" title="">NoteStyle</a>クラスの次のプロパティを使用して、画像のスタイルを設定することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+PlusPakCell.GcCalendarCell gcCalendarCell1 = <span class="hljs-keyword">new</span> PlusPakCell.GcCalendarCell();
+
+<span class="hljs-comment">// メモを表示します。</span>
+gcCalendarCell1.ShowNotes = <span class="hljs-literal">true</span>;
+
+PlusPakCell.NoteStyle notestyle1 = <span class="hljs-keyword">new</span> PlusPakCell.NoteStyle();
+notestyle1.ImageLayoutMode =  GrapeCity.Win.Calendar.ImageLayoutMode.Stretch;
+notestyle1.ImageSize = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">30</span>, <span class="hljs-number">30</span>);
+notestyle1.Name = <span class="hljs-string">"notestyle1"</span>;
+
+gcCalendarCell1.Notes.Add(<span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2015</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>), <span class="hljs-keyword">new</span> PlusPakCell.CalendarNote(<span class="hljs-string">"メモ１"</span>, <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"c:\memo.png"</span>), GrapeCity.Win.Calendar.NoteDisplayMode.ImageWithText, notestyle1));
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcCalendarCell1 });
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Dim GcCalendarCell1 = New PlusPak.GcCalendarCell()
+
+' メモを表示します。
+GcCalendarCell1.ShowNotes = True
+
+Dim notestyle1 As New PlusPakCell.NoteStyle()
+notestyle1.ImageLayoutMode = GrapeCity.Win.Calendar.ImageLayoutMode.Stretch
+notestyle1.ImageSize = New Size(30, 30)
+notestyle1.Name = "notestyle1"
+
+GcCalendarCell1.Notes.Add(New Date(2015, 5, 1), New PlusPakCell.CalendarNote("メモ１", New Bitmap("c:\memo.png"), GrapeCity.Win.Calendar.NoteDisplayMode.ImageWithText     , notestyle1))
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcCalendarCell1})
+GcMultiRow1.RowCount = 10</code></pre></div><h2>メモのドラッグ＆ドロップ</h2><p><a href="gcdocsite__documentlink?toc-item-id=9d600da5-3a15-4925-b699-54f02c86d94a" title="">AllowDragDropNote</a>プロパティにTrueを設定すると、ドラッグ＆ドロップでメモを別の日付に移動することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/ppimages/gccalendar/note_movenote01.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcCalendarCell1.AllowDragDropNote = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcCalendarCell1.AllowDragDropNote = True</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=5c66b65d-4c55-4789-8a07-8e32216ca253" title="">GcCalendarCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ec9a15e1-311b-4a1c-972d-2b1eabd65071" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=36f73f20-19a2-4571-9dcb-591e1ee1e837" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e70e569d-bed2-4b51-b0ec-b437f82912b3" title="">キーボードからの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6a94c6aa-81e3-41bc-a45a-09aff2ba497d" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9f75582f-079b-4e5a-a0c8-8daf097f923f" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=93fe3668-cc67-4b54-b42a-6515be44c158" title="">休業日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=aec3550b-c240-4c73-ad30-2553bc0a2507" title="">日付の選択と取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af4ba527-0df7-42a3-b1f5-037ed5794607" title="">データベースへの接続</a></p><p><a href="gcdocsite__documentlink?toc-item-id=17ac25c3-6e23-4b97-9e71-6f357056feae" title="">祝日定義ファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5fb8054d-bcf8-40e9-834c-3de9507cb4d5" title="">iCalendarファイルのインポート／エクスポート</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0a830c95-ffd4-47ae-8ac3-20385e029647" title="">カレンダーの手動描画</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac39bee9-c89e-479f-9bfd-d16997abb999" title="">和暦表示の設定変更</a></p>

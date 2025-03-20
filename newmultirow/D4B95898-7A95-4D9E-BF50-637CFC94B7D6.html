@@ -1,0 +1,250 @@
+<p>MultiRowでは、選択したセルのコピーや貼り付けなどをタッチ操作で行うための「タッチツールバー」を提供します。ここでは、タッチツールバーの操作方法やカスタマイズ方法について解説します。</p><h2>タッチツールバー</h2><p>タッチツールバーは、<a href="gcdocsite__documentlink?toc-item-id=75fe9890-cd78-4df6-907d-308cb486ba77" title="">MultiRowTouchToolBar</a>オブジェクトに、<a href="gcdocsite__documentlink?toc-item-id=def1a12b-e30f-4cee-848d-254a5230c013" title="">TouchToolBarButton</a>オブジェクトを配置した構成になっており、TouchToolBarButtonにはアクションを割り当てることができます。タッチツールバーはカスタマイズすることができるので、MultiRowコントロール上でタッチツールバーを使用することで、さまざまな操作を行うことができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar01.png" contenteditable="false"><br></p><p>また、MultiRowでは、貼り付け、切り取り、コピーおよび削除の操作ができるタッチツールバーが、既定の状態で設定されているので、何も設定しなくてもタッチツールバーを使用することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar02.png" contenteditable="false"><br></p><h2>表示方法</h2><p>タッチツールバーは、選択済みのセルをタップするか、長押しをすることで表示します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>タッチツールバーは、タッチ対応デバイス上でのみ表示します。</p></li><li><p>タッチツールバーは、タッチ操作の場合にのみ表示ます。マウス操作時には表示しません。</p></li></ul></blockquote><h4>選択済みのセルのタップ</h4><ol><li><p><strong>タッチツールバーの表示</strong></p><p>選択済みのセルを囲む枠線とグリッパーが表示された状態で枠線内をタップすると、タッチツールバーを表示します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar03.png" contenteditable="false"><br></p><p><br></p><p>選択済みのセルの枠線内に空白エリアが含まれている場合は、その空白エリアをタップしてもタッチツールバーを表示します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar04.png" contenteditable="false"><br></p></li><li><p><strong>タッチツールバーの非表示</strong></p><p>一部のセルが選択済みで、かつタッチツールバーが表示されている場合にグリッド内をタップすると、タッチツールバーは非表示になります。このとき、選択済みのセルの状態は保持されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar05.png" contenteditable="false"><br></p><p><br></p><p>グリッド内のすべての行が選択済みで、かつタッチツールバーが表示されている状態でグリッド内をタップすると、タッチツールバーが非表示になり、タップしたセルが選択されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar06.png" contenteditable="false"><br></p></li></ol><h4>長押しによる表示</h4><p>MultiRowでは、セルを長押しすると、セルを選択してタッチツールバーを表示します。</p><ol><li><p><strong>選択済みのセル</strong></p><p>選択済みのセルの枠線内を長押しすると、タッチツールバーを表示し、選択済みのセルの状態は保持されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar07.png" contenteditable="false"><br></p><p><br></p></li><li><p><strong>選択範囲外のセル</strong></p><p>選択済みのセルの枠線外のセルを長押しすると、タッチツールバーを表示し、長押ししたセルが選択されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar08.png" contenteditable="false"><br></p></li></ol><h2>タッチツールバーの無効設定</h2><p>GcMultiRowコントロールは、<a href="gcdocsite__documentlink?toc-item-id=0dca0773-f1f3-4c95-ae45-2f38225b0eff" title="">GcMultiRow.TouchToolBar</a>プロパティに既定のタッチツールバーが設定されているため、何も設定をしない場合には既定のタッチツールバーを表示します。</p><p>既定のタッチツールバーを表示させたくない場合には、TouchToolBarプロパティにNullを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.TouchToolBar = <span class="hljs-literal">null</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.TouchToolBar = Nothing</code></pre></div><h2>既定のタッチツールバーのカスタマイズ</h2><p>既定のタッチツールバーは、4つの項目（貼り付け／切り取り／コピー／削除）が設定されていますが、これらの項目を非表示にしたり、他の項目を追加することができます。</p><p>次のコードは、既定のタッチツールバーのインスタンスを作成し、「切り取り」を非表示にしたタッチツールバーをGcMultiRowコントロールに割り当てています。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar09.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">DefaultTouchToolBar defaultTouchToolBar1 = <span class="hljs-keyword">new</span> DefaultTouchToolBar(gcMultiRow1);
+
+<span class="hljs-comment">// 既定のツールバーの「切り取り」を非表示に設定する</span>
+defaultTouchToolBar1.Items[<span class="hljs-number">1</span>].Visible = <span class="hljs-literal">false</span>;
+<span class="hljs-comment">// GcMultiRowコントロールにタッチツールバーを設定する</span>
+gcMultiRow1.TouchToolBar = defaultTouchToolBar1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim DefaultTouchToolBar1 = New DefaultTouchToolBar(GcMultiRow1)
+
+' 既定のツールバーの「切り取り」を非表示に設定する
+DefaultTouchToolBar1.Items(1).Visible = False
+' GcMultiRowコントロールにタッチツールバーを設定する
+GcMultiRow1.TouchToolBar = DefaultTouchToolBar1</code></pre></div><p>既定のタッチツールバーの項目を削除するには、RemoveAt メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">DefaultTouchToolBar defaultTouchToolBar1 = <span class="hljs-keyword">new</span> DefaultTouchToolBar(gcMultiRow1);
+
+<span class="hljs-comment">// 既定のツールバーの「コピー」を削除する</span>
+defaultTouchToolBar1.Items.RemoveAt(<span class="hljs-number">2</span>);
+<span class="hljs-comment">// GcMultiRowコントロールにタッチツールバーを設定する</span>
+gcMultiRow1.TouchToolBar = defaultTouchToolBar1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim DefaultTouchToolBar1 = New DefaultTouchToolBar(GcMultiRow1)
+
+' 既定のツールバーの「コピー」を削除する
+DefaultTouchToolBar1.Items.RemoveAt(2)
+' GcMultiRowコントロールにタッチツールバーを設定する
+GcMultiRow1.TouchToolBar = DefaultTouchToolBar1</code></pre></div><p>また、Insertメソッドを使用して、既定のタッチツールバーに新しい項目を追加することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar10.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">DefaultTouchToolBar defaultTouchToolBar1 = <span class="hljs-keyword">new</span> DefaultTouchToolBar(gcMultiRow1);
+
+<span class="hljs-comment">// 既定のツールバーに項目を追加する</span>
+TouchToolBarButton selectallBtn = <span class="hljs-keyword">new</span> TouchToolBarButton(SelectionActions.SelectAll) { Text = <span class="hljs-string">"すべて選択"</span>, Name = <span class="hljs-string">"AllSelect"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"test.png"</span>) };
+defaultTouchToolBar1.Items.Add(selectallBtn);
+
+<span class="hljs-comment">// GcMultiRowコントロールにタッチツールバーを設定する</span>
+gcMultiRow1.TouchToolBar = defaultTouchToolBar1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim DefaultTouchToolBar1 = New DefaultTouchToolBar(GcMultiRow1)
+
+' 既定のツールバーに項目を追加する
+Dim selectallBtn As New TouchToolBarButton(SelectionActions.SelectAll) With {.Text = "すべて選択", .Name = "AllSelect", .Image = New Bitmap("test.png")}
+DefaultTouchToolBar1.Items.Add(selectallBtn)
+
+' GcMultiRowコントロールにタッチツールバーを設定する
+GcMultiRow1.TouchToolBar = DefaultTouchToolBar1</code></pre></div><h2>タッチツールバーのカスタマイズ</h2><p><a href="gcdocsite__documentlink?toc-item-id=75fe9890-cd78-4df6-907d-308cb486ba77" title="">MultiRowTouchToolBar</a>クラスを使用すると、既定のツールバーを使用せずに、新しくタッチツールバーを作成することができます。</p><p>次のコードは、コピーと貼り付けを配置したタッチツールバーを作成します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar11.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-number">5</span>);
+gcMultiRow1.RowCount = <span class="hljs-number">6</span>;
+
+MultiRowTouchToolBar touchToolBar = <span class="hljs-keyword">new</span> MultiRowTouchToolBar(gcMultiRow1);
+
+TouchToolBarButton copyBtn = <span class="hljs-keyword">new</span> TouchToolBarButton(EditingActions.Copy) { Text = <span class="hljs-string">"コピー"</span>, Name = <span class="hljs-string">"CopyItem"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_Copy.png"</span>) };
+TouchToolBarButton pasteBtn = <span class="hljs-keyword">new</span> TouchToolBarButton(EditingActions.Paste) { Text = <span class="hljs-string">"貼り付け"</span>, Name = <span class="hljs-string">"PasteItem"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_Paste.png"</span>) };
+
+touchToolBar.Items.AddRange(<span class="hljs-keyword">new</span> ToolStripItem[] { copyBtn, pasteBtn });
+
+gcMultiRow1.TouchToolBar = touchToolBar;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+GcMultiRow1.Template = Template.CreateGridTemplate(5)
+GcMultiRow1.RowCount = 6
+
+Dim touchToolBar As MultiRowTouchToolBar = New MultiRowTouchToolBar(GcMultiRow1)
+
+Dim copyBtn = New TouchToolBarButton(EditingActions.Copy) With {.Text = "コピー", .Name = "CopyItem", .Image = New Bitmap("Touch_Copy.png")}
+Dim pasteBtn = New TouchToolBarButton(EditingActions.Paste) With {.Text = "貼り付け", .Name = "PasteItem", .Image = New Bitmap("Touch_Paste.png")}
+
+touchToolBar.Items.AddRange(New ToolStripItem() {copyBtn, pasteBtn})
+
+GcMultiRow1.TouchToolBar = touchToolBar</code></pre></div><p>また、TouchToolBarButtonのClickイベントを使用することで、独自の動作を処理することができます。</p><p>次のコードは、タッチツールバーでソートを実行します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-number">3</span>);
+    gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+    gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+
+    <span class="hljs-comment">// サンプルデータを設定する</span>
+    gcMultiRow1.Rows[<span class="hljs-number">0</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] { <span class="hljs-string">"E"</span>, <span class="hljs-string">"1"</span>, <span class="hljs-string">"VB"</span> });
+    gcMultiRow1.Rows[<span class="hljs-number">1</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] { <span class="hljs-string">"D"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"VB"</span> });
+    gcMultiRow1.Rows[<span class="hljs-number">2</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] { <span class="hljs-string">"C"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"CS"</span> });
+    gcMultiRow1.Rows[<span class="hljs-number">3</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] { <span class="hljs-string">"B"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"VB"</span> });
+    gcMultiRow1.Rows[<span class="hljs-number">4</span>].SetValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">3</span>] { <span class="hljs-string">"A"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"CS"</span> });
+
+
+    <span class="hljs-comment">// タッチツールバーを設定する</span>
+    MultiRowTouchToolBar touchToolBar = <span class="hljs-keyword">new</span> MultiRowTouchToolBar(gcMultiRow1);
+
+    TouchToolBarButton ascSortBtn = <span class="hljs-keyword">new</span> TouchToolBarButton() { Text = <span class="hljs-string">"昇順ソート"</span>, Name = <span class="hljs-string">"Sort"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_AscSort.png"</span>) };
+    TouchToolBarButton desSortBtn = <span class="hljs-keyword">new</span> TouchToolBarButton() { Text = <span class="hljs-string">"降順ソート"</span>, Name = <span class="hljs-string">"CopyItem"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_DesSort.png"</span>) };
+
+    <span class="hljs-comment">// タッチツールバーのボタンクリックイベントを設定する</span>
+    ascSortBtn.Click += ascSortBtn_Click;
+    desSortBtn.Click += desSortBtn_Click;
+
+    touchToolBar.Items.AddRange(<span class="hljs-keyword">new</span> ToolStripItem[] { ascSortBtn, desSortBtn });
+    gcMultiRow1.TouchToolBar = touchToolBar;
+}
+
+<span class="hljs-function">private void ascSortBtn_Click(object sender, EventArgs e)</span> 
+{
+    <span class="hljs-comment">// 現在のセルを基準に昇順で並び替える</span>
+    gcMultiRow1.Sort(gcMultiRow1.CurrentCell.CellIndex, SortOrder.Ascending);
+}
+
+<span class="hljs-function">private void desSortBtn_Click(object sender, EventArgs e)</span>
+{
+    <span class="hljs-comment">// 現在のセルを基準に降順で並び替える</span>
+    gcMultiRow1.Sort(gcMultiRow1.CurrentCell.CellIndex, SortOrder.Descending);
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    GcMultiRow1.Template = Template.CreateGridTemplate(3)
+    GcMultiRow1.AllowUserToAddRows = False
+    GcMultiRow1.RowCount = 5
+
+    ' サンプルデータを設定する
+    GcMultiRow1.Rows(0).SetValues(New String(2) {"E", "1", "VB"})
+    GcMultiRow1.Rows(1).SetValues(New String(2) {"D", "2", "VB"})
+    GcMultiRow1.Rows(2).SetValues(New String(2) {"C", "3", "CS"})
+    GcMultiRow1.Rows(3).SetValues(New String(2) {"B", "4", "VB"})
+    GcMultiRow1.Rows(4).SetValues(New String(2) {"A", "5", "CS"})
+
+    ' タッチツールバーを設定する
+    Dim touchToolBar = New MultiRowTouchToolBar(GcMultiRow1)
+
+    Dim ascSortBtn = New TouchToolBarButton() With {.Text = "昇順ソート", .Name = "Sort", .Image = New Bitmap("Touch_AscSort.png")}
+    Dim desSortBtn = New TouchToolBarButton() With {.Text = "降順ソート", .Name = "CopyItem", .Image = New Bitmap("Touch_DesSort.png")}
+
+    ' タッチツールバーのボタンクリックイベントを設定する
+    AddHandler ascSortBtn.Click, AddressOf ascSortBtn_Click
+    AddHandler desSortBtn.Click, AddressOf desSortBtn_Click
+
+    touchToolBar.Items.AddRange(New ToolStripItem() {ascSortBtn, desSortBtn})
+    GcMultiRow1.TouchToolBar = touchToolBar
+End Sub
+
+Private Sub ascSortBtn_Click(sender As Object, e As EventArgs)
+    ' 現在のセルを基準に昇順で並び替える
+    GcMultiRow1.Sort(GcMultiRow1.CurrentCell.CellIndex, SortOrder.Ascending)
+End Sub
+
+
+Private Sub desSortBtn_Click(sender As Object, e As EventArgs)
+    ' 現在のセルを基準に降順で並び替える  
+    GcMultiRow1.Sort(GcMultiRow1.CurrentCell.CellIndex, SortOrder.Descending)
+End Sub</code></pre></div><h2>タッチツールバーでコンテキストメニューを使用する方法</h2><p>.NET Frameworkの<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/web.png" alt="Web サイト" contenteditable="false"> <a href="http://msdn.microsoft.com/ja-jp/library/system.windows.forms.toolstripdropdownbutton(v=vs.80).aspx" title="">ToolStripDropDownButton</a>クラスと<img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/web.png" alt="Web サイト" contenteditable="false"> <a href="http://msdn.microsoft.com/ja-jp/library/system.windows.forms.contextmenustrip(v=vs.80).aspx" title="">ContextMenuStrip</a>クラスを利用することで、タッチツールバーでコンテキストメニューを使用することができます。</p><p>次のコードは、タッチツールバーでコンテキストメニューを使用できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar12.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+MultiRowTouchToolBar touchToolBar = <span class="hljs-keyword">new</span> MultiRowTouchToolBar(gcMultiRow1);
+
+ToolStripDropDownButton dropDownMenu = <span class="hljs-keyword">new</span> ToolStripDropDownButton();
+dropDownMenu.Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_dropdown.png"</span>);
+
+dropDownMenu.ShowDropDownArrow = <span class="hljs-literal">false</span>;
+dropDownMenu.ImageScaling = ToolStripItemImageScaling.None;
+
+<span class="hljs-comment">// コンテキストメニューを設定する</span>
+ContextMenuStrip menu = <span class="hljs-keyword">new</span> System.Windows.Forms.ContextMenuStrip();
+menu.Items.Add(<span class="hljs-string">"行の追加"</span>);
+menu.Items.Add(<span class="hljs-string">"行の削除"</span>);
+menu.Items.Add(<span class="hljs-string">"すべて選択"</span>);
+
+dropDownMenu.DropDown = menu;
+
+touchToolBar.Items.AddRange(<span class="hljs-keyword">new</span> ToolStripItem[] { dropDownMenu });
+
+gcMultiRow1.TouchToolBar = touchToolBar;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim touchToolBar = New MultiRowTouchToolBar(GcMultiRow1)
+
+Dim dropDownMenu = New ToolStripDropDownButton()
+dropDownMenu.Image = New Bitmap("Touch_dropdown.png")
+
+dropDownMenu.ShowDropDownArrow = False
+dropDownMenu.ImageScaling = ToolStripItemImageScaling.None
+
+' コンテキストメニューを設定する
+Dim menu = New System.Windows.Forms.ContextMenuStrip()
+menu.Items.Add("行の追加")
+menu.Items.Add("行の削除")
+menu.Items.Add("すべて選択")
+
+dropDownMenu.DropDown = menu
+
+touchToolBar.Items.AddRange(New ToolStripItem() {dropDownMenu})
+
+GcMultiRow1.TouchToolBar = touchToolBar</code></pre></div><p>また、ContextMenuStrip.Items.AutoSizeプロパティにFalseを設定し、Heightプロパティを設定することで、タッチでも操作しやすいように、コンテキストメニューの項目間のスペースを設定することができます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/touch_touchtoolbar13.png" contenteditable="false"><br></p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-comment">// コンテキストメニューを設定する</span>
+ContextMenuStrip menu = <span class="hljs-keyword">new</span> System.Windows.Forms.ContextMenuStrip();
+menu.Items.Add(<span class="hljs-string">"行の追加"</span>);
+menu.Items.Add(<span class="hljs-string">"行の削除"</span>);
+menu.Items.Add(<span class="hljs-string">"すべて選択"</span>);
+
+<span class="hljs-comment">// コンテキストメニューの項目間のスペースを設定する</span>
+menu.Items[<span class="hljs-number">0</span>].AutoSize = <span class="hljs-literal">false</span>;
+menu.Items[<span class="hljs-number">0</span>].Height = <span class="hljs-number">50</span>;
+
+menu.Items[<span class="hljs-number">1</span>].AutoSize = <span class="hljs-literal">false</span>;
+menu.Items[<span class="hljs-number">1</span>].Height = <span class="hljs-number">50</span>;
+
+menu.Items[<span class="hljs-number">2</span>].AutoSize = <span class="hljs-literal">false</span>;
+menu.Items[<span class="hljs-number">2</span>].Height = <span class="hljs-number">50</span>;
+
+dropDownMenu.DropDown = menu;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">' コンテキストメニューを設定する 
+Dim menu = New System.Windows.Forms.ContextMenuStrip()
+menu.Items.Add("行の追加")
+menu.Items.Add("行の削除")
+menu.Items.Add("すべて選択")
+
+' コンテキストメニューの項目間のスペースを設定する 
+menu.Items(0).AutoSize = False
+menu.Items(0).Height = 50
+
+menu.Items(1).AutoSize = False
+menu.Items(1).Height = 50
+
+menu.Items(2).AutoSize = False
+menu.Items(2).Height = 50
+
+dropDownMenu.DropDown = menu</code></pre></div><blockquote type="warning"><p>!type=warning</p><ul><li><p>タッチツールバーで使用するコンテキストメニューは、.NET FrameworkのToolStripDropDownButtonとContextMenuStripの機能を使用しているので、MultiRowが提供する機能ではありません。</p></li></ul></blockquote><h2>セルノートでのタッチツールバーの使用</h2><p>タッチツールバーは、<a href="gcdocsite__documentlink?toc-item-id=ecd20ea8-d990-4308-9bfc-e55491f0c3ee" title="">セルノート</a>でも使用することができます。</p><p>セルノートでは、次のいずれかの操作によってタッチツールバーを表示することができます。</p><ul><li><p>非編集状態の選択されたセルノートを長押しする。</p></li><li><p>非選択状態のセルノートを長押しする。</p></li></ul><p>すべてのセルノートで、同じタッチツールバーを使用する場合には、<a href="gcdocsite__documentlink?toc-item-id=466faa75-e769-4318-8498-c5e974da7265" title="">GcMultiRow.DefaultCellNoteStyle</a>プロパティの<a href="gcdocsite__documentlink?toc-item-id=57119a9c-10bb-4037-995a-6b597ed4b502" title="">TouchToolBar</a>プロパティを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+MultiRowTouchToolBar touchToolBar = <span class="hljs-keyword">new</span> MultiRowTouchToolBar(gcMultiRow1);
+
+<span class="hljs-comment">// タッチツールバーのボタンを設定する</span>
+TouchToolBarButton noteDeleteBtn = <span class="hljs-keyword">new</span> TouchToolBarButton() { Text = <span class="hljs-string">"削除"</span>, Name = <span class="hljs-string">"NoteDelete"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_NoteDel.png"</span>) };
+
+<span class="hljs-comment">// タッチツールバーにボタンを追加する</span>
+touchToolBar.Items.AddRange(<span class="hljs-keyword">new</span> ToolStripItem[]{noteDeleteBtn});
+
+gcMultiRow1.DefaultCellNoteStyle.TouchToolBar = touchToolBar;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim touchToolBar = New MultiRowTouchToolBar(GcMultiRow1)
+
+' タッチツールバーのボタンを設定する
+Dim noteDeleteBtn = New TouchToolBarButton() With {.Text = "削除", .Name = "NoteDelete", .Image = New Bitmap("Touch_NoteDel.png")}
+
+' タッチツールバーにボタンを追加する
+touchToolBar.Items.AddRange(New ToolStripItem() {noteDeleteBtn})
+
+GcMultiRow1.DefaultCellNoteStyle.TouchToolBar = touchToolBar</code></pre></div><p>特定のセルノートでタッチツールバーを使用する場合には、<a href="gcdocsite__documentlink?toc-item-id=8feec7fa-2c08-480e-aa7c-7a103c0fb44f" title="">CellNote.Style</a>プロパティの<a href="gcdocsite__documentlink?toc-item-id=57119a9c-10bb-4037-995a-6b597ed4b502" title="">TouchToolBar</a>プロパティを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+MultiRowTouchToolBar touchToolBar = <span class="hljs-keyword">new</span> MultiRowTouchToolBar(gcMultiRow1);
+
+<span class="hljs-comment">// タッチツールバーのボタンを設定する</span>
+TouchToolBarButton notestyleBtn = <span class="hljs-keyword">new</span> TouchToolBarButton() { Text = <span class="hljs-string">"編集"</span>, Name = <span class="hljs-string">"NoteEdit"</span>, Image = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"Touch_NoteEdit.png"</span>) };
+
+<span class="hljs-comment">// タッチツールバーにボタンを追加する</span>
+touchToolBar.Items.AddRange(<span class="hljs-keyword">new</span> ToolStripItem[] { notestyleBtn });
+
+<span class="hljs-comment">// 特定のセルノートにタッチツールバーを割り当てる</span>
+gcMultiRow1[<span class="hljs-number">5</span>, <span class="hljs-number">0</span>].Note.Style.TouchToolBar = touchToolBar;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim touchToolBar = New MultiRowTouchToolBar(GcMultiRow1)
+
+' タッチツールバーのボタンを設定する
+Dim notestyleBtn = New TouchToolBarButton() With {.Text = "編集", .Name = "NoteEdit", .Image = New Bitmap("Touch_NoteEdit.png")}
+
+' タッチツールバーにボタンを追加する
+touchToolBar.Items.AddRange(New ToolStripItem() {notestyleBtn})
+
+' 特定のセルノートにタッチツールバーを割り当てる
+GcMultiRow1(5, 0).Note.Style.TouchToolBar = touchToolBar</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=6f14841d-d18f-4c9f-bb6e-b121383ff61a" title="">マルチタッチ機能</a></p><p><a href="gcdocsite__documentlink?toc-item-id=66e3a3e4-25fc-493b-b2bc-f6f950b2a74d" title="">ズーム</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bc53c7fe-0015-4be3-a32b-d6bf8adfdf0d" title="">スクロール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f75a40ca-03e1-4f54-b8cc-3c9191aa7cba" title="">セルの選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d92b0422-8a99-4b70-9b34-411b25b6e201" title="">行の移動</a></p><p><a href="gcdocsite__documentlink?toc-item-id=db31ae9a-3199-441b-b84e-92537fb04ffb" title="">列幅のリサイズ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=56f3c9bd-ad53-4b5a-8888-11d7580b14e9" title="">ボタンのレイアウト</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6161938-3039-43bd-8ee6-b4f969398cca" title="">スピンボタンの最適化</a></p><p><a href="gcdocsite__documentlink?toc-item-id=40c6cfe4-2a32-4b0d-b324-190baada4fd5" title="">タッチキーボード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ac79921a-f292-49ed-be13-6bfd59d1bb01" title="">編集時のセルのグリッパー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3f726fb0-d13e-424b-90ad-3947a359d128" title="">編集時のタッチツールバー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b6d3776b-2453-44a0-ac03-05890abaf11e" title="">ドロップダウンオブジェクトの拡大表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b546d7e2-e4ad-4d9d-9625-c8f998aaf6a2" title="">コンテキストメニューの拡大表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=fc2933e8-158d-4b3e-b953-501c933fbdc8" title="">カレンダーのタッチ操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=477582c4-a172-42f1-ab73-fe746a45f14e" title="">入力デバイスの取得</a></p>

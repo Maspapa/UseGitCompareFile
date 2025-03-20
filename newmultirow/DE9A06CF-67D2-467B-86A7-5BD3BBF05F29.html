@@ -1,0 +1,51 @@
+<p>ComboBoxCellのValueプロパティで取得される値をアイテムのインデックス番号にするには、ComboBoxCell.ValueAsIndexプロパティにTrueを設定します。ComboBoxCell.ValueAsIndexプロパティは<a href="gcdocsite__documentlink?toc-item-id=50910f6f-f30e-49cc-a43b-c30a94704739" title="">ListCell.ValueAsIndex</a>プロパティから継承されています。</p><p>ComboBoxCell.ValueAsIndexプロパティの設定値によって、次のプロパティで取得される値が変更されます。</p><ul><li><p>Cell.Valueプロパティ</p></li><li><p>Cell.FormattedValueプロパティ</p></li><li><p>Cell.EditedFormattedValueプロパティ</p></li></ul><p>また、ComboBoxCell.ValueAsIndexプロパティがTrueの場合、ComboBoxCell.ValueMemberプロパティに設定されている値の影響を受けず、アイテムのインデックス番号が取得されます。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    ComboBoxCell comboBoxCell1 = <span class="hljs-keyword">new</span> ComboBoxCell();
+    comboBoxCell1.Name = <span class="hljs-string">"comboBoxCell1"</span>;
+    comboBoxCell1.Items.Add(<span class="hljs-string">"東京"</span>);
+    comboBoxCell1.Items.Add(<span class="hljs-string">"名古屋"</span>);
+    comboBoxCell1.Items.Add(<span class="hljs-string">"大阪"</span>);
+
+    comboBoxCell1.ValueAsIndex = <span class="hljs-literal">true</span>;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { comboBoxCell1 });
+    gcMultiRow1.SetValue(<span class="hljs-number">0</span>, <span class="hljs-string">"comboBoxCell1"</span>, <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function">private void button1_Click(object sender, EventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = <span class="hljs-keyword">this</span>.gcMultiRow1;
+
+    <span class="hljs-keyword">if</span> (gcMultiRow.CurrentCell <span class="hljs-keyword">is</span> ComboBoxCell)
+    {
+        MessageBox.Show(<span class="hljs-built_in">string</span>.Format(<span class="hljs-string">"選択されているインデックス: {0}"</span>, gcMultiRow.CurrentCell.Value));
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        MessageBox.Show(<span class="hljs-string">"現在のセルはComboBoxCellではありません"</span>);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim ComboBoxCell1 As New ComboBoxCell
+    ComboBoxCell1.Name = "ComboBoxCell1"
+    ComboBoxCell1.Items.Add("東京")
+    ComboBoxCell1.Items.Add("名古屋")
+    ComboBoxCell1.Items.Add("大阪")
+
+    ComboBoxCell1.ValueAsIndex = True
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {ComboBoxCell1})
+    GcMultiRow1.SetValue(0, "ComboBoxCell1", 1)
+End Sub
+
+Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Dim gcMultiRow As GcMultiRow = Me.GcMultiRow1
+    If TypeOf gcMultiRow.CurrentCell Is ComboBoxCell Then
+        MessageBox.Show(String.Format("選択されているインデックス: {0}", gcMultiRow.CurrentCell.Value))
+    Else
+        MessageBox.Show("現在のセルはComboBoxCellではありません")
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b3db033b-8448-45cf-8763-aee7e36f797e" title="">コンボボックス型セル（ComboBoxCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=56bea083-5447-4980-948f-d7dbb4b397c1" title="">SelectedIndexChangedイベントの使用方法</a></p>

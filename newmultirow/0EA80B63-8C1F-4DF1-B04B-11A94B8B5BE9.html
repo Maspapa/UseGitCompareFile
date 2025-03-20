@@ -1,0 +1,56 @@
+<p>MultiRowでは、表示している内容をPDF出力できます。ここでは、PDF形式の出力について解説します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>この機能は、Windows標準機能の「Microsoft Print to PDF」を利用しています。Windows 10 以降ではデフォルトで有効になっていますが、お使いの端末が無効になっている場合は、次の手順で有効にしてください。</p><ol><li><p>キーボードのWindowsキー+Rキーを同時に押下します。</p></li><li><p>検索ボックスに「optionalfeatures」と入力します。</p></li><li><p>OKボタンを押下します。Windowsの機能ダイアログが表示されます。</p></li><li><p>リストにある「Microsoft Print to PDF」にチェックを入れます。</p></li><li><p>OKボタンを押下します。「Microsoft Print to PDF」がインストールされます。</p></li></ol></li></ul></blockquote><h2>データ出力</h2><h3>PDF出力</h3><p>MultiRowに表示しているデータを出力するには、<a href="gcdocsite__documentlink?toc-item-id=29369139-b134-4952-a49d-64c4e88f55f1" title="">SavePDF</a>メソッドを使用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.SavePDF(<span class="hljs-string">"filename.pdf"</span>);</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.SavePDF("filename.pdf")</code></pre></div><h2>オプション設定</h2><p>PDFで出力するデータに対して、ヘッダやフッタにページ番号やタイトルを設定できるほか、出力完了時や例外発生時の処理を設定できます。</p><h3>オプションを設定したPDF出力</h3><p>SavePDFメソッドでは、次の項目を出力ファイルに指定できます。</p><ul><li><p>出力ファイルのパスとファイル名</p></li><li><p>ヘッダのテキストとページ番号</p></li><li><p>フッタのテキストとページ番号</p></li><li><p>出力完了と例外発生時の処理</p></li></ul><p>次のコードでは、出力ファイルに以下のオプションを設定します。</p><ul><li><p>出力ファイルのパスとファイル名：filename.pdf</p></li><li><p>ヘッダおよびフッタのテキストと位置</p></li><li><p>ヘッダおよびフッタのフォント</p></li><li><p>ヘッダおよびフッタのページ番号</p></li><li><p>PDF出力後の処理</p></li><li><p>PDF出力失敗時の処理</p></li></ul><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.SavePDF(<span class="hljs-string">"filename.pdf"</span>, <span class="hljs-keyword">new</span> PDFOptions()
+{
+    <span class="hljs-comment">// ヘッダーのオプション設定</span>
+    Header = <span class="hljs-keyword">new</span> PDFHeaderOptions()
+    {
+        Text = <span class="hljs-string">"PDFのヘッダ"</span>,
+        TextPosition = HorizontalAlignment.Right,
+        TextFont = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">9</span>),
+        ShowPageNumber = <span class="hljs-literal">true</span>,
+        ShowTotalPageNumber = <span class="hljs-literal">true</span>,
+        PageNumberFont = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">9</span>),
+        PageNumberPosition = HorizontalAlignment.Left,
+    },
+    <span class="hljs-comment">// フッターのオプション設定</span>
+    Footer = <span class="hljs-keyword">new</span> PDFFooterOptions()
+    {
+        Text = <span class="hljs-string">"PDFのフッタ"</span>,
+        TextFont = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">9</span>),
+        TextPosition = HorizontalAlignment.Left,
+        ShowPageNumber = <span class="hljs-literal">true</span>,
+        ShowTotalPageNumber = <span class="hljs-literal">true</span>,
+        PageNumberFont = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">"MS UI Gothic"</span>, <span class="hljs-number">9</span>),
+        PageNumberPosition = HorizontalAlignment.Right,
+    },
+
+    <span class="hljs-comment">// PDF出力後の処理</span>
+    PDFSaved = () =&gt; { MessageBox.Show(<span class="hljs-string">"PDFに出力しました。"</span>); },
+    <span class="hljs-comment">// PDF出力失敗時の処理</span>
+    PDFSaveFailed = (ex) =&gt; { MessageBox.Show(ex.Message); }
+
+});</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.SavePDF("filename.pdf", New PDFOptions With {
+    .Header = New PDFHeaderOptions With {   ' ヘッダのオプション設定
+        .Text = "PDFのヘッダ",
+        .TextPosition = HorizontalAlignment.Right,
+        .TextFont = New Font("MS UI Gothic", 9),
+        .ShowPageNumber = True,
+        .ShowTotalPageNumber = True,
+        .PageNumberFont = New Font("MS UI Gothic", 9),
+        .PageNumberPosition = HorizontalAlignment.Left
+    },
+    .Footer = New PDFFooterOptions With {   ' フッタのオプション設定
+        .Text = "PDFのフッタ",
+        .TextFont = New Font("MS UI Gothic", 9),
+        .TextPosition = HorizontalAlignment.Left,
+        .ShowPageNumber = True,
+        .ShowTotalPageNumber = True,
+        .PageNumberFont = New Font("MS UI Gothic", 9),
+        .PageNumberPosition = HorizontalAlignment.Right
+    },
+    .PDFSaved = Sub()   ' PDF出力後の処理
+                    MessageBox.Show("PDFに出力しました。")
+                End Sub,
+    .PDFSaveFailed = Sub(ex As Exception)   ' PDF出力失敗時の処理
+                         MessageBox.Show(ex.Message)
+                     End Sub
+})</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=09974051-9d1b-49e6-84cd-c3107a27e391" title="">ファイル入出力</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a70b3f06-e3a5-48dd-ba78-28e744d78cfb" title="">テンプレートXMLの入出力</a></p><p><a href="gcdocsite__documentlink?toc-item-id=05678c69-4150-43f6-bdb4-7596570ebebe" title="">CSV形式のデータ出力</a></p>

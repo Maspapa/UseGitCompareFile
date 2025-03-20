@@ -1,0 +1,112 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=13b0bd21-79db-4631-b8a7-7ef6ec5a9af4" title="">ICalculation</a>インターフェイスを使用すると、独自に計算結果を出力することができます。ここでは、非表示行を合計値から除外する方法を説明します。</p><h2>ICalculationインターフェースのコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SumCalculation</span> : <span class="hljs-title">ICalculation</span>
+{
+    <span class="hljs-function">public object Calculate(CalculationContext context)</span>
+    {
+        <span class="hljs-comment">// 合計の算出</span>
+        <span class="hljs-built_in">decimal</span> sumValue = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">int</span> count = context.GcMultiRow.RowCount;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++)
+        {
+            <span class="hljs-keyword">if</span> (context.GcMultiRow.Rows[i].Visible)
+            {
+                <span class="hljs-built_in">decimal</span> temp = <span class="hljs-number">0</span>;
+                <span class="hljs-built_in">decimal</span>.TryParse(<span class="hljs-built_in">string</span>.Concat(context.GcMultiRow[i, <span class="hljs-number">0</span>].Value), <span class="hljs-keyword">out</span> temp);
+                sumValue += temp;
+            }
+        }
+
+        <span class="hljs-comment">// 戻り値の設定</span>
+        <span class="hljs-keyword">return</span> sumValue;
+    }
+
+    <span class="hljs-function">public object Clone()</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SumCalculation();
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Public Class SumCalculation
+    Implements ICalculation
+
+    Public Function Calculate(ByVal context As GrapeCity.Win.MultiRow.CalculationContext) As Object Implements GrapeCity.Win.MultiRow.ICalculation.Calculate
+        ' 表示されている行の合計の算出
+        Dim sumValue As Decimal = 0
+        Dim count As Integer = context.GcMultiRow.RowCount
+        For i As Integer = 0 To count - 1
+            If context.GcMultiRow.Rows(i).Visible Then
+                Dim temp As Decimal = 0
+                Decimal.TryParse(String.Concat(context.GcMultiRow(i, "textBoxCell1").Value), temp)
+                sumValue += temp
+            End If
+        Next
+
+        ' 戻り値の設定
+        Return sumValue
+    End Function
+
+    Public Function Clone() As Object Implements System.ICloneable.Clone
+        Return New SumCalculation()
+    End Function
+End Class</code></pre></div><h2>コーディングによる設定</h2><p>次のコードは、独自に作成した計算をサマリ型セルに設定して、その結果を表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+<span class="hljs-comment">// テンプレートの作成</span>
+Template template1 = Template.CreateGridTemplate(<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// 集計用セルの作成</span>
+SummaryCell summaryCell1 = <span class="hljs-keyword">new</span> SummaryCell();
+summaryCell1.Name = <span class="hljs-string">"summaryCell1"</span>;
+summaryCell1.Location = template1.Row.Cells[<span class="hljs-number">0</span>].Location;
+summaryCell1.Style.Format = <span class="hljs-string">"###,###"</span>;
+summaryCell1.Calculation = <span class="hljs-keyword">new</span> SumCalculation();
+
+<span class="hljs-comment">// フッタの設定</span>
+ColumnFooterSection columnFooterSection1 = <span class="hljs-keyword">new</span> ColumnFooterSection();
+columnFooterSection1.Cells.Add(summaryCell1);
+columnFooterSection1.Height = summaryCell1.Height;
+template1.ColumnFooters.Add(columnFooterSection1);
+
+<span class="hljs-comment">// MultiRowの設定</span>
+gcMultiRow1.Template = template1;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+gcMultiRow1.RestoreValue = <span class="hljs-literal">true</span>;
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; gcMultiRow1.RowCount; i++)
+{
+    gcMultiRow1.SetValue(i, <span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-comment">// １行目と3行目を非表示に設定</span>
+gcMultiRow1.Rows[<span class="hljs-number">0</span>].Visible = <span class="hljs-literal">false</span>;
+gcMultiRow1.Rows[<span class="hljs-number">2</span>].Visible = <span class="hljs-literal">false</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' テンプレートの作成
+Dim Template1 As Template = Template.CreateGridTemplate(2)
+
+' 集計用セルの作成
+Dim SummaryCell1 As New SummaryCell()
+SummaryCell1.Name = "SummaryCell1"
+SummaryCell1.Location = Template1.Row.Cells(0).Location
+SummaryCell1.Style.Format = "###,###"
+SummaryCell1.Calculation = New SumCalculation()
+
+' フッタの設定
+Dim ColumnFooterSection1 As New ColumnFooterSection()
+ColumnFooterSection1.Cells.Add(SummaryCell1)
+ColumnFooterSection1.Height = SummaryCell1.Height
+Template1.ColumnFooters.Add(ColumnFooterSection1)
+
+' MultiRowの設定
+GcMultiRow1.Template = Template1
+GcMultiRow1.AllowUserToAddRows = False
+GcMultiRow1.RestoreValue = True
+GcMultiRow1.RowCount = 10
+For i As Integer = 0 To GcMultiRow1.RowCount - 1
+    GcMultiRow1.SetValue(i, 0, i + 1)
+Next
+
+' １行目と3行目を非表示に設定
+GcMultiRow1.Rows(0).Visible = False
+GcMultiRow1.Rows(2).Visible = False</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=4544130d-c322-4a8e-b314-7a8523ab4c89" title="">サマリ型セル (SummaryCell)</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2d9e4d2f-20b1-43ff-b327-0762d80075bc" title="">列の合計をフッタに表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4018de86-4467-46c3-9aa7-716faaa39192" title="">入出金履歴の作成</a></p><p><a href="gcdocsite__documentlink?toc-item-id=90af16df-b408-4ef6-b00a-0a9f2cb7c0f2" title="">データエラー時のエラーアイコン表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5d99f298-d2bb-4fe2-ae43-a250f662042d" title="">値の端数処理</a></p><p><a href="gcdocsite__documentlink?toc-item-id=62e55c75-4b79-4fb6-8663-dcb584bb55de" title="">条件付き集計の定義</a></p>

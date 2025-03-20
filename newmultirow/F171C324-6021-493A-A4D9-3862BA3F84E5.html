@@ -1,0 +1,93 @@
+<p>スタイルのタグには任意の値を格納できます。たとえば、非表示のデータを格納し、実行時にコーディングで読み書きできます。タグは<a href="gcdocsite__documentlink?toc-item-id=5cb6c294-4b7b-4690-bf7f-a25a986b5a97" title="">CellStyle.Tag</a>プロパティで設定します。</p><p>セル型がスタイルのタグをサポートしているかどうかは、各<a href="gcdocsite__documentlink?toc-item-id=53f8b81b-ef95-42e6-b7e8-1e7438c9cf39" title="">セル型</a>の「スタイル」を参照してください。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>セルには、<a href="gcdocsite__documentlink?toc-item-id=622c1215-250f-45e6-9b72-bb8d9eee2760" title="">Cell.Tag</a>プロパティが用意されてます。データの格納などでは、Cell.Tagプロパティの使用が推奨されます。</p></li></ul></blockquote><h2>デザイナによる設定</h2><ol><li><p>インデントを設定するセルを選択する。(例: textBoxCell1)</p></li><li><p>プロパティウィンドウでtextBoxCell1.Style.Tagプロパティに任意の値を設定する。</p></li></ol><h2>コーディングによる設定</h2><p><a href="gcdocsite__documentlink?toc-item-id=5cb6c294-4b7b-4690-bf7f-a25a986b5a97" title="">CellStyle.Tag</a>プロパティに設定した値はセルに表示されません。このため、非表示の情報や拡張データの格納に適しています。TagプロパティはObject型のため、任意の型の情報を保持できます。</p><p>次のコードは、Tagプロパティに文字数の上限を保存し、値の検証時に利用します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow; 
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    Template template1 = GrapeCity.Win.MultiRow.Template.Default;
+    template1.Row.Cells[<span class="hljs-number">0</span>].Style.BackColor = Color.Azure;
+    template1.Row.Cells[<span class="hljs-number">0</span>].Style.Tag = <span class="hljs-number">5</span>;
+
+    gcMultiRow1.Template = template1;
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellValidating(object sender, CellValidatingEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    CellStyle cellStyle = gcMultiRow[e.RowIndex, e.CellIndex].Style;
+    <span class="hljs-built_in">int</span> maxLength = (<span class="hljs-built_in">int</span>)cellStyle.Tag;
+
+    <span class="hljs-keyword">if</span> (cellStyle.Tag != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-built_in">int</span> maxLength = (<span class="hljs-built_in">int</span>)cellStyle.Tag;
+
+        <span class="hljs-keyword">if</span> (e.FormattedValue != <span class="hljs-literal">null</span>)
+        {
+            <span class="hljs-built_in">string</span> <span class="hljs-keyword">value</span> = (<span class="hljs-built_in">string</span>)e.FormattedValue;
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">value</span>.Length &gt; maxLength)
+            {
+                gcMultiRow[e.RowIndex, e.CellIndex].ErrorText = 
+                    <span class="hljs-built_in">string</span>.Format(<span class="hljs-string">"{0} 文字以下で入力してください。"</span>, maxLength);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                gcMultiRow[e.RowIndex, e.CellIndex].ErrorText = <span class="hljs-string">""</span>;
+            }
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load( _
+    ByVal sender As System.Object, ByVal e As System.EventArgs) _
+    Handles MyBase.Load
+    Dim Template1 As Template
+    Template1 = GrapeCity.Win.MultiRow.Template.Default
+    Template1.Row.Cells(0).Style.BackColor = Color.Azure
+    Template1.Row.Cells(0).Style.Tag = 5
+
+    GcMultiRow1.Template = Template1
+End Sub
+
+Private Sub GcMultiRow1_CellValidating( _
+    ByVal sender As System.Object, _
+    ByVal e As CellValidatingEventArgs _
+    ) Handles GcMultiRow1.CellValidating
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim cellStyle As CellStyle = gcMultiRow(e.RowIndex, e.CellIndex).Style
+    If cellStyle.Tag IsNot Nothing Then
+        Dim maxLength As Integer = CType(cellStyle.Tag, Integer)
+        If e.FormattedValue IsNot Nothing Then
+            Dim value As String = CType(e.FormattedValue, String)
+            If (value.Length &gt; maxLength) Then
+                gcMultiRow(e.RowIndex, e.CellIndex).ErrorText = _
+                    String.Format("{0} 文字以下で入力してください。", maxLength)
+            Else
+                gcMultiRow(e.RowIndex, e.CellIndex).ErrorText = ""
+            End If
+        End If
+    End If
+End Sub</code></pre></div><h2>セルの条件付きスタイルとタグ</h2><p>条件付きスタイル（ConditionalCellStyle）や名前付きセルスタイル（NamedCellStyle）にはCellStyle.Tagプロパティのような機能が提供されていないため、これらのセルスタイルを使用する場合にはセル単位のTagプロパティを使用できない制約が生じます。これらのセルスタイルを使用する場合にセル単位のTagプロパティを使用するには、次のような代替策があります。</p><p>Tagプロパティには任意の型の値を格納できるため、配列やコレクションを使用することでセル単位の値を格納できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.Rows[<span class="hljs-number">0</span>].Tag = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"セル1の値"</span>, <span class="hljs-string">"セル2の値"</span> };</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.Rows(0).Tag = New String() { "セル1の値", "セル2の値" }</code></pre></div><p>結合セルスタイル（CombinedCellStyle）は、他のセルスタイルを内包できるため、通常のセルスタイル（CellStyle）とその他のセルスタイルを１つのセルで併用できます。</p><p>ただし、Tagプロパティのためだけにこの方法を使用するのは効率的ではないため、通常はRow.Tagプロパティの使用をお勧めします。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-comment">// 条件付きスタイルを直接使用する場合</span>
+ConditionalCellStyle conditionalCellStyle1 = <span class="hljs-keyword">new</span> ConditionalCellStyle();
+gcMultiRow1.CurrentCell.Style = conditionalCellStyle1;
+
+<span class="hljs-comment">// 条件付きスタイルを結合セルスタイルと共に使用する場合</span>
+CellStyle cellStyle1 = <span class="hljs-keyword">new</span> CellStyle();
+cellStyle1.Tag = <span class="hljs-string">"任意の値"</span>;
+ConditionalCellStyle conditionalCellStyle1 = <span class="hljs-keyword">new</span> ConditionalCellStyle();
+CombinedCellStyle combinedCellStyle1 = <span class="hljs-keyword">new</span> CombinedCellStyle();
+combinedCellStyle1.Items.Add(cellStyle1);
+combinedCellStyle1.Items.Add(conditionalCellStyle1);
+gcMultiRow1.CurrentCell.Style = combinedCellStyle1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+' 条件付きスタイルを直接使用する場合
+Dim ConditionalCellStyle1 As New ConditionalCellStyle()
+GcMultiRow1.CurrentCell.Style = ConditionalCellStyle1
+
+' 条件付きスタイルを結合セルスタイルと共に使用する場合
+Dim CellStyle1 As New CellStyle()
+CellStyle1.Tag = "任意の値"
+Dim ConditionalCellStyle1 As New ConditionalCellStyle()
+Dim CombinedCellStyle1 As New CombinedCellStyle()
+CombinedCellStyle1.Items.Add(CellStyle1)
+CombinedCellStyle1.Items.Add(ConditionalCellStyle1)
+GcMultiRow1.CurrentCell.Style = CombinedCellStyle1</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0659dda6-b828-4148-a42a-71244a85690c" title="">セルのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7bd4c3f5-3a4b-47d1-a04d-c6b0eb34b77e" title="">スタイルの適用ルール</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1f3aedd3-7f2e-404f-9b1c-a035fb3a0028" title="">罫線</a></p><p><a href="gcdocsite__documentlink?toc-item-id=659c8f82-913c-4151-ac57-5489df055fff" title="">背景色と前景色</a></p><p><a href="gcdocsite__documentlink?toc-item-id=890081a2-3af9-4359-8697-d49b65dfe284" title="">背景パターン</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2e54d2f0-6317-4fce-a74e-8b763f3f2f10" title="">背景グラデーション</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7ccdf46e-326e-4f4f-a097-051ad2700b6e" title="">イメージ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a9f06eec-b225-4b07-826e-f14a1e77d6ca" title="">マージンとパディング</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7fcbd91a-83ac-4f84-b8dc-a9061553177d" title="">IMEモード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b113b6cb-598e-48a9-917e-8eec48db994b" title="">複数行とワードラップ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=e32f062a-3075-439c-a2f2-3c7a07840510" title="">文字書式</a></p><p><a href="gcdocsite__documentlink?toc-item-id=122eb1b4-e5f2-48d3-ab7c-a0249190a034" title="">テキストのインデント</a></p><p><a href="gcdocsite__documentlink?toc-item-id=9b34fee2-3101-44f6-8e71-6cd80cca6a4d" title="">GDI+互換モード</a></p><p><a href="gcdocsite__documentlink?toc-item-id=048b62a5-4dee-44f2-85de-b20c61c8c644" title="">マウスホバーのスタイル</a></p><p><a href="gcdocsite__documentlink?toc-item-id=1e2c91d2-750e-44f1-bc8f-05d6c9729caf" title="">ユーザー定義のワードラップ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=5a7efb6e-2090-42a0-b4ca-026b541f2de9" title="">半角文字の均等割付のカスタマイズ</a></p>

@@ -1,0 +1,138 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_datetimepickercell_japaneseera.png" contenteditable="false"><br></p><p>MultiRowでは和暦のサポートは.NET Frameworkに準じます。日付の値を入力または表示できるDateTimePickerCellでは、次のいずれかの方法で和暦を表示できます。</p><h2>コントロールパネルで「カレンダーの種類」を和暦に設定</h2><p>Windowsのコントロールパネルでカレンダーの和暦が有効になっているとき、アプリケーション側で変更を行うことなく和暦の設定を反映できます。コントロールパネルで和暦を有効にするには、次の設定を行います。</p><p>Windows Server 2008の場合:</p><ol><li><p>コントロールパネルの「地域と言語のオプション」を開く。</p></li><li><p>「地域と言語のオプション」画面で「形式」タブから「この形式のカスタマイズ」ボタンをクリックする。</p></li><li><p>表示された「地域のオプションのカスタマイズ」画面で、「日付」タブをクリックする。</p></li><li><p>「カレンダーの種類」から「和暦」を選択する。</p></li><li><p>［OK］ボタンをクリックして設定を適用する。</p></li></ol><p>Windows 7の場合:</p><ol><li><p>コントロールパネルの「時計、言語、および地域」の「地域と言語」を開く。</p></li><li><p>「地域と言語」画面で「形式」タブから「追加の設定」ボタンをクリックする。</p></li><li><p>表示された「形式のカスタマイズ」画面で、「日付」タブをクリックする。</p></li><li><p>「カレンダーの種類」から「和暦」を選択する。</p></li><li><p>［OK］ボタンをクリックして設定を適用する。</p></li></ol><p>Windows 8以降の場合:</p><ol><li><p>コントロールパネルの「時計、言語、および地域」の「地域」を開く。</p></li><li><p>「地域」画面で「形式」タブから「追加の設定」ボタンをクリックする。</p></li><li><p>表示された「形式のカスタマイズ」画面で、「日付」タブをクリックする。</p></li><li><p>「カレンダーの種類」から「和暦」を選択する。</p></li><li><p>［OK］ボタンをクリックして設定を適用する。</p></li></ol><p>この結果、次のようにDateTimePickerCellとドロップダウンカレンダーに和暦が適用されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_datetimepickercell_japaneseera01.png" alt="ドロップダウンカレンダーに和暦を適用した例" contenteditable="false"><br></p><h2>アプリケーションのカルチャ変更</h2><p>アプリケーションのカルチャを変更し、日本形式のカレンダーを適用することでシステム全体に影響することなく和暦を使用できます。ただし、DateTimePickerコントロールのドロップダウンカレンダーはシステムの設定が有効のため、この部分は和暦で表示されません。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Globalization;
+
+JapaneseCalendar jpCalendar = <span class="hljs-keyword">new</span> JapaneseCalendar();
+CultureInfo cultureInfo = <span class="hljs-keyword">new</span> CultureInfo(<span class="hljs-string">"ja-JP"</span>);
+cultureInfo.DateTimeFormat.Calendar = jpCalendar;
+Application.CurrentCulture = cultureInfo;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports System.Globalization
+
+Dim jpCalendar As New JapaneseCalendar()
+Dim cultureInfo As New CultureInfo("ja-JP")
+cultureInfo.DateTimeFormat.Calendar = jpCalendar
+Application.CurrentCulture = cultureInfo</code></pre></div><h2>DateTimePickerCellの書式変更</h2><p>DateTimePickerCellは、標準のDateTimePickerコントロールと同じようにカスタム書式を使用できます。ここに日本のカルチャから取得した日本形式のカレンダーを適用することでDateTimePickerCellに限定して和暦を使用することができます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> System.Globalization;
+
+<span class="hljs-keyword">private</span> CultureInfo _CultureInfo = <span class="hljs-literal">null</span>;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    JapaneseCalendar jpCalendar = <span class="hljs-keyword">new</span> JapaneseCalendar();
+    _CultureInfo = <span class="hljs-keyword">new</span> CultureInfo(<span class="hljs-string">"ja-JP"</span>);
+    _CultureInfo.DateTimeFormat.Calendar = jpCalendar;
+
+    DateTimePickerCell dateTimePickerCell1 = <span class="hljs-keyword">new</span> DateTimePickerCell();
+    dateTimePickerCell1.Format = DateTimePickerFormat.Custom;
+    dateTimePickerCell1.CustomFormat = DateTime.Now.ToString(<span class="hljs-string">"gg yy"</span>, _CultureInfo) + <span class="hljs-string">"年MM月dd日 dddd tt:hh:mm:ss"</span>;
+
+    Template template1 = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { dateTimePickerCell1 });
+    gcMultiRow1.Template = template1;
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellBeginEdit(object sender, CellBeginEditEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = (GcMultiRow)sender;
+    <span class="hljs-keyword">if</span> (gcMultiRow.CurrentCell <span class="hljs-keyword">is</span> DateTimePickerCell)
+    {
+        DateTimePickerCell dtpCell = gcMultiRow.CurrentCell <span class="hljs-keyword">as</span> DateTimePickerCell;
+        dtpCell.Format = DateTimePickerFormat.Custom;
+        DateTime dateTime;
+        <span class="hljs-keyword">if</span> (dtpCell.Value == <span class="hljs-literal">null</span>)
+        {
+            dateTime = DateTime.Now;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            dateTime = (DateTime)dtpCell.Value;
+        }
+        dtpCell.CustomFormat = dateTime.ToString(<span class="hljs-string">"gg yy"</span>, _CultureInfo) + <span class="hljs-string">"年MM月dd日 dddd tt:hh:mm:ss"</span>;
+    }
+}
+
+<span class="hljs-function">private void gcMultiRow1_EditingControlShowing(object sender, EditingControlShowingEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = (GcMultiRow)sender;
+
+    <span class="hljs-keyword">if</span> (e.Control <span class="hljs-keyword">is</span> DateTimePickerEditingControl)
+    {
+        DateTimePickerEditingControl dtpEditingControl = e.Control <span class="hljs-keyword">as</span> DateTimePickerEditingControl;
+        dtpEditingControl.ValueChanged -= <span class="hljs-keyword">new</span> EventHandler(dtpEditingControl_ValueChanged);
+        dtpEditingControl.ValueChanged += <span class="hljs-keyword">new</span> EventHandler(dtpEditingControl_ValueChanged);
+    }
+}
+
+<span class="hljs-function">private void dtpEditingControl_ValueChanged(object sender, EventArgs e)</span>
+{
+    DateTimePicker dtpControl = sender <span class="hljs-keyword">as</span> DateTimePicker;
+    <span class="hljs-keyword">if</span> (dtpControl != <span class="hljs-literal">null</span>)
+    {
+        dtpControl.Format = DateTimePickerFormat.Custom;
+        dtpControl.CustomFormat = dtpControl.Value.ToString(<span class="hljs-string">"gg yy"</span>, _CultureInfo) + <span class="hljs-string">"年MM月dd日 dddd tt:hh:mm:ss"</span>;
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports System.Globalization
+Imports GrapeCity.Win.MultiRow
+
+Private _CultureInfo As CultureInfo = Nothing
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim jpCalendar As New JapaneseCalendar()
+    _CultureInfo = New CultureInfo("ja-JP")
+    _CultureInfo.DateTimeFormat.Calendar = jpCalendar
+
+    Dim DateTimePickerCell1 As New DateTimePickerCell()
+    DateTimePickerCell1.Format = DateTimePickerFormat.Custom
+    DateTimePickerCell1.CustomFormat = DateTime.Now.ToString("gg yy", _CultureInfo) &amp; "年MM月dd日 dddd tt:hh:mm:ss"
+
+    Dim Template1 As Template = Template.CreateGridTemplate(New Cell() { DateTimePickerCell1 })
+    GcMultiRow1.Template = Template1
+End Sub
+
+Private Sub GcMultiRow1_CellBeginEdit(ByVal sender As System.Object, ByVal e As CellBeginEditEventArgs) Handles GcMultiRow1.CellBeginEdit
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    If TypeOf gcMultiRow.CurrentCell Is DateTimePickerCell Then
+        Dim dtpCell As DateTimePickerCell = TryCast(gcMultiRow.CurrentCell, DateTimePickerCell)
+        dtpCell.Format = DateTimePickerFormat.Custom
+        Dim dateTime As Date
+        If dtpCell.Value = Nothing Then
+            dateTime = Date.Now
+        Else
+            dateTime = CType(dtpCell.Value, Date)
+        End If
+        dtpCell.CustomFormat = dateTime.ToString("gg yy", _CultureInfo) &amp; "年MM月dd日 dddd tt:hh:mm:ss"
+    End If
+End Sub
+
+Private Sub GcMultiRow1_EditingControlShowing(ByVal sender As System.Object, ByVal e As EditingControlShowingEventArgs) Handles GcMultiRow1.EditingControlShowing
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+
+    If TypeOf e.Control Is DateTimePickerEditingControl Then
+        Dim dtpEditingControl As DateTimePickerEditingControl = TryCast(e.Control, DateTimePickerEditingControl)
+        RemoveHandler dtpEditingControl.ValueChanged, AddressOf Me.dtpEditingControl_ValueChanged
+        AddHandler dtpEditingControl.ValueChanged, AddressOf Me.dtpEditingControl_ValueChanged
+    End If
+End Sub
+
+Private Sub dtpEditingControl_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Dim dtpControl As DateTimePicker = TryCast(sender, DateTimePicker)
+    If dtpControl IsNot Nothing Then
+        dtpControl.Format = DateTimePickerFormat.Custom
+        dtpControl.CustomFormat = dtpControl.Value.ToString("gg yy", _CultureInfo) &amp; "年MM月dd日 dddd tt:hh:mm:ss"
+    End If
+End Sub</code></pre></div><p>デザイナでは、DateTimePickerCell.CustomFormatプロパティにCultureInfoの情報を書き込めないため、設計時にこの情報を設定することはできません。この場合、次のようなコードでテンプレート内のDateTimePickerCell.CustomFormatプロパティだけを実行時に設定できます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">Template template1 = gcMultiRow1.Template;
+<span class="hljs-keyword">foreach</span> (Cell cell <span class="hljs-keyword">in</span> template1.Row.Cells)
+{
+    <span class="hljs-keyword">if</span> (cell <span class="hljs-keyword">is</span> DateTimePickerCell)
+    {
+        DateTimePickerCell dtpCell = cell <span class="hljs-keyword">as</span> DateTimePickerCell;
+        dtpCell.Format = DateTimePickerFormat.Custom;
+        dtpCell.CustomFormat = DateTime.Now.ToString(<span class="hljs-string">"gg yy"</span>, _CultureInfo) + <span class="hljs-string">"年MM月dd日 dddd tt:hh:mm:ss"</span>;
+    }
+}
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Dim Template1 As Template = GcMultiRow1.Template;
+
+For Each cell As Cell In myTemplate.Row.Cells
+    If TypeOf cell Is DateTimePickerCell Then
+        Dim dtpCell As DateTimePickerCell = DirectCast(cell, DateTimePickerCell)
+        dtpCell.Format = DateTimePickerFormat.Custom
+        dtpCell.CustomFormat = DateTime.Now.ToString("gg yy", _CultureInfo) &amp; "年MM月dd日 dddd tt:hh:mm:ss"
+    End If
+Next
+GcMultiRow1.Template = Template1;</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7e1bd51b-9e9b-44b5-a31f-56c5672e613c" title="">日付型セル（DateTimePickerCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c3044fa7-ed3d-4061-a961-d25694697bfd" title="">初期値の自動確定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=485f0df2-9264-4b73-89fa-087fe4fa90d8" title="">書式設定済みの値の取得</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcd4c78d-1a80-4229-b1e9-57c31031cea4" title="">ValueChangedイベントの使用方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3ed4de8-e23e-4631-b601-93ffc6f32a5c" title="">値がnullのときの代替文字列</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6a710a0-4045-48a1-aeba-c53dd9ad8f5a" title="">ドロップダウンボタンの非表示</a></p>

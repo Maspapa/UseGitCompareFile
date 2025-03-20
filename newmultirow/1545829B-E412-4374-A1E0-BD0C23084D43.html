@@ -1,0 +1,50 @@
+<p>ドロップダウンカレンダーで、休業日（毎週の定期的な休み）を設定する方法について、以下の３つの項目に分けて解説します。</p><h2>概要の説明</h2><p>ドロップダウンカレンダーの休業日の設定は、<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">HolidayStyles</a>プロパティが参照するHolidayStyleCollectionを初めとする下図のオブジェクト（着色された５つ）を使って行います。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/holidaystylecollectionweekday.png" contenteditable="false"><br></p><p>休業日の設定に直接関連する部分をさらに詳しく示すと、下図のようになります。<a href="gcdocsite__documentlink?toc-item-id=6a83502b-0bbe-4c3f-8029-1f000f396ec4" title="">Weekdays</a>とDayOfWeekHolidayPolicy以外のオブジェクトについては、前述の「<a href="gcdocsite__documentlink?toc-item-id=979bc13b-9d8a-4852-adba-df726a52f186" title="">休日の設定</a>」を参照してください。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/imimages/04gcdatetime/weekday.png" contenteditable="false"><br></p><p>Weekdaysオブジェクトには、<a href="gcdocsite__documentlink?toc-item-id=b40a3bb0-57a4-4640-9bc0-1fc0ad367a19" title="">Sunday</a>から<a href="gcdocsite__documentlink?toc-item-id=80ac9376-6d3e-4c01-8383-a8aa83482ecb" title="">Saturday</a>までの７つのプロパティが用意されており、これらが参照するDayWeekHolidayPolicy構造体を使って休業日を設定します。</p><h2>休業日の設定</h2><p>休業日は、次の手順で設定します。</p><ol><li><p>通常の休日と同じように、<a href="gcdocsite__documentlink?toc-item-id=6d530c61-4a75-4e8e-8d02-6cc1682806c6" title="">HolidayStyle</a>オブジェクトを生成します。</p></li><li><p>HolidayStyleオブジェクトの<a href="gcdocsite__documentlink?toc-item-id=b4ad42ff-17af-406b-afd0-9f87b14aa10e" title="">Name</a>プロパティを設定します。</p></li><li><p>コントロールの<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">Weekdays</a>プロパティを経由して参照される<a href="gcdocsite__documentlink?toc-item-id=f17eaa13-48d5-47d4-ba2f-dbbff80e97eb" title="">DayOfWeekStyle</a>オブジェクトの<a href="gcdocsite__documentlink?toc-item-id=0f4fc1e8-2844-4518-ab49-160bfd7fb26c" title="">SubStyle</a>プロパティを使って、休業日の日付スタイル（文字色、背景色、太字、下線）を設定します。</p></li><li><p><a href="gcdocsite__documentlink?toc-item-id=606f955c-d5a9-4518-b687-238f893b9757" title="">HolidayCollection</a>コレクションの<a href="gcdocsite__documentlink?toc-item-id=74b1e455-e6c0-483b-b8fc-8f579d358488" title="">Weekdays</a>プロパティが参照する<a href="gcdocsite__documentlink?toc-item-id=6a83502b-0bbe-4c3f-8029-1f000f396ec4" title="">Weekdays</a>オブジェクトのプロパティ（Sunday～Saturday）を使うことで、休業日にする曜日を指定します。</p></li><li><p>指定したプロパティ（たとえばWednesday）が参照するDayOfWeekdayPolicy構造体のWeekFlagsプロパティで、休業日にする週（例：第２週と第３週）を指定します。</p></li><li><p>HolidayStyleオブジェクトを<a href="gcdocsite__documentlink?toc-item-id=f3718d11-61c0-4084-9c14-9f0fbf09c49b" title="">HolidayStyleCollection</a>コレクションに登録します。</p></li><li><p>コントロールの<a href="gcdocsite__documentlink?toc-item-id=323b3f79-76b2-4628-9a76-38eb8833071c" title="">ActiveHolidayStyles</a>プロパティを使って、登録したHolidayStyleオブジェクトを有効にします。</p></li></ol><h2>サンプルコード</h2><p>次のサンプルコードは、第２と第４の土曜日を休業日に設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> InputManCell = GrapeCity.Win.MultiRow.InputMan;
+
+<span class="hljs-comment">// 休日スタイルを生成します。 </span>
+InputManCell.HolidayStyle aHS = <span class="hljs-keyword">new</span> InputManCell.HolidayStyle();
+<span class="hljs-comment">// 休日スタイルの名称を設定します。 </span>
+aHS.Name = <span class="hljs-string">"休業日"</span>;
+<span class="hljs-comment">// 第２と第４土曜日を休業日に設定します。 </span>
+aHS.Holidays.Weekdays.Saturday = <span class="hljs-keyword">new</span> GrapeCity.Win.Editors.DayOfWeekHolidayPolicy(
+    GrapeCity.Win.Editors.WeekFlags.SecondWeek | GrapeCity.Win.Editors.WeekFlags.FourthWeek,
+    GrapeCity.Win.Editors.HolidayOverride.None);
+
+InputManCell.GcDateTimeCell gcDateTimeCell1 = <span class="hljs-keyword">new</span> InputManCell.GcDateTimeCell();
+gcDateTimeCell1.Name = <span class="hljs-string">"gcDateTimeCell1"</span>;
+
+<span class="hljs-comment">// 休業日の表示スタイルを設定します。</span>
+gcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.SubStyle = <span class="hljs-keyword">new</span> InputManCell.SubStyle(Color.WhiteSmoke, Color.Red, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);
+gcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.WeekFlags = GrapeCity.Win.Editors.WeekFlags.SecondWeek |
+    GrapeCity.Win.Editors.WeekFlags.FourthWeek;
+<span class="hljs-comment">// 設定が完了した休日スタイルを登録します。 </span>
+gcDateTimeCell1.DropDownCalendar.HolidayStyles.Add(<span class="hljs-string">"休業日"</span>, aHS);
+<span class="hljs-comment">// 登録した休日スタイルをコントロールに反映させます。 </span>
+gcDateTimeCell1.DropDownCalendar.ActiveHolidayStyles = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"休業日"</span> };
+
+gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcDateTimeCell1 });</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports InputManCell = GrapeCity.Win.MultiRow.InputMan
+
+' 休日スタイルを生成します。 
+Dim aHS As InputManCell.HolidayStyle = New InputManCell.HolidayStyle()
+' 休日スタイルの名称を設定します。 
+aHS.Name = "休業日"
+' 第２と第４土曜日を休業日に設定します。 
+aHS.Holidays.Weekdays.Saturday = New GrapeCity.Win.Editors.DayOfWeekHolidayPolicy(
+    GrapeCity.Win.Editors.WeekFlags.SecondWeek Or GrapeCity.Win.Editors.WeekFlags.FourthWeek,
+    GrapeCity.Win.Editors.HolidayOverride.None)
+
+
+Dim GcDateTimeCell1 As New InputManCell.GcDateTimeCell()
+GcDateTimeCell1.Name = "GcDateTimeCell1"
+
+' 休業日の表示スタイルを設定します。 
+GcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.SubStyle = New InputManCell.SubStyle(Color.WhiteSmoke, Color.Red, True, False)
+GcDateTimeCell1.DropDownCalendar.Weekdays.Saturday.WeekFlags = GrapeCity.Win.Editors.WeekFlags.SecondWeek Or
+    GrapeCity.Win.Editors.WeekFlags.FourthWeek
+' 設定が完了した休日スタイルを登録します。 
+GcDateTimeCell1.DropDownCalendar.HolidayStyles.Add("休業日", aHS)
+' 登録した休日スタイルをコントロールに反映させます。 
+GcDateTimeCell1.DropDownCalendar.ActiveHolidayStyles = New String() {"休業日"}
+
+GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcDateTimeCell1})</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b80001db-fab9-48f7-baab-a639554c60a2" title="">GcDateTimeCell</a></p><p><a href="gcdocsite__documentlink?toc-item-id=636ed515-d9bd-4cd4-95e1-a248269ffe78" title="">ドロップダウンカレンダー</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6de88de5-48fa-4c94-9bc3-fc9ddb74fe0c" title="">レイアウトの変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4c5fee2d-64be-437d-bc4f-18a2917d7f6b" title="">スタイルの設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7e8d1ddd-87e5-4962-b603-454317a10781" title="">カレンダーの操作</a></p><p><a href="gcdocsite__documentlink?toc-item-id=979bc13b-9d8a-4852-adba-df726a52f186" title="">休日の設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=4394a7f2-0d1c-4787-bfc9-217dd21811e2" title="">ヘッダの書式設定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=076366ab-8236-4f4e-954b-9ee586810bce" title="">祝日定義ファイル</a></p>

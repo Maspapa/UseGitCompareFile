@@ -1,0 +1,121 @@
+<p>ColumnHeaderCellを使用すると、ドロップダウンリストのコマンドを使用して行のフィルタ（絞り込み）を実行できます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_filter_dropdown.png" alt="列ヘッダのドロップダウン" contenteditable="false"><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>仮想モードが有効のとき、フィルタは使用できません。</p></li><li><p>新規行はフィルタの対象ではありません。</p></li></ul></blockquote><h2>ドロップダウンリストの設定</h2><p>ドロップダウンリストを設定するには、ColumnHeaderCell.DropDownListプロパティにHeaderDropDownListクラスのインスタンスを設定します。このとき、フィルタのコマンドを有効にするためにコンストラクタの第二引数にTrueを設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.Default;
+ColumnHeaderCell columnHeaderCell = template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ColumnHeaderCell;
+columnHeaderCell.DropDownList = 
+    <span class="hljs-keyword">new</span> HeaderDropDownList(<span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);
+template1.Row.Cells[<span class="hljs-string">"textBoxCell1"</span>].Style.BackColor = Color.Azure;
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = Template.Default
+Dim ColumnHeaderCell1 As ColumnHeaderCell = _
+    DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+ColumnHeaderCell1.DropDownList = _
+    New HeaderDropDownList("textBoxCell1", True, False)
+Template1.Row.Cells("textBoxCell1").Style.BackColor = Color.Azure
+GcMultiRow1.Template = Template1</code></pre></div><h2>フィルタ範囲の指定</h2><p>フィルタ対象とする行の範囲はHeaderDropDownList.StartRowおよびHeaderDropDownList.EndRowプロパティで設定します。</p><h2>値のカウント</h2><p>既定の設定では、フィルタ対象となる行の範囲で、最初の1,000件までの異なる値がカウントされます。この値はDropDownAutoFilterItem.MaxCountプロパティで確認できます。DropDownAutoFilterItemクラスは、異なる値を元に動的にフィルタの候補を作成します。</p><p>フィルタのためにカウントする値を削減すると、ドロップダウンの表示にかかるパフォーマンスを改善できます。次のコードは、最初の100件までの異なる値に変更します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.Default;
+ColumnHeaderCell columnHeaderCell1 = template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ColumnHeaderCell;
+HeaderDropDownList headerDropDownList1 = <span class="hljs-keyword">new</span> HeaderDropDownList(<span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);
+<span class="hljs-keyword">foreach</span> (DropDownItem item <span class="hljs-keyword">in</span> headerDropDownList1.Items)
+{
+    <span class="hljs-keyword">if</span> (item <span class="hljs-keyword">is</span> DropDownAutoFilterItem)
+    {
+        DropDownAutoFilterItem dropDownAutoFilterItem = item <span class="hljs-keyword">as</span> DropDownAutoFilterItem;
+        dropDownAutoFilterItem.MaxCount = <span class="hljs-number">100</span>;
+    }
+}
+columnHeaderCell1.DropDownList = headerDropDownList1;
+template1.Row.Cells[<span class="hljs-string">"textBoxCell1"</span>].Style.BackColor = Color.Azure;
+gcMultiRow1.Template = template1;
+
+<span class="hljs-comment">// サンプル データを設定する</span>
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+gcMultiRow1.RowCount = <span class="hljs-number">200</span>;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; gcMultiRow1.RowCount; i++)
+{
+    gcMultiRow1[i, <span class="hljs-string">"textBoxCell1"</span>].Value = i.ToString();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = Template.Default
+Dim ColumnHeaderCell1 As ColumnHeaderCell = _
+    DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+Dim HeaderDropDownList1 As HeaderDropDownList = _
+    New HeaderDropDownList("textBoxCell1", True, False)
+For Each item As DropDownItem In HeaderDropDownList1.Items
+    If TypeOf item Is DropDownAutoFilterItem Then
+        Dim dropDownAutoFilterItem As DropDownAutoFilterItem = _
+            DirectCast(item, DropDownAutoFilterItem)
+        dropDownAutoFilterItem.MaxCount = 100
+    End If
+Next
+ColumnHeaderCell1.DropDownList = HeaderDropDownList1
+Template1.Row.Cells("textBoxCell1").Style.BackColor = Color.Azure
+GcMultiRow1.Template = Template1
+
+' サンプル データを設定する
+GcMultiRow1.AllowUserToAddRows = False
+GcMultiRow1.RowCount = 200
+
+For i As Integer = 0 To GcMultiRow1.RowCount - 1
+    GcMultiRow1(i, "textBoxCell1").Value = i.ToString()
+Next</code></pre></div><h2>フィルタのクリア</h2><p><a href="gcdocsite__documentlink?toc-item-id=6a9e8983-c51d-4b6e-a180-79349af7d123" title="">GcMultiRow.ClearAllFilters</a>メソッドを使用すると、既に設定されているフィルタを一括してクリアできます。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.ClearAllFilters();</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.ClearAllFilters()</code></pre></div><h2>フィルタのインジケータ</h2><h3>インジケータ画像の表示</h3><p><a href="gcdocsite__documentlink?toc-item-id=74cb0faa-83db-4b33-b16e-fa9f08e16f50" title="">ColumnHeaderCell.DropDownButtonImages</a>プロパティを使用すると、フィルタのドロップダウンボタンにインジケータの画像を設定できます。<a href="gcdocsite__documentlink?toc-item-id=74cb0faa-83db-4b33-b16e-fa9f08e16f50" title="">ColumnHeaderCell.DropDownButtonImages</a>プロパティの設定を有効にするには、<a href="gcdocsite__documentlink?toc-item-id=886bc73d-2dd5-492b-a5c3-bc2b44403746" title="">ColumnHeaderCell.ShowDropDownButtonImages</a>プロパティをTrueに設定します。</p><p>インジケータの画像は15ピクセル×15ピクセルの枠内に表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_filter_dropdown_02.png" contenteditable="false"><br></p><blockquote type="warning"><p>!type=warning</p><ul><li><p>フィルタのインジケータはズームに対応していません。</p></li><li><p>15ピクセル×15ピクセルより大きい画像を設定した場合は、枠からはみ出した部分が表示されません。</p></li></ul></blockquote><p>次のコードは、フィルタが実行されたときのインジケータの画像を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = Template.Default;
+ColumnHeaderCell columnHeaderCell1 = template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ColumnHeaderCell;
+HeaderDropDownList headerDropDownList1 = <span class="hljs-keyword">new</span> HeaderDropDownList();
+headerDropDownList1.Items.Add(<span class="hljs-keyword">new</span> DropDownAutoFilterItem());
+
+columnHeaderCell1.FilterCellName = <span class="hljs-string">"textBoxCell1"</span>;
+columnHeaderCell1.DropDownList = headerDropDownList1;
+
+columnHeaderCell1.DropDownButtonImages.Filtered = <span class="hljs-keyword">new</span> Bitmap(<span class="hljs-string">@"test.bmp"</span>);
+columnHeaderCell1.ShowDropDownButtonImages = <span class="hljs-literal">true</span>;
+
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = Template.Default
+Dim ColumnHeaderCell1 As ColumnHeaderCell = DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+Dim HeaderDropDownList1 As New HeaderDropDownList()
+HeaderDropDownList1.Items.Add(New DropDownAutoFilterItem())
+
+ColumnHeaderCell1.FilterCellName = "textBoxCell1"
+ColumnHeaderCell1.DropDownList = HeaderDropDownList1
+
+ColumnHeaderCell1.DropDownButtonImages.Filtered = New Bitmap("test.bmp")
+ColumnHeaderCell1.ShowDropDownButtonImages = True
+
+GcMultiRow1.Template = Template1</code></pre></div><h3>ドロップダウンボタン表示効果の無効化</h3><p>インジケータの画像はフィルタのドロップダウンボタン上に表示されるため、画像を設定している場合でもドロップダウンボタンはボタンの表示効果を持っています。</p><p>例えば、マウスホバー時にはボタンの枠線がハイライト表示されたり、画像の背景を透過にしてヘッダセルの背景色を設定した場合には枠線が表示されます。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_filter_dropdown_03.png" contenteditable="false"><br></p><p>このようなボタンの表示効果を無効にするには、<a href="gcdocsite__documentlink?toc-item-id=e979c622-6b23-4c60-b968-8b222daed436" title="">ColumnHeaderCell.HideDropDownButtonVisualEffect</a>プロパティにTrueを設定します。</p><p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/header_filter_dropdown_04.png" contenteditable="false"><br></p><h2>固定行をフィルタから除外</h2><p>固定行をフィルタの対象から除外するには、<a href="gcdocsite__documentlink?toc-item-id=15a70bc5-2a07-466d-81e0-594484e48b73" title="">GcMultiRow.ExcludeFreezeRowsWhenFilter</a>プロパティにTrueを設定します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>GcMultiRow.ExcludeFreezeRowsWhenFilterプロパティにTrueが設定されている場合、固定行の値はフィルタのドロップダウンリストに表示されません。</p></li></ul></blockquote><p>次のコードは、グリッドの下部の10行をフィルタの対象から除外します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp">gcMultiRow1.FreezeBottomRowCount = <span class="hljs-number">10</span>;
+gcMultiRow1.ExcludeFreezeRowsWhenFilter = <span class="hljs-literal">true</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">GcMultiRow1.FreezeBottomRowCount = 10
+GcMultiRow1.ExcludeFreezeRowsWhenFilter = True</code></pre></div><h2>複数選択フィルタ</h2><p>複数選択フィルタを設定するには、<a href="gcdocsite__documentlink?toc-item-id=b5a3173a-883b-4522-a572-ea07d9da1bee" title="">ColumnHeaderCell.DropDownContextMenuStrip</a>プロパティを使用します。HeaderDropDownContextMenu.Itemsプロパティに<a href="gcdocsite__documentlink?toc-item-id=952ba6d6-649e-4e03-97f9-c1a9d6c6a6ea" title="">AutoFilterToolStripItem</a>クラスのインスタンスを設定し、ColumnHeaderCell.DropDownContextMenuStripプロパティに設定することで複数選択フィルタが使用できます。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>DropDownContextMenuStripプロパティが空ではない場合、ColumnHeaderCell.DropDownListプロパティのフィルタの設定は無効になります。</p></li><li><p>DropDownContextMenuStripプロパティは、デザイナの「実行時」タブでの表示をサポートしていません。</p></li></ul></blockquote><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+textBoxCell1.Name = <span class="hljs-string">"textBoxCell1"</span>;
+
+Template template1 = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { textBoxCell1 });
+
+ColumnHeaderCell columnHeaderCell1 = template1.ColumnHeaders[<span class="hljs-number">0</span>].Cells[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ColumnHeaderCell;
+columnHeaderCell1.DropDownList = <span class="hljs-keyword">new</span> HeaderDropDownList(<span class="hljs-string">"textBoxCell1"</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>);
+template1.Row.Cells[<span class="hljs-string">"textBoxCell1"</span>].Style.BackColor = Color.Azure;
+
+HeaderDropDownContextMenu headerDropDownContextMenu1 = <span class="hljs-keyword">new</span> HeaderDropDownContextMenu();
+headerDropDownContextMenu1.Items.Add(<span class="hljs-keyword">new</span> AutoFilterToolStripItem());
+
+columnHeaderCell1.DropDownContextMenuStrip = headerDropDownContextMenu1;
+gcMultiRow1.Template = template1;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim TextBoxCell1 As New TextBoxCell()
+TextBoxCell1.Name = "TextBoxCell1"
+
+Dim Template1 As Template = Template1.CreateGridTemplate(New Cell() {TextBoxCell1})
+
+Dim ColumnHeaderCell1 = DirectCast(Template1.ColumnHeaders(0).Cells(0), ColumnHeaderCell)
+ColumnHeaderCell1.DropDownList = New HeaderDropDownList("TextBoxCell1", False, False)
+
+Dim HeaderDropDownContextMenu1 As New HeaderDropDownContextMenu()
+HeaderDropDownContextMenu1.Items.Add(New AutoFilterToolStripItem())
+
+ColumnHeaderCell1.DropDownContextMenuStrip = HeaderDropDownContextMenu1
+GcMultiRow1.Template = Template1</code></pre></div><p>デザイナで複数選択フィルタを設定するには、次のように操作します。</p><ol><li><p>複数選択フィルタを設定するセルを選択する。(例: columnHeaderCell1)</p></li><li><p>プロパティウィンドウでDropDownListプロパティを選択し、「フィルタドロップダウンリスト」を選択する。</p></li><li><p>プロパティウィンドウでDropDownList.CellNameプロパティを選択し、フィルタを行うセルを選択する。(例: textBoxCell1)</p></li><li><p>プロパティウィンドウでDropDownContextMenuStripプロパティを選択し、「&lt;Add New&gt;」を選択すると、テンプレート上にHeaderDropDownContextMenuが追加される(例: headerDropDownContextMenu1)</p></li><li><p>HeaderDropDownContextMenuを選択して、Itemsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示された「項目コレクション エディタ」の[メンバー]リストにshowAllToolStripItem1が設定されていることを確認する。</p></li><li><p>［OK］ボタンをクリックしてウィンドウを閉じる。</p></li><li><p>プロジェクトを実行する。</p></li><li><p>columnHeaderCell1のドロップダウンリストを表示し、複数選択フィルタが表示されることを確認する。</p></li></ol><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=b6a8b45a-2db8-4ffc-8c99-d5b6c5824ddd" title="">ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b7382e19-e827-417e-9e88-6011b4836b2f" title="">ヘッダによるセル選択</a></p><p><a href="gcdocsite__documentlink?toc-item-id=7ce7c90d-3e70-485d-82b9-55dd525c82b0" title="">ヘッダによる行と列のサイズ変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=8e79ba17-0253-40a0-93d7-8f081ef9c676" title="">列ヘッダによる行の並び替え</a></p><p><a href="gcdocsite__documentlink?toc-item-id=6173680d-08b4-4f11-a32b-b1f4a0ceca44" title="">ヘッダの外観変更</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3d7bd8ef-a1b3-4b08-9b49-bf62fcb1770a" title="">行ヘッダ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=361cf0ad-9fc0-484d-be14-c12c7c17add4" title="">ヘッダのハイライトスタイル</a></p>

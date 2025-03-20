@@ -1,0 +1,21 @@
+<p>PlusPakCell に含まれる次のセル型をデザイナで配置すると、Template.Designer.vb ファイルの初期化コードで、コンストラクタに False をとるコードが生成されます。</p><ul><li><p>GcColorPickerCell</p></li><li><p>GcFontPickerCell</p></li></ul><p>この引数は initialization として定義されているもので、次のような機能を提供しています。</p><ul><li><p>True のとき既定のドロップダウンボタンやショートカットキーを自動的に生成します。False の場合はこれらのオブジェクトを自動的に生成しません。</p></li></ul><p>たとえば、GcFontPickerCell を引数なしでインスタンス化した場合、ドロップダウンボタンを持つセルが作成されます。一方、引数に False を渡してインスタンス化した場合、ドロップダウンボタンを持たないセルが作成されます。前者は一般的な GcFontPickerCell に適し、後者は複数のボタンを持つカスタマイズされた GcFontPickerCell を作成するのに適しています。つまり、この引数は用途に応じて異なる初期化の方法を提供しています。</p><p>MultiRow のデザイナでは、ユーザーがドロップダウンボタン（サイドボタン）やショートカットキーをカスタマイズする可能性を考慮するため、上記のセルを False の引数で初期化し、合わせてドロップダウンボタンを明示的に定義します。ユーザーはドロップダウンボタンをすべて削除したり、既定のボタンを除いて独自のボタンを定義することができます。</p><p>次のコードは、引数の違いによる結果の違いを示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+<span class="hljs-keyword">using</span> PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    PlusPakCell.GcColorPickerCell gcColorPickerCell = <span class="hljs-keyword">new</span> PlusPakCell.GcColorPickerCell();
+    <span class="hljs-comment">// PlusPakCell.GcColorPickerCell gcColorPickerCell = new PlusPakCell.GcColorPickerCell(false);</span>
+    
+    Console.WriteLine(<span class="hljs-string">"サイドボタンの数: {0}"</span>, gcColorPickerCell.SideButtons.Count);
+    gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { gcColorPickerCell });
+    gcMultiRow1.RowCount = <span class="hljs-number">5</span>;
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim gcColorPickerCell As New PlusPakCell.GcColorPickerCell()
+    ' Dim gcColorPickerCell As New PlusPakCell.GcColorPickerCell(False)
+    Console.WriteLine("サイドボタンの数: {0}", gcColorPickerCell.SideButtons.Count)
+    Me.GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {gcColorPickerCell})
+    Me.GcMultiRow1.RowCount = 5
+End Sub</code></pre></div><p><br></p><p>引数が True の場合、サイドボタンの数は 2 になります。引数が False の場合、サイドボタンの数は 0 になり、開発者が明示的にこれらを追加する必要があることがわかります。</p><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=f3782c2d-37c3-407d-9aaf-2a64d3af122f" title="">PlusPakCellの使い方</a></p>

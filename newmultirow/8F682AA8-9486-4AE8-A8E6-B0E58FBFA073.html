@@ -1,0 +1,28 @@
+<p><a href="gcdocsite__documentlink?toc-item-id=2e28f949-d96d-415e-82f8-e3de9d7bc50c" title="">GcMultiRow.CellValueChanged</a>イベントは、セルの値が変更されたときに発生します。</p><p>CellValueChangedイベントでセル型や<a href="gcdocsite__documentlink?toc-item-id=aef02fef-71ef-4923-a5e7-f3c3c41981ba" title="">Cell.Name</a>プロパティを使用して、特定のセルの値が変更された場合に処理を行うことが可能です。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void gcMultiRow1_CellValueChanged(object sender, GrapeCity.Win.MultiRow.CellEventArgs e)</span>
+{
+    <span class="hljs-comment">// Cell.Nameプロパティが"textBoxCell1"の場合</span>
+    <span class="hljs-keyword">if</span> (e.CellName == <span class="hljs-string">"textBoxCell1"</span>)
+    {
+        Console.WriteLine(<span class="hljs-string">"textBoxCell1:{0}, RowIndex:{1}, CellIndex:{2}"</span>, gcMultiRow1.GetValue(e.RowIndex, e.CellIndex), e.RowIndex, e.CellIndex);
+    }
+
+    <span class="hljs-comment">// NumericUpDownCell型セルの場合</span>
+    <span class="hljs-keyword">if</span> (gcMultiRow1.CurrentCell <span class="hljs-keyword">is</span> NumericUpDownCell)
+    {
+        Console.WriteLine(<span class="hljs-string">"数値型セル:{0}, RowIndex:{1}, CellIndex:{2}"</span>, gcMultiRow1.GetValue(e.RowIndex, e.CellIndex), e.RowIndex, e.CellIndex);
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub GcMultiRow1_CellValueChanged(ByVal sender As Object, ByVal e As GrapeCity.Win.MultiRow.CellEventArgs) Handles GcMultiRow1.CellValueChanged
+    ' Cell.Nameプロパティが"textBoxCell1"の場合
+    If e.CellName = "textBoxCell1" Then
+        Console.WriteLine("textBoxCell1:{0}, RowIndex:{1}, CellIndex:{2}", GcMultiRow1.GetValue(e.RowIndex, e.CellIndex), e.RowIndex, e.CellIndex)
+    End If
+
+    ' NumericUpDownCell型セルの場合
+    If TypeOf GcMultiRow1.CurrentCell Is NumericUpDownCell Then
+        Console.WriteLine("数値型セル:{0}, RowIndex:{1}, CellIndex:{2}", GcMultiRow1.GetValue(e.RowIndex, e.CellIndex), e.RowIndex, e.CellIndex)
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=8f564520-e11d-4128-9226-657e7ea0460d" title="">便利なイベント</a></p>

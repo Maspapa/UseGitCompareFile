@@ -1,0 +1,50 @@
+<p>リンクラベル型セル（LinkLabelCell）でユーザーがクリックしたときにURLを関連付けられたブラウザで開くには、<a href="gcdocsite__documentlink?toc-item-id=a59fc2ac-3093-446c-98fe-5b601036b877" title="">GcMultiRow.CellContentClick</a>イベントを使用します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> System.Diagnostics;
+<span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+ {
+     LinkLabelCell linkLabelCell1 = <span class="hljs-keyword">new</span> LinkLabelCell();
+     linkLabelCell1.Name = <span class="hljs-string">"linkLabelCell1"</span>;
+     linkLabelCell1.Value = <span class="hljs-string">"https://www.mescius.com/"</span>;
+     gcMultiRow1.Template = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { linkLabelCell1 });
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellContentClick(object sender, CellEventArgs e)</span>
+{
+    GcMultiRow gcMultiRow = sender <span class="hljs-keyword">as</span> GcMultiRow;
+    Cell currentCell = gcMultiRow.Rows[e.RowIndex].Cells[e.CellIndex];
+    
+    <span class="hljs-keyword">if</span> (currentCell <span class="hljs-keyword">is</span> LinkLabelCell)
+    {
+        <span class="hljs-keyword">if</span> (e.CellName == <span class="hljs-string">"linkLabelCell1"</span>)
+        {
+            <span class="hljs-keyword">if</span> (currentCell.Enabled == <span class="hljs-literal">true</span>)
+            {
+                <span class="hljs-built_in">string</span> command = currentCell.Value.ToString();
+                Process.Start(command);
+            }
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports System.Diagnostics
+Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Dim LinkLabelCell1 As New LinkLabelCell()
+    LinkLabelCell1.Name = "LinkLabelCell1"
+    LinkLabelCell1.Value = "https://www.mescius.com/"
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {LinkLabelCell1})
+End Sub
+
+Private Sub GcMultiRow1_CellContentClick(ByVal sender As System.Object, ByVal e As GrapeCity.Win.MultiRow.CellEventArgs) Handles GcMultiRow1.CellContentClick
+    Dim gcMultiRow As GcMultiRow = TryCast(sender, GcMultiRow)
+    Dim currentCell As Cell = gcMultiRow.Rows(e.RowIndex).Cells(e.CellIndex)
+
+    If TypeOf currentCell Is LabelCell Then
+        If e.CellName = "LinkLabelCell1" Then
+            If currentCell.Enabled = True Then
+                Dim command As String = currentCell.Value.ToString()
+                Process.Start(command)
+            End If
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=90d61fa7-82ff-4cc0-9674-23a20e9277ac" title="">リンクラベル型セル（LinkLabelCell）</a></p>

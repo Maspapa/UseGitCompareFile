@@ -1,0 +1,53 @@
+<p>GcBarCodeCellで表示したバーコードは、<a href="gcdocsite__documentlink?toc-item-id=8f16addf-62b2-4217-9107-6ed8aa6f0b96">CreateBitmap</a>、<a href="gcdocsite__documentlink?toc-item-id=8f16addf-62b2-4217-9107-6ed8aa6f0b96">CreateMetafile</a>の各メソッドを使用して、それぞれビットマップ形式、拡張メタファイル形式の画像として出力することができます。作成した画像を他のアプリケーションで利用する場合などに有効です。 ここでは、バーコードの出力方法について解説します。</p>
+<h2 id="解像度を指定したバーコードの出力">解像度を指定したバーコードの出力</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=8f16addf-62b2-4217-9107-6ed8aa6f0b96">CreateBitmap</a>メソッドの引数に解像度を設定することで解像度を指定したバーコードの出力が可能です。<br />以下のサンプルコードは、生成されたバーコードを120dpiのビットマップ形式のファイルとしてアプリケーションのフォルダに出力する方法です。<br /></p>
+<pre><code class="language-csharp">using GrapeCity.Win.MultiRow;
+using PlusPakCell = GrapeCity.Win.MultiRow.PlusPak;
+
+private void Form1_Load(object sender, EventArgs e)
+{
+    PlusPakCell.GcBarCodeCell gcBarCodeCell1 = new PlusPakCell.GcBarCodeCell();
+    // バーコードの種類を指定します。 
+    gcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13;
+    // バーコードの値を設定します。  
+    gcBarCodeCell1.Value = &quot;494924012510&quot;;
+
+    gcMultiRow1.Template = Template.CreateGridTemplate(new Cell[] { gcBarCodeCell1 });
+    gcMultiRow1.RowCount = 10;
+}
+
+private void button1_Click(object sender, EventArgs e)
+{
+    using (Image imgBarcode1 = (gcMultiRow1[0,0] as PlusPakCell.GcBarCodeCell).CreateBitmap(120))
+    {
+        imgBarcode1.Save(&quot;Barcode1.bmp&quot;, System.Drawing.Imaging.ImageFormat.Bmp);
+    }
+}
+</code></pre>
+<pre><code class="language-vbnet">Imports GrapeCity.Win.MultiRow
+Imports PlusPakCell = GrapeCity.Win.MultiRow.PlusPak
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim GcBarCodeCell1 As New GrapeCity.Win.MultiRow.PlusPak.GcBarCodeCell()
+
+    ' バーコードの種類を指定します。 
+    GcBarCodeCell1.Type = GrapeCity.Win.BarCode.ValueType.BarType.JAN13
+    ' バーコードの値を設定します。  
+    GcBarCodeCell1.Value = &quot;494924012510&quot;
+
+    GcMultiRow1.Template = Template.CreateGridTemplate(New Cell() {GcBarCodeCell1})
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Using imgBarcode1 As Image = DirectCast(GcMultiRow1(0, 0), PlusPakCell.GcBarCodeCell).CreateBitmap(120)
+        imgBarcode1.Save(&quot;BarCode1.bmp&quot;, System.Drawing.Imaging.ImageFormat.Bmp)
+    End Using
+End Sub
+</code></pre>
+<p><br /><br /></p>
+<h2 id="関連トピック">関連トピック</h2>
+<p><a href="gcdocsite__documentlink?toc-item-id=69eeb65c-39b8-4712-81fb-70c5f78c41a0">GcBarCodeCell</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=f7203485-5296-48cc-854f-d1aff19e8561">バーコードの設定</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=5c78afef-1cb6-4cbe-8641-627139f5de36">バーコードの構成</a></p>
+<p><a href="gcdocsite__documentlink?toc-item-id=c2475304-dee9-44c7-91b5-242a0f03678a">対応しているバーコードの種類</a></p>

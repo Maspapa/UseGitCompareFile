@@ -1,0 +1,27 @@
+<p>ValueProcessを使用すると、検証エラーが発生した場合に入力値に対して、保持、削除、入力前の値に復元のいずれかの処理を行うことができます。ValueProcessは、セルの検証時またはセルの編集状態が終了したときに実行されます。</p><h2>デザイナによる設定</h2><p>デザイナでセルの検証と共にValueProcessを使用するには、次のように操作します。</p><ol><li><p>値を検証するセルを選択する。(例: textBoxCell1)</p></li><li><p>プロパティウィンドウでValidatorsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidatorコレクションエディタで左上のコンボボックスから「IncludeListValidator」を選択し、［追加］をクリックする。</p></li><li><p>[メンバ]リストでIncludeListValidatorが選択されていることを確認する。</p></li><li><p>画面右のプロパティグリッドでCandidatesプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示された「文字コレクション エディタ」に、必須とする文字列を設定する。</p><p>例：</p><ul><li><p>東京</p></li><li><p>大阪</p></li></ul></li><li><p>［OK］ボタンをクリックしてウィンドウを閉じる。</p></li><li><p>画面右のプロパティグリッドでActionsプロパティを選択し、［...］ボタンをクリックする。</p></li><li><p>表示されたCellValidateActionコレクションエディタでValueProcessを追加する。</p></li><li><p>[メンバ]リストでValueProcessが選択されていることを確認する。画面右のプロパティグリッドでDoActionReasonプロパティにCellValidating、ValueProcessOptionプロパティにClearをそれぞれ設定する。</p></li><li><p>［OK］ボタンをクリックしてCellValidateActionコレクションエディタを閉じる。</p></li><li><p>［OK］ボタンをクリックしてCellValidatorコレクションエディタを閉じる。</p></li><li><p>デザイナのドキュメントウィンドウのタブを「実行時」に切り替える。</p></li><li><p>textBoxCell1に「名古屋」と入力してセルを移動したときに検証エラーになり、入力値が削除されることを確認する。</p></li></ol><h2>コーディングによる設定</h2><p>次のコードは、セルに「東京」または「大阪」以外の文字列が入力されたときに検証エラーとなり、入力値を削除します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+IncludeListValidator includeListValidator1 = <span class="hljs-keyword">new</span> IncludeListValidator();
+ValueProcess valueProcess1 = <span class="hljs-keyword">new</span> ValueProcess();
+valueProcess1.DoActionReason = ValidateReasons.CellValidating;
+valueProcess1.ValueProcessOption = ValueProcessOption.Clear;
+includeListValidator1.Candidates = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"東京"</span>, <span class="hljs-string">"大阪"</span> };
+includeListValidator1.Actions.Add(valueProcess1);
+textBoxCell1.Validators.Add(includeListValidator1);
+
+Cell[] cells = { textBoxCell1 };
+gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim TextBoxCell1 As New TextBoxCell()
+Dim IncludeListValidator1 As New IncludeListValidator()
+Dim ValueProcess1 As New ValueProcess()
+ValueProcess1.DoActionReason = ValidateReasons.CellValidating
+ValueProcess1.ValueProcessOption = ValueProcessOption.Clear
+IncludeListValidator1.Candidates = New String() {"東京", "大阪"}
+IncludeListValidator1.Actions.Add(ValueProcess1)
+TextBoxCell1.Validators.Add(IncludeListValidator1)
+
+Dim cells As Cell() = {TextBoxCell1}
+GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+GcMultiRow1.RowCount = 10</code></pre></div><blockquote type="warning"><p>!type=warning</p><ul><li><p>DoActionReason プロパティに EndEdit が設定された場合、CellValidating が設定された場合とは ValueProcess が実行されるタイミングが異なるだけで、最終的な結果は同じになります。</p></li></ul></blockquote><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=d92d06e8-ede7-4f1b-8070-44228f223ad0" title="">組み込みの検証アクション</a></p><p><a href="gcdocsite__documentlink?toc-item-id=960673a4-e504-4aab-9966-671de457d274" title="">下線による通知（LineNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=afc60e76-a586-42e6-8eb0-106c53a305a6" title="">セルのスタイルによる通知（CellStyleNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=2122b628-cbd5-48aa-b4f2-c9f18c75c50a" title="">エラーアイコンによる通知（IconNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=b2c54841-df5b-4a46-b0e2-74cf29c2d8e9" title="">サウンドによる通知（SoundNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0511622d-3f3a-4580-87bb-94b2ef855c82" title="">バルーンチップによる通知（TipNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=07b9eee6-11f8-4a1e-af39-9e1a6ba6e027" title="">フォーカスの遷移（FocusProcess）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=3a71566a-6012-4e17-ae1c-8e6f68905cd4" title="">メッセージボックスによる通知（MessageBoxNotify）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=af222cd9-d952-4c8c-8e8d-f57db055dcbc" title="">3段階のアイコンによる通知（ThreeStateIconNotify）</a></p>

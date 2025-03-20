@@ -1,0 +1,25 @@
+<p>DateTimePickerCellはDateTimePickerCell.Style.Formatプロパティをサポートしていないため、DateTimePickerCell.FormattedValueプロパティはDateTimePickerCell.Formatプロパティや<a href="gcdocsite__documentlink?toc-item-id=0690ee7c-d942-44d3-bf54-700bf20cf724" title="">DateTimePickerCell.CustomFormat</a>プロパティの値に関係なく常にDateTimePickerCell.Valueプロパティの値の文字列を返します。（例：9998/12/31 00:00:00）</p><p>DateTimePickerCellの値を書式付で取得するには、<a href="gcdocsite__documentlink?toc-item-id=313bfba2-9577-4c25-8eb3-b6f5c91931dd" title="">Cell.DisplayText</a>プロパティまたは<a href="gcdocsite__documentlink?toc-item-id=963af83c-e177-4594-82c9-a51fb051f2f3" title="">GcMultiRow.GetDisplayText</a>メソッドを使用します。</p><h2>サンプルコード</h2><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+DateTimePickerCell dateTimePickerCell1 = <span class="hljs-keyword">new</span> DateTimePickerCell();
+dateTimePickerCell1.Format = DateTimePickerFormat.Short;
+dateTimePickerCell1.Value = DateTime.Now;
+
+Template template1 = Template.CreateGridTemplate(<span class="hljs-keyword">new</span> Cell[] { dateTimePickerCell1 });
+gcMultiRow1.Template = template1;
+gcMultiRow1.CurrentCellPosition = <span class="hljs-keyword">new</span> CellPosition(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+
+Console.WriteLine(<span class="hljs-string">"書式設定済みの値1: {0}"</span>, gcMultiRow1.GetDisplayText(gcMultiRow1.CurrentCellPosition.RowIndex, gcMultiRow1.CurrentCellPosition.CellIndex));
+Console.WriteLine(<span class="hljs-string">"書式設定済みの値2: {0}"</span>, gcMultiRow1.CurrentCell.DisplayText);
+Console.WriteLine(<span class="hljs-string">"セルの値: {0}"</span>, gcMultiRow1.CurrentCell.FormattedValue.ToString());</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim DateTimePickerCell1 As New DateTimePickerCell()
+DateTimePickerCell1.Format = DateTimePickerFormat.Short
+DateTimePickerCell1.Value = DateTime.Now
+
+Dim Template1 As Template = Template.CreateGridTemplate(New Cell() {DateTimePickerCell1})
+GcMultiRow1.Template = Template1
+GcMultiRow1.CurrentCellPosition = New CellPosition(0, 0)
+
+Console.WriteLine("書式設定済みの値1: {0}", GcMultiRow1.GetDisplayText(GcMultiRow1.CurrentCellPosition.RowIndex, GcMultiRow1.CurrentCellPosition.CellIndex))
+Console.WriteLine("書式設定済みの値2: {0}", GcMultiRow1.CurrentCell.DisplayText)
+Console.WriteLine("セルの値: {0}", GcMultiRow1.CurrentCell.FormattedValue.ToString())</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=7e1bd51b-9e9b-44b5-a31f-56c5672e613c" title="">日付型セル（DateTimePickerCell）</a></p><p><a href="gcdocsite__documentlink?toc-item-id=52a20b79-14bc-4ca2-81ba-909274f1161d" title="">和暦の表示</a></p><p><a href="gcdocsite__documentlink?toc-item-id=c3044fa7-ed3d-4061-a961-d25694697bfd" title="">初期値の自動確定</a></p><p><a href="gcdocsite__documentlink?toc-item-id=bcd4c78d-1a80-4229-b1e9-57c31031cea4" title="">ValueChangedイベントの使用方法</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a3ed4de8-e23e-4631-b601-93ffc6f32a5c" title="">値がnullのときの代替文字列</a></p><p><a href="gcdocsite__documentlink?toc-item-id=f6a710a0-4045-48a1-aeba-c53dd9ad8f5a" title="">ドロップダウンボタンの非表示</a></p>

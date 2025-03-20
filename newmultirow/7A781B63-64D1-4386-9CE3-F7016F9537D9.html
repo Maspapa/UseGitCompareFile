@@ -1,0 +1,70 @@
+<p>セルの検証が行われると<a href="gcdocsite__documentlink?toc-item-id=d3e3fb56-4faa-4809-ae19-e81269a16c2b" title="">GcMultiRow.CellValidateInfoNeeded</a>イベントが発生します。このイベントを使用すると検証結果として表示される情報をカスタマイズすることができます。</p><h2>サンプルコード</h2><p>GcMultiRow.CellValidateInfoNeededイベントで検証が成功したかどうかはIsValidプロパティで取得できます。また、検証情報を設定するには<a href="gcdocsite__documentlink?toc-item-id=960ebd6d-ad78-4f50-8ca4-7b7a0a361055" title="">ValidateContext.ValidateInfo</a>プロパティを使用します。</p><p>次のコードは、<a href="gcdocsite__documentlink?toc-item-id=E0B9198F-61A4-4745-824B-8D670699F6FB" title="">範囲の検証（RangeValidator）</a>と<a href="gcdocsite__documentlink?toc-item-id=af222cd9-d952-4c8c-8e8d-f57db055dcbc" title="">3段階のアイコンによる通知（ThreeStateIconNotify）</a>を使用して、検証が成功時およびエラー時の情報を設定します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+<span class="hljs-function">private void Form1_Load(object sender, EventArgs e)</span>
+{
+    NumericUpDownCell numericUpDownCell1 = <span class="hljs-keyword">new</span> NumericUpDownCell();
+    RangeValidator rangeValidator1 = <span class="hljs-keyword">new</span> RangeValidator();
+    rangeValidator1.RequiredType = <span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">int</span>);
+    rangeValidator1.MaxValue = <span class="hljs-number">10</span>;
+    rangeValidator1.MinValue = <span class="hljs-number">1</span>;
+    rangeValidator1.NullIsValid = <span class="hljs-literal">false</span>;
+    rangeValidator1.Actions.Add(<span class="hljs-keyword">new</span> ThreeStateIconNotify());
+    numericUpDownCell1.Validators.Add(rangeValidator1);
+
+    Cell[] cells = { numericUpDownCell1 };
+    gcMultiRow1.Template = Template.CreateGridTemplate(cells);
+    gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+}
+
+<span class="hljs-function">private void gcMultiRow1_CellValidateInfoNeeded(object sender, CellValidateInfoNeededEventArgs e)</span>
+{
+    <span class="hljs-keyword">if</span> (e.CellValidator <span class="hljs-keyword">is</span> RangeValidator)
+    {
+        <span class="hljs-keyword">if</span> (e.IsValid)
+        {
+            e.ValidateContext.ValidateInfo = <span class="hljs-string">"正しい値です。"</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">if</span> (Convert.ToInt32(e.ValidateContext.EditedFormattedValue) &gt; <span class="hljs-number">10</span>)
+            {
+                e.ValidateContext.ValidateInfo = <span class="hljs-string">"10以下の値を入力してください。"</span>;
+            }
+            <span class="hljs-keyword">if</span>(Convert.ToInt32(e.ValidateContext.EditedFormattedValue) &lt; <span class="hljs-number">1</span>)
+            {
+                e.ValidateContext.ValidateInfo = <span class="hljs-string">"1以上の値を入力してください。"</span>;
+            }
+        }
+    }
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Dim NumericUpDownCell1 As New NumericUpDownCell()
+    Dim RangeValidator1 As New RangeValidator()
+    RangeValidator1.RequiredType = GetType(Integer)
+    RangeValidator1.MaxValue = 10
+    RangeValidator1.MinValue = 1
+    RangeValidator1.NullIsValid = False
+    RangeValidator1.Actions.Add(New ThreeStateIconNotify())
+    NumericUpDownCell1.Validators.Add(RangeValidator1)
+
+    Dim cells As Cell() = {NumericUpDownCell1}
+    GcMultiRow1.Template = Template.CreateGridTemplate(cells)
+    GcMultiRow1.RowCount = 10
+End Sub
+
+Private Sub GcMultiRow1_CellValidateInfoNeeded(sender As Object, e As CellValidateInfoNeededEventArgs) Handles GcMultiRow1.CellValidateInfoNeeded
+    If TypeOf e.CellValidator Is RangeValidator Then
+    If e.IsValid Then
+            e.ValidateContext.ValidateInfo = "正しい値です。"
+    Else
+            If e.ValidateContext.EditedFormattedValue &gt; 10 Then
+                e.ValidateContext.ValidateInfo = "10以下の値を入力してください。"
+        End If
+
+            If e.ValidateContext.EditedFormattedValue &lt; 1 Then
+                e.ValidateContext.ValidateInfo = "1以上の値を入力してください。"
+            End If
+        End If
+    End If
+End Sub</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=0f3efc93-9866-452e-a9a6-3a1f0ecb6591" title="">ユーザー入力の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=0e497c36-9fdf-421d-936a-bd7205764e8a" title="">コントロールのイベントによる検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=ab9b7b07-c4bf-4eff-a5d1-427115093507" title="">セルによる値の検証</a></p><p><a href="gcdocsite__documentlink?toc-item-id=d9af300a-bc41-4bfd-90ab-a506563789cf" title="">検証の実行</a></p><p><a href="gcdocsite__documentlink?toc-item-id=499e2e8c-530f-40ff-ac3d-699bd84478eb" title="">ユーザー定義のセルバリデータ</a></p><p><a href="gcdocsite__documentlink?toc-item-id=a2acbd38-76de-4afd-a7ca-eb03c99ffa6f" title="">ユーザー定義の検証アクション</a></p>

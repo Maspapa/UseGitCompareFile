@@ -1,0 +1,70 @@
+<p><img src="/DOCUMENT_SITE_LINK_PREFIX_HERE/document-site-files/images/f148c511-6e98-4b55-9904-150a375d5825/images/userguide/celltype_columnheadercell_01.png" contenteditable="false"><br></p><p>列ヘッダ型セル（ColumnHeaderCell）は、列の選択やソートのインジケータの表示を提供します。</p><blockquote type="warning"><p>!type=warning</p><ul><li><p>ColumnHeaderCellはColumnHeaderSectionにのみ配置できます。</p></li></ul></blockquote><h2>機能</h2><p>ColumnHeaderCellは、<a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル</a>の機能に加えて、次の機能を使用できます。</p><ul><li><p>行の並び替え（組み込みソート）</p></li><li><p>行の絞り込み（組み込みフィルタ）</p></li><li><p>ドロップダウン リスト</p></li></ul><p>各機能の詳細は<a href="gcdocsite__documentlink?toc-item-id=6b320d3e-dfc7-4f81-be40-2e7028cf55ab" title="">ColumnHeaderCell</a>クラスのリファレンスを参照してください。</p><h2>データ型</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル</a>を参照してください。</p><h2>セル編集コントロール</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル</a>を参照してください。</p><h2>スタイル</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル</a>を参照してください。</p><h2>ショートカットキー</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル</a>を参照してください。</p><h2>イベント</h2><p><a href="gcdocsite__documentlink?toc-item-id=c2380a3d-f24a-4646-a476-778c48229309" title="">ヘッダ型セル</a>を参照してください。</p><h2>使用例</h2><p>次のコードは、列ヘッダ セクションにセルを選択するColumnHeaderCellとセルをソートするColumnHeaderCellを表示します。</p><div data-language="csharp" class="toastui-editor-ww-code-block-highlighting"><pre class="language-csharp"><code data-language="csharp" class="language-csharp"><span class="hljs-keyword">using</span> GrapeCity.Win.MultiRow;
+
+Template template1 = <span class="hljs-keyword">new</span> Template();
+ColumnHeaderSection columnHeaderSection1 = <span class="hljs-keyword">new</span> ColumnHeaderSection();
+ColumnHeaderCell columnHeaderCell1 = <span class="hljs-keyword">new</span> ColumnHeaderCell();
+ColumnHeaderCell columnHeaderCell2 = <span class="hljs-keyword">new</span> ColumnHeaderCell();
+columnHeaderCell1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+columnHeaderCell1.Value = <span class="hljs-string">"選択"</span>;
+columnHeaderCell2.Location = <span class="hljs-keyword">new</span> Point(columnHeaderCell1.Width, <span class="hljs-number">0</span>);
+columnHeaderCell2.Value = <span class="hljs-string">"ソート"</span>;
+columnHeaderCell2.SortCellIndex = <span class="hljs-number">1</span>;
+columnHeaderCell2.SelectionMode = MultiRowSelectionMode.None;
+columnHeaderCell2.SortMode = SortMode.Automatic;
+columnHeaderSection1.Cells.Add(columnHeaderCell1);
+columnHeaderSection1.Cells.Add(columnHeaderCell2);
+columnHeaderSection1.Height = columnHeaderCell1.Height;
+
+TextBoxCell textBoxCell1 = <span class="hljs-keyword">new</span> TextBoxCell();
+TextBoxCell textBoxCell2 = <span class="hljs-keyword">new</span> TextBoxCell();
+textBoxCell1.Location = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+textBoxCell2.Location = <span class="hljs-keyword">new</span> Point(textBoxCell1.Width, <span class="hljs-number">0</span>);
+template1.Row.Cells.Add(textBoxCell1);
+template1.Row.Cells.Add(textBoxCell2);
+
+template1.Row.Height = textBoxCell1.Height;
+template1.Width = textBoxCell1.Size.Width * <span class="hljs-number">2</span>;
+template1.ColumnHeaders.Add(columnHeaderSection1);
+
+gcMultiRow1.Template = template1;
+gcMultiRow1.AllowUserToAddRows = <span class="hljs-literal">false</span>;
+gcMultiRow1.RowCount = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; gcMultiRow1.RowCount; i++)
+{
+    gcMultiRow1.Rows[i].Cells[<span class="hljs-number">1</span>].Value = i.ToString();
+}</code></pre></div><div data-language="vbnet" class="toastui-editor-ww-code-block-highlighting"><pre class="language-vbnet"><code data-language="vbnet" class="language-vbnet">Imports GrapeCity.Win.MultiRow
+
+Dim Template1 As Template = New Template()
+Dim ColumnHeaderSection1 As ColumnHeaderSection = New ColumnHeaderSection()
+Dim ColumnHeaderCell1 As ColumnHeaderCell = New ColumnHeaderCell()
+Dim ColumnHeaderCell2 As ColumnHeaderCell = New ColumnHeaderCell()
+ColumnHeaderCell1.Location = New Point(0, 0)
+ColumnHeaderCell1.Value = "選択"
+ColumnHeaderCell2.Location = New Point(ColumnHeaderCell1.Width, 0)
+ColumnHeaderCell2.Value = "ソート"
+ColumnHeaderCell2.SortCellIndex = 1
+ColumnHeaderCell2.SelectionMode = MultiRowSelectionMode.None
+ColumnHeaderCell2.SortMode = SortMode.Automatic
+ColumnHeaderSection1.Cells.Add(ColumnHeaderCell1)
+ColumnHeaderSection1.Cells.Add(ColumnHeaderCell2)
+ColumnHeaderSection1.Height = ColumnHeaderCell1.Height
+
+Dim TextBoxCell1 As TextBoxCell = New TextBoxCell()
+Dim TextBoxCell2 As TextBoxCell = New TextBoxCell()
+TextBoxCell1.Location = New Point(0, 0)
+TextBoxCell2.Location = New Point(TextBoxCell1.Width, 0)
+Template1.Row.Cells.Add(TextBoxCell1)
+Template1.Row.Cells.Add(TextBoxCell2)
+
+Template1.Row.Height = TextBoxCell1.Height
+Template1.Width = TextBoxCell1.Size.Width * 2
+Template1.ColumnHeaders.Add(ColumnHeaderSection1)
+
+GcMultiRow1.Template = Template1
+GcMultiRow1.AllowUserToAddRows = False
+GcMultiRow1.RowCount = 10
+
+For i As Integer = 0 To GcMultiRow1.RowCount - 1
+    GcMultiRow1.Rows(i).Cells(1).Value = i.ToString()
+Next</code></pre></div><h2>関連トピック</h2><p><a href="gcdocsite__documentlink?toc-item-id=53f8b81b-ef95-42e6-b7e8-1e7438c9cf39" title="">セル型</a></p>
